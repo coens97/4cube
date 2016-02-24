@@ -1,0 +1,49 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{a4wide,graphicx,amssymb, amstext, amsmath, epstopdf, booktabs, verbatim, geometry, appendix, natbib, lmodern, tabularx, enumitem, longtable}
+
+%\geometry{letterpaper}
+%\usepackage{garamond}
+
+\newcommand*\Title{Trafic Control System}
+\newcommand*\cpiType{User Requirements Document}
+\newcommand*\Author{}
+\title{\Title}
+\author{}
+\date{\today}
+%-----------------------------------------------------------
+
+\usepackage{template/template} % This is what makes your document look like a cpi document.
+
+
+\begin{document}
+
+\begin{titlepage}
+\maketitle
+\end{titlepage}
+
+  	\linespread{1.15} %Set standard document linespacing
+    
+  	\subsection*{Background and Context}
+  	This user requirements document specifies the software requirements for the "Traffic Control System". This application allows traffic to be simulated with the purpose of noticing traffic jams related to traffic lights.
+  	
+  	\subsection*{Definitions and abreviations}
+  	\begin{longtable}[l]{p{50pt} p{350pt}} 
+  		User & The person who is controlling this application.\\
+  		System & The implementation of this application.\\
+  		Component & A visible representation of an object on the screen of the user.\\
+  		Crossing & A component that can be used in the traffic simulation which has traffic lights.\\
+  		Traffic light & A component of the crossing which controlls the traffic by displaying colors red, yellow green. For which green the traffic is allowed to go.\\
+  		Pedestrian & A simulation of a pedestrian crossing a road from the traffic light.\\
+  		Lane & A component that represent a piece of road.\\
+  		Cars & A component that represent a car on the road.\\
+  	\end{longtable}
+  	
+  	\tableofcontents
+  	\newpage
+  	
+  	
+  	\include{includes/requirements}
+    \include{includes/ui}
+    \include{includes/usecases}
+    
+    \end{document}
