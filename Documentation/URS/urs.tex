@@ -1,5 +1,5 @@
 \documentclass[a4paper,11pt]{article}
-\usepackage{a4wide,graphicx,amssymb, amstext, amsmath, epstopdf, booktabs, verbatim, geometry, appendix, natbib, lmodern, tabularx, enumitem, longtable}
+\usepackage{a4wide,graphicx,amssymb, amstext, amsmath, epstopdf, booktabs, verbatim, geometry, appendix, natbib, lmodern, tabularx, enumitem, longtable, hyperref}
 
 %\geometry{letterpaper}
 %\usepackage{garamond}
@@ -30,6 +30,7 @@
   	\begin{longtable}[l]{p{50pt} p{350pt}} 
   		User & The person who is controlling this application.\\
   		System & The implementation of this application.\\
+  		Grid & A place on the screen where a component can be added for the traffic situation.\\
   		Component & A visible representation of an object on the screen of the user.\\
   		Crossing & A component that can be used in the traffic simulation which has traffic lights.\\
   		Traffic light & A component of the crossing which controlls the traffic by displaying colors red, yellow green. For which green the traffic is allowed to go.\\
@@ -43,7 +44,7 @@
   	
   	
   	\include{includes/requirements}
-    \include{includes/ui}
+  	\include{includes/specification}
     \include{includes/usecases}
     
     \end{document}

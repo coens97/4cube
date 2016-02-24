@@ -1,0 +1,53 @@
+\section{Specification}
+The following chapter describes the implementation of the application.
+\subsection{Main window}
+The main window is divided into two parts, see figure \ref{fig:mainwindow}. On the very top of the application is a menubar where the user can do actions like saving their work. Then the window is split up in two parts. On the left side is the menubar and on the right side the grid. The grid is the representation of the traffic situation. The components (see section \ref{sec:components}) can be dragged from the sidebar to the grid. To remove a component right-click on it and press on Delete in the context-menu. All open incoming lanes have a text-box which allows the user to specify the amount of traffic coming. The simulation can simply be started by the play button and the simulation speed can simply be changed with a slider. With the button "Show Report" the user can get a report of that moment of the simulation. The report will contain a still image of the current situation. It highlights the traffic jams and the image can be saved.
+
+\begin{figure}[!ht]
+	\caption{Mockup of the Main window}
+	\label{fig:mainwindow}
+	\centering
+	\includegraphics[width=0.8\textwidth]{figures/mainwindow}
+\end{figure}
+\begin{tabularx}{\textwidth}{|p{2cm}X|}\hline
+	Code & Specification \\\hline
+	MWS-010 & When the application just started it will create a new grid 4x3\\\hline
+	MWS-020 & The main window has a menubar.\\\hline
+	MWS-020A & The menu bar has the following structure:
+	\begin{itemize}[noitemsep,nolistsep]
+		\item File
+		\begin{itemize}
+			\item New
+			\item Open
+			\item Save
+			\item Save As
+		\end{itemize}
+		\item Help
+	\end{itemize}\\\hline
+	MWS-020B & A new simulation can be started by pressing on new, a window will prompt for the width and height for the size of the grid.\\\hline
+	MWS-020C & The manual can be opened by pressing on Help.\\\hline
+	MWS-030 & The window has a sidebar on the left.\\\hline
+	MWS-032 & The sidebar contains all the components described in section \ref*{sec:components}.\\\hline
+	MWS-032A & The component can be added to the grid by dragging it to the desired location.\\\hline
+	MWS-034 & The sidebar contains a button which allows the simulation to start/stop.\\\hline
+	MWS-035 & The sidebar contains a button which allows the simulation to pause.\\\hline
+	MWS-036 & The simulation-speed can be changed by adjusting the slider.\\\hline
+	MWS-038 & In simulation the button "Show report" will generate a report.\\\hline
+	MWS-038A & The report is shown in a new window and contains the current traffic situation including cars and pedestrians.\\\hline
+	MWS-038B & In the report the traffic jams are highlighted.\\\hline
+	MWS-038C & The report can be saved as an image file.\\\hline
+\end{tabularx}
+
+To change the amount of time each traffic light is green press right-click on the crossway and click in the context-menu on "Traffic-light configuration". A new window will pop up which allows to set the time for each group of lanes.
+
+\begin{tabularx}{\textwidth}{|p{2cm}X|}\hline
+	Code & Specification \\\hline
+	MWS-100 & All open incoming lanes have a textbox to specify the amount of traffic coming in.\\\hline
+	MWS-110 & When pressing right-click on any component placed on the grid a context-menu appears which allows to rotate or delete the component.\\\hline
+	MWS-120 & When pressing right-click on a crossway it gives an option "Traffic-light configuration"\\\hline
+	MWS-120A & A new window will pop-up with a list of all the lane groups.\\\hline
+	MWS-120B & The user can select a lane group and change the amount of time the traffic-light is green.\\\hline
+\end{tabularx}
+
+\subsection{Components}
+\label{sec:components}

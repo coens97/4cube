@@ -1,4 +1,5 @@
 \section{Requirements}
+The following chapter describes the functionality that the application has to implement.
 \subsection{General requirements}
 \begin{tabularx}{\textwidth}{|p{2cm}X|}\hline
 	Code & Requirement \\\hline
@@ -11,12 +12,26 @@
 		\item Straight road
 		\item Curved road
 	\end{itemize}\\\hline
-	GEN-020 & The amount of traffic comming from each lane can be changed.\\\hline
-	GEN-030 & From the traffic lights of the crossroads it is possible to change the amount of time that traffic light is geen.\\\hline
-	GEN-040 & The system allows simulate traffic, and allow to change the simulation speed.\\\hline
-	GEN-050 & The sytem allows to open and save the traffic situation to a file.\\\hline
-	GEN-050A & The sytem doesn't allow to save a simulation, it only saves the traffic situation.\\\hline
+	GEN-020B & All crossroads have sensors for cars and pedestrians, traffic lights don't go green for no cars or pedestrians.\\\hline
+	GEN-020C & Components can be rotated.\\\hline
+	GEN-025 & Components can be dragged onto the grid.\\\hline
+	GEN-025A & The grid by default is 4x3 but it is possible to change the size of the grid before adding components.\\\hline
+	GEN-030 & From the traffic lights of the crossroads it is possible to change the amount of time that traffic light is green.\\\hline
+	GEN-040 & The system allows simulate traffic in realtime, and allow to change the simulation speed.\\\hline
+	GEN-040A & The system can return a report in which it highlight where many traffic jams are in a graphical representation of the traffic situation. Which can be saved as an image file.\\\hline
+	GEN-050 & The system allows to open and save the traffic situation to a file.\\\hline
+	GEN-060 & The system allows to specify for each open incoming lane to set the amount of traffic coming.\\\hline
+	GEN-200 & The sytem will be delivered as a standalone application (.exe file).\\\hline
+	GEN-200A & The system design and implementation will also be delivered to the client and has all the rights to it.\\\hline
 \end{tabularx}
 
-\subsection{System requirements}
+\subsection{Non functional requirements}
+\begin{tabularx}{\textwidth}{|p{2cm}X|}\hline
+	Code & Requirement \\\hline
+	NFR-010 & The system can run on a regular computer/notebook build less than 4 years ago running Windows.\\\hline
+	NFR-020 & The user interface of the system is straightforward and easy to learn.\\\hline
+	NFR-030 & The application can be used offline.\\\hline
+	NFR-040 & The system is stable, and is not allowed to give unclear error messages.\\\hline
+	NFR-050 & The system is designed to be used with mouse and keyboard.\\\hline
+\end{tabularx}
 
