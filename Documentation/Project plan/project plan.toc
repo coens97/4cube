@@ -1,0 +1,10 @@
+\contentsline {section}{\numberline {1}Introduction}{2}
+\contentsline {section}{\numberline {2}Project Statement }{2}
+\contentsline {subsection}{\numberline {2.1}Formal Client}{2}
+\contentsline {subsection}{\numberline {2.2}Project Leader}{2}
+\contentsline {subsection}{\numberline {2.3}Current Situation}{2}
+\contentsline {subsection}{\numberline {2.4}Project Justification}{2}
+\contentsline {subsection}{\numberline {2.5}Project Product}{3}
+\contentsline {subsection}{\numberline {2.6}Project deliverables and non deliverables }{3}
+\contentsline {subsection}{\numberline {2.7}Project Constraints}{3}
+\contentsline {subsection}{\numberline {2.8}Project Risks}{4}
