@@ -1,0 +1,61 @@
+duration: 40min
+chairwoman: Agnes
+secretary: Wen
+
+
+1. Is this application for single-user or multi-users?
+
+------a team use application. save and load is fine.
+
+2. How much is your budget?
+
+-------as cheap as possible. free for the client
+
+3. Do you need or have any sponsor?
+
+-------no, it's free.
+
+ADD: show statistics, ideal situation.
+small village, one way road.
+normal crossing mandatory, special crossing optional
+A sensor for cars and pedestrian.
+
+4. Do we get source code of the library?
+
+---------up to us to use or not.
+
+5. Are tests written for the library, we are aware of the examples in the documentation
+
+---------up to us to use or not.
+
+8. What is the scope of the application?
+  a) Is it necessary to choose the number of lanes? If so is it possible for lanes to merge or split to less lanes?
+---------both one lane since it is a small village
+  b) Are all the streets just as busy? Or should we allow to set the amount of traffic from a street.
+---------Set amount of traffic
+  c) Is it correct that traffic light crossings are always connected to 3-4 roads?
+---------Always use 4 roads
+
+9. Do you have any other specific requirements of the application? 
+---------Add report after simulation that makes clear where traffic jams are.
+
+=============================================
+
+block 1 weekly meeting mandetory
+block 2 depends on us
+client role  is only available by appointment
+mention in agenda
+rotate roles for each meeting
+
+=============================================
+project plan feedback
+
+assumptions in current situation
+risk: 2 more columns  a guess: low/high, consequence
+be hacked, not necessary
+dont spend time on money part
+
+==============================================
+                      
+next meeting Thursday 12:15
+
