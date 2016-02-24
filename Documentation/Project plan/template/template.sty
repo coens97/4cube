@@ -5,7 +5,7 @@
 \usepackage{helvet} %include helvetica
 %\usepackage{xcolor,mdframed,caption} %for the box
 \usepackage{fancyhdr}
-
+\usepackage[ddmmyyyy]{datetime}
 
 \pdfmapfile{=ggm.map}
 
@@ -44,7 +44,7 @@
 	\hfill \colorbox{cpiGray}{\hspace{.25in} \parbox{2.97in}{\vspace{4.7in} \color{white} \textbf{Agnes Wadee\\
 				Coen Stange\\
 				Wen Li\\ 
-				Yongshi Liang\\ \vspace{2.3in} \vfill}}}%
+				Yongshi Liang\\  \vspace{2.3in} \vfill}}}%
 	\let\Title\@title
 	\restoregeometry}
 		
@@ -56,6 +56,7 @@
 \fancyfoot{}
 \renewcommand{\headrulewidth}{0pt}
 \lhead{\rmfamily \Title}
+\rhead{\rmfamily \date{\today}}
 \lfoot{\rmfamily \cpiType}
 \rfoot{\rmfamily Page \thepage}
 
