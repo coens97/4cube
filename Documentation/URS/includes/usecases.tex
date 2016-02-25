@@ -1,1 +1,423 @@
 \section{Use cases}
+\begin{usecase}
+	
+	\addtitle{Use Case 1}{Positioning a lane} 
+	
+	%Level: "user-goal" or "subfunction"
+	\addfield{Level:}{User-goal}
+	
+	%Primary Actor: Calls on the system to deliver its services.
+	\addfield{Primary Actor:}{End-User}
+	
+	%Preconditions: What must be true on start and worth telling the reader?
+	\addfield{Preconditions:}{The application is open and no simulation is running.}
+	
+	%Main Success Scenario: A typical, unconditional happy path scenario of success.
+	\addscenario{Main Success Scenario:}{
+		\item User drags the lane from the sidebar.
+		\item User places the lane on the grid.
+		\item System sets the new placed lane and updates the grid.
+	}
+	
+	%Extensions: Alternate scenarios of success or failure.
+	\addscenario{Extensions:}{
+		\item[2.a] If the space where the new lane is put is already engaged, then the system will ignore the new lane and goes back to step 1.
+		\begin{enumerate}
+			\item[1.] System informs end-user that the lane cannot be placed, because at that space already exists a lane.
+			\item[2.] End of use case
+		\end{enumerate}
+		\item[2.b]If the lane is placed outside the grid, then the system will ignore the new lane and goes back to step 1.  
+		\begin{enumerate}
+			\item[1.] System informs end-user that the lane must be placed inside the grid.
+				\item[2.] End of use case
+		\end{enumerate}
+	}
+	
+		\addfield{Post condition:}{The program stays in "Positioning a road" state. }
+	
+\end{usecase}
+
+\begin{usecase}
+	
+	\addtitle{Use Case 2}{Rotating the lane} 
+	
+	%Level: "user-goal" or "subfunction"
+	\addfield{Level:}{User-goal}
+	
+	%Primary Actor: Calls on the system to deliver its services.
+	\addfield{Primary Actor:}{End-User}
+	
+	%Preconditions: What must be true on start and worth telling the reader?
+	\addfield{Preconditions:}{There is at least one lane on the grid. No simulaion is running.}
+	
+	%Main Success Scenario: A typical, unconditional happy path scenario of success.
+	\addscenario{Main Success Scenario:}{
+		\item User right clicks on a lane.
+		\item System shows a menu with several options
+		\item User select "Rotate".
+		\item System turns the lane 90 degrees.
+		\item System updates the grid.
+	}
+	
+	%Extensions: Alternate scenarios of success or failure.
+	\addscenario{Extensions:}{
+		\item[3] User does not want to execute any operation from the right click menu.
+		\begin{enumerate}
+			\item[1] User clicks on any space outside the right click menu area.
+			\item[2] End of use case.
+		\end{enumerate}
+	}
+	
+		\addfield{Post condition:}{The program stays in "Rotating the lane" state. }
+	
+\end{usecase}
+
+\begin{usecase}
+	
+	\addtitle{Use Case 3}{Positioning a crossing} 
+	
+	%Level: "user-goal" or "subfunction"
+	\addfield{Level:}{User-goal}
+	
+	%Primary Actor: Calls on the system to deliver its services.
+	\addfield{Primary Actor:}{End-User}
+	
+	%Preconditions: What must be true on start and worth telling the reader?
+	\addfield{Preconditions:}{The application is open and no simulation is running.}
+	
+	%Main Success Scenario: A typical, unconditional happy path scenario of success.
+	\addscenario{Main Success Scenario:}{
+		\item User drags the crossing from the sidebar.
+		\item User places the crossing on the grid.
+	    \item System displays a pop-up window.
+	    \item User sets the initial settings for the selected crossing.
+		\item System sets the new placed lane and updates the grid.
+	}
+	
+	%Extensions: Alternate scenarios of success or failure.
+	\addscenario{Extensions:}{
+		\item[2.a] If the space where the new crossing is put is already engaged, then the system will ignore the new crossing and goes back to step 1.
+		\begin{enumerate}
+			\item[1.] System informs end-user that the crossing cannot be placed, because at that space already exists a crossing.
+			\item[2.] End of use case
+		\end{enumerate}
+		\item[2.b]If the crossing is placed outside the grid, then the system will ignore the new crossing and goes back to step 1.  
+		\begin{enumerate}
+			\item[1.] System informs end-user that the crossing must be placed inside the grid.
+			\item[2.] End of use case
+		\end{enumerate}
+		\item[4.a] User does not set any of the required crossing attributes
+		\begin{enumerate}
+			\item A system default value will be applied to undefined attributes.
+		\end{enumerate}
+		\item [4.b] User does not want to set any settings.
+		\begin{enumerate}
+			\item [1.]User clicks on "Cancel" button.
+			\item [2.]System closes the setting window.
+		\end{enumerate}
+	}
+	
+	\addfield{Post condition:}{The system displays the updated grid. }
+	
+	
+\end{usecase}
+
+\begin{usecase}
+	
+	\addtitle{Use Case 4}{Configurating traffic light timing} 
+	
+	%Level: "user-goal" or "subfunction"
+	\addfield{Level:}{User-goal}
+	
+	%Primary Actor: Calls on the system to deliver its services.
+	\addfield{Primary Actor:}{End-User}
+	
+	%Preconditions: What must be true on start and worth telling the reader?
+	\addfield{Preconditions:}{There is at least one crossing on the grid and no simulation is running.}
+	
+	%Main Success Scenario: A typical, unconditional happy path scenario of success.
+	\addscenario{Main Success Scenario:}{
+		\item User right clicks on a crossing.
+		\item System shows a menu with several options.
+		\item User chooses "Traffic light configuration" from the menu.
+		\item System pops up a new window with configuration options.
+		\item User defines the amount of the time the traffic light is green.
+		\item User clicks on the “OK” button.
+		\item System closes the configuration window.
+		\item System updates the crossing.
+		
+	}
+	
+	%Extensions: Alternate scenarios of success or failure.
+	\addscenario{Extensions:}{
+		\item[3.] User doesn not want to configurate anything. 
+		\begin{enumerate}
+			\item[1.] User clicks on "Cancel" button.
+			\item[2.] System closes the configuration window.
+			\item[3.] End of use case.
+		\end{enumerate}
+	}
+	
+	\addfield{Post condition:}{The system displays the updated grid. }
+	
+\end{usecase}
+
+\begin{usecase}
+	
+	\addtitle{Use Case 5}{Deleting an crossing} 
+	
+	%Level: "user-goal" or "subfunction"
+	\addfield{Level:}{User-goal}
+	
+	%Primary Actor: Calls on the system to deliver its services.
+	\addfield{Primary Actor:}{End-User}
+	
+	%Preconditions: What must be true on start and worth telling the reader?
+	\addfield{Preconditions:}{The application is open. There is at least one crossing on the grid. No simulation is running.}
+	
+	%Main Success Scenario: A typical, unconditional happy path scenario of success.
+	\addscenario{Main Success Scenario:}{
+		\item User right clicks on a crossing.
+		\item System shows a menu of several options.
+		\item User clicks on "Delete".
+		\item System deletes the crossing and updates the grid.
+	}
+	
+	%Extensions: Alternate scenarios of success or failure.
+	\addscenario{Extensions:}{
+		\item[3] User does not want to execute any operation from the right click menu.
+		\begin{enumerate}
+			\item[1] User clicks on any space outside the right click menu area.
+			\item[2] End of use case.
+		\end{enumerate}
+	}
+	
+	
+	
+	\addfield{Post condition:}{The system displays the updated grid. }
+	
+\end{usecase}
+
+\begin{usecase}
+	
+	\addtitle{Use Case 6}{Setting up a simulation} 
+	
+	%Level: "user-goal" or "subfunction"
+	\addfield{Level:}{User-goal}
+	
+	%Primary Actor: Calls on the system to deliver its services.
+	\addfield{Primary Actor:}{End-User}
+	
+	%Preconditions: What must be true on start and worth telling the reader?
+	\addfield{Preconditions:}{There are components on the grid. No simulation is running.}
+	
+	%Main Success Scenario: A typical, unconditional happy path scenario of success.
+	\addscenario{Main Success Scenario:}{
+		\item User chooses setup to configure the simulation.
+		\item System displays input boxes of for each lane.
+		\item Users defines the amount of the cars coming through the lanes and fills in the input boxes.
+		\item Users clicks on "Set up".
+	}
+	
+	%Extensions: Alternate scenarios of success or failure.
+	\addscenario{Extensions:}{
+		\item[3] User does not want to do any settings.
+		\begin{enumerate}
+			\item[1] User clicks on "Cancel" button.
+			\item[2] System hides the input boxes. 
+			\item[3] End of use case.
+	}
+	
+	\addfield{Post condition:}{The system is ready for running the simulation. }
+\end{usecase}
+
+\begin{usecase}
+	
+	\addtitle{Use Case 7}{Running a simulation} 
+	
+	%Level: "user-goal" or "subfunction"
+	\addfield{Level:}{User-goal}
+	
+	%Primary Actor: Calls on the system to deliver its services.
+	\addfield{Primary Actor:}{End-User}
+	
+	%Preconditions: What must be true on start and worth telling the reader?
+	\addfield{Preconditions:}{The simulation is set up.}
+	
+	%Main Success Scenario: A typical, unconditional happy path scenario of success.
+	\addscenario{Main Success Scenario:}{
+		\item User clicks on "Play" button.
+		\item System runs the simulation.
+	}
+	
+	%Extensions: Alternate scenarios of success or failure.
+	\addscenario{Extensions:}{
+		\item[2] System detects errors.
+		\begin{enumerate}
+			\item[1.] System stops running the simulation and gives an error message.
+		\end{enumerate}
+	}
+	
+		\addfield{Post condition:}{The simulation is running. }
+\end{usecase}
+
+\begin{usecase}
+	
+	\addtitle{Use Case 8}{Stopping the simulation} 
+	
+	%Level: "user-goal" or "subfunction"
+	\addfield{Level:}{User-goal}
+	
+	%Primary Actor: Calls on the system to deliver its services.
+	\addfield{Primary Actor:}{End-User}
+	
+	%Preconditions: What must be true on start and worth telling the reader?
+	\addfield{Preconditions:}{The system is running a simulation.}
+	
+	%Main Success Scenario: A typical, unconditional happy path scenario of success.
+	\addscenario{Main Success Scenario:}{
+		\item User clicks on "Stop" button.
+		\item System stops the simulation.
+	}
+	
+	\addfield{Post condition:}{The system is not running the simulation. }
+	
+\end{usecase}
+\begin{usecase}
+	
+	\addtitle{Use Case 9}{Load file} 
+	
+	%Level: "user-goal" or "subfunction"
+	\addfield{Level:}{User-goal}
+	
+	%Primary Actor: Calls on the system to deliver its services.
+	\addfield{Primary Actor:}{End-User}
+	
+	%Preconditions: What must be true on start and worth telling the reader?
+	\addfield{Preconditions:}{The application is open. No simulation is running. There is at least one saved file with traffic control system. }
+	
+	%Main Success Scenario: A typical, unconditional happy path scenario of success.
+	\addscenario{Main Success Scenario:}{
+		\item User selects file to open.
+		\item System closes previous project.
+		\item System loads the file.
+	}
+	
+	%Extensions: Alternate scenarios of success or failure.
+	\addscenario{Extensions:}{
+		\item[2.a] File can't be loaded.
+		\begin{enumerate}
+			\item[1.] System informs user that file can't be loaded and given the choice to stop or choose another file.
+			\item[2.] End of use case.
+		\end{enumerate}
+		\item[2.b] Another project is open
+		\begin{enumerate}
+			\item[1.] System asks if users wants, to save project, that is already open, before closing it and opening another project.
+			\item[2.] End of use case.
+		\end{enumerate}
+	}
+	
+		\addfield{Post condition:}{The system has loaded an existing file. }
+	
+\end{usecase}
+\begin{usecase}
+	
+	\addtitle{Use Case 10}{Save file} 
+	
+	%Level: "user-goal" or "subfunction"
+	\addfield{Level:}{User-goal}
+	
+	%Primary Actor: Calls on the system to deliver its services.
+	\addfield{Primary Actor:}{End-User}
+	
+	%Preconditions: What must be true on start and worth telling the reader?
+	\addfield{Preconditions:}{The application is open. No simulation is running.}
+	
+	%Main Success Scenario: A typical, unconditional happy path scenario of success.
+	\addscenario{Main Success Scenario:}{
+		\item User click the "Save" button
+		\item System saves the file.
+	}
+	%Extensions: Alternate scenarios of success or failure.
+	\addscenario{Extensions:}{
+		\item[2.a] Project file has not been saved on the device yet.
+		\begin{enumerate}
+			\item[1.] A saving dialogue window pops up.
+			\item[2.] User chooses the directory where the file will be stored, and names the file.
+			\item[3.] User clicks " OK ".
+			\item[4.] System saves the file.
+		\end{enumerate}
+	}
+	
+		\addfield{Post condition:}{The system has saved a file. }
+\end{usecase}
+
+\begin{usecase}
+	
+	\addtitle{Use Case 11}{Save file as a new file} 
+	
+	%Level: "user-goal" or "subfunction"
+	\addfield{Level:}{User-goal}
+	
+	%Primary Actor: Calls on the system to deliver its services.
+	\addfield{Primary Actor:}{End-User}
+	
+	%Preconditions: What must be true on start and worth telling the reader?
+	\addfield{Preconditions:}{ The application is open. Noo simulation is running.}
+	
+	%Main Success Scenario: A typical, unconditional happy path scenario of success.
+	\addscenario{Main Success Scenario:}{
+		\item User clicks " Save as " button.
+		\item A saving dialogue window pops up.
+		\item User chooses the directory where the file will be stored, and names the file.
+		\item User clicks " OK ".
+		\item System saves the file.
+	}
+	
+	%Extensions: Alternate scenarios of success or failure.
+	\addscenario{Extensions:}{
+		\item[3.a] User mis-clicks the " Save as " button and does not want to save the file as a new file.
+		\begin{enumerate}
+			\item[1.] User clicks " Cancel ".
+			\item[2.] Dialogue window closes.
+		\end{enumerate}
+	}
+	
+		\addfield{Post condition:}{The system has saved a file. }
+\end{usecase}
+
+\begin{usecase}
+	
+	\addtitle{Use Case 12}{Resizing the grid} 
+	
+	%Level: "user-goal" or "subfunction"
+	\addfield{Level:}{User-goal}
+	
+	%Primary Actor: Calls on the system to deliver its services.
+	\addfield{Primary Actor:}{End-User}
+	
+	%Preconditions: What must be true on start and worth telling the reader?
+	\addfield{Preconditions:}{ The application is open. Noo simulation is running.}
+	
+	%Main Success Scenario: A typical, unconditional happy path scenario of success.
+	\addscenario{Main Success Scenario:}{
+		\item User clicks on “Edit” on the top bar.
+		\item System displays a menu with several options.
+		\item User clicks on "Document settings".
+		\item System shows document settings panel.
+		\item User defines the size of the grid by tying numbers in the width and height input boxes.
+		\item User clicks on “OK”.
+		\item System updates and display the new grid.
+	}
+	
+	%Extensions: Alternate scenarios of success or failure.
+	\addscenario{Extensions:}{
+		\item[5] Use wants to make the grid size smaller. 
+		\begin{enumerate}
+			\item  System discards the objects placed outside of the new grid size. 
+		\end{enumerate}
+	}
+	
+	\addfield{Post condition:}{System displays the resized grid.}
+\end{usecase}
+
