@@ -49,5 +49,64 @@ To change the amount of time each traffic light is green press right-click on th
 	MWS-120B & The user can select a lane group and change the amount of time the traffic-light is green.\\\hline
 \end{tabularx}
 
+\newpage
 \subsection{Components}
 \label{sec:components}
+\subsubsection{Crossway}
+\begin{figure}
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/crosswaya.png}
+		\caption{Crossway without pedestrians.}
+		\label{fig:crossa}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/crosswayb.png}
+		\caption{Crossway with pedestrians.}
+		\label{fig:crossb}
+	\end{subfigure}
+	\caption{Crossways}
+	\label{fig:cross}
+\end{figure}
+
+\begin{tabularx}{\textwidth}{|p{2cm}X|}\hline
+	Code & Specification \\\hline
+	CWC-010 & All cossways are connected to 4 roads\\\hline
+	CWC-020 & There are 2 different types of crossways see figure \ref{fig:cross}.\\\hline
+	CWC-020 & Type A crossway is without pedestrian lane.\\\hline
+	CWC-020A & From each side the crossway A has 2 incoming lanes and 1 outgoing lane.\\\hline
+	CWC-025 & Type B crossway is with an pedestrian lane.\\\hline
+	CWC-025A & Type B has from 2 opposite sides a crossway for pedestrians, which only has 1 incoming lane.\\\hline
+	CWC-030 & Traffic light for cars have the colors red, orange and geen.\\\hline
+	CWC-035 & Traffic light for pedestrians have the colors red and green.\\\hline
+	CWC-040 & Traffic light for cars only turn orange after green.\\\hline
+	CWC-040A & Amount of time for the orange light is fixed, and is set to 2 seconds in normal simulation time.\\\hline
+	CWC-045 & Traffic light for green are set to default for 4 seconds.\\\hline
+	CWC-045A & The amount of time each light group of an crossway can be changed.\\\hline
+	CWC-050 & The order of the light groups are fixed.\\\hline
+	CWC-050A & When there are no cars or pedestrians on the sensors for the according lightgroup it will be skipped in the simulation.\\\hline
+\end{tabularx}
+
+\subsubsection{Road}
+\begin{figure}
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/straightroad.pdf}
+		\caption{Crossway without pedestrians.}
+		\label{fig:crossa}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/curvedroad.pdf}
+		\caption{Crossway with pedestrians.}
+		\label{fig:crossb}
+	\end{subfigure}
+	\caption{Crossways}
+	\label{fig:cross}
+\end{figure}
+
+\subsection{Traffic light groups}
+\textsl{At the moment of writing this document it is unclear what the traffic light groups are.}
