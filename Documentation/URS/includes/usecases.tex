@@ -213,20 +213,13 @@
 	
 	%Main Success Scenario: A typical, unconditional happy path scenario of success.
 	\addscenario{Main Success Scenario:}{
-		\item User chooses setup to configure the simulation.
-		\item System displays input boxes of for each lane.
+		\item System displays input boxes of for each incoming lane which is not connected.
 		\item Users defines the amount of the cars coming through the lanes and fills in the input boxes.
-		\item Users clicks on "Set up".
 	}
 	
 	%Extensions: Alternate scenarios of success or failure.
 	\addscenario{Extensions:}{
-		\item[3] User does not want to do any settings.
-		\begin{enumerate}
-			\item[1] User clicks on "Cancel" button.
-			\item[2] System hides the input boxes. 
-			\item[3] End of use case.
-		\end{enumerate}
+
 	}
 	
 	\addfield{Post condition:}{The system is ready for running the simulation. }
