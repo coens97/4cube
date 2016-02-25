@@ -89,24 +89,50 @@ To change the amount of time each traffic light is green press right-click on th
 	CWC-050A & When there are no cars or pedestrians on the sensors for the according lightgroup it will be skipped in the simulation.\\\hline
 \end{tabularx}
 
+\newpage
 \subsubsection{Road}
 \begin{figure}
 	\centering
 	\begin{subfigure}{.5\textwidth}
 		\centering
-		\includegraphics[width=\linewidth]{figures/straightroad.pdf}
-		\caption{Crossway without pedestrians.}
-		\label{fig:crossa}
+		\includegraphics{figures/straightroad.pdf}
+		\caption{Straight road.}
+		\label{fig:strr}
 	\end{subfigure}%
 	\begin{subfigure}{.5\textwidth}
 		\centering
-		\includegraphics[width=\linewidth]{figures/curvedroad.pdf}
-		\caption{Crossway with pedestrians.}
-		\label{fig:crossb}
+		\includegraphics{figures/curvedroad.pdf}
+		\caption{Curved road.}
+		\label{fig:curvedr}
 	\end{subfigure}
 	\caption{Crossways}
-	\label{fig:cross}
+	\label{fig:road}
 \end{figure}
+
+\begin{tabularx}{\textwidth}{|p{2cm}X|}\hline
+	Code & Specification \\\hline
+	RCP-010 & There are two types of roads, a straight road and a curved road.\\\hline
+	RCP-020 & All roads have 2 lanes, in both directions.\\\hline
+	RCP-030 & Unconnected incoming lanes have a textbox which allows to change the number of cars comming in when the simulation is running.\\\hline
+	RCP-030A & This is also the case with crossroads.\\\hline
+\end{tabularx}
+
+\subsubsection{Car}
+\begin{tabularx}{\textwidth}{|p{2cm}X|}\hline
+	Code & Specification \\\hline
+	CAR-010 & All cars run at the same speed, the speed allows 1 car to pass the green light per second.\\\hline
+	CAR-020 & Cars do not collide.\\\hline
+	CAR-030 & No cars go through red light.\\\hline
+	CAR-040 & Cars will not go through orange light.\\\hline
+	CAR-050 & Cars will take a random direction on the crossroad.\\\hline
+\end{tabularx}
+
+\subsubsection{Pedestrian}
+\begin{tabularx}{\textwidth}{|p{2cm}X|}\hline
+	Code & Specification \\\hline
+	PED-010 & Pedestrians have 50\% change on being at the crosswalk.\\\hline
+	PED-020 & Nothing can be configured of the pedestrians.\\\hline
+\end{tabularx}
 
 \subsection{Traffic light groups}
 \textsl{At the moment of writing this document it is unclear what the traffic light groups are.}
