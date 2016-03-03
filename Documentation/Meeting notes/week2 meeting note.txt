@@ -1,0 +1,9 @@
+duration: 40min
+chairwoman: Wen
+secretary: Coen
+
+The project plan and the URS are reviewed, the notes arre in the pdf's.
+
+Special notes from the client:
+Accerlation of the cars is a could
+Cars fixed number at constant distance from each other
