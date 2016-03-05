@@ -74,7 +74,7 @@
 
 \begin{usecase}
 	
-	\addtitle{Use Case 3}{Positioning a crossing} 
+	\addtitle{Use Case 3}{Positioning a crossroad} 
 	
 	%Level: "user-goal" or "subfunction"
 	\addfield{Level:}{User-goal}
@@ -87,26 +87,26 @@
 	
 	%Main Success Scenario: A typical, unconditional happy path scenario of success.
 	\addscenario{Main Success Scenario:}{
-		\item User drags the crossing from the sidebar.
-		\item User places the crossing on the grid.
+		\item User drags the crossroad from the sidebar.
+		\item User places the crossroad on the grid.
 	    \item System displays a pop-up window.
-	    \item User sets the initial settings for the selected crossing.
-		\item System sets the new placed crossing and updates the grid.
+	    \item User sets the initial settings for the selected crossroad.
+		\item System sets the new placed crossroad and updates the grid.
 	}
 	
 	%Extensions: Alternate scenarios of success or failure.
 	\addscenario{Extensions:}{
-		\item[2.a] If the space where the new crossing is put is already engaged, then the system will ignore the new crossing and goes back to step 1.
+		\item[2.a] If the space where the new crossroad is put is already engaged, then the system will ignore the new crossroad and goes back to step 1.
 		\begin{enumerate}
-			\item[1.] System informs end-user that the crossing cannot be placed, because at that space already exists a crossing.
+			\item[1.] System informs end-user that the crossroad cannot be placed, because at that space already exists a crossroad.
 			\item[2.] End of use case
 		\end{enumerate}
-		\item[2.b]If the crossing is placed outside the grid, then the system will ignore the new crossing and goes back to step 1.  
+		\item[2.b]If the crossroad is placed outside the grid, then the system will ignore the new crossroad and goes back to step 1.  
 		\begin{enumerate}
-			\item[1.] System informs end-user that the crossing must be placed inside the grid.
+			\item[1.] System informs end-user that the crossroad must be placed inside the grid.
 			\item[2.] End of use case
 		\end{enumerate}
-		\item[4.a] User does not set any of the required crossing attributes
+		\item[4.a] User does not set any of the required crossroad attributes
 		\begin{enumerate}
 			\item A system default value will be applied to undefined attributes.
 		\end{enumerate}
@@ -133,18 +133,18 @@
 	\addfield{Primary Actor:}{End-User}
 	
 	%Preconditions: What must be true on start and worth telling the reader?
-	\addfield{Preconditions:}{There is at least one crossing on the grid and no simulation is running.}
+	\addfield{Preconditions:}{There is at least one crossroad on the grid and no simulation is running.}
 	
 	%Main Success Scenario: A typical, unconditional happy path scenario of success.
 	\addscenario{Main Success Scenario:}{
-		\item User right clicks on a crossing.
+		\item User right clicks on a crossroad.
 		\item System shows a menu with several options.
 		\item User chooses "Traffic light configuration" from the menu.
 		\item System pops up a new window with configuration options.
 		\item User defines the amount of the time the traffic light is green.
 		\item User clicks on the "OK" button.
 		\item System closes the configuration window.
-		\item System updates the crossing.
+		\item System updates the crossroad.
 		
 	}
 	
@@ -164,7 +164,7 @@
 
 \begin{usecase}
 	
-	\addtitle{Use Case 5}{Deleting an crossing} 
+	\addtitle{Use Case 5}{Deleting an crossroad} 
 	
 	%Level: "user-goal" or "subfunction"
 	\addfield{Level:}{User-goal}
@@ -173,14 +173,14 @@
 	\addfield{Primary Actor:}{End-User}
 	
 	%Preconditions: What must be true on start and worth telling the reader?
-	\addfield{Preconditions:}{The application is open. There is at least one crossing on the grid. No simulation is running.}
+	\addfield{Preconditions:}{The application is open. There is at least one crossroad on the grid. No simulation is running.}
 	
 	%Main Success Scenario: A typical, unconditional happy path scenario of success.
 	\addscenario{Main Success Scenario:}{
-		\item User right clicks on a crossing.
+		\item User right clicks on a crossroad.
 		\item System shows a menu of several options.
 		\item User clicks on "Delete".
-		\item System deletes the crossing and updates the grid.
+		\item System deletes the crossroad and updates the grid.
 	}
 	
 	%Extensions: Alternate scenarios of success or failure.

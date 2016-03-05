@@ -44,13 +44,13 @@ The main window is divided into two parts, see figure \ref{fig:mainwindow}. On t
 	R01 & MWS-038C & The report can be saved as an image file.\\\hline
 \end{tabularx}
 
-To change the amount of time each traffic light is green press right-click on the crossway and click in the context-menu on "Traffic-light configuration". A new window will pop up which allows to set the time for each group of lanes.
+To change the amount of time each traffic light is green press right-click on the crossroad and click in the context-menu on "Traffic-light configuration". A new window will pop up which allows to set the time for each group of lanes.
 
 \begin{tabularx}{\textwidth}{|p{0.5cm}p{2cm}X|}\hline
 	Rxx & Code & Specification \\\hline
 	R01 & MWS-100 & All open incoming lanes have a textbox to specify the amount of traffic coming in.\\\hline
 	R01 & MWS-110 & When pressing right-click on any component placed on the grid a context-menu appears which allows to rotate or delete the component.\\\hline
-	R01 & MWS-120 & When pressing right-click on a crossway it gives an option "Traffic-light configuration"\\\hline
+	R01 & MWS-120 & When pressing right-click on a crossroad it gives an option "Traffic-light configuration"\\\hline
 	R01 & MWS-120A & A new window will pop-up with a list of all the lane groups.\\\hline
 	R01 & MWS-120B & The user can select a lane group and change the amount of time the traffic-light is green.\\\hline
 \end{tabularx}
@@ -58,19 +58,19 @@ To change the amount of time each traffic light is green press right-click on th
 \newpage
 \subsection{Components}
 \label{sec:components}
-\subsubsection{Crossway}
+\subsubsection{Crossroad}
 \begin{figure}
 	\centering
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{figures/crosswaya.png}
-		\caption{Crossway without pedestrians.}
+		\caption{Crossroad without pedestrians.}
 		\label{fig:crossa}
 	\end{subfigure}%
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{figures/crosswayb.png}
-		\caption{Crossway with pedestrians.}
+		\caption{Crossroad with pedestrians.}
 		\label{fig:crossb}
 	\end{subfigure}
 	\caption{Crossways}
@@ -80,17 +80,17 @@ To change the amount of time each traffic light is green press right-click on th
 \begin{tabularx}{\textwidth}{|p{0.5cm}p{2cm}X|}\hline
 	Rxx & Code & Specification \\\hline
 	R01 & CWC-010 & All cossways are connected to 4 roads\\\hline
-	R01 & CWC-020 & There are 2 different types of crossways see figure \ref{fig:cross}.\\\hline
-	R01 & CWC-020 & Type A crossway is without pedestrian lane.\\\hline
-	R01 & CWC-020A & From each side the crossway A has 2 incoming lanes and 1 outgoing lane.\\\hline
-	R01 & CWC-025 & Type B crossway is with an pedestrian lane.\\\hline
-	R01 & CWC-025A & Type B has from 2 opposite sides a crossway for pedestrians, which only has 1 incoming lane.\\\hline
+	R01 & CWC-020 & There are 2 different types of crossroads see figure \ref{fig:cross}.\\\hline
+	R01 & CWC-020 & Type A crossroad is without pedestrian lane.\\\hline
+	R01 & CWC-020A & From each side the crossroad A has 2 incoming lanes and 1 outgoing lane.\\\hline
+	R01 & CWC-025 & Type B crossroad is with an pedestrian lane.\\\hline
+	R01 & CWC-025A & Type B has from 2 opposite sides a crossroad for pedestrians, which only has 1 incoming lane.\\\hline
 	R01 & CWC-030 & Traffic light for cars have the colors red, orange and geen.\\\hline
 	R01 & CWC-035 & Traffic light for pedestrians have the colors red and green.\\\hline
 	R01 & CWC-040 & Traffic light for cars only turn orange after green.\\\hline
 	R01 & CWC-040A & Amount of time for the orange light is fixed, and is set to 2 seconds in normal simulation time.\\\hline
 	R01 & CWC-045 & Traffic light for green are set to default for 4 seconds.\\\hline
-	R01 & CWC-045A & The amount of time each light group of an crossway can be changed.\\\hline
+	R01 & CWC-045A & The amount of time each light group of an crossroad can be changed.\\\hline
 	R01 & CWC-050 & The order of the light groups are fixed.\\\hline
 	R01 & CWC-050A & When there are no cars or pedestrians on the sensors for the according lightgroup it will be skipped in the simulation.\\\hline
 	R01 & CWC-060 & Unconnected incoming lanes have a textbox which allows to change the number of cars comming in when the simulation is running.\\\hline
@@ -121,7 +121,7 @@ To change the amount of time each traffic light is green press right-click on th
 	R01 & RCP-010 & There are two types of roads, a straight road and a curved road.\\\hline
 	R01 & RCP-020 & All roads have 2 lanes, in both directions.\\\hline
 	R01 & RCP-030 & Unconnected incoming lanes have a textbox which allows to change the number of cars comming in when the simulation is running.\\\hline
-	R01 & RCP-030A & Just like crossway see CWC-060.\\\hline
+	R01 & RCP-030A & Just like crossroad see CWC-060.\\\hline
 \end{tabularx}
 
 \subsubsection{Car}
