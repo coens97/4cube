@@ -1,0 +1,306 @@
+\section{Test tables}
+Explanation: 
+\begin{itemize}
+	\item Target on screen\\
+	The actual screen commands the user will interact with.
+	\item Test Data/Simulation\\
+	Test actions under different kinds of conditions and with different kinds of data to check if we have captured all the exceptions and if we take necessary prcautions to prevent the action from crashing.
+	\item Rusult\\
+	What is the result in each different case we ran the test.
+\end{itemize}
+
+\newpage
+
+\subsection{Positioning a lane}
+Test Name: Positioning a lane \\Test Date: \\ $\left[ PASS \right] / \left[ FAIL \right]$\\Comment: \\
+\begin{enumerate}
+	\item Pre-Condition
+	\begin{itemize}
+		\item The application is successfully opened.
+		\item No simulation is running.
+		\item Grid B3 is occupied with lane TypeA.
+		\item Grid C4 is occupied with crossing TypeA.
+	\end{itemize}
+	\item Target on screen
+	\begin{itemize}
+		\item User click on the Lane tab.
+		\item User chooses a lane.
+		\item User drags the lane from the Lane tab.
+		\item User places the lane on the grid.
+	\end{itemize}
+	\item Test Data/Simulation
+	\begin{itemize}
+		\item User chooses a lane TypeA, by left clicking the mouse, and then drags it to the grid (gridB2).
+		\item User choose a lane TypeB, by left clicking the mouse, and then drags it in the grid (gridB3).
+		\item User choose a lane TyoeA, by left clicking the mouse, and then drags it to the grid (gridC4).
+		\item User choose a lane TypeB, by left clicking the mouse, and then drags it outside the grid.
+	\end{itemize}
+	\item Result
+	\begin{itemize}
+		\item A lane with TypeA shows in grid B2.
+		\item System gives an  error message "Grid occupied". Grid B3 does not change.
+		\item System gives an  error message "Grid occupied". Grid C4 does not change.
+		\item  System gives an error message "Please places inside the grid.
+	\end{itemize}
+\end{enumerate}
+
+\newpage
+
+\subsection{Rotating the component}
+Test Name: Rotating the component\\Test Date: \\ $\left[ PASS \right] / \left[ FAIL \right]$\\Comment: \\
+\begin{enumerate}
+	\item Pre-Condition
+	\begin{itemize}
+		\item The application is successfully opened.
+		\item No simulation is running.
+		\item Grid B3 is occupied with lane TypeB.
+		\item Grid C4 is occupied with crossing TypeA.
+	\end{itemize}
+	\item Target on screen
+	\begin{itemize}
+		\item User choose a component in the grid.
+		\item User right clicks on the component.
+		\item User selects "Rotate" from right-click menu.
+	\end{itemize}
+	\item Test Data/Simulation
+	\begin{itemize}
+		\item User right click on grid B3 then choose rotate option by left clicking the mouse. 
+		\item User right click on grid C4 then choose rotate option by left clicking the mouse.
+		\item User right click on grid D1. 
+	\end{itemize}
+	\item Result
+	\begin{itemize}
+		\item Lane on grid B3 has rotated 90 degrees clockwise.
+		\item Crossing on grid C4 has rotated 90 degrees clockwise.
+		\item Nothing happens and no option pop out.
+	\end{itemize}
+\end{enumerate}
+
+\newpage
+
+\subsection{Positioning a crossing}
+Test Name: Positioning a crossing\\Test Date: \\ $\left[ PASS \right] / \left[ FAIL \right]$\\Comment: \\
+\begin{enumerate}
+	\item Pre-Condition
+	\begin{itemize}
+		\item The application is successfully opened.
+		\item No simulation is running.
+		\item Grid B3 is occupied with lane TypeB.
+		\item Grid C4 is occupied with crossing TypeA.
+	\end{itemize}
+	\item Target on screen
+	\begin{itemize}
+		\item User click on the Crossing tab.
+		\item User chooses a crossing.
+		\item User drags the crossing from the Crossing tab.
+		\item User places the crossing on the grid.
+		\item User sets the initial setting of that crossing.
+	\end{itemize}
+	\item Test Data/Simulation
+	\begin{itemize}
+		\item User choose a crossing TypeA, by left clicking the mouse, and then drags it to the grid (gridB2). Setting the initial setting in the pop-up window.
+		\item User choose a crossing TypeB, by left clicking the mouse, and then drags it to the grid (gridB3).
+		\item User choose a crossing TypeA, by left clicking the mouse, and then drags it to the grid (gridC4).
+		\item User choose a crossing TypeB, by left clicking the mouse, and then drags it to the grid (gridC2). User without setting any attributes of that crossing.
+		\item User choose a crossing TypeA, by left clicking the mouse, and then drags it to the grid (gridsC3). User clicks on the cancel button in the pop-up window.
+		\item User choose a crossing TypeB, by left clicking the mouse, and then drags it outside the grid.
+	\end{itemize}
+	\item Result
+	\begin{itemize}
+		\item A crossing with TypeA shows in grid B2. System set attributes to that crossing.
+		\item System gives an  error message "Grid occupied". Grid B3 does not change.
+		\item System gives an  error message "Grid occupied". Grid C4 does not change.
+		\item A crossing with TypeB shows in grid C2. System set default attributes to that crossing.
+		\item A crossing with TypeB shows in grid C3. System close the setting window and without setting attributes.
+		\item System gives an error message "Please places inside the grid.
+	\end{itemize}
+\end{enumerate}
+
+\newpage
+
+\subsection{Configurating traffic light timing}
+Test Name: Configurating traffic light timing\\Test Date: \\ $\left[ PASS \right] / \left[ FAIL \right]$\\Comment: \\
+\begin{enumerate}
+	\item Pre-Condition
+	\begin{itemize}
+		\item The application is successfully opened.
+		\item No simulation is running.
+		\item Grid B3 is occupied with lane TypeB.
+		\item Grid C4 is occupied with crossing TypeA.
+	\end{itemize}
+	\item Target on screen
+	\begin{itemize}
+		\item User choose a crossing in the grid.
+		\item User right clicks on the crossing.
+		\item User selects "Traffic light configuration" from right-click menu.
+		\item User selects a light group in the listbox of the light groups.
+		\item User change the green light time on the numericUpDown.
+		\item User clicks the "Complete" button. 
+	\end{itemize}
+	\item Test Data/Simulation
+	\begin{itemize}
+		\item User right click on grid C4 then choose Traffic light configuration  option by left clicking the mouse. After selected a light group and changed the time by the numericUpDown, user click on Change. User click on complete.
+		\item User right click on grid C4 then choose Traffic light configuration option by left clicking the mouse. After changed the time by the numericUpDown, user click on Change all. User click on complete.
+		\item User right click on grid C4 then choose Traffic light configuration option by left clicking the mouse. And without change anything then click on close. 
+		\item User right click on grid B3. 
+		\item User right click on grid A1.
+	\end{itemize}
+	\item Result
+	\begin{itemize}
+		\item System sets the green light time of that chosen light group and close the configuration window. 
+		\item System sets that value to all the light groups and close the configuration window. 
+		\item System without change anything and close the configuration window.
+		\item System only shows the rotate option.
+		\item Nothing happends and no option pop out.
+		
+	\end{itemize}
+\end{enumerate}
+
+\newpage
+
+\subsection{Deleting the component}
+Test Name: Deleting the component\\Test Date: \\ $\left[ PASS \right] / \left[ FAIL \right]$\\Comment: \\
+\begin{enumerate}
+	\item Pre-Condition
+	\begin{itemize}
+		\item The application is successfully opened.
+		\item No simulation is running.
+		\item Grid B3 is occupied with lane TypeB.
+		\item Grid C4 is occupied with crossing TypeA.
+	\end{itemize}
+	\item Target on screen
+	\begin{itemize}
+		\item User choose a component in the grid.
+		\item User right clicks on the component.
+		\item User selects "Delete" from right-click menu.
+	\end{itemize}
+	\item Test Data/Simulation
+	\begin{itemize}
+		\item User right click on grid B3 then choose rotate option by left clicking the mouse. 
+		\item User right click on grid C4 then choose rotate option by left clicking the mouse.
+		\item User right click on grid D1. 
+	\end{itemize}
+	\item Result
+	\begin{itemize}
+		\item Lane on grid B3 has deleted.
+		\item Crossing on grid C4 has deleted.
+		\item Nothing happens and no option pop out.
+	\end{itemize}
+\end{enumerate}
+
+\newpage
+
+\subsection{Setting up the amount of incoming cars }
+Test Name: Setting up the amount of incoming cars\\Test Date: \\ $\left[ PASS \right] / \left[ FAIL \right]$\\Comment: \\
+\begin{enumerate}
+	\item Pre-Condition
+	\begin{itemize}
+		\item The application is successfully opened.
+		\item No simulation is running.
+		\item Grid B3 is occupied with lane TypeB.
+		\item Grid C4 is occupied with crossing TypeA.
+	\end{itemize}
+	\item Target on screen
+	\begin{itemize}
+		\item User chooses a textbox on one of the components which already in the grid.
+		\item User define the amount of the cars coming through the lanes in that textbox.
+	\end{itemize}
+	\item Test Data/Simulation
+	\begin{itemize}
+		\item User click on a textbox in grid B3 and input a value.
+		\item User click on a textbox in grid C4 and input a value.
+		\item User click on a textbox in gird B3 and without input a value.
+		\item User doesn't click on a textbox.
+	\end{itemize}
+	\item Result
+	\begin{itemize}
+		\item System sets the amount of incoming car of which user changed in the lane.
+		\item System sets the amount of incoming car of which user changed in the crossing.
+		\item System sets the amount of incoming car of which user changed in the lane to defalut value.
+		\item Nothing happens. 
+	\end{itemize}
+\end{enumerate}
+
+\newpage 
+
+\subsection{Running a simulation}
+Test Name: Running a simulation\\Test Date: \\ $\left[ PASS \right] / \left[ FAIL \right]$\\Comment: \\
+\begin{enumerate}
+	\item Pre-Condition
+	\begin{itemize}
+		\item The application is successfully opened.
+		\item No simulation is running.
+		\item The simulation is set up.
+	\end{itemize}
+	\item Target on screen
+	\begin{itemize}
+		\item User clicks on "Start/Stop" button.
+	\end{itemize}
+	\item Test Data/Simulation
+	\begin{itemize}
+		\item User click on start.
+		\item The simlation start.
+	\end{itemize}
+	\item Result
+	\begin{itemize}
+		\item After user click on start, system shows the cars flow go through all the lanes in the components which are already placed in the grid. Also the traffic light time changing like the setting in the configuration. 
+		Cars stop when the light is red and go when the light is green. And the button of pause is availabled.
+	\end{itemize}
+\end{enumerate}
+
+\newpage
+
+\subsection{Stopping  simulation}
+Test Name: Stopping a simulation\\Test Date: \\ $\left[ PASS \right] / \left[ FAIL \right]$\\Comment: \\
+\begin{enumerate}
+	\item Pre-Condition
+	\begin{itemize}
+		\item The application is successfully opened.
+		\item A simulation is running.
+	\end{itemize}
+	\item Target on screen
+	\begin{itemize}
+		\item User clicks on "Start/Stop" button.
+	\end{itemize}
+	\item Test Data/Simulation
+	\begin{itemize}
+		\item User click on stop.
+		\item The simlation stop.
+	\end{itemize}
+	\item Result
+	\begin{itemize}
+		\item After user click on stop, system stop the simulation. All the cars are disappear and the light stop changing. The pause button is disabled
+	\end{itemize}
+\end{enumerate}
+
+\newpage
+
+\subsection{Pausing  simulation}
+Test Name: Stopping a simulation\\Test Date: \\ $\left[ PASS \right] / \left[ FAIL \right]$\\Comment: \\
+\begin{enumerate}
+	\item Pre-Condition
+	\begin{itemize}
+		\item The application is successfully opened.
+		\item A simulation is running.
+	\end{itemize}
+	\item Target on screen
+	\begin{itemize}
+		\item User clicks on "Pause" button.
+	\end{itemize}
+	\item Test Data/Simulation
+	\begin{itemize}
+		\item User click on pause.
+		\item The simlation paused.
+	\end{itemize}
+	\item Result
+	\begin{itemize}
+		\item After user click on pause, system pause the simulation. All the cars are is stop and the light stop changing. The text of the pause button change into resume.
+	\end{itemize}
+\end{enumerate}
+
+\newpage
+
+
+
+
+

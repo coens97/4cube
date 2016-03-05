@@ -1,0 +1,53 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{a4wide,graphicx,amssymb, amstext, amsmath, epstopdf, booktabs, verbatim, geometry, appendix, natbib, lmodern, tabularx, enumitem, longtable, hyperref, subcaption,tabu}
+%\geometry{letterpaper}
+%\usepackage{garamond}
+% \usepackage{graphicx}
+
+\newcommand*\Title{Trafic Control System}
+\newcommand*\cpiType{Test Plan}
+\newcommand*\Author{}
+\title{\Title}
+\author{}
+\date{\today}
+%-----------------------------------------------------------
+
+\usepackage{template/template} % This is what makes your document look like a cpi document.
+
+
+\begin{document}
+
+\begin{titlepage}
+\maketitle
+\end{titlepage}
+	\linespread{1.15}
+	\tableofcontents
+	\newpage
+	\section{Introduction}
+	The purpose of this test-plan is to see whether all functionalities described in the usecases are working correctly and whether certain usndesired actions affect the program's workflow. Instead of constant warning pop-up when a certain action is not permitted we focused on preventing the user from creating mistakes as much as possible, meaning certain functions will be disabled when they're not supposed to be accessed.\\
+	We will conduct a small test with a handful of testers and conduct a final reconfiguration before the final acceptance test with the client.
+	
+	\section{Test Action}
+	This test action are based on URS document we already made.\\
+	
+	Scenarios: 
+	\begin{itemize}
+		\item Positioning a lane
+		\item Rotating the component
+		\item Positioning a crossing
+		\item Configurating traffic ligtht timing
+		\item Deleting the component
+		\item Setting up the amount of incoming cars 
+		\item Running simulation
+		\item Stopping the simulation
+		\item Pausing simulation
+		\item Load file
+		\item Save file
+		\item Save file as a new file
+		\item Resizing the grid
+	\end{itemize}
+	
+	\newpage
+	\include{includes/test1}
+
+\end{document}
