@@ -143,5 +143,43 @@ To change the amount of time each traffic light is green press right-click on th
 	R01 & PED-020 & Nothing can be configured of the pedestrians.\\\hline
 \end{tabularx}
 
+\newpage
 \subsection{Traffic light groups}
-\textsl{At the moment of writing this document it is unclear what the traffic light groups are.}
+\begin{figure}
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.8\textwidth]{figures/CrossroadAL.pdf}
+		\caption{Crossroad A incoming lane numbers.}
+		\label{fig:cral}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.8\textwidth]{figures/CrossroadBL.pdf}
+		\caption{Crossroad B incoming lane numbers.}
+		\label{fig:crbl}
+	\end{subfigure}
+	\caption{Crossways}
+	\label{fig:tlg}
+\end{figure}
+
+The group of lanes which have green light at the same moment are defined in this section. The traffic lights follow the order as defined in this document, Traffic lights will skip a light group if no cars are present on the group of lanes.
+
+\subsubsection{Crossroad A}
+\begin{tabularx}{\textwidth}{|p{0.6cm}p{4cm}X|p{0.6cm}p{4cm}X|}\hline
+	ID & Image & Lanes & ID & Image & Lanes \\\hline
+	A1 &  \includegraphics[width=4cm]{figures/CrossroadA1.pdf} & 1, 7, 8 &
+	A2 &  \includegraphics[width=4cm]{figures/CrossroadA2.pdf} & 5, 6, 7 \\\hline
+	A3 &  \includegraphics[width=4cm]{figures/CrossroadA3.pdf} & 3, 4, 5 &
+	A4 &  \includegraphics[width=4cm]{figures/CrossroadA4.pdf} & 1, 2, 3 \\\hline
+\end{tabularx}
+
+\subsubsection{Crossroad B}
+\begin{tabularx}{\textwidth}{|p{0.6cm}p{4cm}X|p{0.6cm}p{4cm}X|}\hline
+	ID & Image & Lanes & ID & Image & Lanes \\\hline
+	A1 &  \includegraphics[width=4cm]{figures/CrossroadB1.pdf} & 2, 5 &
+	A2 &  \includegraphics[width=4cm]{figures/CrossroadB2.pdf} & 6, 8 \\\hline
+	A3 &  \includegraphics[width=4cm]{figures/CrossroadB3.pdf} & 3, 7 &
+	A4 &  \includegraphics[width=4cm]{figures/CrossroadB4.pdf} & 4 \\\hline
+	A4 &  \includegraphics[width=4cm]{figures/CrossroadB5.pdf} & 1 & & & \\\hline
+\end{tabularx}
