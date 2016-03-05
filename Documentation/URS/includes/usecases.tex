@@ -39,7 +39,7 @@
 
 \begin{usecase}
 	
-	\addtitle{Use Case 2}{Rotating the lane} 
+	\addtitle{Use Case 2}{Rotating the component} 
 	
 	%Level: "user-goal" or "subfunction"
 	\addfield{Level:}{User-goal}
@@ -91,7 +91,7 @@
 		\item User places the crossing on the grid.
 	    \item System displays a pop-up window.
 	    \item User sets the initial settings for the selected crossing.
-		\item System sets the new placed lane and updates the grid.
+		\item System sets the new placed crossing and updates the grid.
 	}
 	
 	%Extensions: Alternate scenarios of success or failure.
@@ -142,7 +142,7 @@
 		\item User chooses "Traffic light configuration" from the menu.
 		\item System pops up a new window with configuration options.
 		\item User defines the amount of the time the traffic light is green.
-		\item User clicks on the “OK” button.
+		\item User clicks on the "OK" button.
 		\item System closes the configuration window.
 		\item System updates the crossing.
 		
@@ -367,17 +367,7 @@
 		\item User clicks "OK".
 		\item System saves the file.
 	}
-	
-	%Extensions: Alternate scenarios of success or failure.
-	\addscenario{Extensions:}{
-		\item[3.a] User mis-clicks the " Save as " button and does not want to save the file as a new file.
-		\begin{enumerate}
-			\item[1.] User clicks " Cancel ".
-			\item[2.] Dialogue window closes.
-		\end{enumerate}
-	}
-	
-		\addfield{Post condition:}{The system has saved a file. }
+	\addfield{Post condition:}{The system has saved a file. }
 \end{usecase}
 
 \begin{usecase}
@@ -415,3 +405,32 @@
 	\addfield{Post condition:}{System displays the resized grid.}
 \end{usecase}
 
+\begin{usecase}
+	
+	\addtitle{Use Case 13}{Closing application} 
+	
+	%Level: "user-goal" or "subfunction"
+	\addfield{Level:}{User-goal}
+	
+	%Primary Actor: Calls on the system to deliver its services.
+	\addfield{Primary Actor:}{End-User}
+	
+	%Preconditions: What must be true on start and worth telling the reader?
+	\addfield{Preconditions:}{ The application is open.}
+	
+	%Main Success Scenario: A typical, unconditional happy path scenario of success.
+	\addscenario{Main Success Scenario:}{
+		\item User presses the close button of the window.
+	}
+	
+	%Extensions: Alternate scenarios of success or failure.
+	\addscenario{Extensions:}{
+		\item[1] User has unsaved changes
+		\begin{enumerate}
+			\item Ask if user wants to save changes, if so go to use case 10.
+			\item Close application.
+		\end{enumerate}
+	}
+	
+	\addfield{Post condition:}{System displays the resized grid.}
+\end{usecase}
