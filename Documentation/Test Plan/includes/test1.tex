@@ -1,3 +1,4 @@
+\newcommand{\pass}{[\sethlcolor{green}\hl{PASS}] / [\sethlcolor{red}\hl{FAIL}]}
 \section{Test tables}
 Explanation: 
 \begin{itemize}
@@ -19,7 +20,7 @@ Explanation:
 		\item The application is successfully opened.
 		\item No simulation is running.
 		\item Grid B3 is occupied with lane TypeA.
-		\item Grid C4 is occupied with crossing TypeA.
+		\item Grid C4 is occupied with crossroad TypeA.
 	\end{itemize}
 	\item Target on screen
 	\begin{itemize}
@@ -46,7 +47,7 @@ Explanation:
 
 \begin{tabularx}{\textwidth}{|p{3cm}X|p{3cm}X|}\hline
 	Tester name: &  & Test date: & \\\hline
-	Result: &   [\sethlcolor{green}\hl{PASS}] / [\sethlcolor{red}\hl{FAIL}] & Comment: & \\\hline
+	Result: &  \pass  & Comment: & \\\hline
 \end{tabularx}
 
 \newpage
@@ -59,7 +60,7 @@ Explanation:
 		\item The application is successfully opened.
 		\item No simulation is running.
 		\item Grid B3 is occupied with lane TypeB.
-		\item Grid C4 is occupied with crossing TypeA.
+		\item Grid C4 is occupied with crossroad TypeA.
 	\end{itemize}
 	\item Target on screen
 	\begin{itemize}
@@ -68,27 +69,23 @@ Explanation:
 		\item User selects "Rotate" from right-click menu.
 	\end{itemize}
 	\item Test Data/Simulation
-	\begin{itemize}
-		\item User right click on grid B3 then choose rotate option by left clicking the mouse. 
-		\item User right click on grid C4 then choose rotate option by left clicking the mouse.
-		\item User right click on grid D1. 
-	\end{itemize}
-	\item Result
-	\begin{itemize}
-		\item Lane on grid B3 has rotated 90 degrees clockwise.
-		\item Crossing on grid C4 has rotated 90 degrees clockwise.
-		\item Nothing happens and no option pop out.
-	\end{itemize}
 \end{enumerate}
+
+\begin{tabularx}{\textwidth}{|X|X|p{2.5cm}|}\hline
+Actions & Expected result & Result \\\hline
+User right click on grid B3 then choose rotate option by left clicking the mouse. & Lane on grid B3 has rotated 90 degrees clockwise. & \pass \\\hline
+User right click on grid C4 then choose rotate option by left clicking the mouse. & Crossroad on grid C4 has rotated 90 degrees clockwise. & \pass\\\hline
+User right click on grid D1. & Nothing happens and no option pop out. & \pass\\\hline
+\end{tabularx}
 
 \begin{tabularx}{\textwidth}{|p{3cm}X|p{3cm}X|}\hline
 	Tester name: &  & Test date: & \\\hline
-	Result: &   [\sethlcolor{green}\hl{PASS}] / [\sethlcolor{red}\hl{FAIL}] & Comment: & \\\hline
+	Result: &   \pass & Comment: & \\\hline
 \end{tabularx}
 
 \newpage
 
-\subsection{Positioning a crossing}
+\subsection{Positioning a crossroad}
 
 \begin{enumerate}
 	\item Pre-Condition
@@ -96,39 +93,39 @@ Explanation:
 		\item The application is successfully opened.
 		\item No simulation is running.
 		\item Grid B3 is occupied with lane TypeB.
-		\item Grid C4 is occupied with crossing TypeA.
+		\item Grid C4 is occupied with crossroad TypeA.
 	\end{itemize}
 	\item Target on screen
 	\begin{itemize}
-		\item User click on the Crossing tab.
-		\item User chooses a crossing.
-		\item User drags the crossing from the Crossing tab.
-		\item User places the crossing on the grid.
-		\item User sets the initial setting of that crossing.
+		\item User click on the Crossroad tab.
+		\item User chooses a crossroad.
+		\item User drags the crossroad from the Crossroad tab.
+		\item User places the crossroad on the grid.
+		\item User sets the initial setting of that crossroad.
 	\end{itemize}
 	\item Test Data/Simulation
 	\begin{itemize}
-		\item User choose a crossing TypeA, by left clicking the mouse, and then drags it to the grid (gridB2). Setting the initial setting in the pop-up window.
-		\item User choose a crossing TypeB, by left clicking the mouse, and then drags it to the grid (gridB3).
-		\item User choose a crossing TypeA, by left clicking the mouse, and then drags it to the grid (gridC4).
-		\item User choose a crossing TypeB, by left clicking the mouse, and then drags it to the grid (gridC2). User without setting any attributes of that crossing.
-		\item User choose a crossing TypeA, by left clicking the mouse, and then drags it to the grid (gridsC3). User clicks on the cancel button in the pop-up window.
-		\item User choose a crossing TypeB, by left clicking the mouse, and then drags it outside the grid.
+		\item User choose a crossroad TypeA, by left clicking the mouse, and then drags it to the grid (gridB2). Setting the initial setting in the pop-up window.
+		\item User choose a crossroad TypeB, by left clicking the mouse, and then drags it to the grid (gridB3).
+		\item User choose a crossroad TypeA, by left clicking the mouse, and then drags it to the grid (gridC4).
+		\item User choose a crossroad TypeB, by left clicking the mouse, and then drags it to the grid (gridC2). User without setting any attributes of that crossroad.
+		\item User choose a crossroad TypeA, by left clicking the mouse, and then drags it to the grid (gridsC3). User clicks on the cancel button in the pop-up window.
+		\item User choose a crossroad TypeB, by left clicking the mouse, and then drags it outside the grid.
 	\end{itemize}
 	\item Result
 	\begin{itemize}
-		\item A crossing with TypeA shows in grid B2. System set attributes to that crossing.
+		\item A crossroad with TypeA shows in grid B2. System set attributes to that crossroad.
 		\item System gives an  error message "Grid occupied". Grid B3 does not change.
 		\item System gives an  error message "Grid occupied". Grid C4 does not change.
-		\item A crossing with TypeB shows in grid C2. System set default attributes to that crossing.
-		\item A crossing with TypeB shows in grid C3. System close the setting window and without setting attributes.
+		\item A crossroad with TypeB shows in grid C2. System set default attributes to that crossroad.
+		\item A crossroad with TypeB shows in grid C3. System close the setting window and without setting attributes.
 		\item System gives an error message "Please places inside the grid.
 	\end{itemize}
 \end{enumerate}
 
 \begin{tabularx}{\textwidth}{|p{3cm}X|p{3cm}X|}\hline
 	Tester name: &  & Test date: & \\\hline
-	Result: &   [\sethlcolor{green}\hl{PASS}] / [\sethlcolor{red}\hl{FAIL}] & Comment: & \\\hline
+	Result: &   \pass & Comment: & \\\hline
 \end{tabularx}
 
 \newpage
@@ -141,12 +138,12 @@ Explanation:
 		\item The application is successfully opened.
 		\item No simulation is running.
 		\item Grid B3 is occupied with lane TypeB.
-		\item Grid C4 is occupied with crossing TypeA.
+		\item Grid C4 is occupied with crossroad TypeA.
 	\end{itemize}
 	\item Target on screen
 	\begin{itemize}
-		\item User choose a crossing in the grid.
-		\item User right clicks on the crossing.
+		\item User choose a crossroad in the grid.
+		\item User right clicks on the crossroad.
 		\item User selects "Traffic light configuration" from right-click menu.
 		\item User selects a light group in the listbox of the light groups.
 		\item User change the green light time on the numericUpDown.
@@ -173,7 +170,7 @@ Explanation:
 
 \begin{tabularx}{\textwidth}{|p{3cm}X|p{3cm}X|}\hline
 	Tester name: &  & Test date: & \\\hline
-	Result: &   [\sethlcolor{green}\hl{PASS}] / [\sethlcolor{red}\hl{FAIL}] & Comment: & \\\hline
+	Result: &   \pass & Comment: & \\\hline
 \end{tabularx}
 
 \newpage
@@ -186,7 +183,7 @@ Explanation:
 		\item The application is successfully opened.
 		\item No simulation is running.
 		\item Grid B3 is occupied with lane TypeB.
-		\item Grid C4 is occupied with crossing TypeA.
+		\item Grid C4 is occupied with crossroad TypeA.
 	\end{itemize}
 	\item Target on screen
 	\begin{itemize}
@@ -203,14 +200,14 @@ Explanation:
 	\item Result
 	\begin{itemize}
 		\item Lane on grid B3 has deleted.
-		\item Crossing on grid C4 has deleted.
+		\item Crossroad on grid C4 has deleted.
 		\item Nothing happens and no option pop out.
 	\end{itemize}
 \end{enumerate}
 
 \begin{tabularx}{\textwidth}{|p{3cm}X|p{3cm}X|}\hline
 	Tester name: &  & Test date: & \\\hline
-	Result: &   [\sethlcolor{green}\hl{PASS}] / [\sethlcolor{red}\hl{FAIL}] & Comment: & \\\hline
+	Result: &   \pass & Comment: & \\\hline
 \end{tabularx}
 
 \newpage
@@ -223,7 +220,7 @@ Explanation:
 		\item The application is successfully opened.
 		\item No simulation is running.
 		\item Grid B3 is occupied with lane TypeB.
-		\item Grid C4 is occupied with crossing TypeA.
+		\item Grid C4 is occupied with crossroad TypeA.
 	\end{itemize}
 	\item Target on screen
 	\begin{itemize}
@@ -240,7 +237,7 @@ Explanation:
 	\item Result
 	\begin{itemize}
 		\item System sets the amount of incoming car of which user changed in the lane.
-		\item System sets the amount of incoming car of which user changed in the crossing.
+		\item System sets the amount of incoming car of which user changed in the crossroad.
 		\item System sets the amount of incoming car of which user changed in the lane to defalut value.
 		\item Nothing happens. 
 	\end{itemize}
@@ -248,7 +245,7 @@ Explanation:
 
 \begin{tabularx}{\textwidth}{|p{3cm}X|p{3cm}X|}\hline
 	Tester name: &  & Test date: & \\\hline
-	Result: &   [\sethlcolor{green}\hl{PASS}] / [\sethlcolor{red}\hl{FAIL}] & Comment: & \\\hline
+	Result: &   \pass & Comment: & \\\hline
 \end{tabularx}
 
 \newpage 
@@ -280,7 +277,7 @@ Explanation:
 
 \begin{tabularx}{\textwidth}{|p{3cm}X|p{3cm}X|}\hline
 	Tester name: &  & Test date: & \\\hline
-	Result: &   [\sethlcolor{green}\hl{PASS}] / [\sethlcolor{red}\hl{FAIL}] & Comment: & \\\hline
+	Result: &   \pass & Comment: & \\\hline
 \end{tabularx}
 
 \newpage
@@ -310,7 +307,7 @@ Explanation:
 
 \begin{tabularx}{\textwidth}{|p{3cm}X|p{3cm}X|}\hline
 	Tester name: &  & Test date: & \\\hline
-	Result: &   [\sethlcolor{green}\hl{PASS}] / [\sethlcolor{red}\hl{FAIL}] & Comment: & \\\hline
+	Result: &  \pass & Comment: & \\\hline
 \end{tabularx}
 
 \newpage
@@ -340,7 +337,7 @@ Explanation:
 
 \begin{tabularx}{\textwidth}{|p{3cm}X|p{3cm}X|}\hline
 	Tester name: &  & Test date: & \\\hline
-	Result: &   [\sethlcolor{green}\hl{PASS}] / [\sethlcolor{red}\hl{FAIL}] & Comment: & \\\hline
+	Result: &  \pass & Comment: & \\\hline
 \end{tabularx}
 
 
