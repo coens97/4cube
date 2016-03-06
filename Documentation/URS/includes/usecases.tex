@@ -357,7 +357,7 @@
 	\addfield{Primary Actor:}{End-User}
 	
 	%Preconditions: What must be true on start and worth telling the reader?
-	\addfield{Preconditions:}{ The application is open. Noo simulation is running.}
+	\addfield{Preconditions:}{ The application is open. No simulation is running.}
 	
 	%Main Success Scenario: A typical, unconditional happy path scenario of success.
 	\addscenario{Main Success Scenario:}{
@@ -381,7 +381,7 @@
 	\addfield{Primary Actor:}{End-User}
 	
 	%Preconditions: What must be true on start and worth telling the reader?
-	\addfield{Preconditions:}{ The application is open. Noo simulation is running.}
+	\addfield{Preconditions:}{ The application is open. No simulation is running.}
 	
 	%Main Success Scenario: A typical, unconditional happy path scenario of success.
 	\addscenario{Main Success Scenario:}{
@@ -421,16 +421,17 @@
 	%Main Success Scenario: A typical, unconditional happy path scenario of success.
 	\addscenario{Main Success Scenario:}{
 		\item User presses the close button of the window.
+		\item System closes the window.
 	}
 	
 	%Extensions: Alternate scenarios of success or failure.
 	\addscenario{Extensions:}{
 		\item[1] User has unsaved changes
 		\begin{enumerate}
-			\item Ask if user wants to save changes, if so go to use case 10.
+			\item System asks if user wants to save changes, if so go to use case 10.
 			\item Close application.
 		\end{enumerate}
 	}
 	
-	\addfield{Post condition:}{System displays the resized grid.}
+	\addfield{Post condition:}{Application is closed.}
 \end{usecase}
