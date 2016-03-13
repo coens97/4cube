@@ -15,13 +15,6 @@ Explanation:
 \subsection{Positioning a lane}
 
 \begin{enumerate}
-	\item Pre-Condition
-	\begin{itemize}
-		\item The application is successfully opened.
-		\item No simulation is running.
-		\item Grid B3 is occupied with lane TypeA.
-		\item Grid C4 is occupied with crossroad TypeA.
-	\end{itemize}
 	\item Target on screen
 	\begin{itemize}
 		\item User clicks on the Lane tab.
@@ -33,6 +26,10 @@ Explanation:
 \end{enumerate}	
 	\begin{tabularx}{\textwidth}{|X|X|p{2.5cm}|}\hline
 		Actions & Expected result & Result \\\hline
+		User opens the application.& Application opens. &  \pass \\\hline
+		User checks whether the play button is enabled. & &  \pass \\\hline
+		User drags a lane Type A from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
+		User drags a crossroad Type A from the sidebar and places it in Grid C4. & A crossroad with Type A shows in Grid C4. & \pass \\\hline
 		User chooses a lane Type A, by left clicking the mouse, and then drags it to the grid (grid B2). & A lane with TypeA shows in grid B2. & \pass \\\hline
 		User chooses a lane Type B, by left clicking the mouse, and then drags it in the grid (grid B3). & System gives an  error message "Grid occupied". Grid B3 does not change. & \pass\\\hline
 		User chooses a lane Type A, by left clicking the mouse, and then drags it to the grid (grid C4). & System gives an  error message "Grid occupied". Grid C4 does not change. & \pass\\\hline
@@ -50,13 +47,6 @@ Explanation:
 \subsection{Rotating the component}
 
 \begin{enumerate}
-	\item Pre-Condition
-	\begin{itemize}
-		\item The application is successfully opened.
-		\item No simulation is running.
-		\item Grid B3 is occupied with lane TypeB.
-		\item Grid C4 is occupied with crossroad TypeA.
-	\end{itemize}
 	\item Target on screen
 	\begin{itemize}
 		\item User chooses a component in the grid.
@@ -68,6 +58,10 @@ Explanation:
 
 \begin{tabularx}{\textwidth}{|X|X|p{2.5cm}|}\hline
 Actions & Expected result & Result \\\hline
+User opens the application.& Application opens. &  \pass \\\hline
+User checks whether the play button is enabled. & &  \pass \\\hline
+User drags a lane Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
+User drags a crossroad Type A from the sidebar and places it in Grid C4. & A crossroad with Type A shows in Grid C4. & \pass \\\hline
 User right clicks on grid B3 then chooses rotate option by left clicking the mouse. & Lane on grid B3 has rotated 90 degrees clockwise. & \pass \\\hline
 User right clicks on grid C4 then chooses rotate option by left clicking the mouse. & Crossroad on grid C4 has rotated 90 degrees clockwise. & \pass\\\hline
 User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\\hline
@@ -83,13 +77,7 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \subsection{Positioning a crossroad}
 
 \begin{enumerate}
-	\item Pre-Condition
-	\begin{itemize}
-		\item The application is successfully opened.
-		\item No simulation is running.
-		\item Grid B3 is occupied with lane TypeB.
-		\item Grid C4 is occupied with crossroad TypeA.
-	\end{itemize}
+
 	\item Target on screen
 	\begin{itemize}
 		\item User click on the Crossroad tab.
@@ -102,6 +90,10 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \end{enumerate}	
 	\begin{tabularx}{\textwidth}{|X|X|p{2.5cm}|}\hline
 		Actions & Expected result & Result \\\hline
+		User opens the application.& Application opens. &  \pass \\\hline
+		User checks whether the play button is enabled. & &  \pass \\\hline
+		User drags a lane Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
+		User drags a crossroad Type A from the sidebar and places it in Grid C4. & A crossroad with Type A shows in Grid C4. & \pass \\\hline
 		User chooses a crossroad Type A, by left clicking the mouse, and then drags it to the grid (grid B2). Setting the initial setting in the pop-up window. & A crossroad with TypeA shows in grid B2. System set attributes to that crossroad. & \pass \\\hline
 		User chooses a crossroad Type B, by left clicking the mouse, and then drags it to the grid (grid B3). & System gives an  error message "Grid occupied". Grid B3 does not change. & \pass\\\hline
 		User choosse a crossroad Type A, by left clicking the mouse, and then drags it to the grid (grid C4). & System gives an  error message "Grid occupied". Grid C4 does not change. & \pass\\\hline
@@ -122,13 +114,7 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \subsection{Configurating traffic light timing}
 
 \begin{enumerate}
-	\item Pre-Condition
-	\begin{itemize}
-		\item The application is successfully opened.
-		\item No simulation is running.
-		\item Grid B3 is occupied with lane TypeB.
-		\item Grid C4 is occupied with crossroad TypeA.
-	\end{itemize}
+
 	\item Target on screen
 	\begin{itemize}
 		\item User choose a crossroad in the grid.
@@ -142,6 +128,10 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \end{enumerate}	
 	\begin{tabularx}{\textwidth}{|X|X|p{2.5cm}|}\hline
 		Actions & Expected result & Result \\\hline
+		User opens the application.& Application opens. &  \pass \\\hline
+		User checks whether the play button is enabled. & &  \pass \\\hline
+		User drags a lane Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
+		User drags a crossroad Type A from the sidebar and places it in Grid C4. & A crossroad with Type A shows in Grid C4. & \pass \\\hline
 		User right clicks on grid C4 then chooses Traffic light configuration  option by left clicking the mouse. After selects a light group and changes the time by the numericUpDown, user clicks on Change. User clicks on complete. & System sets the green light time of that chosen light group and close the configuration window.  & \pass \\\hline
 		User right clicks on grid C4 then choose Traffic light configuration option by left clicking the mouse. After changed the time by the numericUpDown, user click on Change all. User click on complete. & System sets that value to all the light groups and close the configuration window. & \pass \\\hline
 		User right clicks on grid C4 then choose Traffic light configuration option by left clicking the mouse. And without changing anything then clicks on close. & System without changing anything and closes the configuration window. & \pass \\\hline
@@ -161,16 +151,10 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \subsection{Deleting the component}
 
 \begin{enumerate}
-	\item Pre-Condition
-	\begin{itemize}
-		\item The application is successfully opened.
-		\item No simulation is running.
-		\item Grid B3 is occupied with lane TypeB.
-		\item Grid C4 is occupied with crossroad TypeA.
-	\end{itemize}
+	
 	\item Target on screen
 	\begin{itemize}
-		\item User choosea a component in the grid.
+		\item User chooses a component in the grid.
 		\item User right clicks on the component.
 		\item User selects "Delete" from right-click menu.
 	\end{itemize}
@@ -178,6 +162,10 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \end{enumerate}	
 	\begin{tabularx}{\textwidth}{|X|X|p{2.5cm}|}\hline
 		Actions & Expected result & Result \\\hline
+		User opens the application.& Application opens. &  \pass \\\hline
+		User checks whether the play button is enabled. & &  \pass \\\hline
+		User drags a lane Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
+		User drags a crossroad Type A from the sidebar and places it in Grid C4. & A crossroad with Type A shows in Grid C4. & \pass \\\hline
 		User right clicks on grid B3 then chooses rotate option by left clicking the mouse.  & Lane on grid B3 has deleted.  & \pass \\\hline
 		User right click on grid C4 then choosea rotate option by left clicking the mouse. & Crossroad on grid C4 has deleted. & \pass \\\hline
 		User right click on grid D1. & Nothing happens and no option pop out. & \pass \\\hline
@@ -195,13 +183,7 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \subsection{Setting up the amount of incoming cars }
 
 \begin{enumerate}
-	\item Pre-Condition
-	\begin{itemize}
-		\item The application is successfully opened.
-		\item No simulation is running.
-		\item Grid B3 is occupied with lane TypeB.
-		\item Grid C4 is occupied with crossroad TypeA.
-	\end{itemize}
+	
 	\item Target on screen
 	\begin{itemize}
 		\item User chooses a textbox on one of the components which already in the grid.
@@ -211,6 +193,10 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \end{enumerate}	
 	\begin{tabularx}{\textwidth}{|X|X|p{2.5cm}|}\hline
 		Actions & Expected result & Result \\\hline
+		User opens the application.& Application opens. &  \pass \\\hline
+		User checks whether the play button is enabled. & &  \pass \\\hline
+		User drags a lane Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
+		User drags a crossroad Type A from the sidebar and places it in Grid C4. & A crossroad with Type A shows in Grid C4. & \pass \\\hline
 		User clicks on a textbox in grid B3 and input a value. & System sets the amount of incoming car of which user changed in the lane. & \pass \\\hline
 		User clicks on a textbox in grid C4 and input a value. & System sets the amount of incoming car of which user changed in the crossroad. & \pass \\\hline
 		User clicks on a textbox in gird B3 and without input a value. & System sets the amount of incoming car of which user changed in the lane to defalut value. & \pass \\\hline
@@ -228,12 +214,7 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \subsection{Running a simulation}
 
 \begin{enumerate}
-	\item Pre-Condition
-	\begin{itemize}
-		\item The application is successfully opened.
-		\item No simulation is running.
-		\item The simulation is set up.
-	\end{itemize}
+
 	\item Target on screen
 	\begin{itemize}
 		\item User clicks on "Start/Stop" button.
@@ -242,6 +223,14 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \end{enumerate}	
 	\begin{tabularx}{\textwidth}{|X|X|p{2.5cm}|}\hline
 		Actions & Expected result & Result \\\hline
+		User opens the application.& Application opens. &  \pass \\\hline
+		User checks whether the play button is enabled. & &  \pass \\\hline
+		User drags a lane Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
+		User right clicks on grid B3 then chooses rotate option by left clicking the mouse. & Lane on grid B3 has rotated 90 degrees clockwise. & \pass \\\hline
+		User drags a crossroad Type A from the sidebar and places it in Grid C4. & A crossroad with Type A shows in Grid C4. & \pass \\\hline
+		User right clicks on grid C4 then chooses Traffic light configuration  option by left clicking the mouse. After selects a light group and changes the time by the numericUpDown, user clicks on Change. User clicks on complete. & System sets the green light time of that chosen light group and close the configuration window.  & \pass \\\hline
+		User clicks on a textbox in grid B3 and input a value. & System sets the amount of incoming car of which user changed in the lane. & \pass \\\hline
+		User clicks on a textbox in grid C4 and input a value. & System sets the amount of incoming car of which user changed in the crossroad. & \pass \\\hline
 		User click on start. & After user clicks on start, system shows the cars flow go through all the lanes in the components which are already placed in the grid. Also the traffic light time changing like the setting in the configuration. & \pass \\\hline
 		The simlation starts. &	Cars stop when the light is red and go when the light is green. And the button of pause is availabled. & \pass \\\hline	
 	\end{tabularx}
@@ -257,11 +246,7 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \subsection{Stopping  simulation}
 
 \begin{enumerate}
-	\item Pre-Condition
-	\begin{itemize}
-		\item The application is successfully opened.
-		\item A simulation is running.
-	\end{itemize}
+
 	\item Target on screen
 	\begin{itemize}
 		\item User clicks on "Start/Stop" button.
@@ -270,6 +255,16 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \end{enumerate}
 	\begin{tabularx}{\textwidth}{|X|X|p{2.5cm}|}\hline
 	    Actions & Expected result & Result \\\hline
+	    User opens the application.& Application opens. &  \pass \\\hline
+	    User checks whether the play button is enabled. & &  \pass \\\hline
+	    User drags a lane Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
+	    User right clicks on grid B3 then chooses rotate option by left clicking the mouse. & Lane on grid B3 has rotated 90 degrees clockwise. & \pass \\\hline
+	    User drags a crossroad Type A from the sidebar and places it in Grid C4. & A crossroad with Type A shows in Grid C4. & \pass \\\hline
+	    User right clicks on grid C4 then chooses Traffic light configuration  option by left clicking the mouse. After selects a light group and changes the time by the numericUpDown, user clicks on Change. User clicks on complete. & System sets the green light time of that chosen light group and close the configuration window.  & \pass \\\hline
+	    User clicks on a textbox in grid B3 and input a value. & System sets the amount of incoming car of which user changed in the lane. & \pass \\\hline
+	    User clicks on a textbox in grid C4 and input a value. & System sets the amount of incoming car of which user changed in the crossroad. & \pass \\\hline
+	    User click on start. & After user clicks on start, system shows the cars flow go through all the lanes in the components which are already placed in the grid. Also the traffic light time changing like the setting in the configuration. & \pass \\\hline
+	    The simlation starts. &	Cars stop when the light is red and go when the light is green. And the button of pause is availabled. & \pass \\\hline	
 	    User clicks on stop. & After user clicks on stop, system stops the simulation. All the cars disappear and the lights stop changing. The pause button is disabled. & \pass \\\hline    
 	\end{tabularx}
 
@@ -283,11 +278,7 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \subsection{Pausing  simulation}
 
 \begin{enumerate}
-	\item Pre-Condition
-	\begin{itemize}
-		\item The application is successfully opened.
-		\item A simulation is running.
-	\end{itemize}
+
 	\item Target on screen
 	\begin{itemize}
 		\item User clicks on "Pause" button.
@@ -296,6 +287,16 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \end{enumerate}
 	\begin{tabularx}{\textwidth}{|X|X|p{2.5cm}|}\hline
 		Actions & Expected result & Result \\\hline
+		User opens the application.& Application opens. &  \pass \\\hline
+		User checks whether the play button is enabled. & &  \pass \\\hline
+		User drags a lane Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
+		User right clicks on grid B3 then chooses rotate option by left clicking the mouse. & Lane on grid B3 has rotated 90 degrees clockwise. & \pass \\\hline
+		User drags a crossroad Type A from the sidebar and places it in Grid C4. & A crossroad with Type A shows in Grid C4. & \pass \\\hline
+		User right clicks on grid C4 then chooses Traffic light configuration  option by left clicking the mouse. After selects a light group and changes the time by the numericUpDown, user clicks on Change. User clicks on complete. & System sets the green light time of that chosen light group and close the configuration window.  & \pass \\\hline
+		User clicks on a textbox in grid B3 and input a value. & System sets the amount of incoming car of which user changed in the lane. & \pass \\\hline
+		User clicks on a textbox in grid C4 and input a value. & System sets the amount of incoming car of which user changed in the crossroad. & \pass \\\hline
+		User click on start. & After user clicks on start, system shows the cars flow go through all the lanes in the components which are already placed in the grid. Also the traffic light time changing like the setting in the configuration. & \pass \\\hline
+		The simlation starts. &	Cars stop when the light is red and go when the light is green. And the button of pause is availabled. & \pass \\\hline	
 		User clicks on pause. & After user clicks on pause, system pauses the simulation. All the cars stop and the lights stop changing. The text of the pause button changes into resume. & \pass \\\hline
 	\end{tabularx}
 
@@ -304,44 +305,12 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 	Result: &  \pass & Comment: & \\\hline
 \end{tabularx}
 
-\newpage
 
-\subsection{Stopping  simulation}
-
-\begin{enumerate}
-	\item Pre-Condition
-	\begin{itemize}
-		\item The application is successfully opened.
-		\item A simulation is running.
-	\end{itemize}
-	\item Target on screen
-	\begin{itemize}
-		\item User clicks on "Start/Stop" button.
-	\end{itemize}
-	\item Test Data/Simulation
-\end{enumerate}
-	\begin{tabularx}{\textwidth}{|X|X|p{2.5cm}|}\hline
-		Actions & Expected result & Result \\\hline
-		User clicks on stop. & After user clicks on stop, system stops the simulation. All the cars disappear and the lights stop changing. The pause button is disabled. & \pass \\\hline    
-	\end{tabularx}
-
-\begin{tabularx}{\textwidth}{|p{3cm}X|p{3cm}X|}\hline
-	Tester name: &  & Test date: & \\\hline
-	Result: &  \pass & Comment: & \\\hline
-\end{tabularx}
-
-\newpage
 
 \subsection{Load file}
 
 \begin{enumerate}
-	\item Pre-Condition
-	\begin{itemize}
-		\item The application is successfully opened.
-		\item No simulation is running.
-		\item There is at least one saved file with traffic control
-		system.
-	\end{itemize}
+	
 	\item Target on screen
 	\begin{itemize}
 		\item User clicks on "Load" button.
@@ -350,6 +319,9 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \end{enumerate}
 	\begin{tabularx}{\textwidth}{|X|X|p{2.5cm}|}\hline
 		Actions & Expected result & Result \\\hline
+		User opens the application.& Application opens. &  \pass \\\hline
+		User checks whether the play button is enabled. & &  \pass \\\hline
+		User checks that there is at least one saved file with traffic control system on the device.& &\pass \\\hline
 		User clicks on Load and chooses a file to open. & System closes previous project and loads the chosen file.  & \pass \\\hline 
 		User clicks on Load and chooses a file to open. & System informs user that file can’t be loaded and given the choice
 		to stop or choose another file. & \pass \\\hline 
@@ -365,11 +337,7 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \subsection{Save file}
 
 \begin{enumerate}
-	\item Pre-Condition
-	\begin{itemize}
-		\item The application is successfully opened.
-		\item No simulation is running.
-	\end{itemize}
+	
 	\item Target on screen
 	\begin{itemize}
 		\item User clicks on "Save" button.
@@ -378,6 +346,11 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \end{enumerate}
 	\begin{tabularx}{\textwidth}{|X|X|p{2.5cm}|}\hline
 		Actions & Expected result & Result \\\hline
+		User opens the application.& Application opens. &  \pass \\\hline
+		User checks whether the play button is enabled. & &  \pass \\\hline
+		User checks that there is at least one saved file with traffic control system on the device.& &\pass \\\hline
+		User clicks on Load and chooses a file to open. & System loads the chosen file.  & \pass \\\hline 
+		User makes a change on the grid by dragging a new line Type A to an unoccupied place in the grid. & System displays the new component in the grid. & \pass \\\hline 
 		User clicks on Save. & System saves the file.  & \pass \\\hline 
 		User clicks on Save when the project has not been saved on the device yet. & A saving dialogue window pops up. & \pass \\\hline
 		User chooses the directory where the file will be stored, and names the file then clicks OK. & System saves the file. & \pass \\\hline 
@@ -392,11 +365,6 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \subsection{Save file as a new file}
 
 \begin{enumerate}
-	\item Pre-Condition
-	\begin{itemize}
-		\item The application is successfully opened.
-		\item No simulation is running.
-	\end{itemize}
 	\item Target on screen
 	\begin{itemize}
 		\item User clicks on "Save as" button.
@@ -405,6 +373,8 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \end{enumerate}
 	\begin{tabularx}{\textwidth}{|X|X|p{2.5cm}|}\hline
 		Actions & Expected result & Result \\\hline
+		User opens the application.& Application opens. &  \pass \\\hline
+		User checks whether the play button is enabled. & &  \pass \\\hline
 		User clicks on Save as. & A saving dialogue window pops up. & \pass \\\hline
 		User chooses the directory where the file will be stored, and names the file then clicks OK. & System saves the file. & \pass \\\hline 
 	\end{tabularx}
@@ -418,11 +388,7 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \subsection{Resizing the grid}
 
 \begin{enumerate}
-	\item Pre-Condition
-	\begin{itemize}
-		\item The application is successfully opened.
-		\item No simulation is running.
-	\end{itemize}
+	
 	\item Target on screen
 	\begin{itemize}
 		\item User clicks on "Edit" on the top bar.
@@ -431,6 +397,8 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \end{enumerate}
 	\begin{tabularx}{\textwidth}{|X|X|p{2.5cm}|}\hline
 		Actions & Expected result & Result \\\hline
+		User opens the application.& Application opens. &  \pass \\\hline
+		User checks whether the play button is enabled. & &  \pass \\\hline
 		User clicks on "Edit" on the top bar. & System displays a menu with several options.& \pass \\\hline
 		User clicks on "Document settings. & System shows document settings panel. & \pass \\\hline
 		User defines the size of the grid by typing numbers in the width and height input boxes, then clicks on OK.& System updates and display the new grid. & \pass \\\hline
@@ -445,10 +413,6 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \subsection{Closing application}
 
 \begin{enumerate}
-	\item Pre-Condition
-	\begin{itemize}
-		\item The application is open.
-	\end{itemize}
 	\item Target on screen
 	\begin{itemize}
 		\item User clicks on "Close" button.
@@ -457,6 +421,7 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \end{enumerate}
 	\begin{tabularx}{\textwidth}{|X|X|p{2.5cm}|}\hline
 		Actions & Expected result & Result \\\hline
+		User opens the application.& Application opens. &  \pass \\\hline
 		User clicks on Close. & System closes the window. & \pass \\\hline
 		User clicks on Close when there is unsaved changes. & System asks if user wants to save changes. & \pass \\\hline
 	\end{tabularx}
