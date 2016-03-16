@@ -29,7 +29,7 @@
     <packageHasNamedElement>
       <Interface
         Id="7637bd2e-1216-498b-908d-55717dd864f6"
-        name="IDataAccessLayer"
+        name="IGridData"
         isAbstract="false"
         isLeaf="false">
         <ownedOperations>
@@ -395,6 +395,24 @@
                       LastKnownLocation="4cube.classdiagram.uml" />
                   </type_NamedElement>
                 </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="c058e2bf-f247-47f5-acde-a6d8aa5312dc"
+            name="GenerateBitmap"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="0bb5f3b9-83ac-4563-8ca2-c32da3a67d5a"
+                  name="string path"
+                  direction="In"
+                  isUnique="false" />
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
@@ -1834,6 +1852,41 @@
           </association>
         </targetEnds>
       </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="f4e6e182-29f4-452f-ba47-94d960639dcb"
+        name="IReportData"
+        isAbstract="false"
+        isLeaf="false">
+        <ownedOperations>
+          <operation
+            Id="50f02857-ebb5-4ca8-aa4b-eb5de36b8c34"
+            name="SaveReport"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="098a7bc9-bad8-41d4-bc26-087706dad0bf"
+                  name="string path"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="54c33db2-8249-4564-9856-a085096743c3"
+                  name="Bitmap bitmap"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
