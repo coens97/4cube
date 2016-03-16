@@ -45,11 +45,11 @@
           </generalization>
         </generalsInternal>
         <targetEnds>
-          <association Id="8d15456b-54e6-44b2-b31f-a8a7314ffb36" isDerived="false" sourceEndRoleName="TrafficLightColours" targetEndRoleName=" " isLeaf="false" isAbstract="false">
+          <association Id="8d15456b-54e6-44b2-b31f-a8a7314ffb36" isDerived="false" sourceEndRoleName="CurrentColor" targetEndRoleName=" " isLeaf="false" isAbstract="false">
             <enumerationMoniker Id="11c5ae3b-3af6-4747-b5e0-26c2a8611c38" LastKnownName="TrafficLightColours" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
-                <memberEnd Id="c37adc22-30d9-4003-ad52-a1cac337c4bc" name="TrafficLightColours" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                <memberEnd Id="c37adc22-30d9-4003-ad52-a1cac337c4bc" name="CurrentColor" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
                   <lowerValueInternal>
                     <literalString Id="65746b7c-3b94-4c9c-bf42-7e473322c547" name="Lower">
                       <elementDefinition Id="b3452f70-3560-42f3-beda-a516d31bfe94" />
@@ -292,7 +292,7 @@
       </enumeration>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="a76be024-0e4c-4ff2-bdf5-91f8fa79db89" name="GridEntity1" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="a76be024-0e4c-4ff2-bdf5-91f8fa79db89" name="GridEntity" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="d15abc20-7f89-4576-b3a5-e61c91fcb5b5" />
         <targetEnds>
           <association Id="bb34cb49-fa9a-4df4-af17-c289b6ea29da" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">

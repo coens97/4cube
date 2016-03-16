@@ -494,20 +494,20 @@
             </relationshipOwnedElementsInternal>
           </association>
           <association
-            Id="fd4e3518-b4e9-4789-a9f3-eda7610173db"
+            Id="08de8df4-c652-4870-b82b-c7d7000b717b"
             isDerived="false"
             sourceEndRoleName=""
             targetEndRoleName=""
             isLeaf="false"
             isAbstract="false">
             <classMoniker
-              Id="d13ced79-ccaf-4d83-ad76-8c09b029b98f"
-              LastKnownName="ComponentViewModel"
+              Id="255b4dce-ac48-4e85-8e59-85124b76d8ad"
+              LastKnownName="ComponentUserControl"
               LastKnownLocation="4cube.classdiagram.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="9defd59b-a747-4fa3-bc41-aab7fb8b5eb2"
+                  Id="2140c054-1603-44ea-8341-604c6f5e8e71"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -519,7 +519,7 @@
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="d9ce3685-3a98-4cf9-bfdb-0baaf76957db"
+                  Id="3a10b32b-ef1c-4a42-8f59-3394ad6e503c"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -529,13 +529,13 @@
                   isComposite="true">
                   <lowerValueInternal>
                     <literalString
-                      Id="1ae20781-f93c-4271-9854-a4f7881c12bc"
+                      Id="9354a622-a746-450a-a43a-e1a85fc8fcfe"
                       name="Lower"
                       value="*" />
                   </lowerValueInternal>
                   <upperValueInternal>
                     <literalString
-                      Id="7ff2ebef-506e-4615-b509-875234b17479"
+                      Id="4a5ebd4b-60a3-4869-8dea-c7a513f96aaf"
                       name="Upper"
                       value="*" />
                   </upperValueInternal>
@@ -929,7 +929,7 @@
           <association
             Id="f2ed7e97-63fa-4417-ac60-a22736a3e797"
             isDerived="false"
-            sourceEndRoleName="TrafficLightColours"
+            sourceEndRoleName="CurrentColor"
             targetEndRoleName=" "
             isLeaf="false"
             isAbstract="false">
@@ -941,7 +941,7 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="db482140-3d71-4f6c-a698-a570d1c77483"
-                  name="TrafficLightColours"
+                  name="CurrentColor"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -1399,7 +1399,7 @@
     <packageHasNamedElement>
       <class
         Id="d15abc20-7f89-4576-b3a5-e61c91fcb5b5"
-        name="GridEntity1"
+        name="GridEntity"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -1742,6 +1742,97 @@
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="2c08ae68-ff61-4469-be68-654ec563f42f"
+        LastKnownName="CommonLayer"
+        LastKnownLocation="Package_2237.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="255b4dce-ac48-4e85-8e59-85124b76d8ad"
+        name="ComponentUserControl"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="2b81b2d7-510e-4e2a-af35-9aa168c34bec"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="d13ced79-ccaf-4d83-ad76-8c09b029b98f"
+              LastKnownName="ComponentViewModel"
+              LastKnownLocation="4cube.classdiagram.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="78e300f6-0ff5-4bc2-bc25-40e75db7ceab"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Composite"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c033ded3-0820-495a-8134-3a1e9c6b8a29"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="true" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="2042140e-76d3-462d-8ae5-1dae0277b762"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="7b50acf0-616b-4a4f-934a-47df5782b3fe"
+              LastKnownName="ComponentEntity"
+              LastKnownLocation="Package_2237.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b4686119-4927-45f8-ae5b-e1b1e89bbde6"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c99342e2-21f0-404d-a7c5-d6718a81c4cc"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
       </class>
     </packageHasNamedElement>
   </packagedElements>
