@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="2b064b94-e70f-4694-a003-1cfd196fc00a" name="PresentationLayer" linkedPackageId="620b3daf-6ebb-4b83-a523-1e9bc9158122" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="68cabfa4-eaf1-4136-8935-3f9bf1a81cbc">
+      <profileInstance Id="4e95efa6-544b-4f87-ab38-99af7ad3bce3" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="08388a92-4999-44ec-8d65-5ba773a7174b">
+      <profileInstance Id="fbf6f6b4-bac7-4163-93cb-96a4e7292196" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="4d4c2078-5c37-4dff-b8cd-8a4ce7d8a711" name="MainWindow" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="9019120d-b726-4dd4-9555-ea5f989e715f" />
+        <targetEnds>
+          <association Id="78615c38-b331-4bf4-899c-d1159b15ce06" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="60645bec-ca28-4a54-8def-e28ff5c948e5" LastKnownName="TrafficLightWindow" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="00b51767-dbbe-4c7f-8d58-53ee2e944d8e" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="c71838e5-0730-44d4-9fc0-64f074fdeb1b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d427580e-e6aa-43b1-b1a4-60ca0ff345c0" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <elementDefinition Id="f27f5758-1f3b-4747-809b-3317ef41337d" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="2b7497eb-25d6-4eaa-82bb-cc4e7c54aade" />
+          </association>
+          <association Id="58df4ea5-3245-4b6e-8512-669b6a8cdc7a" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="2f237c60-0c5c-4a79-89d9-df15e967a73a" LastKnownName="TrafficReportWindow" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="4da5f6b6-985b-44c8-9970-006aaa0eb060" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="4003a4de-7a9c-456a-8f86-5e95f4ec3b9b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="990d2003-a794-49c3-ac7b-bccdb921f65e" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <elementDefinition Id="60e8a039-f38c-4559-b27f-f579303859dc" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="1d385f95-bed5-4575-9329-0af440ad1dca" />
+          </association>
+          <association Id="1c111b9f-26bc-4ff7-a5f6-3a08969be38b" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="1614a1c2-7130-4c76-a942-4d017d095e78" LastKnownName="ComponentViewModel" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="e269fe84-a831-446c-9708-5db078983190" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="9defd59b-a747-4fa3-bc41-aab7fb8b5eb2" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="956c85c3-76c5-4e27-8fed-80dd593c6aa7" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <lowerValueInternal>
+                    <literalString Id="25745ca3-e0c0-4f3c-a02f-4e3544c87189" name="Lower" value="*">
+                      <elementDefinition Id="1ae20781-f93c-4271-9854-a4f7881c12bc" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="89d28910-18eb-4bb4-97eb-e70004aedb75" name="Upper" value="*">
+                      <elementDefinition Id="7ff2ebef-506e-4615-b509-875234b17479" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="d9ce3685-3a98-4cf9-bfdb-0baaf76957db" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="fd4e3518-b4e9-4789-a9f3-eda7610173db" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="60645bec-ca28-4a54-8def-e28ff5c948e5" name="TrafficLightWindow" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="b08faae1-bcb7-40d2-8317-e98ecdebfdc9" />
+        <targetEnds>
+          <association Id="8e8755cc-8ac3-4fd4-9816-36d09f6a0a29" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="92f2221e-a2a5-4259-942a-4c35dd81c9c9" LastKnownName="TrafficlightGroupModel" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="cf4f08f9-9944-429c-8725-847b3b0d570a" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="edb8adc3-7301-4f8d-b26b-525c61c630d2" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="017663c8-23dc-4a62-b19b-cb52ddb54aeb" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <elementDefinition Id="f1522b99-7929-4199-a95d-ac369ed2719c" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="0cf53fef-af83-4deb-b2bf-d9f5c3cfc592" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="2f237c60-0c5c-4a79-89d9-df15e967a73a" name="TrafficReportWindow" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="52f9ad2a-9eed-4404-be7c-0c353c8c2c08" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="9eedcd4a-33cb-4ff4-b180-4a71a3ba3425" name="ViewModelBase" isAbstract="true" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="027893ff-0412-40a3-bc0c-e51cd01e76cf" />
+        <ownedAttributesInternal>
+          <property Id="0224243f-01ad-4dc6-b0ec-da75db02b5f0" name="PropertyChanged" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ef0a564e-09c0-48ad-82a5-f0b49913f4c3" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="0d57af3b-db84-479a-88a1-54ba5651cf57" LastKnownName="PropertyChangedEventHandler" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="0e286278-9976-4689-9b4b-34db3b2396b4" name="OnPropertyChanged" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="21c5c908-9ff1-4d77-98d3-aff2e9653857" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="5e16315c-d308-4a86-9f85-c6ba6de9c3e1" name="..." direction="In" isUnique="false">
+                  <elementDefinition Id="a8e445db-70d6-4609-a6a6-5548001f84c3" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="b750f301-ac2f-4e2a-a200-740f8403262a" name="SetValue" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="606f9077-4aca-4f2b-8c3c-63f13182abd4" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="ac218306-8f4f-4a47-bcac-b64b5b51e342" name="..." direction="In" isUnique="false">
+                  <elementDefinition Id="f9de893b-c103-4eea-9c63-e84bdb6de3a4" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="0d57af3b-db84-479a-88a1-54ba5651cf57" name="PropertyChangedEventHandler" isAbstract="false" isLeaf="false" cachedFullName="PropertyChangedEventHandler">
+        <elementDefinition Id="be60a63f-9303-481c-9a83-57242645ca44" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="1614a1c2-7130-4c76-a942-4d017d095e78" name="ComponentViewModel" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="d13ced79-ccaf-4d83-ad76-8c09b029b98f" />
+        <generalsInternal>
+          <generalization Id="15e62cd0-e97e-4752-983a-aefad26d41ff" isSubstitutable="false">
+            <classMoniker Id="9eedcd4a-33cb-4ff4-b180-4a71a3ba3425" LastKnownName="ViewModelBase" />
+            <elementDefinition Id="df79e68a-ac94-4fe4-98c8-9d3cd9342392" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <property Id="77bf2e2a-b9c5-40e1-8221-3208485aa349" name="UpFieldUsed" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="9e1f93b9-2d38-4775-b879-3d122fdb30e3" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="d4b2428c-238d-4475-bc9d-6c3cee52cbd6" LastKnownName="bool" />
+            </type_NamedElement>
+          </property>
+          <property Id="a50ff360-7c31-43b7-9f74-d2ed78c186d5" name="DownFieldUsed" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="49b4e76c-3a09-400e-bf10-9a88157fd45d" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="01e679eb-a545-441b-ad9a-ca27dd27db2c" LastKnownName="bool" />
+            </type_NamedElement>
+          </property>
+          <property Id="dbe040ec-908f-4536-9d4e-56c5ce7bb9c4" name="LeftFieldUsed" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="34614e0c-15c9-4222-a8b2-c66109d2687c" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="f22a6369-2589-44d7-88ca-6a612bf3f71d" LastKnownName="bool" />
+            </type_NamedElement>
+          </property>
+          <property Id="a0e51f87-72ab-47c0-8f2f-a82c43e37033" name="RightFieldUsed" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="cc8187d7-a8e9-4fdb-b479-f1ccb260c50d" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="d7741769-b4ec-4beb-a673-ffa48ce649e3" LastKnownName="bool" />
+            </type_NamedElement>
+          </property>
+          <property Id="16a468ec-b404-4667-a43f-6c6fd9221a61" name="UpField" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="301468d4-63a7-4dcd-a540-b0d98921b87b" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="a84d1644-3386-4a91-9b43-5acdfdfded55" LastKnownName="int" />
+            </type_NamedElement>
+          </property>
+          <property Id="58f982d5-2b6d-4361-b177-53e139ba4f2b" name="DownField" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ea936b2e-8d31-40ae-873e-2eb34e59fd90" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="a84d1644-3386-4a91-9b43-5acdfdfded55" LastKnownName="int" />
+            </type_NamedElement>
+          </property>
+          <property Id="f1d5e03c-27cb-4e42-bb51-0c51930004e1" name="LeftField" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="078e5f87-1fc8-49f9-b8cd-bccba9dd6524" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="a84d1644-3386-4a91-9b43-5acdfdfded55" LastKnownName="int" />
+            </type_NamedElement>
+          </property>
+          <property Id="bfa5de30-095d-4aaa-949b-ea3222d05b26" name="RightField" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="062ef91a-1a67-4576-8321-7d37ec40394f" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="a84d1644-3386-4a91-9b43-5acdfdfded55" LastKnownName="int" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="a84d1644-3386-4a91-9b43-5acdfdfded55" name="int" isAbstract="false" isLeaf="false" cachedFullName="int">
+        <elementDefinition Id="c06e0991-fcc9-454f-8f79-14bcb982f6f3" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="d4b2428c-238d-4475-bc9d-6c3cee52cbd6" name="bool" isAbstract="false" isLeaf="false" cachedFullName="bool">
+        <elementDefinition Id="5a65f153-ab86-4d34-8d01-d97191baee79" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="d7741769-b4ec-4beb-a673-ffa48ce649e3" name="bool" isAbstract="false" isLeaf="false" cachedFullName="bool">
+        <elementDefinition Id="5a65f153-ab86-4d34-8d01-d97191baee79" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="f22a6369-2589-44d7-88ca-6a612bf3f71d" name="bool" isAbstract="false" isLeaf="false" cachedFullName="bool">
+        <elementDefinition Id="5a65f153-ab86-4d34-8d01-d97191baee79" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="01e679eb-a545-441b-ad9a-ca27dd27db2c" name="bool" isAbstract="false" isLeaf="false" cachedFullName="bool">
+        <elementDefinition Id="5a65f153-ab86-4d34-8d01-d97191baee79" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="92f2221e-a2a5-4259-942a-4c35dd81c9c9" name="TrafficlightGroupModel" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="8dbcc9f0-328c-48bb-93f8-b156671be024" />
+        <generalsInternal>
+          <generalization Id="99d63e21-6cf7-4b4b-9d78-07002e304470" isSubstitutable="false">
+            <classMoniker Id="9eedcd4a-33cb-4ff4-b180-4a71a3ba3425" LastKnownName="ViewModelBase" />
+            <elementDefinition Id="e0d41608-a8d6-4744-a4d2-64a9c7d605da" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <property Id="e568ee99-9fe1-47e4-baf6-62da43bafbe7" name="TrafficTimes" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="3bfd8107-6fb4-4673-97c3-d3fe070f2d64" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="c0d0f8c9-3636-4237-90cd-6da3fa4b8355" LastKnownName="ObservableList&lt;int&gt;" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="c0d0f8c9-3636-4237-90cd-6da3fa4b8355" name="ObservableList&lt;int&gt;" isAbstract="false" isLeaf="false" cachedFullName="ObservableList&lt;int&gt;">
+        <elementDefinition Id="6107997a-f94d-48c0-a3f9-3dc9ffc8aa30" />
+      </referencedType>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="620b3daf-6ebb-4b83-a523-1e9bc9158122" name="4cube.classdiagram">
+    <elementDefinition Id="983b31da-a0e1-48c5-9732-d860cfa50f4c" />
+  </package>
+</logicalClassDesignerModel>

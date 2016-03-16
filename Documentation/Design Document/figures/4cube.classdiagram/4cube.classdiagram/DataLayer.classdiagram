@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="62e4af82-d96a-4047-904c-8cf6a504b0ed" name="DataLayer" linkedPackageId="4eb0f5b5-78a2-42c0-a34e-b4ec417bab83" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="2b2ea6dc-f550-43ea-adb7-2649bb307328">
+      <profileInstance Id="fd87fea1-527c-4224-a613-0d5f98668ee7" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="78579fb5-1dab-4290-a437-dcfd671f8677">
+      <profileInstance Id="b9f50493-c923-476c-899b-21c51373d3b3" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="af94777f-00f6-490d-afb2-619290646059" name="IDataAccessLayer" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="7637bd2e-1216-498b-908d-55717dd864f6" />
+        <ownedOperations>
+          <operation Id="bbf2aa99-673f-40fc-a14a-3efe3c0fea20" name="OpenFile" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="8328d691-56c2-48c6-a8d2-f94ee37d208b" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="79e2717b-5812-4719-9c55-8adeffe00fda" name="string path" direction="In" isUnique="false">
+                  <elementDefinition Id="8594129f-716e-4b14-90ba-39ad9af94c23" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="bb4666a1-f93e-4981-b08e-fdf2867d3918" direction="Return" isUnique="false">
+                  <elementDefinition Id="d54ba9a4-e51d-44ed-96ff-e9fbad7a7197" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="0c2bb6e6-ead0-443e-80f5-ba2b76ebd870" LastKnownName="GridEntity" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="2bbb0460-7cab-447d-b28c-57b502a16e77" name="SaveFile" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="cb3323c9-31eb-417a-bddb-8c868e6d052c" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="88bf4581-4d6b-4213-9933-53cf452db6ca" name="string path" direction="In" isUnique="false">
+                  <elementDefinition Id="a754036d-f4d0-42f4-b46f-43efda9548df" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="ba217218-981f-40a8-9b86-89cd96946865" name="GridEntity grid" direction="In" isUnique="false">
+                  <elementDefinition Id="1722948d-8413-4c50-8320-2057f2584279" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="0c2bb6e6-ead0-443e-80f5-ba2b76ebd870" name="GridEntity" isAbstract="false" isLeaf="false" cachedFullName="GridEntity">
+        <elementDefinition Id="e88b116c-a7c3-401b-b67d-f261aaae3f31" />
+      </referencedType>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="4eb0f5b5-78a2-42c0-a34e-b4ec417bab83" name="4cube.classdiagram">
+    <elementDefinition Id="983b31da-a0e1-48c5-9732-d860cfa50f4c" />
+  </package>
+</logicalClassDesignerModel>

@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="ffed6420-68cf-44de-909b-826cdbb2bdce" name="BussinessLayer" linkedPackageId="e8024430-4815-466c-b898-7d019a2296f0" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="a2cf1eb7-afb5-4a47-86b3-32121ec6d90f">
+      <profileInstance Id="404c14c4-4999-470c-86ca-e996664900d7" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="09af41e6-2239-4e1a-b260-4228e0b6c2b9">
+      <profileInstance Id="467eb2cf-d7b5-47da-b116-7eeb143d7134" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="28d0d56c-0eaf-4f82-a1e0-f8a204f21a01" name="IGridModel" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f2131240-0b86-43a1-ae13-fcd6ff8f24e2" />
+        <ownedOperations>
+          <operation Id="a6d2bd73-4363-4ea7-8a8d-8ae23dfd1a6f" name="AddComponent" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="21a04301-c4a2-4cf4-9267-5c27d5b9df42" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="064a9075-5fe2-40ba-b694-81930831c581" name="ComponentEntity component" direction="In" isUnique="false">
+                  <elementDefinition Id="0bcb9dbc-53cc-49ff-a89e-5f102610b7b8" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="7268dd93-bfd6-47a4-a628-5c9943f823cf" name="RotateComponent" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="8d899596-697f-4cda-ba15-0843fb9a2a83" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="4cbbd9b2-acd9-470b-9991-4d86296e4713" name="ComponentEntity component" direction="In" isUnique="false">
+                  <elementDefinition Id="cc5d5c8b-cabe-4bae-b564-722ebc2f322b" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="94a02dd9-5724-4026-a928-f31c4ad99fd8" name="DeleteComponent" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="400373b8-0b7a-4eda-9308-b03417d41301" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="7b91b1ad-898c-4668-a767-c73933a8c2dd" name="ComponentEntity component" direction="In" isUnique="false">
+                  <elementDefinition Id="51e1e541-7990-45c2-a3e1-c5ed5982478e" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="27448894-f651-4c7c-8095-8e9983dddd7c" name="ResizeGrid" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="da10fae6-29b3-41ae-9748-f0f62a0b4e67" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="49a546ee-49ac-441b-a4d0-d34edf6cf6f0" name="int w" direction="In" isUnique="false">
+                  <elementDefinition Id="49cd8c74-86c9-42a3-b7ae-b0184b9aed54" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="57d800d4-16fc-456f-a317-6cf30afe7998" name="int h" direction="In" isUnique="false">
+                  <elementDefinition Id="e5311cd8-5277-44a5-87c1-7f5000b16932" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="e76cb092-ce40-494c-ae0c-8eb137bb8e73" name="OpenFile" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="4c2c9590-0131-45fd-9e48-d3d6bfb5ff36" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="fbe7ea7b-f788-46cd-af21-5722755c4611" name="string path" direction="In" isUnique="false">
+                  <elementDefinition Id="93e9e103-53a6-4c15-84b5-4e352afb005c" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="0182c44b-06de-4dc1-ae0f-b2723be308a8" name="SaveFile" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="578c2de6-32f4-48ec-ac5f-5926b8b836ab" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="a5edbfc9-bbad-4b6e-828c-780d10d0d751" name="string path" direction="In" isUnique="false">
+                  <elementDefinition Id="5e4c82e3-4070-4d64-8b53-5a8c61082e04" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="d60892f5-c91c-4474-a86d-857bf9626df8" name="GreenLight" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="cd5eb68a-7aa3-49ce-aa15-4792c29dc73f" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="366dd76a-9412-46f2-adaf-d66bac172e07" name="TrafficLightEntity e" direction="In" isUnique="false">
+                  <elementDefinition Id="3a0a230e-e3a3-47fa-a885-808d7377fc2a" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="8c3c9ea3-3480-4447-9cad-c538df1d3fa2" name="TrafficLightGroup t" direction="In" isUnique="false">
+                  <elementDefinition Id="2d2890b5-76fb-4924-8c63-26b27f14c164" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="09ccb916-def6-4496-baf1-0b8693823f01" name="int n" direction="In" isUnique="false">
+                  <elementDefinition Id="0955f3fc-f063-4e92-b164-94a3bb74dda6" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="4bdfe23c-bd7f-482a-9013-c70f72c50a86" name="ISimulation" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="45479565-cfb8-4027-b692-8dc5364a7e6c" />
+        <suppliersInternal>
+          <dependency Id="7f29ebcb-cad5-4895-a2fd-1486bb35ec03">
+            <interfaceMoniker Id="e5dcafe0-9ed5-4235-a92c-f386526b36ea" LastKnownName="IReport" />
+            <elementDefinition Id="46bd0325-15ac-4396-82a9-60b4fadcf5ee" />
+          </dependency>
+        </suppliersInternal>
+        <ownedOperations>
+          <operation Id="cb5a20b5-019b-401e-8a32-c3c2e588dced" name="Pause" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="24d7e205-56e8-487a-85b2-075f676c858d" />
+          </operation>
+          <operation Id="7532a7a6-6ddd-4209-b152-948db2854c99" name="ChangeSpeed" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="1a84ba67-0312-4a8c-b029-7f0a3df5e08a" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="dbcd6e0f-c850-43db-b1a6-89047ecddd88" name="int n" direction="In" isUnique="false">
+                  <elementDefinition Id="42dc23aa-e8ad-4238-bfac-25a47fc2ddad" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="0de4759a-1487-45c3-a442-99cc3290b758" name="Start" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="2e866f5b-7bb8-4abd-9ec5-243156e0e002" />
+          </operation>
+          <operation Id="f6107a06-4afa-43b6-8fea-7cf362d46150" name="Stop" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="65ac7bdf-586e-4faa-99b9-a89923c6ab25" />
+          </operation>
+          <operation Id="9fc378cb-8d19-4076-8c97-f8857c7affe1" name="AttachTick" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="1e159140-0728-4dc5-bd54-315d782a585b" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="1e23ba8c-0942-4ec3-91b5-ac807979f908" name="Action call" direction="In" isUnique="false">
+                  <elementDefinition Id="6759f652-379c-403b-a46f-39a9c2a5a6e9" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="de8a7052-9826-4a4f-853d-475e3ecc4437" name="DetachTick" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="0daa7641-26e6-496d-9fda-1f676d2dc510" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="47ea0c75-ae33-4ae9-8249-c327ecb84ad7" name="Action call" direction="In" isUnique="false">
+                  <elementDefinition Id="55f0f478-d373-49f3-9e21-3458156797a8" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="e5dcafe0-9ed5-4235-a92c-f386526b36ea" name="IReport" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="91e5218f-ee80-4ef2-9ef8-73fe05f40793" />
+        <ownedOperations>
+          <operation Id="357e93c4-542b-452e-9f66-2164595351fb" name="OnSimulationTick" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="f071948b-3e18-4109-bd70-9c692c1e2970" />
+          </operation>
+          <operation Id="0b30770f-e9b5-44ce-919f-4ab661623e36" name="Clear" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="d9e45608-dd41-4486-bbf0-ada6a9fa1e75" />
+          </operation>
+          <operation Id="29d27ca0-03c7-4afc-bea5-ef19b4aad347" name="GenerateReport" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="2524c4da-8094-4dc9-b1aa-d756cbfc2093" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="9dc31e9f-d1e2-4929-b623-2f337f115dfd" direction="Return" isUnique="false">
+                  <elementDefinition Id="bfcdc78f-9846-4708-8ebf-af369f8d7965" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="0c13dd65-de42-47ef-8da6-dc74d1159e42" LastKnownName="List&lt;Tuple&lt;x, y&gt;&gt;" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="0c13dd65-de42-47ef-8da6-dc74d1159e42" name="List&lt;Tuple&lt;x, y&gt;&gt;" isAbstract="false" isLeaf="false" cachedFullName="List&lt;Tuple&lt;x, y&gt;&gt;">
+        <elementDefinition Id="afc079af-35e1-4a0e-a6aa-beb2df351fa5" />
+      </referencedType>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="e8024430-4815-466c-b898-7d019a2296f0" name="4cube.classdiagram">
+    <elementDefinition Id="983b31da-a0e1-48c5-9732-d860cfa50f4c" />
+  </package>
+</logicalClassDesignerModel>
