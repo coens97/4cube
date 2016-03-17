@@ -1,4 +1,4 @@
-\documentclass[a4paper,11pt]{article}
+\documentclass[twoside,a4paper,11pt]{article}
 \usepackage{a4wide,graphicx,amssymb, amstext, amsmath, epstopdf, booktabs, verbatim, geometry, appendix, natbib, lmodern, tabularx, enumitem, longtable, hyperref, subcaption}
 
 %\geometry{letterpaper}
@@ -11,9 +11,88 @@
 \author{}
 \date{\today}
 %-----------------------------------------------------------
+\usepackage{caption}
+\usepackage[strict]{changepage}
+%%%
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{afterpage}
+\usepackage{placeins}
+\usepackage{xcolor}
+\setcounter{totalnumber}{1}
+\setcounter{topnumber}{1}
+\setcounter{bottomnumber}{1}
+\renewcommand{\topfraction}{.99}
+\renewcommand{\bottomfraction}{.99}
+\renewcommand{\textfraction}{.01}
+
+\usepackage{rotating}
+\usepackage{pdflscape}
 
 \usepackage{template/template} % This is what makes your document look like a cpi document.
-
+\makeatletter
+\newcommand*{\twopagepicture}[4]{%
+	\checkoddpage
+	\ifoddpage
+	\expandafter\@firstofone
+	\else
+	\expandafter\afterpage
+	\fi
+	{\afterpage{%
+			\if #1t%
+			\if #2p%
+			\thispagestyle{empty}%
+			\afterpage{\thispagestyle{empty}}%
+			\fi
+			\fi
+			\begin{figure}[#1]
+				\if #2p%
+				\if #1t%
+				\vspace*{-\dimexpr1in+\voffset+\topmargin+\headheight+\headsep\relax}%
+				\fi
+				\fi
+				\if #1b%
+				\caption{#4}%
+				\fi
+				\makebox[\textwidth][l]{%
+					\if #2p\relax
+					\let\mywidth\paperwidth
+					\hskip-\dimexpr1in+\hoffset+\evensidemargin\relax
+					\else
+					\let\mywidth\linewidth
+					\fi
+					\adjustbox{trim=0 0 {.5\width} 0,clip}{\includegraphics[width=2\mywidth]{#3}}}%
+				\if #1b\else
+				\caption{#4}%
+				\fi
+				\if #2p%
+				\if #1b%
+				\vspace*{-\dimexpr\paperheight-\textheight-1in-\voffset-\topmargin-\headheight-\headsep\relax}%
+				\fi
+				\fi
+			\end{figure}%
+			\begin{figure}[#1]
+				\if #2p%
+				\if #1t%
+				\vspace*{-\dimexpr1in+\voffset+\topmargin+\headheight+\headsep\relax}%
+				\fi
+				\fi
+				\makebox[\textwidth][l]{%
+					\if #2p%
+					\let\mywidth\paperwidth
+					\hskip-\dimexpr1in+\hoffset+\oddsidemargin\relax
+					\else
+					\let\mywidth\linewidth
+					\fi
+					\adjustbox{trim={.5\width} 0 0 0,clip}{\includegraphics[width=2\mywidth]{#3}}}%
+				\if #2p%
+				\if #1b%
+				\vspace*{-\dimexpr\paperheight-\textheight-1in-\voffset-\topmargin-\headheight-\headsep\relax}%
+				\fi
+				\fi
+			\end{figure}%
+		}}%
+	}
 
 \begin{document}
 
