@@ -12,28 +12,34 @@ Explanation:
 
 \newpage
 
-\subsection{Positioning a lane}
+\subsection{Positioning a road}
 
 \begin{enumerate}
+		\item Precondition
+		\begin{itemize}
+			\item Road Type A on Grid B3.
+			\item Crossroad Type B on Grid C4.
+			\item The other Grids are empty. 
+		\end{itemize}
+	
 	\item Target on screen
 	\begin{itemize}
-		\item User clicks on the Lane tab.
-		\item User chooses a lane.
-		\item User drags the lane from the Lane tab.
-		\item User places the lane on the grid.
+		\item User clicks on the Road tab.
+		\item User chooses a road.
+		\item User drags the road from the Road tab.
+		\item User places the road on the grid.
 	\end{itemize}
 	\item Test Data/Simulation
 \end{enumerate}	
 	\begin{tabularx}{\textwidth}{|X|X|p{2.5cm}|}\hline
 		Actions & Expected result & Result \\\hline
 		User opens the application.& Application opens. &  \pass \\\hline
-		User checks whether the play button is enabled. & &  \pass \\\hline
-		User drags a lane Type A from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
+		User drags a road Type A from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
 		User drags a crossroad Type A from the sidebar and places it in Grid C4. & A crossroad with Type A shows in Grid C4. & \pass \\\hline
-		User chooses a lane Type A, by left clicking the mouse, and then drags it to the grid (grid B2). & A lane with TypeA shows in grid B2. & \pass \\\hline
-		User chooses a lane Type B, by left clicking the mouse, and then drags it in the grid (grid B3). & System gives an  error message "Grid occupied". Grid B3 does not change. & \pass\\\hline
-		User chooses a lane Type A, by left clicking the mouse, and then drags it to the grid (grid C4). & System gives an  error message "Grid occupied". Grid C4 does not change. & \pass\\\hline
-		User chooses a lane TypeB, by left clicking the mouse, and then drags it outside the grid. & System gives an error message "Please places inside the grid. & \pass\\\hline
+		User chooses a road Type A, by left clicking the mouse, and then drags it to the grid (grid B2). & A road with TypeA shows in grid B2. & \pass \\\hline
+		User chooses a road Type B, by left clicking the mouse, and then drags it in the grid (grid B3). & System gives an  error message "Grid occupied". Grid B3 does not change. & \pass\\\hline
+		User chooses a road Type A, by left clicking the mouse, and then drags it to the grid (grid C4). & System gives an  error message "Grid occupied". Grid C4 does not change. & \pass\\\hline
+		User chooses a road TypeB, by left clicking the mouse, and then drags it outside the grid. & System gives an error message "Please places inside the grid. & \pass\\\hline
 	\end{tabularx}
 
 
@@ -47,6 +53,13 @@ Explanation:
 \subsection{Rotating the component}
 
 \begin{enumerate}
+		\item Precondition
+		\begin{itemize}
+			\item Road Type A on Grid B3.
+			\item Crossroad Type B on Grid C4.
+		    \item The other Grids are empty.  
+		\end{itemize}
+	
 	\item Target on screen
 	\begin{itemize}
 		\item User chooses a component in the grid.
@@ -60,10 +73,10 @@ Explanation:
 Actions & Expected result & Result \\\hline
 User opens the application.& Application opens. &  \pass \\\hline
 User checks whether the play button is enabled. & &  \pass \\\hline
-User drags a lane Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
+User drags a road Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
 User drags a crossroad Type A from the sidebar and places it in Grid C4. & A crossroad with Type A shows in Grid C4. & \pass \\\hline
-User right clicks on grid B3 then chooses rotate option by left clicking the mouse. & Lane on grid B3 has rotated 90 degrees clockwise. & \pass \\\hline
-User right clicks on grid C4 then chooses rotate option by left clicking the mouse. & Crossroad on grid C4 has rotated 90 degrees clockwise. & \pass\\\hline
+User right clicks on grid B3 then chooses rotate option by left clicking the mouse. & Road on grid B3 has rotated 90 degrees clockwise. & \pass \\\hline
+User right clicks on Grid C4 then chooses rotate option by left clicking the mouse. & Crossroad on grid C4 has rotated 90 degrees clockwise. & \pass\\\hline
 User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\\hline
 \end{tabularx}
 
@@ -77,6 +90,12 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 \subsection{Positioning a crossroad}
 
 \begin{enumerate}
+	\item Precondition
+	\begin{itemize}
+		\item Road Type A on Grid B3.
+		\item Crossroad Type B on Grid C4. 
+		\item The other Grids are empty. 		
+	\end{itemize}
 
 	\item Target on screen
 	\begin{itemize}
@@ -92,7 +111,7 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 		Actions & Expected result & Result \\\hline
 		User opens the application.& Application opens. &  \pass \\\hline
 		User checks whether the play button is enabled. & &  \pass \\\hline
-		User drags a lane Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
+		User drags a road Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
 		User drags a crossroad Type A from the sidebar and places it in Grid C4. & A crossroad with Type A shows in Grid C4. & \pass \\\hline
 		User chooses a crossroad Type A, by left clicking the mouse, and then drags it to the grid (grid B2). Setting the initial setting in the pop-up window. & A crossroad with TypeA shows in grid B2. System set attributes to that crossroad. & \pass \\\hline
 		User chooses a crossroad Type B, by left clicking the mouse, and then drags it to the grid (grid B3). & System gives an  error message "Grid occupied". Grid B3 does not change. & \pass\\\hline
@@ -130,7 +149,7 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 		Actions & Expected result & Result \\\hline
 		User opens the application.& Application opens. &  \pass \\\hline
 		User checks whether the play button is enabled. & &  \pass \\\hline
-		User drags a lane Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
+		User drags a road Type B from the sidebar and places it in Grid B3. & A line with Type A shows in Grid B3. & \pass \\\hline
 		User drags a crossroad Type A from the sidebar and places it in Grid C4. & A crossroad with Type A shows in Grid C4. & \pass \\\hline
 		User right clicks on grid C4 then chooses Traffic light configuration  option by left clicking the mouse. After selects a light group and changes the time by the numericUpDown, user clicks on Change. User clicks on complete. & System sets the green light time of that chosen light group and close the configuration window.  & \pass \\\hline
 		User right clicks on grid C4 then choose Traffic light configuration option by left clicking the mouse. After changed the time by the numericUpDown, user click on Change all. User click on complete. & System sets that value to all the light groups and close the configuration window. & \pass \\\hline
@@ -163,12 +182,10 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 	\begin{tabularx}{\textwidth}{|X|X|p{2.5cm}|}\hline
 		Actions & Expected result & Result \\\hline
 		User opens the application.& Application opens. &  \pass \\\hline
-		User checks whether the play button is enabled. & &  \pass \\\hline
-		User drags a lane Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
+		User drags a road Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
 		User drags a crossroad Type A from the sidebar and places it in Grid C4. & A crossroad with Type A shows in Grid C4. & \pass \\\hline
-		User right clicks on grid B3 then chooses rotate option by left clicking the mouse.  & Lane on grid B3 has deleted.  & \pass \\\hline
+		User right clicks on grid B3 then chooses rotate option by left clicking the mouse.  & Road on grid B3 has deleted.  & \pass \\\hline
 		User right click on grid C4 then choosea rotate option by left clicking the mouse. & Crossroad on grid C4 has deleted. & \pass \\\hline
-		User right click on grid D1. & Nothing happens and no option pop out. & \pass \\\hline
 	\end{tabularx}
 	
 
@@ -187,7 +204,7 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 	\item Target on screen
 	\begin{itemize}
 		\item User chooses a textbox on one of the components which already in the grid.
-		\item User defines the amount of the cars coming through the lanes in that textbox.
+		\item User defines the amount of the cars coming through the roads in that textbox.
 	\end{itemize}
 	\item Test Data/Simulation
 \end{enumerate}	
@@ -195,7 +212,7 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 		Actions & Expected result & Result \\\hline
 		User opens the application.& Application opens. &  \pass \\\hline
 		User checks whether the play button is enabled. & &  \pass \\\hline
-		User drags a lane Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
+		User drags a road Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
 		User drags a crossroad Type A from the sidebar and places it in Grid C4. & A crossroad with Type A shows in Grid C4. & \pass \\\hline
 		User clicks on a textbox in grid B3 and input a value. & System sets the amount of incoming car of which user changed in the lane. & \pass \\\hline
 		User clicks on a textbox in grid C4 and input a value. & System sets the amount of incoming car of which user changed in the crossroad. & \pass \\\hline
@@ -225,8 +242,8 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 		Actions & Expected result & Result \\\hline
 		User opens the application.& Application opens. &  \pass \\\hline
 		User checks whether the play button is enabled. & &  \pass \\\hline
-		User drags a lane Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
-		User right clicks on grid B3 then chooses rotate option by left clicking the mouse. & Lane on grid B3 has rotated 90 degrees clockwise. & \pass \\\hline
+		User drags a road Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
+		User right clicks on grid B3 then chooses rotate option by left clicking the mouse. & Road on grid B3 has rotated 90 degrees clockwise. & \pass \\\hline
 		User drags a crossroad Type A from the sidebar and places it in Grid C4. & A crossroad with Type A shows in Grid C4. & \pass \\\hline
 		User right clicks on grid C4 then chooses Traffic light configuration  option by left clicking the mouse. After selects a light group and changes the time by the numericUpDown, user clicks on Change. User clicks on complete. & System sets the green light time of that chosen light group and close the configuration window.  & \pass \\\hline
 		User clicks on a textbox in grid B3 and input a value. & System sets the amount of incoming car of which user changed in the lane. & \pass \\\hline
@@ -257,8 +274,8 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 	    Actions & Expected result & Result \\\hline
 	    User opens the application.& Application opens. &  \pass \\\hline
 	    User checks whether the play button is enabled. & &  \pass \\\hline
-	    User drags a lane Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
-	    User right clicks on grid B3 then chooses rotate option by left clicking the mouse. & Lane on grid B3 has rotated 90 degrees clockwise. & \pass \\\hline
+	    User drags a road Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
+	    User right clicks on grid B3 then chooses rotate option by left clicking the mouse. & Road on grid B3 has rotated 90 degrees clockwise. & \pass \\\hline
 	    User drags a crossroad Type A from the sidebar and places it in Grid C4. & A crossroad with Type A shows in Grid C4. & \pass \\\hline
 	    User right clicks on grid C4 then chooses Traffic light configuration  option by left clicking the mouse. After selects a light group and changes the time by the numericUpDown, user clicks on Change. User clicks on complete. & System sets the green light time of that chosen light group and close the configuration window.  & \pass \\\hline
 	    User clicks on a textbox in grid B3 and input a value. & System sets the amount of incoming car of which user changed in the lane. & \pass \\\hline
@@ -289,8 +306,8 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 		Actions & Expected result & Result \\\hline
 		User opens the application.& Application opens. &  \pass \\\hline
 		User checks whether the play button is enabled. & &  \pass \\\hline
-		User drags a lane Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
-		User right clicks on grid B3 then chooses rotate option by left clicking the mouse. & Lane on grid B3 has rotated 90 degrees clockwise. & \pass \\\hline
+		User drags a road Type B from the sidebar and places it in Grid B3. & A line with Type a shows in Grid B3. & \pass \\\hline
+		User right clicks on grid B3 then chooses rotate option by left clicking the mouse. & Road on grid B3 has rotated 90 degrees clockwise. & \pass \\\hline
 		User drags a crossroad Type A from the sidebar and places it in Grid C4. & A crossroad with Type A shows in Grid C4. & \pass \\\hline
 		User right clicks on grid C4 then chooses Traffic light configuration  option by left clicking the mouse. After selects a light group and changes the time by the numericUpDown, user clicks on Change. User clicks on complete. & System sets the green light time of that chosen light group and close the configuration window.  & \pass \\\hline
 		User clicks on a textbox in grid B3 and input a value. & System sets the amount of incoming car of which user changed in the lane. & \pass \\\hline
@@ -323,7 +340,7 @@ User right clicks on grid D1. & Nothing happens and no option pop out. & \pass\\
 		User checks whether the play button is enabled. & &  \pass \\\hline
 		User checks that there is at least one saved file with traffic control system on the device.& &\pass \\\hline
 		User clicks on Load and chooses a file to open. & System closes previous project and loads the chosen file.  & \pass \\\hline 
-		User clicks on Load and chooses a file to open. & System informs user that file can’t be loaded and given the choice
+		User clicks on Load and chooses a file to open. & System informs user that file cannot be loaded and given the choice
 		to stop or choose another file. & \pass \\\hline 
 		User clicks on Load and chooses a file to open when another project is open. & System asks if users wants, to save project, that is already open, before closing it and opening another project. & \pass \\\hline 
 	\end{tabularx}
