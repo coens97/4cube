@@ -1,0 +1,18 @@
+test plan
+-still some copy and paste errors 
+-it will be difficult to implement the pause simmulation
+- 3.12 has no expected for some steps
+
+design document
+-wpf
+-which classes will implement the interfaces
+-show methods 
+-include the gui of all the cases
+-show report, resize grid, 
+-specify the car flow
+
+next week
+-peer review form
+-discuss the result of the form next week
+-12:25
+
