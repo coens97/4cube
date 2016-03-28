@@ -79,32 +79,6 @@
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="301d694a-b863-4d52-858c-8ec6458d8120" />
           </association>
-          <association Id="ed8bbca8-2226-453c-aaa9-816548d68d1b" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
-            <classMoniker Id="8c47baf0-4cb4-4cde-b60b-ca1a6217cdcf" LastKnownName="CarUserControl" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd Id="ec084f1f-88d6-47ce-a46c-9220bfe5945b" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
-                  <elementDefinition Id="82c447c8-f7ea-43a3-ac75-4493a3779de8" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd Id="e75275c0-2584-4c71-884f-9492f498d620" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
-                  <lowerValueInternal>
-                    <literalString Id="83128000-6095-4dc0-a0ef-b2542e286a9c" name="Lower" value="*">
-                      <elementDefinition Id="80bb4ba2-0ed3-477c-b509-0bd75a1f08b2" />
-                    </literalString>
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString Id="8bfdfd83-3375-447f-ac17-8fc57f11549f" name="Upper" value="*">
-                      <elementDefinition Id="727efc14-d95d-4aab-8c43-edaa537c47f6" />
-                    </literalString>
-                  </upperValueInternal>
-                  <elementDefinition Id="baf1439b-5ec0-4fee-aafc-a19617236624" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-            <elementDefinition Id="80f81e11-e885-4557-8a8a-6fbce920cf6d" />
-          </association>
           <association Id="154cd51d-594e-45ef-a450-c27bd6fb38ad" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
             <classMoniker Id="b56a93a2-da5e-4e61-9fcd-9db3384ecb7b" LastKnownName="PedestrianUserControl" />
             <relationshipOwnedElementsInternal>
@@ -130,6 +104,32 @@
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="bf6520ae-759b-42cc-8f45-7bebf2944255" />
+          </association>
+          <association Id="bb370ac1-a993-4c2e-9307-9a72695b90ff" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="8c47baf0-4cb4-4cde-b60b-ca1a6217cdcf" LastKnownName="CarUserControl" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c29a5f26-f6b7-41ba-a87e-a2fac2939885" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="b47d127d-3fb8-4393-bf8d-92ee7bf9c5d5" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c9bfad76-28c0-48d0-a87f-de320e25e343" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <lowerValueInternal>
+                    <literalString Id="7d4bf639-4ed9-4c7f-a707-f95abfc86906" name="Lower" value="*">
+                      <elementDefinition Id="28220254-d8aa-4327-b43d-dab992960b13" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="86d1e9e0-4864-4d08-850e-721d37cfc2f9" name="Upper" value="*">
+                      <elementDefinition Id="bf6deda3-cd68-4ca9-9a26-12873e716b47" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="317af679-1bd8-4f65-8f9d-c4ac96e7dbba" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="5b05dfe6-9c0b-4f73-95fe-97f1c9145688" />
           </association>
         </targetEnds>
         <ownedAttributesInternal>
@@ -470,7 +470,7 @@
           </association>
         </targetEnds>
         <ownedOperationsInternal>
-          <operation Id="75228ce1-20a4-4de3-af1e-43180b0bcd4c" name="OnOkPress" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+          <operation Id="75228ce1-20a4-4de3-af1e-43180b0bcd4c" name="OnOkClicked" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="748a84e5-b3de-4e6d-982d-15231e0ba44b" />
           </operation>
         </ownedOperationsInternal>
