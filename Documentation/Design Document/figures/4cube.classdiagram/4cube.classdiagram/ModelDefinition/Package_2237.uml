@@ -12,5 +12,21 @@
         isLeaf="false"
         isActiveClass="false" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="fe68b1da-e548-4e7b-9185-d152695ebcd6"
+        name="CarEntity"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="005656de-4ed0-4bc0-a8b4-b4bf992b8c7c"
+        name="PedestrianEntity"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
   </packagedElements>
 </package>

@@ -186,6 +186,213 @@
         <elementDefinition Id="afc079af-35e1-4a0e-a6aa-beb2df351fa5" />
       </referencedType>
     </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="00147b8c-3095-4c3a-b69a-d7455b892ef4" name="GridModel" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="d9f322ea-ad32-414f-bb81-686cb917cbcd" />
+        <suppliersInternal>
+          <interfaceRealization Id="9adb0fee-d432-4ba9-97ff-8b1b50fa03f5">
+            <interfaceMoniker Id="28d0d56c-0eaf-4f82-a1e0-f8a204f21a01" LastKnownName="IGridModel" />
+            <elementDefinition Id="bd78c16e-82f7-45bc-bbd1-4c148fc90040" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <property Id="9b92c61d-f3b0-4e60-a929-9e768c362cbf" name="_grid" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="10abeb99-d78d-4e85-9893-8b58bd70a589" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="19c78be7-c01d-4180-831d-08c106a047f9" LastKnownName="GridEntity" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="ee936e32-c6fe-4dcc-89d6-0bea582edecc" name="AddComponent" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="efd40726-77a6-4790-a6d1-e95976f3095f" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="01e89480-1416-4cd7-9fdc-d569670fa2c2" name="ComponentEntity component" direction="In" isUnique="false">
+                  <elementDefinition Id="d38af5a6-486a-413f-b457-08a51f54e304" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="1e67eb4d-639f-4b02-b625-85c541be152e" name="RotateComponent" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="4a8b761a-31ff-41bb-a9d3-4bb1ba3e6a60" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="3b67bb71-dfb2-4ae6-98f5-c9fbb7d85243" name="ComponentEntity component" direction="In" isUnique="false">
+                  <elementDefinition Id="7191cbf8-4cf9-40ee-8885-be59299673bd" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="b4f62e39-f2c9-46cf-8b25-6a639568aa53" name="DeleteComponent" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="99e18f93-70e4-4250-a095-bcbd01c88fcf" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="a2f1102e-65c8-4956-ab48-4f2a1322f902" name="ComponentEntity component" direction="In" isUnique="false">
+                  <elementDefinition Id="9ff82411-5d8d-448e-b15b-059ab37bfa70" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="0611e27b-bc9c-466c-888c-11ecf05a5de1" name="ResizeGrid" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="01fba515-55ef-43b1-b7c5-69ae6a87cdfb" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="44471cb4-419a-4592-b71c-141b5fe01844" name="int w" direction="In" isUnique="false">
+                  <elementDefinition Id="6daa6da1-f37c-4e0e-997c-046a83419d72" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="3b1c557d-72eb-4f8c-a096-ee1946302127" name="int h" direction="In" isUnique="false">
+                  <elementDefinition Id="f620e491-043d-4adc-9128-b5bef5d196ce" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="da090dbb-1db5-48cb-94f5-8b3b7b4a8212" name="OpenFile" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="97b5a818-889a-463d-88ca-d2ee2bb7b295" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="725b2f8a-d314-4d45-b971-ac5c39b55d7a" name="string path" direction="In" isUnique="false">
+                  <elementDefinition Id="ddd5a258-2eb3-411b-b3e5-41a526e8e4d1" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="804fe5b1-2c11-466f-95d6-00f6567099a8" name="SaveFile" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="e9e16c07-b9f4-4ece-8581-15e252c5b987" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="8e34d430-25e8-4e8d-8b8a-ca4f218d906d" name="string path" direction="In" isUnique="false">
+                  <elementDefinition Id="c1a47fa6-c769-494e-812c-0276f99ac2a4" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="93795257-3f25-479e-97bc-8808f93cbf98" name="GreenLight" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="70aa3958-a9d4-4c85-9485-61b1911e6fd0" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="272be506-5527-424f-ada2-0656aa859a11" name="TrafficLightEntity e" direction="In" isUnique="false">
+                  <elementDefinition Id="532e0ddc-16cf-4046-bd00-2591751d5a19" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="24aa236d-0cf3-4239-b8fe-9dc9b86b843a" name="TrafficLightGroup t" direction="In" isUnique="false">
+                  <elementDefinition Id="cef93f70-396f-42fc-8e95-4e17cc415b3e" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="5dea5800-c6d9-43a6-846e-9a8ee4285e03" name="int n" direction="In" isUnique="false">
+                  <elementDefinition Id="1acb2f6e-e9a4-418e-aaf3-238720867657" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="19c78be7-c01d-4180-831d-08c106a047f9" name="GridEntity" isAbstract="false" isLeaf="false" cachedFullName="4cube.classdiagram::GridEntity">
+        <elementDefinition Id="d15abc20-7f89-4576-b3a5-e61c91fcb5b5" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="09752ea7-4154-48ac-9a0e-39aad3275f0a" name="Sumilation" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="1293b4a5-04fa-4e2d-bec6-db0a486ec293" />
+        <suppliersInternal>
+          <interfaceRealization Id="f8f82d0b-1edd-4b5b-92a9-d1b9db209739">
+            <interfaceMoniker Id="4bdfe23c-bd7f-482a-9013-c70f72c50a86" LastKnownName="ISimulation" />
+            <elementDefinition Id="27b0cf35-2a5a-444a-8e6c-ce828d4a4fad" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <property Id="28f2562b-2680-48a8-aaf6-f0626dc35182" name="_grid" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="270db046-4243-40a0-9fa0-181b4dbc17b0" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="19c78be7-c01d-4180-831d-08c106a047f9" LastKnownName="GridEntity" />
+            </type_NamedElement>
+          </property>
+          <property Id="8b27f950-819a-49ae-adca-496360e17173" name="_time" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a368f217-38ea-49f4-b2d2-6bdf88785d60" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="6f201801-6ea8-4e26-9b2d-24d203d37250" LastKnownName="int" />
+            </type_NamedElement>
+          </property>
+          <property Id="f7062058-b977-41d9-99df-5540fc2d557f" name="_timer" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ae9ce1f0-1a12-49bc-bacc-d054d633a81c" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="1118c9dd-83d7-4f89-9387-f1e2bce0e57f" LastKnownName="Timer" />
+            </type_NamedElement>
+          </property>
+          <property Id="5f4549c0-480b-45ca-b0fc-520b55be09be" name="_callBacks" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="0b7eed69-7a84-4fe8-a599-52b83472108e" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="1e781ef1-731f-49d4-b624-eb736b8294e1" LastKnownName="Action" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="2b5b84d9-3745-4c87-b569-b18f5e978913" name="Pause" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="1028df56-e4b0-43b8-b3ec-9bf4fee0719f" />
+          </operation>
+          <operation Id="c690575f-eb7f-4184-9b54-c41aa9cb7e1e" name="ChangeSpeed" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="78c79408-cb21-4343-b804-99db70972077" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="c2306e94-d457-4223-bf24-33351dea34ff" name="int n" direction="In" isUnique="false">
+                  <elementDefinition Id="c7a1d090-a791-443e-a73d-d0d365ae5266" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="7cb53668-301f-4d1c-9b33-7eccd4fde0f8" name="Start" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="61b8d289-8e5c-4b4b-9692-9391278de38f" />
+          </operation>
+          <operation Id="429ba8bd-6c6f-41e3-8cc7-b13fbea19630" name="Stop" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="b5a6e6e5-a00a-4737-8f45-d904635bd674" />
+          </operation>
+          <operation Id="b0512549-e6e7-400a-bfd6-6ad9ed7ba84e" name="AttachTick" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="9acc5741-5d7f-4489-9019-2b02b3013b38" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="96c124f5-ebed-4346-b8be-7f839640dbe8" name="Action call" direction="In" isUnique="false">
+                  <elementDefinition Id="debbe32b-2923-4d23-bbbe-f89d7035963e" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="48b46c50-4e39-4a49-be19-afeb77cf2aba" name="DetachTick" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="a0b49877-91c5-4a68-9cb1-e403c42aa292" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="252ee293-0da8-424e-b8a4-8b5de7a67dca" name="Action call" direction="In" isUnique="false">
+                  <elementDefinition Id="73e7fce0-b855-488d-8877-f2312b72c1ee" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="19431b65-4c53-4efa-bad3-6770d00ab854" name="OnSimulationTick" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="088d7e0a-7138-42a1-9a7b-8c01de414338" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="1118c9dd-83d7-4f89-9387-f1e2bce0e57f" name="Timer" isAbstract="false" isLeaf="false" cachedFullName="Timer">
+        <elementDefinition Id="18db0af2-691a-470b-b653-bfe4436660a2" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="6f201801-6ea8-4e26-9b2d-24d203d37250" name="int" isAbstract="false" isLeaf="false" cachedFullName="int">
+        <elementDefinition Id="c06e0991-fcc9-454f-8f79-14bcb982f6f3" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="1e781ef1-731f-49d4-b624-eb736b8294e1" name="Action" isAbstract="false" isLeaf="false" cachedFullName="Action">
+        <elementDefinition Id="985f6b76-7a3d-4b78-8717-c3a7c6320df3" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="e8024430-4815-466c-b898-7d019a2296f0" name="4cube.classdiagram">
     <elementDefinition Id="983b31da-a0e1-48c5-9732-d860cfa50f4c" />

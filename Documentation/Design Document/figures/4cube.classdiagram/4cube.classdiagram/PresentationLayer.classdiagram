@@ -1,19 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="2b064b94-e70f-4694-a003-1cfd196fc00a" name="PresentationLayer" linkedPackageId="620b3daf-6ebb-4b83-a523-1e9bc9158122" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
-  <profileInstances>
-    <packageHasProfileInstances Id="68cabfa4-eaf1-4136-8935-3f9bf1a81cbc">
-      <profileInstance Id="4e95efa6-544b-4f87-ab38-99af7ad3bce3" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="08388a92-4999-44ec-8d65-5ba773a7174b">
-      <profileInstance Id="fbf6f6b4-bac7-4163-93cb-96a4e7292196" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-  </profileInstances>
   <packagedElements>
     <logicalClassDesignerModelHasTypes>
       <class Id="4d4c2078-5c37-4dff-b8cd-8a4ce7d8a711" name="MainWindow" isAbstract="false" isLeaf="false" isActiveClass="false">
@@ -77,7 +63,137 @@
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="08de8df4-c652-4870-b82b-c7d7000b717b" />
           </association>
+          <association Id="bdc73331-5e5a-4c2b-ab96-61467ae2ad2c" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="341079b0-4672-495f-be86-c60608028fc0" LastKnownName="ResizeGridWindow" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="017612a6-e6ba-4310-b629-ea696bddcadb" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="811bd2ab-0a5b-4bc8-882d-984592db11f6" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7cf0043a-1d29-412d-adff-3246a62334d2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <elementDefinition Id="e1ffb6ef-7f72-47e8-a30e-b691a5464a3b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="301d694a-b863-4d52-858c-8ec6458d8120" />
+          </association>
+          <association Id="ed8bbca8-2226-453c-aaa9-816548d68d1b" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="8c47baf0-4cb4-4cde-b60b-ca1a6217cdcf" LastKnownName="CarUserControl" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="ec084f1f-88d6-47ce-a46c-9220bfe5945b" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="82c447c8-f7ea-43a3-ac75-4493a3779de8" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="e75275c0-2584-4c71-884f-9492f498d620" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <lowerValueInternal>
+                    <literalString Id="83128000-6095-4dc0-a0ef-b2542e286a9c" name="Lower" value="*">
+                      <elementDefinition Id="80bb4ba2-0ed3-477c-b509-0bd75a1f08b2" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="8bfdfd83-3375-447f-ac17-8fc57f11549f" name="Upper" value="*">
+                      <elementDefinition Id="727efc14-d95d-4aab-8c43-edaa537c47f6" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="baf1439b-5ec0-4fee-aafc-a19617236624" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="80f81e11-e885-4557-8a8a-6fbce920cf6d" />
+          </association>
+          <association Id="154cd51d-594e-45ef-a450-c27bd6fb38ad" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="b56a93a2-da5e-4e61-9fcd-9db3384ecb7b" LastKnownName="PedestrianUserControl" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="40cb9b68-6d74-494f-9ba5-c5d867882481" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="260f378b-867f-4a2f-9060-27779ec688de" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="2e2aab26-6561-421d-99a8-bc2aa5cfd588" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <lowerValueInternal>
+                    <literalString Id="aa802c66-765e-40c2-92c7-0b63d77cd320" name="Lower" value="*">
+                      <elementDefinition Id="d9d109bf-5a2d-4fbe-9317-950d2c084d1f" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="baa7fcdf-526f-4742-bc25-a7ceaceebc55" name="Upper" value="*">
+                      <elementDefinition Id="3ceff05a-ebf6-4c29-a6e2-951cd5f9ab4a" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="0ae31a50-b8e6-451a-ad27-ba30a5a1f55e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="bf6520ae-759b-42cc-8f45-7bebf2944255" />
+          </association>
         </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="c06ceee7-285c-4354-b88a-72bd386d68af" name="_unsavedChanges" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="3b2162ef-4b96-4eec-9fc6-97f81710b1d6" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="d4b2428c-238d-4475-bc9d-6c3cee52cbd6" LastKnownName="bool" />
+            </type_NamedElement>
+          </property>
+          <property Id="bc9cb4f0-74d4-4ed3-9dca-1fc9d8973979" name="_running" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="f1947146-03de-4a07-8a7b-fa518fe46398" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="d4b2428c-238d-4475-bc9d-6c3cee52cbd6" LastKnownName="bool" />
+            </type_NamedElement>
+          </property>
+          <property Id="b21d747c-4b79-489d-94f5-58040e5fef4d" name="_path" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="49c1c8cd-bd9f-46cb-9651-de4dcc7ea250" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="55168180-3996-40bb-9593-f74c8cb3095f" LastKnownName="string" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="862b71ac-036e-4886-aba5-0c7e9b1478dd" name="OnSimulationStartClicked" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="98889ee7-caf2-4bda-828d-26eefeb61b08" />
+          </operation>
+          <operation Id="c0461b8b-214a-460b-8f67-8a6f795ac452" name="OnSimulationTick" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="398c68c0-64fc-45df-948b-27341d59f29b" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="3a73f198-2fc7-4219-b7e3-838b1ac46f92" name="Gridentity" direction="In" isUnique="false">
+                  <elementDefinition Id="33ab9b46-ab27-4419-bf2d-99b740e26919" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="00539ae2-955a-49da-926e-ef0a5db0b44f" name="OnComponentDragged" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="030313af-b0b0-44fa-a1b8-021b30588dfc" />
+          </operation>
+          <operation Id="0ee3937b-fa6a-4eaf-9669-f2f48dfddee6" name="OnGridResizedClicked" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="faaf981a-70ab-4fc1-95fd-607e89a57d85" />
+          </operation>
+          <operation Id="79709b9d-684a-4314-93a3-d6c1acf54b39" name="OnOpenFileClicked" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="b9a67f69-3f2c-445e-a01f-8933e5b9be4d" />
+          </operation>
+          <operation Id="1755f826-38db-4792-9b54-569e2521bfad" name="OnSaveFileClicked" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="3a66e0a7-c925-41c6-b273-f530589cf4f2" />
+          </operation>
+          <operation Id="12801292-25fc-4f03-a13b-9704a36e39e9" name="OnSaveAsFileClicked" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="a845a77c-baff-4236-8320-e5e63d5c1e0f" />
+          </operation>
+          <operation Id="75f7c32d-469f-4971-bada-4dd4458b303b" name="OnSimulationSpeedChanged" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="2b43f98d-ddb6-4c84-8178-bbf49fb683b4" />
+          </operation>
+          <operation Id="76c0a7dd-e25d-418b-bd92-2950d3a1627a" name="OnSimulationStopClicked" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="125ae2fa-e5c9-41e4-9da4-a104a79c29c9" />
+          </operation>
+          <operation Id="d8313dd4-394b-4c69-ab52-5c823aad12f5" name="OnShowReportClicked" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="3811746d-a05e-4873-8f55-e8e966fafdb7" />
+          </operation>
+          <operation Id="897495bf-382b-4f47-a0f4-48a7caafd6d4" name="OnWindowClose" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="9b1e13b3-968e-46f1-9b75-139d22563326" />
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
@@ -85,7 +201,7 @@
         <elementDefinition Id="b08faae1-bcb7-40d2-8317-e98ecdebfdc9" />
         <targetEnds>
           <association Id="8e8755cc-8ac3-4fd4-9816-36d09f6a0a29" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
-            <classMoniker Id="92f2221e-a2a5-4259-942a-4c35dd81c9c9" LastKnownName="TrafficlightGroupModel" />
+            <classMoniker Id="92f2221e-a2a5-4259-942a-4c35dd81c9c9" LastKnownName="TrafficLightViewModel" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd Id="cf4f08f9-9944-429c-8725-847b3b0d570a" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
@@ -101,6 +217,14 @@
             <elementDefinition Id="0cf53fef-af83-4deb-b2bf-d9f5c3cfc592" />
           </association>
         </targetEnds>
+        <ownedOperationsInternal>
+          <operation Id="866555e0-70ee-45d4-aa2e-d16762ecade4" name="OnChangeAllPressed" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="206a8205-b489-40f9-803a-52c4efb2ef9a" />
+          </operation>
+          <operation Id="4074ceb4-24b8-4f35-800d-9ed8d079b887" name="OnChangePressed" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="74eacc9a-ba88-43eb-a716-3c05f13139c8" />
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
@@ -235,7 +359,7 @@
       </referencedType>
     </packageHasNamedElement>
     <logicalClassDesignerModelHasTypes>
-      <class Id="92f2221e-a2a5-4259-942a-4c35dd81c9c9" name="TrafficlightGroupModel" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="92f2221e-a2a5-4259-942a-4c35dd81c9c9" name="TrafficLightViewModel" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="8dbcc9f0-328c-48bb-93f8-b156671be024" />
         <generalsInternal>
           <generalization Id="99d63e21-6cf7-4b4b-9d78-07002e304470" isSubstitutable="false">
@@ -265,6 +389,16 @@
           <packageHasNamedElement>
             <class Id="b993dfe2-25b0-43be-9568-25363f29a0bf" name="ComponentEntity" isAbstract="false" isLeaf="false" isActiveClass="false">
               <elementDefinition Id="7b50acf0-616b-4a4f-934a-47df5782b3fe" />
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="f1481fae-1982-49e7-a75f-227f7eb302c1" name="CarEntity" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="fe68b1da-e548-4e7b-9185-d152695ebcd6" />
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="1ffdc216-b0b9-4655-a013-00faac4e030b" name="PedestrianEntity" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="005656de-4ed0-4bc0-a8b4-b4bf992b8c7c" />
             </class>
           </packageHasNamedElement>
         </packagedElements>
@@ -307,10 +441,133 @@
             <elementDefinition Id="2042140e-76d3-462d-8ae5-1dae0277b762" />
           </association>
         </targetEnds>
+        <ownedOperationsInternal>
+          <operation Id="c156ba34-07b4-4cc6-9f72-a0e54827f33f" name="OnContextMenuClicked" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="5904347e-d4fc-4eef-aaa3-f32e1b07d608" />
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="341079b0-4672-495f-be86-c60608028fc0" name="ResizeGridWindow" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="19eb946a-acd4-43a2-bdd0-827645fd880c" />
+        <targetEnds>
+          <association Id="7d25e6c0-888c-4de7-8d7f-7a717cc0f3a4" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="29f21350-fd77-4c45-9136-5995c115e8e7" LastKnownName="GridSizeViewModel" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="4c8f7322-c4dc-4045-acc0-a0ea1e8048c2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="713fa201-7e1f-4a28-b928-4373baef8004" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="f03b4634-ab1f-4c98-8064-e00428b852d9" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <elementDefinition Id="94be0640-9f57-46db-ae7d-a949563aa710" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="35bba8f3-bb78-4220-aa09-c43b169f1926" />
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation Id="75228ce1-20a4-4de3-af1e-43180b0bcd4c" name="OnOkPress" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="748a84e5-b3de-4e6d-982d-15231e0ba44b" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="29f21350-fd77-4c45-9136-5995c115e8e7" name="GridSizeViewModel" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="fffaa390-62df-40d1-927c-04d3f82cce52" />
+        <generalsInternal>
+          <generalization Id="82e092cc-f972-4678-bdf9-9e61ab3c17f5" isSubstitutable="false">
+            <classMoniker Id="9eedcd4a-33cb-4ff4-b180-4a71a3ba3425" LastKnownName="ViewModelBase" />
+            <elementDefinition Id="08cf2e1a-0810-4741-b0c4-992255c5bd92" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <property Id="2037b6ac-66c0-4e02-9d57-6939a5bc4ac6" name="With" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="26f84708-9b67-4dd1-9911-6dfd791b10f2" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="a84d1644-3386-4a91-9b43-5acdfdfded55" LastKnownName="int" />
+            </type_NamedElement>
+          </property>
+          <property Id="a5403a8f-aa2f-444c-98b1-ab805c2fed94" name="Height" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e49f5ebe-fec3-4427-9c97-e8a8d9e5c48b" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="a84d1644-3386-4a91-9b43-5acdfdfded55" LastKnownName="int" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="8c47baf0-4cb4-4cde-b60b-ca1a6217cdcf" name="CarUserControl" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="48058541-9928-472a-bf85-022ae84c7d73" />
+        <targetEnds>
+          <association Id="742f4bd5-0c86-4c0d-9fd0-7efd14c659a9" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="f1481fae-1982-49e7-a75f-227f7eb302c1" LastKnownName="CarEntity" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="0db1d432-8b94-454c-9eca-e53849803119" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="afccb852-9ee8-4fd9-b422-869d383a7c5c" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d0543b55-f5b6-40fe-a97f-7b1f558d9238" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="625d4c39-7874-46c6-b2d5-32c8486172e3" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="70052446-e214-46a1-adc9-5b9193ca1c23" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="b56a93a2-da5e-4e61-9fcd-9db3384ecb7b" name="PedestrianUserControl" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="00c14c8e-4d1c-4c65-ab1a-7cff3a099a13" />
+        <targetEnds>
+          <association Id="b33ee0af-d5d8-4de6-8ffc-5952ec85ff11" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="1ffdc216-b0b9-4655-a013-00faac4e030b" LastKnownName="PedestrianEntity" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="cea7ba71-0d3d-4df9-84af-d4656b45f9d7" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="7c97425a-0ee3-4f93-9baf-804c61d7caef" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="296c287e-1d29-4f48-a25d-5de265517852" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="878f2a64-dc95-46c4-8950-9b669f7169c9" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="73231867-bf68-4d94-8abe-2d18522ba272" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="55168180-3996-40bb-9593-f74c8cb3095f" name="string" isAbstract="false" isLeaf="false" cachedFullName="string">
+        <elementDefinition Id="a0d37c6f-110c-47f7-974f-fa1e4a3888a8" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="620b3daf-6ebb-4b83-a523-1e9bc9158122" name="4cube.classdiagram">
     <elementDefinition Id="983b31da-a0e1-48c5-9732-d860cfa50f4c" />
+    <profileInstances>
+      <packageHasProfileInstances Id="68cabfa4-eaf1-4136-8935-3f9bf1a81cbc">
+        <profileInstance Id="4e95efa6-544b-4f87-ab38-99af7ad3bce3" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="08388a92-4999-44ec-8d65-5ba773a7174b">
+        <profileInstance Id="fbf6f6b4-bac7-4163-93cb-96a4e7292196" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </logicalClassDesignerModel>
