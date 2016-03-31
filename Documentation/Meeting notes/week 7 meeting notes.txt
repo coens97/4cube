@@ -1,0 +1,16 @@
+chairman: Coen
+Secretary: Wen
+
+before week 8 hand in design document final
+
+need to show necessary components to match the relation
+
+ISimulation logic 
+
+GridEntity: which direction the car is coming
+
+Description
+
+Dependency injection?
+
+Sequence diagram:  Simulation, Update needed?
