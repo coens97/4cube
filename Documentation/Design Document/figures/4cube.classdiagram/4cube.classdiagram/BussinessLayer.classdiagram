@@ -96,12 +96,6 @@
     <logicalClassDesignerModelHasTypes>
       <Interface Id="4bdfe23c-bd7f-482a-9013-c70f72c50a86" name="ISimulation" isAbstract="false" isLeaf="false">
         <elementDefinition Id="45479565-cfb8-4027-b692-8dc5364a7e6c" />
-        <suppliersInternal>
-          <dependency Id="7f29ebcb-cad5-4895-a2fd-1486bb35ec03">
-            <interfaceMoniker Id="e5dcafe0-9ed5-4235-a92c-f386526b36ea" LastKnownName="IReport" />
-            <elementDefinition Id="46bd0325-15ac-4396-82a9-60b4fadcf5ee" />
-          </dependency>
-        </suppliersInternal>
         <ownedOperations>
           <operation Id="cb5a20b5-019b-401e-8a32-c3c2e588dced" name="Pause" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="24d7e205-56e8-487a-85b2-075f676c858d" />
@@ -121,26 +115,6 @@
           </operation>
           <operation Id="f6107a06-4afa-43b6-8fea-7cf362d46150" name="Stop" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="65ac7bdf-586e-4faa-99b9-a89923c6ab25" />
-          </operation>
-          <operation Id="9fc378cb-8d19-4076-8c97-f8857c7affe1" name="AttachTick" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="1e159140-0728-4dc5-bd54-315d782a585b" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="1e23ba8c-0942-4ec3-91b5-ac807979f908" name="Action call" direction="In" isUnique="false">
-                  <elementDefinition Id="6759f652-379c-403b-a46f-39a9c2a5a6e9" />
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation Id="de8a7052-9826-4a4f-853d-475e3ecc4437" name="DetachTick" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="0daa7641-26e6-496d-9fda-1f676d2dc510" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="47ea0c75-ae33-4ae9-8249-c327ecb84ad7" name="Action call" direction="In" isUnique="false">
-                  <elementDefinition Id="55f0f478-d373-49f3-9e21-3458156797a8" />
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
           </operation>
         </ownedOperations>
       </Interface>
@@ -305,6 +279,10 @@
             <interfaceMoniker Id="4bdfe23c-bd7f-482a-9013-c70f72c50a86" LastKnownName="ISimulation" />
             <elementDefinition Id="27b0cf35-2a5a-444a-8e6c-ce828d4a4fad" />
           </interfaceRealization>
+          <dependency Id="a8e8ca08-024e-4552-8b31-f3d695ed1ebe">
+            <interfaceMoniker Id="e5dcafe0-9ed5-4235-a92c-f386526b36ea" LastKnownName="IReport" />
+            <elementDefinition Id="f890a57e-0710-451d-b147-e7c93b49a0af" />
+          </dependency>
         </suppliersInternal>
         <ownedAttributesInternal>
           <property Id="28f2562b-2680-48a8-aaf6-f0626dc35182" name="_grid" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -325,10 +303,10 @@
               <referencedTypeMoniker Id="1118c9dd-83d7-4f89-9387-f1e2bce0e57f" LastKnownName="Timer" />
             </type_NamedElement>
           </property>
-          <property Id="5f4549c0-480b-45ca-b0fc-520b55be09be" name="_callBacks" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-            <elementDefinition Id="0b7eed69-7a84-4fe8-a599-52b83472108e" />
+          <property Id="0a60f1da-1f13-4aa5-b06a-47036043959a" name="_report" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="35524dc8-d5fb-4353-ac08-c404c8cc6e16" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="1e781ef1-731f-49d4-b624-eb736b8294e1" LastKnownName="Action" />
+              <referencedTypeMoniker Id="703d1f5b-3f18-464d-bc19-0c28573e22b9" LastKnownName="IReport" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
@@ -352,26 +330,6 @@
           <operation Id="429ba8bd-6c6f-41e3-8cc7-b13fbea19630" name="Stop" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="b5a6e6e5-a00a-4737-8f45-d904635bd674" />
           </operation>
-          <operation Id="b0512549-e6e7-400a-bfd6-6ad9ed7ba84e" name="AttachTick" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="9acc5741-5d7f-4489-9019-2b02b3013b38" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="96c124f5-ebed-4346-b8be-7f839640dbe8" name="Action call" direction="In" isUnique="false">
-                  <elementDefinition Id="debbe32b-2923-4d23-bbbe-f89d7035963e" />
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation Id="48b46c50-4e39-4a49-be19-afeb77cf2aba" name="DetachTick" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="a0b49877-91c5-4a68-9cb1-e403c42aa292" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="252ee293-0da8-424e-b8a4-8b5de7a67dca" name="Action call" direction="In" isUnique="false">
-                  <elementDefinition Id="73e7fce0-b855-488d-8877-f2312b72c1ee" />
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
           <operation Id="19431b65-4c53-4efa-bad3-6770d00ab854" name="OnSimulationTick" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="088d7e0a-7138-42a1-9a7b-8c01de414338" />
           </operation>
@@ -389,8 +347,8 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="1e781ef1-731f-49d4-b624-eb736b8294e1" name="Action" isAbstract="false" isLeaf="false" cachedFullName="Action">
-        <elementDefinition Id="985f6b76-7a3d-4b78-8717-c3a7c6320df3" />
+      <referencedType Id="703d1f5b-3f18-464d-bc19-0c28573e22b9" name="IReport" isAbstract="false" isLeaf="false" cachedFullName="4cube.classdiagram::IReport">
+        <elementDefinition Id="91e5218f-ee80-4ef2-9ef8-73fe05f40793" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>

@@ -151,20 +151,22 @@
               <referencedTypeMoniker Id="55168180-3996-40bb-9593-f74c8cb3095f" LastKnownName="string" />
             </type_NamedElement>
           </property>
+          <property Id="d7692d94-2a2f-4477-95a5-59c4d44d6a05" name="_model" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="c2c4df4c-db65-478b-bc1d-e8777b09e56c" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="07452a40-d895-4879-83bb-dadfadaeec37" LastKnownName="IModel" />
+            </type_NamedElement>
+          </property>
+          <property Id="f75acdaf-67e6-4758-8e7f-d1aff0e76898" name="_report" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="0295fb3c-bd0e-4078-813a-5441ce921b52" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="fc6f034a-e4ae-4a88-9801-b3a58f4d8096" LastKnownName="IReport" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation Id="862b71ac-036e-4886-aba5-0c7e9b1478dd" name="OnSimulationStartClicked" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="98889ee7-caf2-4bda-828d-26eefeb61b08" />
-          </operation>
-          <operation Id="c0461b8b-214a-460b-8f67-8a6f795ac452" name="OnSimulationTick" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="398c68c0-64fc-45df-948b-27341d59f29b" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="3a73f198-2fc7-4219-b7e3-838b1ac46f92" name="Gridentity" direction="In" isUnique="false">
-                  <elementDefinition Id="33ab9b46-ab27-4419-bf2d-99b740e26919" />
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
           </operation>
           <operation Id="00539ae2-955a-49da-926e-ef0a5db0b44f" name="OnComponentDragged" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="030313af-b0b0-44fa-a1b8-021b30588dfc" />
@@ -550,6 +552,16 @@
     <packageHasNamedElement>
       <referencedType Id="55168180-3996-40bb-9593-f74c8cb3095f" name="string" isAbstract="false" isLeaf="false" cachedFullName="string">
         <elementDefinition Id="a0d37c6f-110c-47f7-974f-fa1e4a3888a8" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="07452a40-d895-4879-83bb-dadfadaeec37" name="IModel" isAbstract="false" isLeaf="false" cachedFullName="IModel">
+        <elementDefinition Id="684cbb73-afaf-4d49-98f6-4d60285b7334" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="fc6f034a-e4ae-4a88-9801-b3a58f4d8096" name="IReport" isAbstract="false" isLeaf="false" cachedFullName="4cube.classdiagram::IReport">
+        <elementDefinition Id="91e5218f-ee80-4ef2-9ef8-73fe05f40793" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>

@@ -260,15 +260,6 @@
         name="ISimulation"
         isAbstract="false"
         isLeaf="false">
-        <suppliersInternal>
-          <dependency
-            Id="46bd0325-15ac-4396-82a9-60b4fadcf5ee">
-            <interfaceMoniker
-              Id="91e5218f-ee80-4ef2-9ef8-73fe05f40793"
-              LastKnownName="IReport"
-              LastKnownLocation="4cube.classdiagram.uml" />
-          </dependency>
-        </suppliersInternal>
         <ownedOperations>
           <operation
             Id="24d7e205-56e8-487a-85b2-075f676c858d"
@@ -312,42 +303,6 @@
             isAbstract="true"
             concurrency="Sequential"
             isQuery="false" />
-          <operation
-            Id="1e159140-0728-4dc5-bd54-315d782a585b"
-            name="AttachTick"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="true"
-            concurrency="Sequential"
-            isQuery="false">
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="6759f652-379c-403b-a46f-39a9c2a5a6e9"
-                  name="Action call"
-                  direction="In"
-                  isUnique="false" />
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation
-            Id="0daa7641-26e6-496d-9fda-1f676d2dc510"
-            name="DetachTick"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="true"
-            concurrency="Sequential"
-            isQuery="false">
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="55f0f478-d373-49f3-9e21-3458156797a8"
-                  name="Action call"
-                  direction="In"
-                  isUnique="false" />
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
         </ownedOperations>
       </Interface>
     </packageHasNamedElement>
@@ -757,6 +712,44 @@
                 LastKnownLocation="4cube.classdiagram.uml" />
             </type_NamedElement>
           </property>
+          <property
+            Id="c2c4df4c-db65-478b-bc1d-e8777b09e56c"
+            name="_model"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="684cbb73-afaf-4d49-98f6-4d60285b7334"
+                LastKnownName="IModel"
+                LastKnownLocation="4cube.classdiagram.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="0295fb3c-bd0e-4078-813a-5441ce921b52"
+            name="_report"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="91e5218f-ee80-4ef2-9ef8-73fe05f40793"
+                LastKnownName="IReport"
+                LastKnownLocation="4cube.classdiagram.uml" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
@@ -767,24 +760,6 @@
             isAbstract="false"
             concurrency="Sequential"
             isQuery="false" />
-          <operation
-            Id="398c68c0-64fc-45df-948b-27341d59f29b"
-            name="OnSimulationTick"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false">
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="33ab9b46-ab27-4419-bf2d-99b740e26919"
-                  name="Gridentity"
-                  direction="In"
-                  isUnique="false" />
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
           <operation
             Id="030313af-b0b0-44fa-a1b8-021b30588dfc"
             name="OnComponentDragged"
@@ -1370,6 +1345,19 @@
             </relationshipOwnedElementsInternal>
           </association>
         </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="e9ac4a9f-512f-4e00-b5aa-a844ba43b7ee"
+            name="List&lt;GreenLightTimeEntity&gt;"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -1384,12 +1372,12 @@
             Id="0a60015e-4897-4894-b8a4-763ef2805f46"
             isDerived="false"
             sourceEndRoleName=""
-            targetEndRoleName="Rotate"
+            targetEndRoleName=""
             isLeaf="false"
             isAbstract="false">
             <enumerationMoniker
               Id="2296751c-b007-4628-92e5-5aa96f72d19f"
-              LastKnownName="Rotate"
+              LastKnownName="Direction"
               LastKnownLocation="4cube.classdiagram.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -1418,7 +1406,6 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="ba90118c-c58c-4a68-9d6a-a4a2092955a1"
-                  name="Rotate"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -1511,6 +1498,24 @@
               <undefinedTypeMoniker
                 Id="c06e0991-fcc9-454f-8f79-14bcb982f6f3"
                 LastKnownName="int"
+                LastKnownLocation="4cube.classdiagram.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="c1502dac-711f-42e3-bba4-debce1b99aeb"
+            name="Rotatation"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="9fd74db9-1034-4c69-97c9-95c13b239fd7"
+                LastKnownName="Direction"
                 LastKnownLocation="4cube.classdiagram.uml" />
             </type_NamedElement>
           </property>
@@ -1619,6 +1624,45 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="08b1ac9f-5e2a-4e18-b906-1daceca2bf4b"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <enumerationMoniker
+              Id="2296751c-b007-4628-92e5-5aa96f72d19f"
+              LastKnownName="Direction"
+              LastKnownLocation="4cube.classdiagram.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5dfa036e-83cf-484d-aa4d-b09edf6a34d8"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3f351e87-a41d-4a58-bb23-900190f2114a"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
         <ownedAttributesInternal>
           <property
             Id="0bd14788-bd5c-4ad8-8290-84cea8a86b6b"
@@ -1633,8 +1677,8 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="c06e0991-fcc9-454f-8f79-14bcb982f6f3"
-                LastKnownName="int"
+                Id="900ee60f-b565-4e30-95f2-2f0c38b8de0e"
+                LastKnownName="Observable&lt;int&gt;"
                 LastKnownLocation="4cube.classdiagram.uml" />
             </type_NamedElement>
           </property>
@@ -1651,8 +1695,26 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="c06e0991-fcc9-454f-8f79-14bcb982f6f3"
-                LastKnownName="int"
+                Id="900ee60f-b565-4e30-95f2-2f0c38b8de0e"
+                LastKnownName="Observable&lt;int&gt;"
+                LastKnownLocation="4cube.classdiagram.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="19a84379-6e16-49cd-bb25-96f7e4fb3e37"
+            name="Direction"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <enumerationMoniker
+                Id="2296751c-b007-4628-92e5-5aa96f72d19f"
+                LastKnownName="Direction"
                 LastKnownLocation="4cube.classdiagram.uml" />
             </type_NamedElement>
           </property>
@@ -1666,6 +1728,45 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="9855af79-85c8-4055-b5d3-f439c10c566c"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <enumerationMoniker
+              Id="2296751c-b007-4628-92e5-5aa96f72d19f"
+              LastKnownName="Direction"
+              LastKnownLocation="4cube.classdiagram.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6166f0af-afce-4b23-a112-90f21760df95"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4ddd1efe-055d-48b5-8842-7421f88b26c4"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
         <ownedAttributesInternal>
           <property
             Id="4e8d2227-2925-44a0-92d5-ea2e1a603d4c"
@@ -1680,8 +1781,8 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="c06e0991-fcc9-454f-8f79-14bcb982f6f3"
-                LastKnownName="int"
+                Id="900ee60f-b565-4e30-95f2-2f0c38b8de0e"
+                LastKnownName="Observable&lt;int&gt;"
                 LastKnownLocation="4cube.classdiagram.uml" />
             </type_NamedElement>
           </property>
@@ -1698,8 +1799,26 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="c06e0991-fcc9-454f-8f79-14bcb982f6f3"
-                LastKnownName="int"
+                Id="900ee60f-b565-4e30-95f2-2f0c38b8de0e"
+                LastKnownName="Observable&lt;int&gt;"
+                LastKnownLocation="4cube.classdiagram.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="05277b52-384f-407e-a484-74f9ecfb5ead"
+            name="Direction"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <enumerationMoniker
+                Id="2296751c-b007-4628-92e5-5aa96f72d19f"
+                LastKnownName="Direction"
                 LastKnownLocation="4cube.classdiagram.uml" />
             </type_NamedElement>
           </property>
@@ -1709,7 +1828,7 @@
     <packageHasNamedElement>
       <enumeration
         Id="2296751c-b007-4628-92e5-5aa96f72d19f"
-        name="Rotate"
+        name="Direction"
         isAbstract="false"
         isLeaf="false">
         <ownedLiterals>
@@ -1925,6 +2044,60 @@
                 LastKnownLocation="4cube.classdiagram.uml" />
             </type_NamedElement>
           </property>
+          <property
+            Id="8a648cab-1b9d-444f-a5d9-d8b4aebc10aa"
+            name="Pedestrians"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="4848f422-f749-4e10-a2cf-82b7c67efb20"
+                LastKnownName="ObservableCollection&lt;PedestrianEntity&gt;"
+                LastKnownLocation="4cube.classdiagram.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="3cb168a2-85f4-4508-9e0d-ae72e10eda36"
+            name="Cars"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="d384f6cc-3ca9-4913-9a6c-b2dac634ff70"
+                LastKnownName="ObservableCollection&lt;CarEntity&gt;"
+                LastKnownLocation="4cube.classdiagram.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="fddabe6e-c34c-4663-8b91-b64199c60987"
+            name="Components"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="31eec711-ab20-4e27-948d-5f230e3d272c"
+                LastKnownName="List&lt;ComponentEntity&gt;"
+                LastKnownLocation="4cube.classdiagram.uml" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>
@@ -1996,7 +2169,7 @@
             Id="9129feea-94a8-45f9-a16a-9f695b997dd8"
             isDerived="false"
             sourceEndRoleName=" "
-            targetEndRoleName="TrafficLightGroup"
+            targetEndRoleName=""
             isLeaf="false"
             isAbstract="false">
             <enumerationMoniker
@@ -2031,7 +2204,6 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="b3cc927f-a578-4bc1-9ba1-df6885d6b4be"
-                  name="TrafficLightGroup"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -2070,6 +2242,24 @@
               <undefinedTypeMoniker
                 Id="c06e0991-fcc9-454f-8f79-14bcb982f6f3"
                 LastKnownName="int"
+                LastKnownLocation="4cube.classdiagram.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="1cdc8d0b-a268-4454-ae9c-f110b84cd7b0"
+            name="Group"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <enumerationMoniker
+                Id="c0031744-6140-4af1-8955-f97fd251fcb8"
+                LastKnownName="TrafficLightGroup"
                 LastKnownLocation="4cube.classdiagram.uml" />
             </type_NamedElement>
           </property>
@@ -2626,6 +2816,13 @@
               LastKnownName="ISimulation"
               LastKnownLocation="4cube.classdiagram.uml" />
           </interfaceRealization>
+          <dependency
+            Id="f890a57e-0710-451d-b147-e7c93b49a0af">
+            <interfaceMoniker
+              Id="91e5218f-ee80-4ef2-9ef8-73fe05f40793"
+              LastKnownName="IReport"
+              LastKnownLocation="4cube.classdiagram.uml" />
+          </dependency>
         </suppliersInternal>
         <ownedAttributesInternal>
           <property
@@ -2686,8 +2883,8 @@
             </type_NamedElement>
           </property>
           <property
-            Id="0b7eed69-7a84-4fe8-a599-52b83472108e"
-            name="_callBacks"
+            Id="35524dc8-d5fb-4353-ac08-c404c8cc6e16"
+            name="_report"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -2698,9 +2895,9 @@
             aggregation="None"
             isComposite="false">
             <type_NamedElement>
-              <undefinedTypeMoniker
-                Id="985f6b76-7a3d-4b78-8717-c3a7c6320df3"
-                LastKnownName="Action"
+              <interfaceMoniker
+                Id="91e5218f-ee80-4ef2-9ef8-73fe05f40793"
+                LastKnownName="IReport"
                 LastKnownLocation="4cube.classdiagram.uml" />
             </type_NamedElement>
           </property>
@@ -2749,42 +2946,6 @@
             concurrency="Sequential"
             isQuery="false" />
           <operation
-            Id="9acc5741-5d7f-4489-9019-2b02b3013b38"
-            name="AttachTick"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false">
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="debbe32b-2923-4d23-bbbe-f89d7035963e"
-                  name="Action call"
-                  direction="In"
-                  isUnique="false" />
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation
-            Id="a0b49877-91c5-4a68-9cb1-e403c42aa292"
-            name="DetachTick"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false">
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="73e7fce0-b855-488d-8877-f2312b72c1ee"
-                  name="Action call"
-                  direction="In"
-                  isUnique="false" />
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation
             Id="088d7e0a-7138-42a1-9a7b-8c01de414338"
             name="OnSimulationTick"
             visibility="Private"
@@ -2805,6 +2966,41 @@
       <undefinedType
         Id="985f6b76-7a3d-4b78-8717-c3a7c6320df3"
         name="Action" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="9fd74db9-1034-4c69-97c9-95c13b239fd7"
+        name="Direction" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="684cbb73-afaf-4d49-98f6-4d60285b7334"
+        name="IModel" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="4848f422-f749-4e10-a2cf-82b7c67efb20"
+        name="ObservableCollection&lt;PedestrianEntity&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="d384f6cc-3ca9-4913-9a6c-b2dac634ff70"
+        name="ObservableCollection&lt;CarEntity&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="3c8b0946-b80e-40af-8057-7af372a3545b"
+        name="ObservableCollection&lt;ComponentEntity&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="900ee60f-b565-4e30-95f2-2f0c38b8de0e"
+        name="Observable&lt;int&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="31eec711-ab20-4e27-948d-5f230e3d272c"
+        name="List&lt;ComponentEntity&gt;" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
