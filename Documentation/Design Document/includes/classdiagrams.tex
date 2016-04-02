@@ -1,6 +1,6 @@
 \section{Class diagrams}
 \twopagepicture{b}{l}{figures/CommonLayer}{Class diagram common layer}
-\subsubsection{Common layer}
+\subsection{Common layer}
 The \texttt{CommonLayer} is shown in figure 2. The design of the classes are in mind that it can be shared in between layers and it can be serialized (written to file). Hence the class diagram follow the constraints that it can't use any interfaces or that there is a circular reference (it has to look like a tree). Notice that the 
 \texttt{PedestrianEntity} and the \texttt{CarEntity} are in an \texttt{ObservableCollection} and have observable attributes. When the simulation is running the view will be be notified when attributes are changed.
 
