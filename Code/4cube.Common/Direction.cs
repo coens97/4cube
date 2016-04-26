@@ -12,6 +12,5 @@ namespace _4cube.Common
         Right,
         Down,
         Left
-        
     }
 }
