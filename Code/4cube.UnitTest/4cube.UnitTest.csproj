@@ -53,6 +53,16 @@
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\4cube.Common\4cube.Common.csproj">
+      <Project>{9818d661-a219-4617-a92e-778baf03bf17}</Project>
+      <Name>4cube.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\4cube.Data\4cube.Data.csproj">
+      <Project>{24fc6135-dcf2-407a-97d8-21b26a61cd2b}</Project>
+      <Name>4cube.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

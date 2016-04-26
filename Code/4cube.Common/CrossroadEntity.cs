@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _4cube.Common
 {
-    class CrossroadEntity:ComponentEntity
+    public class CrossroadEntity:ComponentEntity
     {
         public List<GreenLightTimeEntity> GreenLightTimeEntities { get; set; }
     }
