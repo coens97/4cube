@@ -14,8 +14,5 @@ namespace _4cube.Common
         public double Height { get; set; }
         public List<PedestrianEntity> Pedestrians { get; set; }
         public double Width { get; set; }
-
-
-          
     }
 }
