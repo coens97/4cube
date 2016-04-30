@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using _4cube.Common.Components.TrafficLight;
 
-namespace _4cube.Common
+namespace _4cube.Common.Components.Crossroad
 {
     public class CrossroadEntity:ComponentEntity
     {

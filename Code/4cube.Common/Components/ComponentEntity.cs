@@ -1,4 +1,4 @@
-﻿namespace _4cube.Common
+﻿namespace _4cube.Common.Components
 {
     public class ComponentEntity
     {

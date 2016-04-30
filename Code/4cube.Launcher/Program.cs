@@ -22,6 +22,7 @@ namespace _4cube.Launcher
 {
     class Program 
     {
+        [STAThread]
         static void Main(string[] args)
         {
             var kernel = new StandardKernel();
@@ -30,7 +31,7 @@ namespace _4cube.Launcher
             var simulation = kernel.Get<ISimulation>();
             var mainWindow = kernel.Get<MainWindow>();
 
-            mainWindow.Show();
+            mainWindow.ShowDialog();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace _4cube.Common.Components
+﻿namespace _4cube.Common.Ai
 {
     public class CarEntity
     {

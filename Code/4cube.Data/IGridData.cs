@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using _4cube.Common;
+using _4cube.Common.Components;
 
 
 namespace _4cube.Data

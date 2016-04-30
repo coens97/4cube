@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _4cube.Common;
+using _4cube.Common.Components;
+using _4cube.Common.Components.TrafficLight;
 
 namespace _4cube.Bussiness
 {
@@ -20,7 +23,7 @@ namespace _4cube.Bussiness
             throw new NotImplementedException();
         }
 
-        public void GreenLight(TrafficLightEntity e, TrafficLightGroup t, int n)
+        public void GreenLight(GreenLightTimeEntity e, TrafficLightGroup t, int n)
         {
             throw new NotImplementedException();
         }

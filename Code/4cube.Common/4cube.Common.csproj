@@ -40,21 +40,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CarEntity.cs" />
-    <Compile Include="ComponentEntity.cs" />
-    <Compile Include="CrossroadBEntity.cs" />
-    <Compile Include="CrossroadAEntity.cs" />
-    <Compile Include="CrossroadEntity.cs" />
-    <Compile Include="CurvedRoadEntity.cs" />
+    <Compile Include="Ai\CarEntity.cs" />
+    <Compile Include="Ai\PedestrianEntity.cs" />
+    <Compile Include="Components\ComponentEntity.cs" />
+    <Compile Include="Components\Crossroad\CrossroadAEntity.cs" />
+    <Compile Include="Components\Crossroad\CrossroadBEntity.cs" />
+    <Compile Include="Components\Crossroad\CrossroadEntity.cs" />
+    <Compile Include="Components\CurvedRoadEntity.cs" />
+    <Compile Include="Components\GridEntity.cs" />
+    <Compile Include="Components\RoadEntity.cs" />
+    <Compile Include="Components\StraightRoadEntity.cs" />
+    <Compile Include="Components\TrafficLight\GreenLightTimeEntity.cs" />
+    <Compile Include="Components\TrafficLight\TrafficLightColors.cs" />
+    <Compile Include="Components\TrafficLight\TrafficLightGroup.cs" />
     <Compile Include="Direction.cs" />
-    <Compile Include="GreenLightTimeEntity.cs" />
-    <Compile Include="GridEntity.cs" />
-    <Compile Include="PedestrianEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoadEntity.cs" />
-    <Compile Include="StraightRoadEntity.cs" />
-    <Compile Include="TrafficLightColors.cs" />
-    <Compile Include="TrafficLightGroup.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

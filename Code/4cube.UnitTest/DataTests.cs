@@ -4,6 +4,8 @@ using _4cube.Data;
 using _4cube.Common;
 using System.Collections.Generic;
 using System.Linq;
+using _4cube.Common.Ai;
+using _4cube.Common.Components;
 
 namespace _4cube.UnitTest
 {

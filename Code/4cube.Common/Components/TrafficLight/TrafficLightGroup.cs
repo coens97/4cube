@@ -1,4 +1,4 @@
-﻿namespace _4cube.Common
+﻿namespace _4cube.Common.Components.TrafficLight
 {
     public enum TrafficLightGroup
     {

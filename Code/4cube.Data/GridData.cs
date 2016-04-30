@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using _4cube.Common;
 using System.Xml;
 using System.IO;
+using _4cube.Common.Components;
 
 namespace _4cube.Data
 {
