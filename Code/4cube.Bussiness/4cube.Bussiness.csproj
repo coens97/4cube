@@ -40,9 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GridModel.cs" />
+    <Compile Include="IGridModel.cs" />
     <Compile Include="ISimulation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Simulation.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\4cube.Data\4cube.Data.csproj">
+      <Project>{24fc6135-dcf2-407a-97d8-21b26a61cd2b}</Project>
+      <Name>4cube.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

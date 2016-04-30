@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _4cube.Bussiness
 {
-    interface ISimulation
+    public interface ISimulation
     {
         void ChangeSpeed(int n);
         void Pause();

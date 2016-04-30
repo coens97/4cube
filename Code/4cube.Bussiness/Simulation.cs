@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _4cube.Data;
 
 
 namespace _4cube.Bussiness
 {
-    class Simulation : ISimulation
+    public class Simulation : ISimulation
     {
         private GridEntity _grid;
 
