@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _4cube.Bussiness
+namespace _4cube.Bussiness.Simulation
 {
     public interface ISimulation
     {

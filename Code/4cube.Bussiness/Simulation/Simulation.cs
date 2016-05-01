@@ -8,7 +8,8 @@ using _4cube.Common.Components;
 using _4cube.Data;
 using System.Timers;
 
-namespace _4cube.Bussiness
+namespace _4cube.Bussiness.Simulation
+
 {
     public class Simulation : ISimulation
     {
