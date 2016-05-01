@@ -6,32 +6,52 @@ using System.Threading.Tasks;
 using _4cube.Common;
 using _4cube.Common.Components;
 using _4cube.Data;
-
+using System.Timers;
 
 namespace _4cube.Bussiness
 {
     public class Simulation : ISimulation
     {
         private GridEntity _grid;
+        // private IReport _report;
+        private double _time = 0;
+        private Timer _timer;
 
-        public void ChangeSpeed(int n)
+        public Simulation()
         {
-            throw new NotImplementedException();
+            
+        }
+
+        public void ChangeSpeed(double n)
+        {
+            _time = n;
+
         }
 
         public void Pause()
         {
-            throw new NotImplementedException();
+            _timer.Stop();
+            _time = _timer.Interval;
+            getGrid();
+
+        }
+
+        public IEnumerable<GridEntity> getGrid()
+        {
+            yield return _grid;
         }
 
         public void Start()
         {
-            throw new NotImplementedException();
+            _timer = new Timer(_time);
+            _timer.Start();
         }
 
         public void Stop()
         {
-            throw new NotImplementedException();
+            _timer.Stop();
+            _grid = new GridEntity();
+            _time = 0;
         }
     }
 }

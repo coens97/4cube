@@ -8,7 +8,7 @@ namespace _4cube.Bussiness
 {
     public interface ISimulation
     {
-        void ChangeSpeed(int n);
+        void ChangeSpeed(double n);
         void Pause();
         void Start();
         void Stop();
