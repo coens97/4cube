@@ -7,6 +7,7 @@ using Ninject;
 using Ninject.Modules;
 using _4cube.Bussiness;
 using _4cube.Presentation;
+using _4cube.Bussiness.Simulation;
 
 namespace _4cube.Launcher
 {

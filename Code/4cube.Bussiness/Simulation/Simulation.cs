@@ -25,25 +25,23 @@ namespace _4cube.Bussiness.Simulation
 
         public void ChangeSpeed(double n)
         {
-            _time = n;
+            _timer.Interval = n;
 
         }
 
-        public void Pause()
+        public void Pause(GridEntity g)
         {
             _timer.Stop();
             _time = _timer.Interval;
-            getGrid();
+            _grid = g;
+           
 
         }
 
-        public IEnumerable<GridEntity> getGrid()
-        {
-            yield return _grid;
-        }
 
-        public void Start()
+        public void Start(GridEntity g)
         {
+            _grid = g;
             _timer = new Timer(_time);
             _timer.Start();
         }
@@ -51,7 +49,6 @@ namespace _4cube.Bussiness.Simulation
         public void Stop()
         {
             _timer.Stop();
-            _grid = new GridEntity();
             _time = 0;
         }
     }
