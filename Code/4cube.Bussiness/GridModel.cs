@@ -15,17 +15,18 @@ namespace _4cube.Bussiness
 
         public void AddComponent(ComponentEntity component)
         {
-            throw new NotImplementedException();
+            _grid.Components.Add(component);
         }
 
         public void DeleteComponent(ComponentEntity component)
         {
-            throw new NotImplementedException();
+            _grid.Components.Remove(component);
         }
 
         public void GreenLight(GreenLightTimeEntity e, TrafficLightGroup t, int n)
         {
-            throw new NotImplementedException();
+            e.Duration = n;
+            e.TrafficLightGroup = t;
         }
 
         public void OpenFile(string path)
@@ -40,7 +41,7 @@ namespace _4cube.Bussiness
 
         public void RotateComponent(ComponentEntity component)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void SaveFile(string path)
