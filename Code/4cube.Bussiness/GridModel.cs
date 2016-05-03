@@ -25,8 +25,10 @@ namespace _4cube.Bussiness
 
         public void GreenLight(GreenLightTimeEntity e, TrafficLightGroup t, int n)
         {
-            e.Duration = n;
-            e.TrafficLightGroup = t;
+            if ( e.TrafficLightGroup == t)
+            {
+                e.Duration = n;
+            }           
         }
 
         public void OpenFile(string path)
@@ -34,14 +36,29 @@ namespace _4cube.Bussiness
             throw new NotImplementedException();
         }
 
-        public void ResizeGrid(int w, int h)
+        public void ResizeGrid(double w, double h)
         {
-            throw new NotImplementedException();
+            _grid.Width = w;
+            _grid.Height = h;
         }
 
         public void RotateComponent(ComponentEntity component)
         {
-            
+            switch (component.Rotation)
+            {
+                case Direction.Up:
+                    component.Rotation = Direction.Right;
+                    break;
+                case Direction.Right:
+                    component.Rotation = Direction.Down;
+                    break;
+                case Direction.Down:
+                    component.Rotation = Direction.Left;
+                    break;
+                case Direction.Left:
+                    component.Rotation = Direction.Up;
+                    break;
+            }
         }
 
         public void SaveFile(string path)
