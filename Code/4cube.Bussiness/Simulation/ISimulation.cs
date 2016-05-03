@@ -10,7 +10,7 @@ namespace _4cube.Bussiness.Simulation
     public interface ISimulation
     {
         void ChangeSpeed(double n);
-        void Pause(GridEntity g);
+        void Pause();
         void Start(GridEntity g);
         void Stop();
 

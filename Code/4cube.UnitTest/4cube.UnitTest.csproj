@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -45,15 +49,22 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
     <Compile Include="DataTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimulatorTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\4cube.Bussiness\4cube.Bussiness.csproj">
+      <Project>{15da131e-5f02-4f7f-a2c8-b04b7bf1e737}</Project>
+      <Name>4cube.Bussiness</Name>
+    </ProjectReference>
     <ProjectReference Include="..\4cube.Common\4cube.Common.csproj">
       <Project>{9818d661-a219-4617-a92e-778baf03bf17}</Project>
       <Name>4cube.Common</Name>
@@ -62,6 +73,9 @@
       <Project>{24fc6135-dcf2-407a-97d8-21b26a61cd2b}</Project>
       <Name>4cube.Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

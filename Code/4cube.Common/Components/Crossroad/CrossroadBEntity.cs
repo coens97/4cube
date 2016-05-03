@@ -1,6 +1,6 @@
 ﻿namespace _4cube.Common.Components.Crossroad
 {
-    class CrossroadBEntity:CrossroadEntity
+    public class CrossroadBEntity:CrossroadEntity
     {
     }
 }

@@ -7,6 +7,9 @@ using _4cube.Common;
 using _4cube.Common.Components;
 using _4cube.Data;
 using System.Timers;
+using _4cube.Bussiness.Config;
+using _4cube.Common.Ai;
+using _4cube.Common.Components.Crossroad;
 
 namespace _4cube.Bussiness.Simulation
 
@@ -14,13 +17,22 @@ namespace _4cube.Bussiness.Simulation
     public class Simulation : ISimulation
     {
         private GridEntity _grid;
+        private IConfig _config;
         // private IReport _report;
         private double _time = 0;
         private Timer _timer;
 
-        public Simulation()
+        public Simulation(IConfig config)
         {
-            
+            _timer = new Timer(_time);
+            _timer.Elapsed += TimerOnElapsed;
+            _config = config;
+        }
+
+        private void TimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
+        {
+            _time++;
+            ProcessTrafficLight();
         }
 
         public void ChangeSpeed(double n)
@@ -29,27 +41,51 @@ namespace _4cube.Bussiness.Simulation
 
         }
 
-        public void Pause(GridEntity g)
+        public void Pause()
         {
             _timer.Stop();
-            _time = _timer.Interval;
-            _grid = g;
-           
-
         }
 
 
         public void Start(GridEntity g)
         {
             _grid = g;
-            _timer = new Timer(_time);
             _timer.Start();
+            TimerOnElapsed(this, null);
         }
 
         public void Stop()
         {
             _timer.Stop();
             _time = 0;
+        }
+
+        private void ProcessTrafficLight()
+        {
+            var crossroads = _grid.Components.OfType<CrossroadEntity>();
+            
+            foreach (var c in crossroads)
+            {
+
+                if (_time >= c.LastTimeSwitched + c.GreenLightTimeEntities[c.CurrentGreenLightGroup].Duration)
+                {
+                    int tries = c.GreenLightTimeEntities.Count + 1;
+                    do
+                    {
+                        c.CurrentGreenLightGroup = (c.CurrentGreenLightGroup + 1)%c.GreenLightTimeEntities.Count;
+                        var group = c.GreenLightTimeEntities[c.CurrentGreenLightGroup].TrafficLightGroup;
+                        var cr = _config.CrossRoadCoordinatesCars[group];//
+                        if (_grid.Cars.Any(x=> x.IsInPosition(cr)) || _grid.Pedestrians.Any(x => x.IsInPosition(/* add for pedestrians*/)))
+                        {
+                            tries = 0;
+                        }
+                        else
+                        {
+                            tries--;
+                        }
+                    } while (tries < 0);
+                }
+            }
         }
     }
 }
