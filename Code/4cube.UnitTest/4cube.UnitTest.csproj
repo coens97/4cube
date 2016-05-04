@@ -60,6 +60,7 @@
     <Compile Include="GridModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimulatorTest.cs" />
+    <Compile Include="SimulationUtilityTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\4cube.Bussiness\4cube.Bussiness.csproj">
