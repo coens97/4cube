@@ -6,12 +6,25 @@ using System.Threading.Tasks;
 using _4cube.Common;
 using _4cube.Common.Components;
 using _4cube.Common.Components.TrafficLight;
+using System.IO;
+using _4cube.Data;
 
 namespace _4cube.Bussiness
 {
     public class GridModel : IGridModel
     {
-        private GridEntity _grid;
+        public GridEntity _grid = new GridEntity
+        {
+            Pedestrians = new List<Common.Ai.PedestrianEntity>(),
+            Components = new List<ComponentEntity>(),
+            Cars = new List<Common.Ai.CarEntity>()
+        };
+
+        private IGridData _datalayer;
+        public GridModel(IGridData datalayer)
+        {
+            _datalayer = datalayer;
+        }
 
         public void AddComponent(ComponentEntity component)
         {
@@ -25,18 +38,18 @@ namespace _4cube.Bussiness
 
         public void GreenLight(GreenLightTimeEntity e, TrafficLightGroup t, int n)
         {
-            if ( e.TrafficLightGroup == t)
+            if (e.TrafficLightGroup == t)
             {
                 e.Duration = n;
-            }           
+            }
         }
 
         public void OpenFile(string path)
         {
-            throw new NotImplementedException();
+            _grid = _datalayer.OpenFile(path);
         }
 
-        public void ResizeGrid(double w, double h)
+        public void ResizeGrid(int w, int h)
         {
             _grid.Width = w;
             _grid.Height = h;
@@ -63,7 +76,8 @@ namespace _4cube.Bussiness
 
         public void SaveFile(string path)
         {
-            throw new NotImplementedException();
+            _datalayer.SaveFile(path, _grid);
+
         }
     }
 }

@@ -15,7 +15,7 @@ namespace _4cube.Bussiness
         void DeleteComponent(ComponentEntity component);
         void GreenLight(GreenLightTimeEntity e, TrafficLightGroup t, int n);
         void OpenFile(string path);
-        void ResizeGrid(double w, double h);
+        void ResizeGrid(int w, int h);
         void RotateComponent(ComponentEntity component);
         void SaveFile(string path);
     }
