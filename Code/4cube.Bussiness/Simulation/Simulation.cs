@@ -17,14 +17,14 @@ namespace _4cube.Bussiness.Simulation
     public class Simulation : ISimulation
     {
         private GridEntity _grid;
-        private IConfig _config;
+        private readonly IConfig _config;
         // private IReport _report;
         private double _time = 0;
-        private Timer _timer;
+        private readonly Timer _timer;
 
         public Simulation(IConfig config)
         {
-            _timer = new Timer(_time);
+            _timer = new Timer(1000);
             _timer.Elapsed += TimerOnElapsed;
             _config = config;
         }
@@ -66,26 +66,24 @@ namespace _4cube.Bussiness.Simulation
             
             foreach (var c in crossroads)
             {
-
-                if (_time >= c.LastTimeSwitched + c.GreenLightTimeEntities[c.CurrentGreenLightGroup].Duration)
+                if (!(_time >= c.LastTimeSwitched + c.GreenLightTimeEntities[c.CurrentGreenLightGroup].Duration))
+                    continue;
+                var tries = c.GreenLightTimeEntities.Count + 1;
+                do
                 {
-                    int tries = c.GreenLightTimeEntities.Count + 1;
-                    do
+                    c.CurrentGreenLightGroup = (c.CurrentGreenLightGroup + 1)%c.GreenLightTimeEntities.Count;
+                    var group = c.GreenLightTimeEntities[c.CurrentGreenLightGroup].TrafficLightGroup;
+                    var cr = _config.CrossRoadCoordinatesCars[@group];
+                    var pd = _config.CrossRoadCoordinatesPedes[@group];
+                    if (_grid.Cars.Any(x=> x.IsInPosition(cr)) || _grid.Pedestrians.Any(x => x.IsInPosition(pd)))
                     {
-                        c.CurrentGreenLightGroup = (c.CurrentGreenLightGroup + 1)%c.GreenLightTimeEntities.Count;
-                        var group = c.GreenLightTimeEntities[c.CurrentGreenLightGroup].TrafficLightGroup;
-                        var cr = _config.CrossRoadCoordinatesCars[group];
-                        var pd = _config.CrossRoadCoordinatesPedes[group];
-                        if (_grid.Cars.Any(x=> x.IsInPosition(cr)) || _grid.Pedestrians.Any(x => x.IsInPosition(pd)))
-                        {
-                            tries = 0;
-                        }
-                        else
-                        {
-                            tries--;
-                        }
-                    } while (tries < 0);
-                }
+                        tries = 0;
+                    }
+                    else
+                    {
+                        tries--;
+                    }
+                } while (tries < 0);
             }
         }
     }
