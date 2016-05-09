@@ -71,13 +71,14 @@ namespace _4cube.Bussiness
                 case Direction.Left:
                     component.Rotation = Direction.Up;
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
         public void SaveFile(string path)
         {
             _datalayer.SaveFile(path, _grid);
-
         }
     }
 }
