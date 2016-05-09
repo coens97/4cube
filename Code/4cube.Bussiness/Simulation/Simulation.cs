@@ -75,6 +75,11 @@ namespace _4cube.Bussiness.Simulation
                     var group = c.GreenLightTimeEntities[c.CurrentGreenLightGroup].TrafficLightGroup;
                     var cr = _config.CrossRoadCoordinatesCars[group];
                     var pd = _config.CrossRoadCoordinatesPedes[group];
+
+                    // check if config.currentpedestrian.isnotempty <-->if the current trafficlightgroup has a pedestrian lane
+                    // generate random number 50%
+                    // generate 1 pedestrian on spawnpoint..get it from config
+
                     if (_grid.Cars.Any(x=> x.IsInPosition(cr, c.X, c.Y)) || _grid.Pedestrians.Any(x => x.IsInPosition(pd, c.X, c.Y)))
                     {
                         tries = 0;
