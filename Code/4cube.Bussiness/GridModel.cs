@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,7 @@ using _4cube.Common;
 using _4cube.Common.Components;
 using _4cube.Common.Components.TrafficLight;
 using System.IO;
+using _4cube.Common.Components.Crossroad;
 using _4cube.Data;
 
 namespace _4cube.Bussiness
@@ -20,7 +22,7 @@ namespace _4cube.Bussiness
             Cars = new List<Common.Ai.CarEntity>()
         };
 
-        private IGridData _datalayer;
+        private readonly IGridData _datalayer;
         public GridModel(IGridData datalayer)
         {
             _datalayer = datalayer;
@@ -36,11 +38,12 @@ namespace _4cube.Bussiness
             _grid.Components.Remove(component);
         }
 
-        public void GreenLight(GreenLightTimeEntity e, TrafficLightGroup t, int n)
+        public void GreenLight(CrossroadEntity e, TrafficLightGroup t, int n)
         {
-            if (e.TrafficLightGroup == t)
+            var traficlightentity = e.GreenLightTimeEntities.FirstOrDefault(x => x.TrafficLightGroup == t);
+            if (traficlightentity != null)
             {
-                e.Duration = n;
+                traficlightentity.Duration = n;
             }
         }
 
@@ -51,6 +54,10 @@ namespace _4cube.Bussiness
 
         public void ResizeGrid(int w, int h)
         {
+            if (_grid.Components.Any(x => x.X > w || x.Y > h))
+            {
+                throw new Exception("Components are outside of the grid");
+            }
             _grid.Width = w;
             _grid.Height = h;
         }
