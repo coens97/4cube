@@ -42,7 +42,7 @@ namespace _4cube.UnitTest
 
             int[] testa = { 2, 3, 4 };
 
-            ComponentEntity component = new ComponentEntity { ComponentID = "AA", NrOfIncomingCars = testa, Rotation = Direction.Down, X = 11, Y = 33 };
+            ComponentEntity component = new ComponentEntity { NrOfIncomingCars = testa, Rotation = Direction.Down, X = 11, Y = 33 };
 
             _gridModel.AddComponent(component);
 

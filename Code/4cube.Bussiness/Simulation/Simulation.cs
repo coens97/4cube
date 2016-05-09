@@ -51,7 +51,7 @@ namespace _4cube.Bussiness.Simulation
         {
             _grid = g;
             _timer.Start();
-            TimerOnElapsed(this, null);
+            //TimerOnElapsed(this, null);
         }
 
         public void Stop()
@@ -73,9 +73,9 @@ namespace _4cube.Bussiness.Simulation
                 {
                     c.CurrentGreenLightGroup = (c.CurrentGreenLightGroup + 1)%c.GreenLightTimeEntities.Count;
                     var group = c.GreenLightTimeEntities[c.CurrentGreenLightGroup].TrafficLightGroup;
-                    var cr = _config.CrossRoadCoordinatesCars[@group];
-                    var pd = _config.CrossRoadCoordinatesPedes[@group];
-                    if (_grid.Cars.Any(x=> x.IsInPosition(cr)) || _grid.Pedestrians.Any(x => x.IsInPosition(pd)))
+                    var cr = _config.CrossRoadCoordinatesCars[group];
+                    var pd = _config.CrossRoadCoordinatesPedes[group];
+                    if (_grid.Cars.Any(x=> x.IsInPosition(cr, c.X, c.Y)) || _grid.Pedestrians.Any(x => x.IsInPosition(pd, c.X, c.Y)))
                     {
                         tries = 0;
                     }

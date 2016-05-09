@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:_4cube.Presentation"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+    <Grid />
 </Window>
+

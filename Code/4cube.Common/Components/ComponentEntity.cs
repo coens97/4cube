@@ -2,7 +2,7 @@
 {
     public class ComponentEntity
     {
-        public string ComponentID { get; set; }
+        public string ComponentId { get; set; }
         public int[] NrOfIncomingCars { get; set; }
         public Direction Rotation { get; set; }
         public int X { get; set; }
