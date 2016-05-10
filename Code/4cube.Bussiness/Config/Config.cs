@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using _4cube.Common;
 using _4cube.Common.Components.TrafficLight;
 
 namespace _4cube.Bussiness.Config
@@ -8,6 +9,7 @@ namespace _4cube.Bussiness.Config
     {
         public Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]> CrossRoadCoordinatesCars { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]>();
         public Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]> CrossRoadCoordinatesPedes { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]>();
+        public Dictionary<TrafficLightGroup, Tuple<int, int, Direction>[]> PedstrainSpawn { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, Direction>[]>();
 
         public Config()
         {
@@ -72,6 +74,14 @@ namespace _4cube.Bussiness.Config
             CrossRoadCoordinatesPedes[TrafficLightGroup.B2] = new[]
              {
                 new Tuple<int, int, int, int>(110,332,260,364)
+            };
+            PedstrainSpawn[TrafficLightGroup.B3] = new[]
+            {
+                new Tuple<int, int, Direction>(90, 52, Direction.Left),//x is the start, y is the middle of the y's
+            };
+            PedstrainSpawn[TrafficLightGroup.B2] = new[]
+            {
+                new Tuple<int, int, Direction>(110,348,Direction.Right), 
             };
         }
     }

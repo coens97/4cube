@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -76,9 +77,27 @@ namespace _4cube.Bussiness.Simulation
                     var cr = _config.CrossRoadCoordinatesCars[group];
                     var pd = _config.CrossRoadCoordinatesPedes[group];
 
-                    // check if config.currentpedestrian.isnotempty <-->if the current trafficlightgroup has a pedestrian lane
-                    // generate random number 50%
-                    // generate 1 pedestrian on spawnpoint..get it from config
+                    if (_config.CrossRoadCoordinatesPedes[group].Any())
+                    {
+                        Random rnd = new Random();
+                        int number = rnd.Next(1,11);
+                        if (number%2 == 0)
+                        {
+                            //even number means there are pedestrians
+                            _grid.Pedestrians.Add(new PedestrianEntity
+                            {
+                                X = 95, 
+                                Y = 40,
+                                Direction = Direction.Left
+                            });
+                        }
+                        else
+                        {
+                            //there are no pedestrians
+                        }
+                    }
+
+
 
                     if (_grid.Cars.Any(x=> x.IsInPosition(cr, c.X, c.Y)) || _grid.Pedestrians.Any(x => x.IsInPosition(pd, c.X, c.Y)))
                     {
