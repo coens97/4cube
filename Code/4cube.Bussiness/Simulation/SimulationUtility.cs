@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using _4cube.Common;
 using _4cube.Common.Ai;
 
 namespace _4cube.Bussiness.Simulation
@@ -25,5 +26,28 @@ namespace _4cube.Bussiness.Simulation
         {
             return value >= minimum && value <= maximum;
         }
+
+        
+        public static Tuple<int, int> Rotate(int x, int y, int originX, int originY, Direction d)
+        {
+
+            double angleInRadians = 90 * (Math.PI / 180);
+            double cosTheta = Math.Cos(angleInRadians);
+            double sinTheta = Math.Sin(angleInRadians);
+            return new Tuple<int, int>
+                (
+                
+                    (int)
+                        (cosTheta*(x - originX) -
+                         sinTheta*(y - originY) + originX),
+               
+                    (int)
+                        (sinTheta*(x - originX) +
+                         cosTheta*(y - originY) + originY)
+                );
+
+        }
+
+
     }
 }

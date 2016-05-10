@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
 using _4cube.Common;
-=======
 using System.Linq;
->>>>>>> origin/master
 using _4cube.Common.Components.TrafficLight;
 
 namespace _4cube.Bussiness.Config
@@ -13,9 +10,9 @@ namespace _4cube.Bussiness.Config
     {
         public Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]> CrossRoadCoordinatesCars { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]>();
         public Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]> CrossRoadCoordinatesPedes { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]>();
-<<<<<<< HEAD
+
         public Dictionary<TrafficLightGroup, Tuple<int, int, Direction>[]> PedstrainSpawn { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, Direction>[]>();
-=======
+
         public Tuple<int, int, int, int>[] GetAllLanesOfTrafficLight(TrafficLightGroup t)
         {
             if (t == TrafficLightGroup.A1 || t == TrafficLightGroup.A2 || t == TrafficLightGroup.A3 ||
@@ -39,7 +36,7 @@ namespace _4cube.Bussiness.Config
             }
             return null;
         }
->>>>>>> origin/master
+
 
         public Config()
         {

@@ -21,7 +21,7 @@ namespace _4cube.UnitTest
 
         private IConfig _config;
         private IKernel _container;
-
+       
 
         [TestInitializeAttribute]
         public void MyTestInitialize()
@@ -50,6 +50,30 @@ namespace _4cube.UnitTest
             var carNotOnLane = new CarEntity { X = gridX + 120, Y = gridY + 180 }; // car not on lane a1
             Assert.IsTrue(carOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1], gridX, gridY));
             Assert.IsFalse(carNotOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1], gridX, gridY));
+        }
+
+        [TestMethod]
+        public void TestRotate()
+        {
+            Tuple<int, int> testeTupleA;
+            Tuple<int, int> testTuple2 = new Tuple<int, int>(300,100);
+            testeTupleA = SimulationUtility.Rotate(100, 100, 200, 200, Direction.Up);
+
+            Assert.AreEqual(testeTupleA,testTuple2);
+
+            Tuple<int, int> testTupleB;
+            Tuple<int, int> testTuple3 = new Tuple<int, int>(250, 100);
+
+            Tuple<int, int> testTupleC;
+            Tuple<int,int> testTuple4 = new Tuple<int, int>(300,250);
+
+            testTupleB = SimulationUtility.Rotate(100, 150, 200, 200, Direction.Up);
+            testTupleC = SimulationUtility.Rotate(250, 100, 200, 200, Direction.Right);
+
+            Assert.AreEqual(testTupleB,testTuple3);
+            Assert.AreEqual(testTupleC,testTuple4);
+
+
         }
     }
 }
