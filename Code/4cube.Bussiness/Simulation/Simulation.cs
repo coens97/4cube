@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+<<<<<<< HEAD
 using System.Diagnostics;
+=======
+using System.ComponentModel;
+>>>>>>> origin/master
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +26,7 @@ namespace _4cube.Bussiness.Simulation
         // private IReport _report;
         private double _time = 0;
         private readonly Timer _timer;
+        private int speed = 2;
 
         public Simulation(IConfig config)
         {
@@ -34,6 +39,7 @@ namespace _4cube.Bussiness.Simulation
         {
             _time++;
             ProcessTrafficLight();
+            ProcessCar();
         }
 
         public void ChangeSpeed(double n)
@@ -108,6 +114,32 @@ namespace _4cube.Bussiness.Simulation
                         tries--;
                     }
                 } while (tries < 0);
+            }
+        }
+
+        private void ProcessCar()
+        {
+            var cars = _grid.Components.OfType<CarEntity>();
+
+            foreach (var c in cars)
+            {
+                switch (c.Direction)
+                {
+                     case  Direction.Up:
+                        c.Y += speed;
+                        break;
+                     case  Direction.Right:
+                        c.X += speed;
+                        break;
+                     case  Direction.Down:
+                        c.Y -= speed;
+                        break;
+                     case  Direction.Left:
+                        c.X -= speed;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             }
         }
     }

@@ -11,6 +11,7 @@ using _4cube.Bussiness.Simulation;
 using _4cube.Common;
 using _4cube.Common.Ai;
 using _4cube.Common.Components;
+using _4cube.Common.Components.Crossroad;
 using _4cube.Common.Components.TrafficLight;
 using _4cube.Data;
 
@@ -39,10 +40,7 @@ namespace _4cube.UnitTest
         [TestMethod]
         public void TestAddandDeleteComponent()
         {
-
-            int[] testa = { 2, 3, 4 };
-
-            ComponentEntity component = new ComponentEntity { NrOfIncomingCars = testa, Rotation = Direction.Down, X = 11, Y = 33 };
+            var component = new ComponentEntity { Rotation = Direction.Down, X = 11, Y = 33 };
 
             _gridModel.AddComponent(component);
 
@@ -55,13 +53,13 @@ namespace _4cube.UnitTest
         [TestMethod]
         public void TestRotateComponennt()
         {
-            ComponentEntity component = new ComponentEntity
+            var component = new ComponentEntity
             {
                 Rotation = Direction.Up
             };
-            Direction expected = Direction.Right;
+            var expected = Direction.Right;
 
-
+            Assert.AreEqual(component.Rotation, Direction.Up);
             _gridModel.RotateComponent(component);
             Assert.AreEqual(component.Rotation, expected);
         }
@@ -75,18 +73,21 @@ namespace _4cube.UnitTest
             Assert.AreEqual(_gridModel._grid.Height, 400);
         }
 
-        [TestMethod]
+      [TestMethod]
 
         public void TestGreenlight()
         {
-            GreenLightTimeEntity glt = new GreenLightTimeEntity { Duration = 1, TrafficLightGroup = TrafficLightGroup.A4 };
+            var cr = new CrossroadAEntity {GreenLightTimeEntities = new List<GreenLightTimeEntity>(new []
+            {
+                new GreenLightTimeEntity { Duration = 5, TrafficLightGroup = TrafficLightGroup.A4}
+            })};
 
-            TrafficLightGroup testtl = TrafficLightGroup.A4;
+            Assert.AreEqual(cr.GreenLightTimeEntities.First(x => x.TrafficLightGroup == TrafficLightGroup.A4).Duration, 5);
 
-            _gridModel.GreenLight(glt, testtl, 20);
 
-            Assert.AreEqual(glt.Duration, 20);
-            Assert.AreEqual(glt.TrafficLightGroup, TrafficLightGroup.A4);
+            _gridModel.GreenLight(cr, TrafficLightGroup.A4, 20);
+
+            Assert.AreEqual(cr.GreenLightTimeEntities.First(x => x.TrafficLightGroup == TrafficLightGroup.A4).Duration, 20);
 
         }
 
