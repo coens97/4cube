@@ -15,7 +15,7 @@ namespace _4cube.Bussiness.Config
         public Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]> CrossRoadCoordinatesCars { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]>();
         public Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]> CrossRoadCoordinatesPedes { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]>();
 
-        public Dictionary<TrafficLightGroup, Tuple<int, int, Direction>[]> PedstrainSpawn { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, Direction>[]>();
+        public Dictionary<TrafficLightGroup, Tuple<int, int, Direction>> PedstrainSpawn { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, Direction>();
 
         private readonly Tuple<int, int, int, int>[] _crossRoadALanes;
         private readonly Tuple<int, int, int, int>[] _crossRoadBLanes;
@@ -129,14 +129,8 @@ namespace _4cube.Bussiness.Config
             {
                 LanesP[1].BoundingBox
             };
-            PedstrainSpawn[TrafficLightGroup.B3] = new[]
-            {
-                new Tuple<int, int, Direction>(90, 52, Direction.Left)
-            };
-            PedstrainSpawn[TrafficLightGroup.B2] = new[]
-            {
-                new Tuple<int, int, Direction>(110,348,Direction.Right), 
-            };
+            PedstrainSpawn[TrafficLightGroup.B3] = new Tuple<int, int, Direction>(90, 52, Direction.Right);
+            PedstrainSpawn[TrafficLightGroup.B2] = new Tuple<int, int, Direction>(310, 350, Direction.Left);
 
             _crossRoadALanes = LanesA.Select(x => x.BoundingBox).ToArray();
 
