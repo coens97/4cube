@@ -83,14 +83,14 @@ namespace _4cube.Bussiness.Simulation
 
                     if (_config.CrossRoadCoordinatesPedes[group].Any())
                     {
-                        Random rnd = new Random();
-                        int number = rnd.Next(1,11);
+                        var rnd = new Random();
+                        var number = rnd.Next(1,11);
                         if (number%2 == 0)
                         {
                             //even number means there are pedestrians
                             _grid.Pedestrians.Add(new PedestrianEntity
                             {
-                                X = 95, 
+                                X = _config., 
                                 Y = 40,
                                 Direction = Direction.Left
                             });
