@@ -67,40 +67,56 @@ namespace _4cube.Bussiness.Config
             return null;
         }
 
+        public void CalculateLane(Lane l)
+        {
+            switch (l.DirectionLane)
+            {
+                case Direction.Up:
+                    l.EnterPoint = new Tuple<int, int>((l.BoundingBox.Item3 - l.BoundingBox.Item1)/2, l.BoundingBox.Item4);
+                    l.ExitPoint = new Tuple<int, int>((l.BoundingBox.Item3 - l.BoundingBox.Item1)/2, l.BoundingBox.Item2);
+                    break;
+                case Direction.Down:
+                    l.EnterPoint = new Tuple<int, int>((l.BoundingBox.Item3 - l.BoundingBox.Item1) / 2, l.BoundingBox.Item2);
+                    l.ExitPoint = new Tuple<int, int>((l.BoundingBox.Item3 - l.BoundingBox.Item1) / 2, l.BoundingBox.Item4);
+                    break;
+                case Direction.Left:
+                    l.EnterPoint = new Tuple<int, int>(l.BoundingBox.Item3,(l.BoundingBox.Item4- l.BoundingBox.Item2)/2);
+                    l.ExitPoint = new Tuple<int, int>(l.BoundingBox.Item3,(l.BoundingBox.Item4- l.BoundingBox.Item2)/2);
+                    break;
+                case Direction.Right:
+                    l.EnterPoint = new Tuple<int, int>(l.BoundingBox.Item1, (l.BoundingBox.Item4 - l.BoundingBox.Item2) / 2);
+                    l.ExitPoint = new Tuple<int, int>(l.BoundingBox.Item1, (l.BoundingBox.Item4 - l.BoundingBox.Item2) / 2);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         public Config()
         {
             CrossRoadCoordinatesCars[TrafficLightGroup.A1] = new[]
             {
-                LanesA[0].BoundingBox,
-                LanesA[9].BoundingBox,
-                LanesA[10].BoundingBox
+                LanesA[0].BoundingBox, LanesA[9].BoundingBox, LanesA[10].BoundingBox
             };
 
             CrossRoadCoordinatesCars[TrafficLightGroup.A2] = new[]
             {
-                LanesA[6].BoundingBox,
-                LanesA[7].BoundingBox,
-                LanesA[8].BoundingBox
+                LanesA[6].BoundingBox, LanesA[7].BoundingBox, LanesA[8].BoundingBox
             };
 
-            CrossRoadCoordinatesCars[TrafficLightGroup.A3] = new[]  //3,4,5
+            CrossRoadCoordinatesCars[TrafficLightGroup.A3] = new[] //3,4,5
             {
-                LanesA[3].BoundingBox,
-                LanesA[4].BoundingBox,
-                LanesA[6].BoundingBox
+                LanesA[3].BoundingBox, LanesA[4].BoundingBox, LanesA[6].BoundingBox
             };
 
-            CrossRoadCoordinatesCars[TrafficLightGroup.A4] = new[]  //1,2,3
+            CrossRoadCoordinatesCars[TrafficLightGroup.A4] = new[] //1,2,3
             {
-                LanesA[0].BoundingBox,
-                LanesA[1].BoundingBox,
-                LanesA[3].BoundingBox
+                LanesA[0].BoundingBox, LanesA[1].BoundingBox, LanesA[3].BoundingBox
             };
 
             CrossRoadCoordinatesCars[TrafficLightGroup.B1] = new[] //2,5
             {
-                LanesB[2].BoundingBox,
-                LanesB[7].BoundingBox
+                LanesB[2].BoundingBox, LanesB[7].BoundingBox
             };
 
             CrossRoadCoordinatesCars[TrafficLightGroup.B2] = new[] //6 for cars 
@@ -135,12 +151,22 @@ namespace _4cube.Bussiness.Config
             };
             PedstrainSpawn[TrafficLightGroup.B2] = new[]
             {
-                new Tuple<int, int, Direction>(110,348,Direction.Right), 
+                new Tuple<int, int, Direction>(110, 348, Direction.Right),
             };
 
             _crossRoadALanes = LanesA.Select(x => x.BoundingBox).ToArray();
 
             _crossRoadBLanes = LanesB.Select(x => x.BoundingBox).ToArray();
+
+            foreach (var lane in LanesA)
+            {
+                CalculateLane(lane);
+            }
+
+            foreach (var lane in LanesB)
+            {
+                CalculateLane(lane);
+            }
         }
     }
 }
