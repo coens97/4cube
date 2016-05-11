@@ -41,20 +41,20 @@ namespace _4cube.Bussiness.Simulation
 
         public static Tuple<int, int> Rotate(int x, int y, int originX, int originY, Direction d)
         {
-            double angleInRadians = 0;
+            double radians = 0;
             double cosTheta;
             double sinTheta;
 
             switch (d)
             {
                 case Direction.Right:
-                    angleInRadians = 90 * (Math.PI / 180);
+                    radians = 0.5 * Math.PI;
                     break;
                 case Direction.Down:
-                    angleInRadians = 180 * (Math.PI / 180);
+                    radians = Math.PI;
                     break;
                 case Direction.Left:
-                    angleInRadians = 270 * (Math.PI / 180);
+                    radians = 1.5 * Math.PI;
                     break;
                 case Direction.Up:
                     break;
@@ -62,9 +62,28 @@ namespace _4cube.Bussiness.Simulation
                     throw new ArgumentOutOfRangeException(nameof(d), d, null);
             }
 
-            cosTheta = Math.Cos(angleInRadians);
-            sinTheta = Math.Sin(angleInRadians);
+            cosTheta = Math.Cos(radians);
+            sinTheta = Math.Sin(radians);
             return new Tuple<int, int>((int) (cosTheta*(x - originX) - sinTheta*(y - originY) + originX), (int) (sinTheta*(x - originX) + cosTheta*(y - originY) + originY));
         }
+
+        public static Tuple<int, int, int, int>[] Rotate(Tuple<int, int, int, int>[] t, int gridX, int gridY,
+            int gridWidth, int gridHeight,Direction d)
+        {
+            var originX = gridWidth/2+gridX;
+            var originY = gridHeight/2+gridY;
+
+            var result = new Tuple<int, int, int, int>[t.Length];
+
+            for (var i = 0; i < t.Length; i++)
+            {
+                var r1 = Rotate(t[i].Item1, t[i].Item2, originX, originY, d);
+                var r2 = Rotate(t[i].Item3, t[i].Item4, originX, originY, d);
+                result[i]= new Tuple<int, int, int, int>(r1.Item1,r1.Item2,r2.Item1,r2.Item2);
+            }
+
+            return result;
+        }
+
     }
 }

@@ -88,5 +88,23 @@ namespace _4cube.UnitTest
             Assert.AreEqual(new Tuple<int, int>(400, 400), SimulationUtility.GetGridPosition(400, 400, width, height));
             Assert.AreEqual(new Tuple<int, int>(800, 400), SimulationUtility.GetGridPosition(885, 445, width, height));
         }
+
+
+        [TestMethod]
+
+        public void TestRotateTuples()
+        {
+            var tuples = _config.GetAllLanesOfTrafficLight(typeof(CrossroadAEntity));
+
+            var testTuples = SimulationUtility.Rotate(tuples, 0, 0, _config.GridWidth, _config.GridHeight, Direction.Down);
+            var testTuples0 = SimulationUtility.Rotate(tuples,-200, -200, _config.GridWidth, _config.GridHeight, Direction.Right);
+            
+            Assert.AreEqual(testTuples[0],new Tuple<int, int, int, int>(278,400,228,278));
+            Assert.AreEqual(testTuples0[2], new Tuple<int, int, int, int>(0,222,-121,278));// Assert.AreEqual(testTuples0[2], new Tuple<int, int, int, int>(0,222,-122,278));
+
+
+
+        }
+
     }
 }
