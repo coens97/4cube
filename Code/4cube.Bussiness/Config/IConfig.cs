@@ -8,6 +8,7 @@ namespace _4cube.Bussiness.Config
     {
         int GridWidth { get; }
         int GridHeight { get; }
+        int CarDistance { get; }
         Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]> CrossRoadCoordinatesCars { get; }
         Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]> CrossRoadCoordinatesPedes { get; }
 

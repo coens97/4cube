@@ -11,29 +11,24 @@ namespace _4cube.Bussiness.Config
     {
         public int GridWidth { get; } = 400;
         public int GridHeight { get; } = 400;
+        public int CarDistance { get; } = 10;
         public Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]> CrossRoadCoordinatesCars { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]>();
         public Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]> CrossRoadCoordinatesPedes { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]>();
 
         public Dictionary<TrafficLightGroup, Tuple<int, int, Direction>[]> PedstrainSpawn { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, Direction>[]>();
 
+        private Tuple<int, int, int, int>[] _crossRoadALanes;
+        private Tuple<int, int, int, int>[] _crossRoadBLanes;
+
         public Tuple<int, int, int, int>[] GetAllLanesOfTrafficLight(Type t)
         {
             if (t == typeof(CrossroadAEntity))
             {
-                return
-                    CrossRoadCoordinatesCars[TrafficLightGroup.A1].Concat(CrossRoadCoordinatesCars[TrafficLightGroup.A2])
-                    .Concat(CrossRoadCoordinatesCars[TrafficLightGroup.A3])
-                    .Concat(CrossRoadCoordinatesCars[TrafficLightGroup.A4]) 
-                    as Tuple<int, int, int, int>[];
+                return _crossRoadALanes;
             }
             else if (t == typeof(CrossroadBEntity))
             {
-                return
-                    CrossRoadCoordinatesCars[TrafficLightGroup.B1].Concat(CrossRoadCoordinatesCars[TrafficLightGroup.B2])
-                        .Concat(CrossRoadCoordinatesCars[TrafficLightGroup.B3])
-                        .Concat(CrossRoadCoordinatesCars[TrafficLightGroup.B4])
-                        .Concat(CrossRoadCoordinatesCars[TrafficLightGroup.B5])
-                        as Tuple<int, int, int, int>[];
+                return _crossRoadBLanes;
             }
             return null;
         }
@@ -111,6 +106,18 @@ namespace _4cube.Bussiness.Config
             {
                 new Tuple<int, int, Direction>(110,348,Direction.Right), 
             };
+
+            _crossRoadALanes = CrossRoadCoordinatesCars[TrafficLightGroup.A1].Concat(CrossRoadCoordinatesCars[TrafficLightGroup.A2])
+                    .Concat(CrossRoadCoordinatesCars[TrafficLightGroup.A3])
+                    .Concat(CrossRoadCoordinatesCars[TrafficLightGroup.A4])
+                    as Tuple<int, int, int, int>[];
+
+            _crossRoadBLanes =
+                CrossRoadCoordinatesCars[TrafficLightGroup.B1].Concat(CrossRoadCoordinatesCars[TrafficLightGroup.B2])
+                    .Concat(CrossRoadCoordinatesCars[TrafficLightGroup.B3])
+                    .Concat(CrossRoadCoordinatesCars[TrafficLightGroup.B4])
+                    .Concat(CrossRoadCoordinatesCars[TrafficLightGroup.B5])
+                    as Tuple<int, int, int, int>[];
         }
     }
 }
