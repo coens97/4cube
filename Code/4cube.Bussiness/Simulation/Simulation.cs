@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using _4cube.Common;
@@ -114,29 +115,65 @@ namespace _4cube.Bussiness.Simulation
             }
         }
 
+        private void MoveCar(CarEntity car)
+        {
+            var fPos = new Tuple<int, int>(0,0);
+            switch (car.Direction)
+            {
+                case Direction.Up:
+                    fPos = new Tuple<int, int>(car.X, car.Y + speed);
+                    break;
+                case Direction.Right:
+                    fPos = new Tuple<int, int>(car.X + speed, car.Y);
+                    break;
+                case Direction.Down:
+                    fPos = new Tuple<int, int>(car.X, car.Y - speed);
+                    break;
+                case Direction.Left:
+                    fPos = new Tuple<int, int>(car.X - speed, car.Y);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            //Check if there is no car at the position the car wants to go to
+            var d = _config.CarDistance;
+            var collisionField = new Tuple<int,int,int,int>(fPos.Item1 - d, fPos.Item2 - d, fPos.Item1 + d, fPos.Item2 + d);
+
+            if (!_grid.Cars.Where(x => x != car).Any(x => SimulationUtility.IsInPosition(x.X, x.Y, collisionField)))
+            {
+                car.X = fPos.Item1;
+                car.Y = fPos.Item2;
+            }
+        }
+
         private void ProcessCar()
         {
             var cars = _grid.Components.OfType<CarEntity>();
 
-            foreach (var c in cars)
+            foreach (var car in cars)
             {
-                switch (c.Direction)
+                var gridPosition = SimulationUtility.GetGridPosition(car.X, car.Y, _config.GridWidth, _config.GridHeight);
+                var component =
+                    _grid.Components.FirstOrDefault(x => x.X == gridPosition.Item1 && x.Y == gridPosition.Item2);
+
+                var crossroad = component as CrossroadEntity;
+                var road = component as RoadEntity;
+
+                if (crossroad != null)
                 {
-                     case  Direction.Up:
-                        c.Y += speed;
-                        break;
-                     case  Direction.Right:
-                        c.X += speed;
-                        break;
-                     case  Direction.Down:
-                        c.Y -= speed;
-                        break;
-                     case  Direction.Left:
-                        c.X -= speed;
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
+                    if (car.IsInPosition(_config.GetAllLanesOfTrafficLight(crossroad.GetType()),gridPosition.Item1, gridPosition.Item2)) // is the car in any of the lanes of the crossroad
+                    {
+                        var trafficlightGroup = crossroad.GreenLightTimeEntities[crossroad.CurrentGreenLightGroup].TrafficLightGroup;
+                        if (car.IsInPosition(_config.CrossRoadCoordinatesCars[trafficlightGroup], gridPosition.Item1, gridPosition.Item2)) // Light is green of the lane it is tanding in
+                            MoveCar(car);
+                    }
                 }
+                else if (road != null)
+                {
+                    MoveCar(car);
+                }
+                
             }
         }
     }
