@@ -145,19 +145,9 @@ namespace _4cube.Bussiness.Config
             {
                 LanesP[1].BoundingBox
             };
-<<<<<<< HEAD
+
             PedstrainSpawn[TrafficLightGroup.B3] = new Tuple<int, int, Direction>(90, 52, Direction.Right);
             PedstrainSpawn[TrafficLightGroup.B2] = new Tuple<int, int, Direction>(310, 350, Direction.Left);
-=======
-            PedstrainSpawn[TrafficLightGroup.B3] = new[]
-            {
-                new Tuple<int, int, Direction>(90, 52, Direction.Left)
-            };
-            PedstrainSpawn[TrafficLightGroup.B2] = new[]
-            {
-                new Tuple<int, int, Direction>(110, 348, Direction.Right),
-            };
->>>>>>> origin/master
 
             _crossRoadALanes = LanesA.Select(x => x.BoundingBox).ToArray();
 
