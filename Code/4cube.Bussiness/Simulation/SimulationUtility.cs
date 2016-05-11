@@ -48,11 +48,14 @@ namespace _4cube.Bussiness.Simulation
 
         }
 
-        public static Tuple<int, int> GetGridPosition(int x, int y)
+        public static Tuple<int, int> GetGridPosition(int x, int y, int gridWidth, int gridHeight)
         {
             // from an input x and y get the position of the lefttop corner of the grid it is in
             // width = 400 height = 400 then (100,100)->(0,0);420,20->400,0
-            return new Tuple<int, int>(0,0);
+
+            return new Tuple<int, int>(
+                (int)Math.Floor(x/ Convert.ToDecimal(gridWidth)) * gridWidth,
+                (int)Math.Floor(y / Convert.ToDecimal(gridHeight)) * gridHeight);
         }
 
 

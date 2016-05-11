@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using _4cube.Common;
 using System.Linq;
+using _4cube.Common.Components.Crossroad;
 using _4cube.Common.Components.TrafficLight;
 
 namespace _4cube.Bussiness.Config
@@ -15,10 +16,9 @@ namespace _4cube.Bussiness.Config
 
         public Dictionary<TrafficLightGroup, Tuple<int, int, Direction>[]> PedstrainSpawn { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, Direction>[]>();
 
-        public Tuple<int, int, int, int>[] GetAllLanesOfTrafficLight(TrafficLightGroup t)
+        public Tuple<int, int, int, int>[] GetAllLanesOfTrafficLight(Type t)
         {
-            if (t == TrafficLightGroup.A1 || t == TrafficLightGroup.A2 || t == TrafficLightGroup.A3 ||
-                t == TrafficLightGroup.A4)
+            if (t == typeof(CrossroadAEntity))
             {
                 return
                     CrossRoadCoordinatesCars[TrafficLightGroup.A1].Concat(CrossRoadCoordinatesCars[TrafficLightGroup.A2])
@@ -26,8 +26,7 @@ namespace _4cube.Bussiness.Config
                     .Concat(CrossRoadCoordinatesCars[TrafficLightGroup.A4]) 
                     as Tuple<int, int, int, int>[];
             }
-            else if (t == TrafficLightGroup.B1 || t == TrafficLightGroup.B2 || t == TrafficLightGroup.B3 ||
-                     t == TrafficLightGroup.B4 || t == TrafficLightGroup.B5)
+            else if (t == typeof(CrossroadBEntity))
             {
                 return
                     CrossRoadCoordinatesCars[TrafficLightGroup.B1].Concat(CrossRoadCoordinatesCars[TrafficLightGroup.B2])

@@ -75,5 +75,18 @@ namespace _4cube.UnitTest
 
 
         }
+
+        [TestMethod]
+        public void TestGetGridPosition()
+        {
+            // from an input x and y get the position of the lefttop corner of the grid it is in
+            // width = 400 height = 400 then (100,100)->(0,0);420,20->400,0
+            var width = 400;
+            var height = 400;
+            Assert.AreEqual(new Tuple<int,int>(0,0),SimulationUtility.GetGridPosition(200,200,width,height) );
+            Assert.AreEqual(new Tuple<int, int>(0, 0), SimulationUtility.GetGridPosition(399, 399, width, height));
+            Assert.AreEqual(new Tuple<int, int>(400, 400), SimulationUtility.GetGridPosition(400, 400, width, height));
+            Assert.AreEqual(new Tuple<int, int>(800, 400), SimulationUtility.GetGridPosition(885, 445, width, height));
+        }
     }
 }

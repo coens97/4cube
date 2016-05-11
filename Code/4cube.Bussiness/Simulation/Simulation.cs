@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using _4cube.Common;
@@ -114,29 +115,48 @@ namespace _4cube.Bussiness.Simulation
             }
         }
 
+        private void MoveCar(CarEntity car)
+        {
+            switch (car.Direction)
+            {
+                case Direction.Up:
+                    car.Y += speed;
+                    break;
+                case Direction.Right:
+                    car.X += speed;
+                    break;
+                case Direction.Down:
+                    car.Y -= speed;
+                    break;
+                case Direction.Left:
+                    car.X -= speed;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         private void ProcessCar()
         {
             var cars = _grid.Components.OfType<CarEntity>();
 
-            foreach (var c in cars)
+            foreach (var car in cars)
             {
-                switch (c.Direction)
+                var gridPosition = SimulationUtility.GetGridPosition(car.X, car.Y, _config.GridWidth, _config.GridHeight);
+                var component =
+                    _grid.Components.FirstOrDefault(x => x.X == gridPosition.Item1 && x.Y == gridPosition.Item2);
+                var crossroad = component as CrossroadEntity;
+
+                if (crossroad != null)
                 {
-                     case  Direction.Up:
-                        c.Y += speed;
-                        break;
-                     case  Direction.Right:
-                        c.X += speed;
-                        break;
-                     case  Direction.Down:
-                        c.Y -= speed;
-                        break;
-                     case  Direction.Left:
-                        c.X -= speed;
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
+                    if (car.IsInPosition(_config.GetAllLanesOfTrafficLight(crossroad.GetType()),gridPosition.Item1, gridPosition.Item2)) // is the car in any of the lanes of the crossroad
+                    {
+                        var trafficlightGroup = crossroad.GreenLightTimeEntities[crossroad.CurrentGreenLightGroup].TrafficLightGroup;
+                        if (car.IsInPosition(_config.CrossRoadCoordinatesCars[trafficlightGroup], gridPosition.Item1, gridPosition.Item2)) // Light is green of the lane it is tanding in
+                            MoveCar(car);
+                    }
                 }
+                
             }
         }
     }
