@@ -7,14 +7,14 @@ namespace _4cube.Bussiness.Simulation
 {
     public static class SimulationUtility
     {
-        public static bool IsInPosition(this CarEntity car, Tuple<int, int, int, int>[] positions, int x, int y)
+        public static bool IsInPosition(this CarEntity car, Tuple<int, int, int, int>[] positions, int gridx, int gridy)
         {
-            return IsInPosition(car.X, car.Y, positions, x, y);
+            return IsInPosition(car.X, car.Y, positions, gridx, gridy);
         }
 
-        public static bool IsInPosition(this PedestrianEntity ped, Tuple<int, int, int, int>[] positions, int x, int y)
+        public static bool IsInPosition(this PedestrianEntity ped, Tuple<int, int, int, int>[] positions, int gridx, int gridy)
         {
-            return IsInPosition(ped.X, ped.Y, positions, x, y);
+            return IsInPosition(ped.X, ped.Y, positions, gridx, gridy);
         }
 
         public static bool IsInPosition(int x, int y, Tuple<int, int, int, int>[] positions, int gridx, int gridy)
@@ -46,6 +46,13 @@ namespace _4cube.Bussiness.Simulation
                          cosTheta*(y - originY) + originY)
                 );
 
+        }
+
+        public static Tuple<int, int> GetGridPosition(int x, int y)
+        {
+            // from an input x and y get the position of the lefttop corner of the grid it is in
+            // width = 400 height = 400 then (100,100)->(0,0);420,20->400,0
+            return new Tuple<int, int>(0,0);
         }
 
 

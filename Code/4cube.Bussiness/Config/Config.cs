@@ -8,6 +8,8 @@ namespace _4cube.Bussiness.Config
 {
     public class Config : IConfig
     {
+        public int GridWidth { get; } = 400;
+        public int GridHeight { get; } = 400;
         public Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]> CrossRoadCoordinatesCars { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]>();
         public Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]> CrossRoadCoordinatesPedes { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]>();
 
