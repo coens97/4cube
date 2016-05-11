@@ -57,7 +57,7 @@ namespace _4cube.UnitTest
         {
             Tuple<int, int> testeTupleA;
             Tuple<int, int> testTuple2 = new Tuple<int, int>(300,100);
-            testeTupleA = SimulationUtility.Rotate(100, 100, 200, 200, Direction.Up);
+            testeTupleA = SimulationUtility.Rotate(100, 100, 200, 200, Direction.Right);
 
             Assert.AreEqual(testeTupleA,testTuple2);
 
@@ -67,8 +67,8 @@ namespace _4cube.UnitTest
             Tuple<int, int> testTupleC;
             Tuple<int,int> testTuple4 = new Tuple<int, int>(300,250);
 
-            testTupleB = SimulationUtility.Rotate(100, 150, 200, 200, Direction.Up);
-            testTupleC = SimulationUtility.Rotate(250, 100, 200, 200, Direction.Right);
+            testTupleB = SimulationUtility.Rotate(100, 150, 200, 200, Direction.Right);
+            testTupleC = SimulationUtility.Rotate(100, 150, 200, 200, Direction.Down);
 
             Assert.AreEqual(testTupleB,testTuple3);
             Assert.AreEqual(testTupleC,testTuple4);
