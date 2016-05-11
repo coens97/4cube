@@ -47,7 +47,13 @@ namespace _4cube.Bussiness.Config
             new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 228, 122, 278), DirectionLane = Direction.Right, OutgoingDiretion = new [] {Direction.Down, Direction.Right}},
             new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 178, 122, 228), DirectionLane = Direction.Right, OutgoingDiretion = new [] {Direction.Up}},
             new Lane { BoundingBox = new Tuple<int, int, int, int>(122, 0, 202, 122), DirectionLane = Direction.Left, OutgoingDiretion = new Direction[] {}}
-        }
+        };
+
+        public Lane[] LanesP { get; } =new []
+        {
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(90,36,290,68), DirectionLane = Direction.Left, OutgoingDiretion = new Direction[] {}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(110,332,260,364), DirectionLane = Direction.Right, OutgoingDiretion = new Direction[] {}}
+        };
         public Tuple<int, int, int, int>[] GetAllLanesOfTrafficLight(Type t)
         {
             if (t == typeof(CrossroadAEntity))
@@ -65,86 +71,76 @@ namespace _4cube.Bussiness.Config
         {
             CrossRoadCoordinatesCars[TrafficLightGroup.A1] = new[]
             {
-                new Tuple<int, int, int, int>(122, 0, 172, 122),
-                new Tuple<int, int, int, int>(122, 278, 0, 227),
-                new Tuple<int, int, int, int>(122, 227, 0, 178)
+                LanesA[0].BoundingBox,
+                LanesA[9].BoundingBox,
+                LanesA[10].BoundingBox
             };
 
             CrossRoadCoordinatesCars[TrafficLightGroup.A2] = new[]
             {
-                new Tuple<int, int, int, int>(227, 278, 278, 400),
-                new Tuple<int, int, int, int>(178, 278, 227, 400),
-                new Tuple<int, int, int, int>(122, 278, 0, 227)
-
+                LanesA[6].BoundingBox,
+                LanesA[7].BoundingBox,
+                LanesA[8].BoundingBox
             };
 
             CrossRoadCoordinatesCars[TrafficLightGroup.A3] = new[]  //3,4,5
             {
-                new Tuple<int, int, int, int>(278,122,400,172),
-                new Tuple<int, int, int, int>(278,172,400,220),
-                new Tuple<int, int, int, int>(227,278,227,400)
+                LanesA[3].BoundingBox,
+                LanesA[4].BoundingBox,
+                LanesA[6].BoundingBox
             };
 
             CrossRoadCoordinatesCars[TrafficLightGroup.A4] = new[]  //1,2,3
             {
-                new Tuple<int, int, int, int>(122, 0,172,122),
-                new Tuple<int, int, int, int>(172,0,220,122),
-                new Tuple<int, int, int, int>(278,122,400,172)
+                LanesA[0].BoundingBox,
+                LanesA[1].BoundingBox,
+                LanesA[3].BoundingBox
             };
 
             CrossRoadCoordinatesCars[TrafficLightGroup.B1] = new[] //2,5
             {
-                new Tuple<int, int, int, int>(278,122,400,172),
-                new Tuple<int, int, int, int>(122,278,0,228)  
+                LanesB[2].BoundingBox,
+                LanesB[7].BoundingBox
             };
 
             CrossRoadCoordinatesCars[TrafficLightGroup.B2] = new[] //6 for cars 
             {
-                new Tuple<int, int, int, int>(122,278,0,178)
-                 
+                LanesB[9].BoundingBox,
             };
 
             CrossRoadCoordinatesCars[TrafficLightGroup.B3] = new[] //3 
-              {
-                new Tuple<int, int, int, int>(278,172,400,222)
-
+            {
+                LanesB[3].BoundingBox
             };
             CrossRoadCoordinatesCars[TrafficLightGroup.B4] = new[]
             {
-                new Tuple<int, int, int, int>(278,278,204,400) 
+                LanesB[6].BoundingBox
             };
             CrossRoadCoordinatesCars[TrafficLightGroup.B5] = new[]
-             {
-                new Tuple<int, int, int, int>(122,0,204,122)
+            {
+                LanesB[0].BoundingBox,
             };
+
             CrossRoadCoordinatesPedes[TrafficLightGroup.B3] = new[]
             {
-                new Tuple<int, int, int, int>(90,36,290,68)
+                LanesP[0].BoundingBox
             };
             CrossRoadCoordinatesPedes[TrafficLightGroup.B2] = new[]
-             {
-                new Tuple<int, int, int, int>(110,332,260,364)
+            {
+                LanesP[1].BoundingBox
             };
             PedstrainSpawn[TrafficLightGroup.B3] = new[]
             {
-                new Tuple<int, int, Direction>(90, 52, Direction.Left),//x is the start, y is the middle of the y's
+                new Tuple<int, int, Direction>(90, 52, Direction.Left)
             };
             PedstrainSpawn[TrafficLightGroup.B2] = new[]
             {
                 new Tuple<int, int, Direction>(110,348,Direction.Right), 
             };
 
-            _crossRoadALanes = CrossRoadCoordinatesCars[TrafficLightGroup.A1].Concat(CrossRoadCoordinatesCars[TrafficLightGroup.A2])
-                    .Concat(CrossRoadCoordinatesCars[TrafficLightGroup.A3])
-                    .Concat(CrossRoadCoordinatesCars[TrafficLightGroup.A4])
-                    as Tuple<int, int, int, int>[];
+            _crossRoadALanes = LanesA.Select(x => x.BoundingBox).ToArray();
 
-            _crossRoadBLanes =
-                CrossRoadCoordinatesCars[TrafficLightGroup.B1].Concat(CrossRoadCoordinatesCars[TrafficLightGroup.B2])
-                    .Concat(CrossRoadCoordinatesCars[TrafficLightGroup.B3])
-                    .Concat(CrossRoadCoordinatesCars[TrafficLightGroup.B4])
-                    .Concat(CrossRoadCoordinatesCars[TrafficLightGroup.B5])
-                    as Tuple<int, int, int, int>[];
+            _crossRoadBLanes = LanesB.Select(x => x.BoundingBox).ToArray();
         }
     }
 }
