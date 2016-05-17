@@ -119,56 +119,61 @@ namespace _4cube.Bussiness.Simulation
             var gridPosition = SimulationUtility.GetGridPosition(car.X, car.Y, _config.GridWidth, _config.GridHeight);
             var component = _grid.Components.FirstOrDefault(x => x.X == gridPosition.Item1 && x.Y == gridPosition.Item2);
 
-            var crossroad = component as CrossroadEntity;
-            var road = component as RoadEntity;
-            if (crossroad != null)
+
+            Lane[] lanes;
+
+            if (component is CrossroadAEntity)
+                lanes = _config.LanesA;
+            else if (component is CrossroadBEntity)
+                lanes = _config.LanesB;
+            else if (component is StraightRoadEntity)
+                lanes = _config.StraightRoad;
+            else if (component is CurvedRoadEntity)
+                lanes = _config.CurvedRoad;
+            else
+                throw new TypeAccessException("Unkown component on grid");
+
+            var enterLane =
+                    lanes.FirstOrDefault(
+                        x =>
+                            !x.OutgoingDiretion.Any() &&
+                            x.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2));
+            if (enterLane != null)
             {
-                // Move car on crossroad
-                var crossroadA = component as CrossroadAEntity;
-
-                var lanes = crossroadA != null ? _config.LanesA : _config.LanesB;
-
-                var enterLane =
-                        lanes.FirstOrDefault(
-                            x =>
-                                !x.OutgoingDiretion.Any() &&
-                                x.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2));
-                if (enterLane != null)
+                fPos = MoveCarToPoint(car, enterLane.ExitPoint);
+            }
+            else
+            {
+                var exitLane =
+                lanes.FirstOrDefault(
+                    x =>
+                        x.OutgoingDiretion.Any() &&
+                        x.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2));
+                if (exitLane != null)
                 {
-                    fPos = MoveCarToPoint(car, enterLane.ExitPoint);
+                    fPos = MoveCarToPoint(car, exitLane.ExitPoint);
                 }
                 else
                 {
-                    var exitLane =
-                    lanes.FirstOrDefault(
-                        x =>
-                            x.OutgoingDiretion.Any() &&
-                            x.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2));
-                    if (exitLane != null)
-                    {
-                        fPos = MoveCarToPoint(car, exitLane.ExitPoint);
-                    }
-                    else
-                    {
-                        exitLane =
-                            lanes.First(
-                                x => !x.OutgoingDiretion.Any() && x.DirectionLane == car.Direction);
-                        fPos = MoveCarToPoint(car, exitLane.EnterPoint);
-                    }
+                    exitLane =
+                        lanes.First(
+                            x => !x.OutgoingDiretion.Any() && x.DirectionLane == car.Direction);
+                    fPos = MoveCarToPoint(car, exitLane.EnterPoint);
                 }
+            }
 
-                // Check if the car is crossing a border of the crossroad
-                if (enterLane != null)
+            // Check if the car is crossing a border of the crossroad
+            if (enterLane != null)
+            {
+                // If the car was first in an entering lane but now not anymore
+                if (!enterLane.BoundingBox.IsInPosition(fPos.Item1, fPos.Item2, gridPosition.Item1,
+                    gridPosition.Item2))
                 {
-                    // If the car was first in an entering lane but now not anymore
-                    if (!enterLane.BoundingBox.IsInPosition(fPos.Item1, fPos.Item2, gridPosition.Item1,
-                        gridPosition.Item2))
-                    {
-                        var random = new Random();
-                        var i = random.Next(enterLane.OutgoingDiretion.Length);
-                        car.Direction = enterLane.OutgoingDiretion[i];
-                    }
+                    var random = new Random();
+                    var i = random.Next(enterLane.OutgoingDiretion.Length);
+                    car.Direction = enterLane.OutgoingDiretion[i];
                 }
+                
             }
 
             //Check if there is no car at the position the car wants to go to

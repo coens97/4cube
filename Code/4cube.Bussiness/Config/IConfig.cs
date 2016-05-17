@@ -21,5 +21,8 @@ namespace _4cube.Bussiness.Config
 
         Lane[] LanesA { get; }
         Lane[] LanesB { get; }
+
+        Lane[] StraightRoad { get; }
+        Lane[] CurvedRoad { get; }
     }
 }
