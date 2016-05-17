@@ -19,7 +19,7 @@ namespace _4cube.Bussiness.Simulation
 
         public static bool IsInPosition(int x, int y, Tuple<int, int, int, int>[] positions, int gridx, int gridy)
         {
-            return positions.Any(pos => x.InBetween(pos.Item1 + gridx, pos.Item3 + gridx) && y.InBetween(pos.Item2 + gridy, pos.Item4 + gridy));
+            return positions.Any(pos => pos.IsInPosition(x, y, gridx, gridy));
         }
 
         public static Tuple<int, int> GetGridPosition(int x, int y, int gridWidth, int gridHeight)
@@ -34,9 +34,14 @@ namespace _4cube.Bussiness.Simulation
             return value >= minimum && value <= maximum;
         }
 
-        public static bool IsInPosition(int x, int y, Tuple<int, int, int, int> pos)
+        public static bool IsInPosition(this Tuple<int, int, int, int> pos, int x, int y)
         {
             return x.InBetween(pos.Item1, pos.Item3) && y.InBetween(pos.Item2, pos.Item4);
+        }
+
+        public static bool IsInPosition(this Tuple<int, int, int, int> pos, int x, int y, int gridx, int gridy)
+        {
+            return x.InBetween(pos.Item1 + gridx, pos.Item3 + gridx) && y.InBetween(pos.Item2 + gridy, pos.Item4 + gridy);
         }
 
         public static Tuple<int, int> Rotate(int x, int y, int originX, int originY, Direction d)

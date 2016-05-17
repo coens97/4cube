@@ -23,9 +23,6 @@ namespace _4cube.UnitTest
         private GridModel _gridModel;
         private IKernel _container;
 
-
-
-
         [TestInitialize]
         public void MyTestInitialize()
         {

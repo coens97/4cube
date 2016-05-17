@@ -24,8 +24,7 @@ namespace _4cube.Bussiness.Simulation
         // private IReport _report;
         private double _time = 0;
         private readonly Timer _timer;
-        private int _speed = 2;
-        private int _pedestrianSpeed = 1;
+        
 
         public Simulation(IConfig config)
         {
@@ -116,33 +115,80 @@ namespace _4cube.Bussiness.Simulation
         private void MoveCar(CarEntity car)
         {
             var fPos = new Tuple<int, int>(0,0);
-            switch (car.Direction)
+
+            var gridPosition = SimulationUtility.GetGridPosition(car.X, car.Y, _config.GridWidth, _config.GridHeight);
+            var component = _grid.Components.FirstOrDefault(x => x.X == gridPosition.Item1 && x.Y == gridPosition.Item2);
+
+            var crossroad = component as CrossroadEntity;
+            var road = component as RoadEntity;
+            if (crossroad != null)
             {
-                case Direction.Up:
-                    fPos = new Tuple<int, int>(car.X, car.Y - _speed);
-                    break;
-                case Direction.Right:
-                    fPos = new Tuple<int, int>(car.X + _speed, car.Y);
-                    break;
-                case Direction.Down:
-                    fPos = new Tuple<int, int>(car.X, car.Y + _speed);
-                    break;
-                case Direction.Left:
-                    fPos = new Tuple<int, int>(car.X - _speed, car.Y);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                // Move car on crossroad
+                var crossroadA = component as CrossroadAEntity;
+
+                var lanes = crossroadA != null ? _config.LanesA : _config.LanesB;
+
+                var enterLane =
+                        lanes.FirstOrDefault(
+                            x =>
+                                !x.OutgoingDiretion.Any() &&
+                                x.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2));
+                if (enterLane != null)
+                {
+                    fPos = MoveCarToPoint(car, enterLane.ExitPoint);
+                }
+                else
+                {
+                    var exitLane =
+                    lanes.FirstOrDefault(
+                        x =>
+                            x.OutgoingDiretion.Any() &&
+                            x.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2));
+                    if (exitLane != null)
+                    {
+                        fPos = MoveCarToPoint(car, exitLane.ExitPoint);
+                    }
+                    else
+                    {
+                        exitLane =
+                            lanes.First(
+                                x => !x.OutgoingDiretion.Any() && x.DirectionLane == car.Direction);
+                        fPos = MoveCarToPoint(car, exitLane.EnterPoint);
+                    }
+                }
+
+                // Check if the car is crossing a border of the crossroad
+                if (enterLane != null)
+                {
+                    // If the car was first in an entering lane but now not anymore
+                    if (!enterLane.BoundingBox.IsInPosition(fPos.Item1, fPos.Item2, gridPosition.Item1,
+                        gridPosition.Item2))
+                    {
+                        var random = new Random();
+                        var i = random.Next(enterLane.OutgoingDiretion.Length);
+                        car.Direction = enterLane.OutgoingDiretion[i];
+                    }
+                }
             }
 
             //Check if there is no car at the position the car wants to go to
             var d = _config.CarDistance;
             var collisionField = new Tuple<int,int,int,int>(fPos.Item1 - d, fPos.Item2 - d, fPos.Item1 + d, fPos.Item2 + d);
 
-            if (!_grid.Cars.Where(x => x != car).Any(x => SimulationUtility.IsInPosition(x.X, x.Y, collisionField)))
+            if (!_grid.Cars.Where(x => x != car).Any(x => collisionField.IsInPosition(x.X, x.Y)))
             {
                 car.X = fPos.Item1;
                 car.Y = fPos.Item2;
             }
+        }
+
+        public Tuple<int, int> MoveCarToPoint(CarEntity car, Tuple<int, int> point)
+        {
+            var angle = Math.Atan2(point.Item2 - car.Y, point.Item1 - car.X);
+            return new Tuple<int, int>(
+                car.X + (int)(Math.Cos(angle) * _config.CarSpeed),
+                car.Y + (int)(Math.Sin(angle) * _config.CarSpeed)
+                );
         }
 
         public void MovePedestrain(PedestrianEntity pedestrian)
@@ -150,16 +196,16 @@ namespace _4cube.Bussiness.Simulation
             switch (pedestrian.Direction)
             {
                 case Direction.Up:
-                    pedestrian.Y -= _pedestrianSpeed;
+                    pedestrian.Y -= _config.PedestrianSpeed;
                     break;
                 case Direction.Right:
-                    pedestrian.X += _pedestrianSpeed;
+                    pedestrian.X += _config.PedestrianSpeed;
                     break;
                 case Direction.Down:
-                    pedestrian.Y += _pedestrianSpeed;
+                    pedestrian.Y += _config.PedestrianSpeed;
                     break;
                 case Direction.Left:
-                    pedestrian.X -= _pedestrianSpeed;
+                    pedestrian.X -= _config.PedestrianSpeed;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
