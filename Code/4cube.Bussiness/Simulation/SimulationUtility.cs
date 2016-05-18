@@ -102,5 +102,10 @@ namespace _4cube.Bussiness.Simulation
             return new Tuple<int, int, int, int>(r1.Item1, r1.Item2, r2.Item1, r2.Item2);
         }
 
+        public static Direction RotatedDirection(this Direction old, Direction changed)
+        {
+            return (Direction)(((int)old + (int)changed) % 4);
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using _4cube.Common;
 using System.Linq;
+using _4cube.Common.Components;
 using _4cube.Common.Components.Crossroad;
 using _4cube.Common.Components.TrafficLight;
 
@@ -67,6 +68,19 @@ namespace _4cube.Bussiness.Config
             new Lane { BoundingBox = new Tuple<int, int, int, int>(122, 278, 200, 400), DirectionLane = Direction.Down, OutgoingDiretion = new Direction[] {}},
             new Lane { BoundingBox = new Tuple<int, int, int, int>(200, 278, 278, 400), DirectionLane = Direction.Up, OutgoingDiretion = new [] {Direction.Left}},
         };
+
+        public Lane[] GetLanesOfComponent(ComponentEntity component)
+        {
+            if (component is CrossroadAEntity)
+                return LanesA;
+            if (component is CrossroadBEntity)
+                return LanesB;
+            if (component is StraightRoadEntity)
+                return StraightRoad;
+            if (component is CurvedRoadEntity)
+                return CurvedRoad;
+            return null;
+        }
 
         public Lane[] LanesP { get; } =
         {

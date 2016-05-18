@@ -119,7 +119,7 @@ namespace _4cube.Bussiness.Simulation
             var component = _grid.Components.FirstOrDefault(x => x.X == gridPosition.Item1 && x.Y == gridPosition.Item2);
 
 
-            Lane[] lanes = _config.GetLanesOfComponent(component);
+            var lanes = _config.GetLanesOfComponent(component);
 
             var enterLane =
                     lanes.FirstOrDefault(
@@ -145,7 +145,7 @@ namespace _4cube.Bussiness.Simulation
                 {
                     exitLane =
                         lanes.First(
-                            x => !x.OutgoingDiretion.Any() && x.DirectionLane == car.Direction);
+                            x => !x.OutgoingDiretion.Any() && x.DirectionLane.RotatedDirection(component.Rotation) == car.Direction);
                     fPos = MoveCarToPoint(car, exitLane.EnterPoint);
                 }
             }
@@ -180,7 +180,7 @@ namespace _4cube.Bussiness.Simulation
                 else
                 {
                     var l = _config.GetLanesOfComponent(component)
-                        .Where(x => x.OutgoingDiretion.Any() && x.DirectionLane == car.Direction).ToArray();
+                        .Where(x => x.OutgoingDiretion.Any() && x.DirectionLane.RotatedDirection(component.Rotation) == car.Direction).ToArray();
                     if (!l.Any())
                     {
                         _grid.Cars.Remove(car);

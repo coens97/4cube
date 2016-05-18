@@ -37,8 +37,8 @@ namespace _4cube.UnitTest
         {
             var carOnLane = new CarEntity {X = 125, Y = 5}; // car on lane a1
             var carNotOnLane = new CarEntity { X = 120, Y = 180 }; // car not on lane a1
-            Assert.IsTrue(carOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1],0, 0));
-            Assert.IsFalse(carNotOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1], 0, 0));
+            Assert.IsTrue(carOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1],0, 0, _config.GridWidth, _config.GridHeight, Direction.Up));
+            Assert.IsFalse(carNotOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1], 0, 0, _config.GridWidth, _config.GridHeight, Direction.Up));
         }
 
         [TestMethod]
@@ -48,8 +48,8 @@ namespace _4cube.UnitTest
             var gridY = 400;
             var carOnLane = new CarEntity { X = gridX + 125, Y = gridY + 5 }; // car on lane a1
             var carNotOnLane = new CarEntity { X = gridX + 120, Y = gridY + 180 }; // car not on lane a1
-            Assert.IsTrue(carOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1], gridX, gridY));
-            Assert.IsFalse(carNotOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1], gridX, gridY));
+            Assert.IsTrue(carOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1], gridX, gridY, _config.GridWidth, _config.GridHeight, Direction.Up));
+            Assert.IsFalse(carNotOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1], gridX, gridY, _config.GridWidth, _config.GridHeight, Direction.Up));
         }
 
         [TestMethod]
@@ -106,5 +106,12 @@ namespace _4cube.UnitTest
 
         }
 
+        [TestMethod]
+        public void TestRotateDirection()
+        {
+            Assert.AreEqual(Direction.Right, Direction.Right.RotatedDirection(Direction.Up));
+            Assert.AreEqual(Direction.Up, Direction.Down.RotatedDirection(Direction.Down));
+            Assert.AreEqual(Direction.Down, Direction.Left.RotatedDirection(Direction.Left));
+        }
     }
 }

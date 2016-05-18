@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using _4cube.Common;
+using _4cube.Common.Components;
 using _4cube.Common.Components.TrafficLight;
 
 namespace _4cube.Bussiness.Config
@@ -24,5 +25,6 @@ namespace _4cube.Bussiness.Config
 
         Lane[] StraightRoad { get; }
         Lane[] CurvedRoad { get; }
+        Lane[] GetLanesOfComponent(ComponentEntity component);
     }
 }
