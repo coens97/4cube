@@ -98,9 +98,8 @@ namespace _4cube.Bussiness.Simulation
                         }
                     }
 
-
-
-                    if (_grid.Cars.Any(x=> x.IsInPosition(cr, c.X, c.Y)) || _grid.Pedestrians.Any(x => x.IsInPosition(pd, c.X, c.Y)))
+                    if (_grid.Cars.Any(x=> x.IsInPosition(cr, c.X, c.Y, _config.GridWidth,_config.GridHeight,c.Rotation)) 
+                        || _grid.Pedestrians.Any(x => x.IsInPosition(pd, c.X, c.Y, _config.GridWidth, _config.GridHeight, c.Rotation)))
                     {
                         tries = 0;
                     }
@@ -120,18 +119,7 @@ namespace _4cube.Bussiness.Simulation
             var component = _grid.Components.FirstOrDefault(x => x.X == gridPosition.Item1 && x.Y == gridPosition.Item2);
 
 
-            Lane[] lanes;
-
-            if (component is CrossroadAEntity)
-                lanes = _config.LanesA;
-            else if (component is CrossroadBEntity)
-                lanes = _config.LanesB;
-            else if (component is StraightRoadEntity)
-                lanes = _config.StraightRoad;
-            else if (component is CurvedRoadEntity)
-                lanes = _config.CurvedRoad;
-            else
-                throw new TypeAccessException("Unkown component on grid");
+            Lane[] lanes = _config.GetLanesOfComponent(component);
 
             var enterLane =
                     lanes.FirstOrDefault(
@@ -179,6 +167,33 @@ namespace _4cube.Bussiness.Simulation
             //Check if there is no car at the position the car wants to go to
             var d = _config.CarDistance;
             var collisionField = new Tuple<int,int,int,int>(fPos.Item1 - d, fPos.Item2 - d, fPos.Item1 + d, fPos.Item2 + d);
+
+            // Check if car crosses grid border hence go to other component
+            if (!Equals(SimulationUtility.GetGridPosition(car.X, car.Y, _config.GridWidth, _config.GridHeight), SimulationUtility.GetGridPosition(fPos.Item1, fPos.Item2, _config.GridWidth, _config.GridHeight)))
+            {
+                gridPosition = SimulationUtility.GetGridPosition(fPos.Item1, fPos.Item2, _config.GridWidth,
+                    _config.GridHeight);
+                if (gridPosition == null)//if car go out of the component
+                {
+                    _grid.Cars.Remove(car);
+                }
+                else
+                {
+                    var l = _config.GetLanesOfComponent(component)
+                        .Where(x => x.OutgoingDiretion.Any() && x.DirectionLane == car.Direction).ToArray();
+                    if (!l.Any())
+                    {
+                        _grid.Cars.Remove(car);
+                    }
+                    else
+                    {
+                        var random = new Random();
+                        var i = random.Next(l.Count());
+                        var lane = l[i];
+                        fPos = lane.EnterPoint;//fPos = MoveCarToPoint(car, lane.EnterPoint);
+                    }
+                }
+            }
 
             if (!_grid.Cars.Where(x => x != car).Any(x => collisionField.IsInPosition(x.X, x.Y)))
             {
@@ -272,10 +287,10 @@ namespace _4cube.Bussiness.Simulation
 
                 if (crossroad != null)
                 {
-                    if (car.IsInPosition(_config.GetAllLanesOfTrafficLight(crossroad.GetType()), gridPosition.Item1, gridPosition.Item2)) // is the car in any of the lanes of the crossroad
+                    if (car.IsInPosition(_config.GetAllLanesOfTrafficLight(crossroad.GetType()), gridPosition.Item1, gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation)) // is the car in any of the lanes of the crossroad
                     {
                         var trafficlightGroup = crossroad.GreenLightTimeEntities[crossroad.CurrentGreenLightGroup].TrafficLightGroup;
-                        if (car.IsInPosition(_config.CrossRoadCoordinatesCars[trafficlightGroup], gridPosition.Item1, gridPosition.Item2)) // Light is green of the lane it is tanding in
+                        if (car.IsInPosition(_config.CrossRoadCoordinatesCars[trafficlightGroup], gridPosition.Item1, gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation)) // Light is green of the lane it is tanding in
                             MoveCar(car);
                     }
                 }
