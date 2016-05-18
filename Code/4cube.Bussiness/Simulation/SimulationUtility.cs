@@ -7,20 +7,20 @@ namespace _4cube.Bussiness.Simulation
 {
     public static class SimulationUtility
     {
-        public static bool IsInPosition(this CarEntity car, Tuple<int, int, int, int>[] positions, int gridx, int gridy)
+        public static bool IsInPosition(this CarEntity car, Tuple<int, int, int, int>[] positions, int gridx, int gridy, int gridWidth, int gridHeight, Direction d)
         {
-            return IsInPosition(car.X, car.Y, positions, gridx, gridy);
+            return positions.IsInPosition(car.X, car.Y, gridx, gridy, gridWidth,gridHeight,d);
         }
 
-        public static bool IsInPosition(this PedestrianEntity ped, Tuple<int, int, int, int>[] positions, int gridx, int gridy)
+        public static bool IsInPosition(this PedestrianEntity ped, Tuple<int, int, int, int>[] positions, int gridx, int gridy, int gridWidth, int gridHeight, Direction d)
         {
-            return IsInPosition(ped.X, ped.Y, positions, gridx, gridy);
+            return positions.IsInPosition(ped.X, ped.Y, gridx, gridy, gridWidth, gridHeight, d);
         }
 
-        public static bool IsInPosition(int x, int y, Tuple<int, int, int, int>[] positions, int gridx, int gridy)
+        /*public static bool IsInPosition(int x, int y, Tuple<int, int, int, int>[] positions, int gridx, int gridy)
         {
             return positions.Any(pos => pos.IsInPosition(x, y, gridx, gridy));
-        }
+        }*/
 
         public static Tuple<int, int> GetGridPosition(int x, int y, int gridWidth, int gridHeight)
         {
@@ -39,8 +39,14 @@ namespace _4cube.Bussiness.Simulation
             return x.InBetween(pos.Item1, pos.Item3) && y.InBetween(pos.Item2, pos.Item4);
         }
 
-        public static bool IsInPosition(this Tuple<int, int, int, int> pos, int x, int y, int gridx, int gridy)
+        public static bool IsInPosition(this Tuple<int, int, int, int>[] inp, int x, int y, int gridx, int gridy, int gridWidth, int gridHeight, Direction d)
         {
+            return inp.Any(tup => tup.IsInPosition(x, y, gridx, gridy, gridWidth, gridHeight, d));
+        }
+
+        public static bool IsInPosition(this Tuple<int, int, int, int> inp, int x, int y, int gridx, int gridy, int gridWidth, int gridHeight, Direction d)
+        {
+            var pos = inp.Rotate(gridx, gridy, gridWidth, gridHeight,d);
             return x.InBetween(pos.Item1 + gridx, pos.Item3 + gridx) && y.InBetween(pos.Item2 + gridy, pos.Item4 + gridy);
         }
 
@@ -72,22 +78,28 @@ namespace _4cube.Bussiness.Simulation
             return new Tuple<int, int>((int) (cosTheta*(x - originX) - sinTheta*(y - originY) + originX), (int) (sinTheta*(x - originX) + cosTheta*(y - originY) + originY));
         }
 
-        public static Tuple<int, int, int, int>[] Rotate(Tuple<int, int, int, int>[] t, int gridX, int gridY,
+        public static Tuple<int, int, int, int>[] Rotate(this Tuple<int, int, int, int>[] t, int gridX, int gridY,
             int gridWidth, int gridHeight,Direction d)
         {
-            var originX = gridWidth/2+gridX;
-            var originY = gridHeight/2+gridY;
-
             var result = new Tuple<int, int, int, int>[t.Length];
 
             for (var i = 0; i < t.Length; i++)
             {
-                var r1 = Rotate(t[i].Item1, t[i].Item2, originX, originY, d);
-                var r2 = Rotate(t[i].Item3, t[i].Item4, originX, originY, d);
-                result[i]= new Tuple<int, int, int, int>(r1.Item1,r1.Item2,r2.Item1,r2.Item2);
+                result[i] = t[i].Rotate(gridX, gridY, gridWidth, gridHeight, d);
             }
 
             return result;
+        }
+
+        public static Tuple<int, int, int, int> Rotate(this Tuple<int, int, int, int> t, int gridX, int gridY,
+            int gridWidth, int gridHeight, Direction d)
+        {
+            var originX = gridWidth / 2 + gridX;
+            var originY = gridHeight / 2 + gridY;
+
+            var r1 = Rotate(t.Item1, t.Item2, originX, originY, d);
+            var r2 = Rotate(t.Item3, t.Item4, originX, originY, d);
+            return new Tuple<int, int, int, int>(r1.Item1, r1.Item2, r2.Item1, r2.Item2);
         }
 
     }

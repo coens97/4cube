@@ -137,7 +137,7 @@ namespace _4cube.Bussiness.Simulation
                     lanes.FirstOrDefault(
                         x =>
                             !x.OutgoingDiretion.Any() &&
-                            x.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2));
+                            x.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2, _config.GridWidth,_config.GridHeight, component.Rotation));
             if (enterLane != null)
             {
                 fPos = MoveCarToPoint(car, enterLane.ExitPoint);
