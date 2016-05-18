@@ -148,7 +148,7 @@ namespace _4cube.Bussiness.Simulation
                 lanes.FirstOrDefault(
                     x =>
                         x.OutgoingDiretion.Any() &&
-                        x.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2));
+                        x.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation));
                 if (exitLane != null)
                 {
                     fPos = MoveCarToPoint(car, exitLane.ExitPoint);
@@ -167,7 +167,7 @@ namespace _4cube.Bussiness.Simulation
             {
                 // If the car was first in an entering lane but now not anymore
                 if (!enterLane.BoundingBox.IsInPosition(fPos.Item1, fPos.Item2, gridPosition.Item1,
-                    gridPosition.Item2))
+                    gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation))
                 {
                     var random = new Random();
                     var i = random.Next(enterLane.OutgoingDiretion.Length);
