@@ -1,4 +1,6 @@
-﻿namespace _4cube.Common.Components.TrafficLight
+﻿using PropertyChanged;
+
+namespace _4cube.Common.Components.TrafficLight
 {
     public class GreenLightTimeEntity
     {

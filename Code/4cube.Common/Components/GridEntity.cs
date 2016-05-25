@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using PropertyChanged;
 using _4cube.Common.Ai;
 
 namespace _4cube.Common.Components
 {
+    [ImplementPropertyChanged]
     public class GridEntity
     {
         public List<CarEntity> Cars { get; set; }
