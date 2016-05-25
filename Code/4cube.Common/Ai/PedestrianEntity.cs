@@ -1,5 +1,8 @@
-﻿namespace _4cube.Common.Ai
+﻿using PropertyChanged;
+
+namespace _4cube.Common.Ai
 {
+    [ImplementPropertyChanged]
     public class PedestrianEntity
     {
         public Direction Direction { get; set; }

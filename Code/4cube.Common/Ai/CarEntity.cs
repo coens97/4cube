@@ -1,5 +1,9 @@
-﻿namespace _4cube.Common.Ai
+﻿
+using PropertyChanged;
+
+namespace _4cube.Common.Ai
 {
+    [ImplementPropertyChanged]
     public class CarEntity
     {
         public Direction Direction { get; set; }
