@@ -13,5 +13,6 @@ namespace _4cube.Presentation
     /// </summary>
     public partial class App : Application
     {
+        
     }
 }

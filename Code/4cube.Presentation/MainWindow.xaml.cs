@@ -20,9 +20,17 @@ namespace _4cube.Presentation
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly Window _resizeWindow = new GridResizingWindow();
+        private readonly Window _configWindow = new Configuration();
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+           _resizeWindow.Show();
+            _configWindow.Show();
         }
     }
 }

@@ -16,8 +16,8 @@
                 <Separator />
                 <MenuItem Header="_Exit" />
             </MenuItem>
-            <MenuItem Header="_View">
-                <MenuItem Header="_Resizing Grid" />
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Document settings" Click="MenuItem_Click" />
             </MenuItem>
         </Menu>
 
