@@ -1,13 +1,16 @@
 ﻿
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using PropertyChanged;
 
 namespace _4cube.Common.Ai
 {
     [ImplementPropertyChanged]
-    public class CarEntity
+    public class CarEntity : INotifyPropertyChanged
     {
         public Direction Direction { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
