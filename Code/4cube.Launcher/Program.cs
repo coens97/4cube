@@ -16,7 +16,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using _4cube.Bussiness.Config;
 using _4cube.Bussiness.Simulation;
+using _4cube.Data;
 
 namespace _4cube.Launcher
 {
@@ -27,8 +29,13 @@ namespace _4cube.Launcher
         {
             var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
-            var gridModel = kernel.Get<IGridModel>();
-            var simulation = kernel.Get<ISimulation>();
+
+            kernel.Bind<IGridModel>().To<GridModel>().InTransientScope();
+            kernel.Bind<IGridData>().To<GridData>().InTransientScope();
+            kernel.Bind<ISimulation>().To<Simulation>().InTransientScope();
+            kernel.Bind<MainWindow>().To<MainWindow>().InTransientScope();
+            kernel.Bind<IConfig>().To<Config>().InSingletonScope();
+
             var mainWindow = kernel.Get<MainWindow>();
 
             mainWindow.ShowDialog();

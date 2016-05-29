@@ -157,6 +157,16 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\4cube.Bussiness\4cube.Bussiness.csproj">
+      <Project>{15da131e-5f02-4f7f-a2c8-b04b7bf1e737}</Project>
+      <Name>4cube.Bussiness</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\4cube.Common\4cube.Common.csproj">
+      <Project>{9818d661-a219-4617-a92e-778baf03bf17}</Project>
+      <Name>4cube.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

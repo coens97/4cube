@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using _4cube.Bussiness;
 
 namespace _4cube.Presentation
 {
@@ -22,9 +23,11 @@ namespace _4cube.Presentation
     {
         private readonly Window _resizeWindow = new GridResizingWindow();
         private readonly Window _configWindow = new Configuration();
-        public MainWindow()
+        private readonly IGridModel _gridModel;
+        public MainWindow(IGridModel gridModel)
         {
             InitializeComponent();
+            _gridModel = gridModel;
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
