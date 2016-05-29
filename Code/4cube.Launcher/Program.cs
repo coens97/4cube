@@ -19,6 +19,7 @@ using System.Windows.Shapes;
 using _4cube.Bussiness.Config;
 using _4cube.Bussiness.Simulation;
 using _4cube.Data;
+using MainWindow = _4cube.Presentation.Window.MainWindow;
 
 namespace _4cube.Launcher
 {
