@@ -31,7 +31,7 @@ namespace _4cube.Launcher
             var kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
 
-            kernel.Bind<IGridModel>().To<GridModel>().InTransientScope();
+            kernel.Bind<IGridModel>().To<GridModel>().InSingletonScope();
             kernel.Bind<IGridData>().To<GridData>().InTransientScope();
             kernel.Bind<ISimulation>().To<Simulation>().InTransientScope();
             kernel.Bind<MainWindow>().To<MainWindow>().InTransientScope();

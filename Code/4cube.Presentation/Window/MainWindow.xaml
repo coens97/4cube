@@ -3,11 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:common="clr-namespace:_4cube.Common;assembly=4cube.Common"
+        xmlns:viewModel="clr-namespace:_4cube.Presentation.ViewModel"
         mc:Ignorable="d"
         Title="Traffic Simulator" Height="566.57" Width="1071.555">
     <Window.DataContext>
-        <common:GridEntity/>
+        <viewModel:MainViewModel/>
     </Window.DataContext>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
@@ -60,17 +60,7 @@
                 </Grid>
 
             </GroupBox>
-
-            <!--<Grid Margin="296,23,10.111,11" Background="White">
-                <ItemsControl ItemsSource="{Binding Cars, UpdateSourceTrigger=PropertyChanged}" Height="484" Margin="0,0,-0.111,0" VerticalAlignment="Top" RenderTransformOrigin="0.434,0.434">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Ellipse Fill="Yellow" Width="10" Height="10" Stroke="Black" HorizontalAlignment="Left" Margin="{Binding Converter={StaticResource MarginConverter}}" />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </Grid>-->
-            <ItemsControl ItemsSource="{Binding Cars}">
+            <ItemsControl ItemsSource="{Binding GridItems}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Canvas Margin="296,23,10.111,11" Background="White" />
