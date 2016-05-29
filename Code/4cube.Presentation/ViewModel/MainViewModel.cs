@@ -24,9 +24,14 @@ namespace _4cube.Presentation.ViewModel
         {
             _gridModel = gridModel;
             
+            // Test data.. should be deleted later
             _gridModel.Grid = new GridEntity
             {
-                Pedestrians = new ObservableCollection<PedestrianEntity>(),
+                Pedestrians = new ObservableCollection<PedestrianEntity>(new[]
+                {
+                    new PedestrianEntity { X = 160, Y = 50 },
+                    new PedestrianEntity { X = 160, Y = 240 }
+                }),
                 Components = new ObservableCollection<ComponentEntity>(),
                 Cars = new ObservableCollection<CarEntity>(new[]
                {
