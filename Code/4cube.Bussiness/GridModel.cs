@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,11 +16,11 @@ namespace _4cube.Bussiness
 {
     public class GridModel : IGridModel
     {
-        public GridEntity _grid = new GridEntity
+        public GridEntity Grid { get; set; } = new GridEntity
         {
-            Pedestrians = new List<Common.Ai.PedestrianEntity>(),
-            Components = new List<ComponentEntity>(),
-            Cars = new List<Common.Ai.CarEntity>()
+            Pedestrians = new ObservableCollection<Common.Ai.PedestrianEntity>(),
+            Components = new ObservableCollection<ComponentEntity>(),
+            Cars = new ObservableCollection<Common.Ai.CarEntity>()
         };
 
         private readonly IGridData _datalayer;
@@ -30,12 +31,12 @@ namespace _4cube.Bussiness
 
         public void AddComponent(ComponentEntity component)
         {
-            _grid.Components.Add(component);
+            Grid.Components.Add(component);
         }
 
         public void DeleteComponent(ComponentEntity component)
         {
-            _grid.Components.Remove(component);
+            Grid.Components.Remove(component);
         }
 
         public void GreenLight(CrossroadEntity e, TrafficLightGroup t, int n)
@@ -49,17 +50,17 @@ namespace _4cube.Bussiness
 
         public void OpenFile(string path)
         {
-            _grid = _datalayer.OpenFile(path);
+            Grid = _datalayer.OpenFile(path);
         }
 
         public void ResizeGrid(int w, int h)
         {
-            if (_grid.Components.Any(x => x.X > w || x.Y > h))
+            if (Grid.Components.Any(x => x.X > w || x.Y > h))
             {
                 throw new Exception("Components are outside of the grid");
             }
-            _grid.Width = w;
-            _grid.Height = h;
+            Grid.Width = w;
+            Grid.Height = h;
         }
 
         public void RotateComponent(ComponentEntity component)
@@ -85,7 +86,7 @@ namespace _4cube.Bussiness
 
         public void SaveFile(string path)
         {
-            _datalayer.SaveFile(path, _grid);
+            _datalayer.SaveFile(path, Grid);
         }
     }
 }

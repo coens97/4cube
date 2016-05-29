@@ -3,9 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:_4cube.Presentation"
+        xmlns:common="clr-namespace:_4cube.Common;assembly=4cube.Common"
         mc:Ignorable="d"
         Title="Traffic Simulator" Height="566.57" Width="1071.555">
+    <Window.DataContext>
+        <common:GridEntity/>
+    </Window.DataContext>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
@@ -26,10 +29,10 @@
                 <TabItem Header="Crossing" Margin="-2,-2,-2.222,0">
                     <Grid Margin="10,11,0,5.111" HorizontalAlignment="Left" Width="120">
                         <Border BorderThickness="1" BorderBrush="#FF000000">
-                            <Image Source="Resources/A.png" />
+                            <Image Source="..\Resources\A.png" />
                         </Border>
                         <Border BorderThickness="1" BorderBrush="#FF000000" Margin="125,0,-125,-0.333">
-                            <Image Source="Resources/B.png" />
+                            <Image Source="..\Resources\B.png" />
                         </Border>
                     </Grid>
                 </TabItem>
@@ -37,10 +40,10 @@
                 <TabItem Header="Road" >
                     <Grid Margin="10,11,0,5.444" HorizontalAlignment="Left" Width="120">
                         <Border BorderThickness="1" BorderBrush="#FF000000">
-                            <Image Source="Resources/roada.png" />
+                            <Image Source="..\Resources/roada.png" />
                         </Border>
                         <Border BorderThickness="1" BorderBrush="#FF000000" Margin="125,0,-125,-0.333">
-                            <Image Source="Resources/roadb.png" />
+                            <Image Source="..\Resources/roadb.png" />
                         </Border>
                     </Grid>
                 </TabItem>
@@ -48,7 +51,7 @@
 
             <GroupBox x:Name="GroupBox" Header="Simulation" HorizontalAlignment="Left" Margin="10,176,0,10.445" Width="269">
                 <Grid Margin="0,0,-0.111,2">
-                    <Button x:Name="BtnStartStop" Content="Start" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Width="236" Height="39"/>
+                    <Button x:Name="BtnStartStop" Content="Start" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Width="236" Height="39" Click="BtnStartStop_Click"/>
                     <Button x:Name="BtnPause" Content="Pause" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Width="236" Height="39"/>
                     <Slider x:Name="slider" Margin="11,188,10,73.889" RenderTransformOrigin="0.967,0.544"/>
                     <Label x:Name="label" Content="Change simulation speed:" Margin="10,137,28,0" RenderTransformOrigin="0.407,0.446" Height="26" VerticalAlignment="Top"/>
@@ -58,12 +61,35 @@
 
             </GroupBox>
 
-            <Grid Margin="296,23,10.111,11" Background="White"/>
+            <!--<Grid Margin="296,23,10.111,11" Background="White">
+                <ItemsControl ItemsSource="{Binding Cars, UpdateSourceTrigger=PropertyChanged}" Height="484" Margin="0,0,-0.111,0" VerticalAlignment="Top" RenderTransformOrigin="0.434,0.434">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Ellipse Fill="Yellow" Width="10" Height="10" Stroke="Black" HorizontalAlignment="Left" Margin="{Binding Converter={StaticResource MarginConverter}}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>-->
+            <ItemsControl ItemsSource="{Binding Cars}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas Margin="296,23,10.111,11" Background="White" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Ellipse Fill="Yellow" Width="10" Height="10" Stroke="Black" HorizontalAlignment="Left" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                        <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
         </Grid>
 
     </DockPanel>
 
 </Window>
-
-
-

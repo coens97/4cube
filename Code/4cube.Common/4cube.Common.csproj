@@ -47,13 +47,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ai\CarEntity.cs" />
+    <Compile Include="IPosition.cs" />
     <Compile Include="Ai\PedestrianEntity.cs" />
     <Compile Include="Components\ComponentEntity.cs" />
     <Compile Include="Components\Crossroad\CrossroadAEntity.cs" />
     <Compile Include="Components\Crossroad\CrossroadBEntity.cs" />
     <Compile Include="Components\Crossroad\CrossroadEntity.cs" />
     <Compile Include="Components\CurvedRoadEntity.cs" />
-    <Compile Include="Components\GridEntity.cs" />
+    <Compile Include="GridEntity.cs" />
     <Compile Include="Components\RoadEntity.cs" />
     <Compile Include="Components\StraightRoadEntity.cs" />
     <Compile Include="Components\TrafficLight\GreenLightTimeEntity.cs" />

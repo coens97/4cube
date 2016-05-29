@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _4cube.Data;
 using _4cube.Common;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using _4cube.Common.Ai;
 using _4cube.Common.Components;
@@ -23,9 +24,9 @@ namespace _4cube.UnitTest
 
             var testgrid = new GridEntity
             {
-                Pedestrians = new List<PedestrianEntity>(),
-                Components = new List<ComponentEntity>(),
-                Cars = new List<CarEntity>()
+                Pedestrians = new ObservableCollection<PedestrianEntity>(),
+                Components = new ObservableCollection<ComponentEntity>(),
+                Cars = new ObservableCollection<CarEntity>()
             };
             testgrid.Pedestrians.Add(pds1);
             testgrid.Pedestrians.Add(pds2);

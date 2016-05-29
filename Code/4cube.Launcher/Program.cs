@@ -38,7 +38,6 @@ namespace _4cube.Launcher
             kernel.Bind<IConfig>().To<Config>().InSingletonScope();
 
             var mainWindow = kernel.Get<MainWindow>();
-
             mainWindow.ShowDialog();
         }
     }

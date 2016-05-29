@@ -6,7 +6,7 @@ using PropertyChanged;
 namespace _4cube.Common.Ai
 {
     [ImplementPropertyChanged]
-    public class CarEntity : INotifyPropertyChanged
+    public class CarEntity : INotifyPropertyChanged, IPosition
     {
         public Direction Direction { get; set; }
         public int X { get; set; }

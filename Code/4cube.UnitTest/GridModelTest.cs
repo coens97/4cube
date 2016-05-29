@@ -41,10 +41,10 @@ namespace _4cube.UnitTest
 
             _gridModel.AddComponent(component);
 
-            Assert.AreEqual(_gridModel._grid.Components.Count, 1);
+            Assert.AreEqual(_gridModel.Grid.Components.Count, 1);
 
             _gridModel.DeleteComponent(component);
-            Assert.AreEqual(_gridModel._grid.Components.Count, 0);
+            Assert.AreEqual(_gridModel.Grid.Components.Count, 0);
         }
 
         [TestMethod]
@@ -66,8 +66,8 @@ namespace _4cube.UnitTest
         {
 
             _gridModel.ResizeGrid(500, 400);
-            Assert.AreEqual(_gridModel._grid.Width, 500);
-            Assert.AreEqual(_gridModel._grid.Height, 400);
+            Assert.AreEqual(_gridModel.Grid.Width, 500);
+            Assert.AreEqual(_gridModel.Grid.Height, 400);
         }
 
       [TestMethod]

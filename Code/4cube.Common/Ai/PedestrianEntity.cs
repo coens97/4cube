@@ -4,7 +4,7 @@ using System.ComponentModel;
 namespace _4cube.Common.Ai
 {
     [ImplementPropertyChanged]
-    public class PedestrianEntity : INotifyPropertyChanged
+    public class PedestrianEntity : INotifyPropertyChanged, IPosition
     {
         public Direction Direction { get; set; }
         public int X { get; set; }

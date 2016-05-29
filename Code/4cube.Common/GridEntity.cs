@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using PropertyChanged;
 using _4cube.Common.Ai;
+using _4cube.Common.Components;
 
-namespace _4cube.Common.Components
+namespace _4cube.Common
 {
     [ImplementPropertyChanged]
     public class GridEntity : INotifyPropertyChanged
     {
-        public List<CarEntity> Cars { get; set; }
-        public List<ComponentEntity> Components { get; set; }
+        public ObservableCollection<CarEntity> Cars { get; set; }
+        public ObservableCollection<ComponentEntity> Components { get; set; }
         public double Height { get; set; }
-        public List<PedestrianEntity> Pedestrians { get; set; }
+        public ObservableCollection<PedestrianEntity> Pedestrians { get; set; }
         public double Width { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
     }
