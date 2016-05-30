@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4cube.Bussiness", "4cube.Bu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4cube.UnitTest", "4cube.UnitTest\4cube.UnitTest.csproj", "{E567EAF4-00A0-49C1-9422-3BF393348A56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4cube.Launcher", "4cube.Launcher\4cube.Launcher.csproj", "{5C0E12D5-1666-4DC9-9DE3-6915F4855CCD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,10 +39,6 @@ Global
 		{E567EAF4-00A0-49C1-9422-3BF393348A56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E567EAF4-00A0-49C1-9422-3BF393348A56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E567EAF4-00A0-49C1-9422-3BF393348A56}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C0E12D5-1666-4DC9-9DE3-6915F4855CCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C0E12D5-1666-4DC9-9DE3-6915F4855CCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C0E12D5-1666-4DC9-9DE3-6915F4855CCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C0E12D5-1666-4DC9-9DE3-6915F4855CCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -52,6 +52,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PropertyChanged, Version=1.51.0.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged.Fody.1.51.0\lib\dotnet\PropertyChanged.dll</HintPath>
       <Private>False</Private>
@@ -174,6 +178,10 @@
     <ProjectReference Include="..\4cube.Common\4cube.Common.csproj">
       <Project>{9818d661-a219-4617-a92e-778baf03bf17}</Project>
       <Name>4cube.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\4cube.Data\4cube.Data.csproj">
+      <Project>{24fc6135-dcf2-407a-97d8-21b26a61cd2b}</Project>
+      <Name>4cube.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
