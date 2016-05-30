@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:_4cube.Presentation.ViewModel"
         xmlns:ai="clr-namespace:_4cube.Common.Ai;assembly=4cube.Common"
+        xmlns:cross="clr-namespace:_4cube.Common.Components.Crossroad;assembly=4cube.Common"
         mc:Ignorable="d"
         Title="Traffic Simulator" Height="566.57" Width="1071.555">
     <Window.DataContext>
@@ -73,6 +74,9 @@
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type ai:PedestrianEntity}">
                         <Ellipse Fill="Blue" Width="10" Height="10" Stroke="Black"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type cross:CrossroadAEntity}">
+                        <Image Source="../Resources/A.png"/>
                     </DataTemplate>
                 </ItemsControl.Resources>
                 <ItemsControl.ItemContainerStyle>

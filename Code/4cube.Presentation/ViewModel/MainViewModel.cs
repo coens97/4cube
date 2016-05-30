@@ -7,6 +7,7 @@ using _4cube.Bussiness;
 using _4cube.Common;
 using _4cube.Common.Ai;
 using _4cube.Common.Components;
+using _4cube.Common.Components.Crossroad;
 
 namespace _4cube.Presentation.ViewModel
 {
@@ -32,7 +33,10 @@ namespace _4cube.Presentation.ViewModel
                     new PedestrianEntity { X = 160, Y = 50 },
                     new PedestrianEntity { X = 160, Y = 240 }
                 }),
-                Components = new ObservableCollection<ComponentEntity>(),
+                Components = new ObservableCollection<ComponentEntity>(new[]
+                {
+                    new CrossroadAEntity { X = 400, Y= 400 }
+                }),
                 Cars = new ObservableCollection<CarEntity>(new[]
                {
                     new CarEntity { X = 100, Y = 200 },
