@@ -25,6 +25,8 @@ namespace _4cube.Presentation.ViewModel
 
         public int Width { get; set; }
         public int Height { get; set; }
+        public int ScaledWidth { get; set; }
+        public int ScaledHeight { get; set; }
 
         public MainViewModel() { }
         public MainViewModel(IGridModel gridModel, IConfig config)
@@ -62,6 +64,8 @@ namespace _4cube.Presentation.ViewModel
 
             Width = grid.Width * config.GridWidth;
             Height = grid.Width * config.GridHeight;
+            ScaledWidth = Width/config.GetScale;
+            ScaledHeight = Height/config.GetScale;
 
             grid.PropertyChanged += GridOnPropertyChanged;
         }
@@ -72,9 +76,11 @@ namespace _4cube.Presentation.ViewModel
             {
                 case "Width":
                     Width = _gridModel.Grid.Width * _config.GridWidth;
+                    ScaledWidth = Width / _config.GetScale;
                     break;
                 case "Height":
                     Height = _gridModel.Grid.Height * _config.GridHeight;
+                    ScaledHeight = Height / _config.GetScale;
                     break;
             }
         }

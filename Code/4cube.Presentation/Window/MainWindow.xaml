@@ -65,30 +65,32 @@
 
             <ScrollViewer HorizontalScrollBarVisibility="Auto"
               VerticalScrollBarVisibility="Auto" Margin="296,23,10.111,11">
-                <ItemsControl ItemsSource="{Binding GridItems}">
-                <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <Canvas Background="White" Height="{Binding Width}" Width="{Binding Height}" />
-                        </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.Resources>
-                    <DataTemplate DataType="{x:Type ai:CarEntity}">
-                        <Ellipse Fill="Yellow" Width="10" Height="10" Stroke="Black"/>
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type ai:PedestrianEntity}">
-                        <Ellipse Fill="Blue" Width="10" Height="10" Stroke="Black"/>
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type cross:CrossroadAEntity}">
-                        <Image Source="../Resources/A.png"/>
-                    </DataTemplate>
-                </ItemsControl.Resources>
-                <ItemsControl.ItemContainerStyle>
-                    <Style TargetType="ContentPresenter">
-                        <Setter Property="Canvas.Left" Value="{Binding X}"/>
-                        <Setter Property="Canvas.Top" Value="{Binding Y}"/>
-                    </Style>
-                </ItemsControl.ItemContainerStyle>
-            </ItemsControl>
+                <Viewbox Width="{Binding ScaledWidth}" Height="{Binding ScaledHeight}" StretchDirection="Both" Stretch="Uniform">
+                    <ItemsControl ItemsSource="{Binding GridItems}">
+                    <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Canvas Background="White" Height="{Binding Width}" Width="{Binding Height}" />
+                            </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.Resources>
+                        <DataTemplate DataType="{x:Type ai:CarEntity}">
+                            <Ellipse Fill="Yellow" Width="20" Height="20" Stroke="Black"/>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type ai:PedestrianEntity}">
+                            <Ellipse Fill="Blue" Width="20" Height="20" Stroke="Black"/>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type cross:CrossroadAEntity}">
+                            <Image Source="../Resources/A.png"/>
+                        </DataTemplate>
+                    </ItemsControl.Resources>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="ContentPresenter">
+                            <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                            <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                </ItemsControl>
+                </Viewbox>
             </ScrollViewer>
         </Grid>
 

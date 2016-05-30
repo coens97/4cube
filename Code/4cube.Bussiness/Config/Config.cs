@@ -15,6 +15,7 @@ namespace _4cube.Bussiness.Config
         public int CarDistance { get; } = 10;
         public int CarSpeed { get; } = 4;
         public int PedestrianSpeed { get; } = 1;
+        public int GetScale { get; } = 2;
 
 
         public Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]> CrossRoadCoordinatesCars { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]>();
