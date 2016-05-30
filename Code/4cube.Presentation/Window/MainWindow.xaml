@@ -62,11 +62,14 @@
                 </Grid>
 
             </GroupBox>
-            <ItemsControl ItemsSource="{Binding GridItems}">
+
+            <ScrollViewer HorizontalScrollBarVisibility="Auto"
+              VerticalScrollBarVisibility="Auto" Margin="296,23,10.111,11">
+                <ItemsControl ItemsSource="{Binding GridItems}">
                 <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas Margin="296,23,10.111,11" Background="White" />
-                    </ItemsPanelTemplate>
+                        <ItemsPanelTemplate>
+                            <Canvas Background="White" Height="{Binding Width}" Width="{Binding Height}" />
+                        </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.Resources>
                     <DataTemplate DataType="{x:Type ai:CarEntity}">
@@ -86,6 +89,7 @@
                     </Style>
                 </ItemsControl.ItemContainerStyle>
             </ItemsControl>
+            </ScrollViewer>
         </Grid>
 
     </DockPanel>

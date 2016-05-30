@@ -12,9 +12,9 @@ namespace _4cube.Common
     {
         public ObservableCollection<CarEntity> Cars { get; set; }
         public ObservableCollection<ComponentEntity> Components { get; set; }
-        public double Height { get; set; }
+        public int Height { get; set; }
         public ObservableCollection<PedestrianEntity> Pedestrians { get; set; }
-        public double Width { get; set; }
+        public int Width { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

@@ -1,9 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Data;
 using PropertyChanged;
 using _4cube.Bussiness;
+using _4cube.Bussiness.Config;
 using _4cube.Common;
 using _4cube.Common.Ai;
 using _4cube.Common.Components;
@@ -19,9 +21,13 @@ namespace _4cube.Presentation.ViewModel
         public CompositeCollection GridItems { get; set; } = new CompositeCollection();
 
         private IGridModel _gridModel;
+        private IConfig _config;
+
+        public int Width { get; set; }
+        public int Height { get; set; }
 
         public MainViewModel() { }
-        public MainViewModel(IGridModel gridModel)
+        public MainViewModel(IGridModel gridModel, IConfig config)
         {
             _gridModel = gridModel;
             
@@ -42,13 +48,35 @@ namespace _4cube.Presentation.ViewModel
                     new CarEntity { X = 100, Y = 200 },
                     new CarEntity { X = 20, Y = 40 },
                     new CarEntity { X = 350, Y = 100 }
-                })
+                }),
+                Width = 10,
+                Height = 8
             };
 
             var grid = _gridModel.Grid;
             GridItems.Add(new CollectionContainer() {Collection = grid.Cars});
             GridItems.Add(new CollectionContainer() {Collection = grid.Pedestrians});
             GridItems.Add(new CollectionContainer() {Collection = grid.Components});
+
+            _config = config;
+
+            Width = grid.Width * config.GridWidth;
+            Height = grid.Width * config.GridHeight;
+
+            grid.PropertyChanged += GridOnPropertyChanged;
+        }
+
+        private void GridOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            switch (propertyChangedEventArgs.PropertyName)
+            {
+                case "Width":
+                    Width = _gridModel.Grid.Width * _config.GridWidth;
+                    break;
+                case "Height":
+                    Height = _gridModel.Grid.Height * _config.GridHeight;
+                    break;
+            }
         }
     }
 }
