@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="_4cube.Presentation.UserControl.ComponentControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:components="clr-namespace:_4cube.Common.Components;assembly=4cube.Common"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="400">
+    <UserControl.DataContext>
+        <components:ComponentEntity/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="image" HorizontalAlignment="Left" VerticalAlignment="Top" Height="0" Width="0"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="177,0,0,0" TextWrapping="Wrap" Text="{Binding NrOfIncomingCars[0]}" VerticalAlignment="Top" Width="48" Grid.ColumnSpan="2" />
+        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" Margin="0,200,0,0" TextWrapping="Wrap" Text="{Binding NrOfIncomingCars[3]}" VerticalAlignment="Top" Width="48"/>
+        <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Height="23" Margin="152,200,0,0" TextWrapping="Wrap" Text="{Binding NrOfIncomingCars[1]}" VerticalAlignment="Top" Width="48" Grid.Column="1"/>
+        <TextBox x:Name="textBox_Copy2" HorizontalAlignment="Left" Height="23" Margin="177,377,0,0" TextWrapping="Wrap" Text="{Binding NrOfIncomingCars[2]}" VerticalAlignment="Top" Width="48" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
+
+        </TextBox>
+
+    </Grid>
+</UserControl>
