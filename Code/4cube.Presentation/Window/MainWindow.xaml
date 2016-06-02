@@ -31,10 +31,10 @@
                 <TabItem Header="Crossing" Margin="-2,-2,-2.222,0">
                     <Grid Margin="10,11,0,5.111" HorizontalAlignment="Left" Width="120">
                         <Border BorderThickness="1" BorderBrush="#FF000000">
-                            <Image Source="../Resources/A.png" />
+                            <Image x:Name="CrossroadA" Source="../Resources/A.png" MouseDown="Image_MouseDown" />
                         </Border>
                         <Border BorderThickness="1" BorderBrush="#FF000000" Margin="125,0,-125,-0.333">
-                            <Image Source="..\Resources\B.png" />
+                            <Image x:Name="CrossroadB" Source="..\Resources\B.png" MouseDown="Image_MouseDown" />
                         </Border>
                     </Grid>
                 </TabItem>
@@ -42,10 +42,10 @@
                 <TabItem Header="Road" >
                     <Grid Margin="10,11,0,5.444" HorizontalAlignment="Left" Width="120">
                         <Border BorderThickness="1" BorderBrush="#FF000000">
-                            <Image Source="..\Resources/roada.png" />
+                            <Image x:Name="RoadA" Source="..\Resources/roada.png" MouseDown="Image_MouseDown" />
                         </Border>
                         <Border BorderThickness="1" BorderBrush="#FF000000" Margin="125,0,-125,-0.333">
-                            <Image Source="..\Resources/roadb.png" />
+                            <Image x:Name="RoadB" Source="..\Resources/roadb.png" MouseDown="Image_MouseDown" />
                         </Border>
                     </Grid>
                 </TabItem>
@@ -69,7 +69,7 @@
                     <ItemsControl ItemsSource="{Binding GridItems}">
                     <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <Canvas Height="{Binding Width}" Width="{Binding Height}">
+                                <Canvas Height="{Binding Width}" Width="{Binding Height}" MouseUp="Canvas_MouseUp">
                                     <Canvas.Background>
                                         <DrawingBrush Stretch="None" TileMode="Tile"
                           Viewport="0,0 400,400" ViewportUnits="Absolute">

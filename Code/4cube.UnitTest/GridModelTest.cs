@@ -74,10 +74,10 @@ namespace _4cube.UnitTest
 
         public void TestGreenlight()
         {
-            var cr = new CrossroadAEntity {GreenLightTimeEntities = new List<GreenLightTimeEntity>(new []
+            var cr = new CrossroadAEntity {GreenLightTimeEntities = new []
             {
                 new GreenLightTimeEntity { Duration = 5, TrafficLightGroup = TrafficLightGroup.A4}
-            })};
+            }};
 
             Assert.AreEqual(cr.GreenLightTimeEntities.First(x => x.TrafficLightGroup == TrafficLightGroup.A4).Duration, 5);
 
