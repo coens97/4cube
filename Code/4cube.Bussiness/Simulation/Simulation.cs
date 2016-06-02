@@ -36,9 +36,43 @@ namespace _4cube.Bussiness.Simulation
         private void TimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
         {
             _time++;
+            SpawnACar();
             ProcessTrafficLight();
             ProcessCar();
             ProcessPedestrain();
+        }
+
+        private void SpawnACar()
+        {
+            //Create cars
+            foreach (var compo in _grid.Components)
+            {
+                for (int i = 0; i < compo.NrOfIncomingCars.Length; i++)
+                    if (compo.NrOfIncomingCarsSpawned[i] < compo.NrOfIncomingCars[i])
+                    {
+                        var direction = (Direction) ((i + 2)%4);
+                        var laneList =
+                            _config.GetLanesOfComponent(compo)
+                                .Where(x => x.DirectionLane == direction && !x.OutgoingDiretion.Any())
+                                .ToArray();
+                        var rd = new Random();
+                        var laneIndex = rd.Next(0, laneList.Count() - 1);
+                        var laneSpawnPoint = laneList[laneIndex].EnterPoint;
+                        var d = _config.CarDistance;
+                        var collisionField = new Tuple<int, int, int, int>(laneSpawnPoint.Item1 - d,
+                            laneSpawnPoint.Item2 - d, laneSpawnPoint.Item1 + d, laneSpawnPoint.Item2 + d);
+                        if (!_grid.Cars.Any(x => collisionField.IsInPosition(x.X, x.Y)))
+                        {
+                            _grid.Cars.Add(new CarEntity
+                            {
+                                Direction = direction,
+                                X = laneSpawnPoint.Item1,
+                                Y = laneSpawnPoint.Item2
+                            });
+                            compo.NrOfIncomingCarsSpawned[i]++;
+                        }
+                    }
+            }
         }
 
         public void ChangeSpeed(double n)
