@@ -55,7 +55,7 @@
                 <Grid Margin="0,0,-0.111,2">
                     <Button x:Name="BtnStartStop" Content="Start" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Width="236" Height="39" Click="BtnStartStop_Click"/>
                     <Button x:Name="BtnPause" Content="Pause" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Width="236" Height="39"/>
-                    <Slider x:Name="slider" Margin="11,188,10,73.889" RenderTransformOrigin="0.967,0.544"/>
+                    <Slider x:Name="slider" Margin="11,188,10,73.889" RenderTransformOrigin="0.967,0.544" Minimum="1" Value="{Binding Speed}"/>
                     <Label x:Name="label" Content="Change simulation speed:" Margin="10,137,28,0" RenderTransformOrigin="0.407,0.446" Height="26" VerticalAlignment="Top"/>
                     <Button x:Name="BtnShowReport" Content="Show Report" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Width="236" Height="39"/>
 

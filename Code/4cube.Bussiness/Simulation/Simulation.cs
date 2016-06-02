@@ -28,7 +28,7 @@ namespace _4cube.Bussiness.Simulation
 
         public Simulation(IConfig config)
         {
-            _timer = new Timer(1000);
+            _timer = new Timer(16);
             _timer.Elapsed += TimerOnElapsed;
             _config = config;
         }
@@ -75,7 +75,7 @@ namespace _4cube.Bussiness.Simulation
             }
         }
 
-        public void ChangeSpeed(double n)
+        public void ChangeSpeed(int n)
         {
             _timer.Interval = n;
 

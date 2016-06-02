@@ -6,6 +6,7 @@ using System.Windows.Data;
 using PropertyChanged;
 using _4cube.Bussiness;
 using _4cube.Bussiness.Config;
+using _4cube.Bussiness.Simulation;
 using _4cube.Common;
 using _4cube.Common.Ai;
 using _4cube.Common.Components;
@@ -21,17 +22,20 @@ namespace _4cube.Presentation.ViewModel
         public CompositeCollection GridItems { get; set; } = new CompositeCollection();
 
         private IGridModel _gridModel;
+        private ISimulation _simulation;
         private IConfig _config;
 
         public int Width { get; set; }
         public int Height { get; set; }
         public int ScaledWidth { get; set; }
         public int ScaledHeight { get; set; }
+        public int Speed { get; set; }
 
         public MainViewModel() { }
-        public MainViewModel(IGridModel gridModel, IConfig config)
+        public MainViewModel(IGridModel gridModel, IConfig config, ISimulation simulation)
         {
             _gridModel = gridModel;
+            _simulation = simulation;
             
             // Test data.. should be deleted later
             _gridModel.Grid = new GridEntity
@@ -68,6 +72,18 @@ namespace _4cube.Presentation.ViewModel
             ScaledHeight = Height/config.GetScale;
 
             grid.PropertyChanged += GridOnPropertyChanged;
+
+            this.PropertyChanged += OnPropertyChanged;
+        }
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            switch (propertyChangedEventArgs.PropertyName)
+            {
+                case "Speed":
+                    _simulation.ChangeSpeed((10 - Speed) * 4 + 16);
+                    break;
+            }
         }
 
         private void GridOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
