@@ -49,7 +49,8 @@ namespace _4cube.Bussiness.Simulation
             //Create cars
             foreach (var compo in _grid.Components)
             {
-                for (int i = 0; i < compo.NrOfIncomingCars.Length; i++)
+                for (var i = 0; i < compo.NrOfIncomingCars.Length; i++)
+                { 
                     if (compo.NrOfIncomingCarsSpawned[i] < compo.NrOfIncomingCars[i])
                     {
                         var direction = (Direction) ((i + 2)%4);
@@ -65,16 +66,16 @@ namespace _4cube.Bussiness.Simulation
                             laneSpawnPoint.Item2 - d, laneSpawnPoint.Item1 + d, laneSpawnPoint.Item2 + d);
                         if (!_grid.Cars.Any(x => collisionField.IsInPosition(x.X, x.Y)))
                         {
-                            _uiContext.Send(x =>
-                                _grid.Cars.Add(new CarEntity
-                                {
-                                    Direction = direction,
-                                    X = laneSpawnPoint.Item1,
-                                    Y = laneSpawnPoint.Item2
-                                }), null);
+                            _grid.Cars.Add(new CarEntity
+                            {
+                                Direction = direction,
+                                X = laneSpawnPoint.Item1 + compo.X,
+                                Y = laneSpawnPoint.Item2 + compo.Y
+                            });
                             compo.NrOfIncomingCarsSpawned[i]++;
                         }
                     }
+                }
             }
         }
 

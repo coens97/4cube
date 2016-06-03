@@ -17,6 +17,7 @@ namespace _4cube.Presentation.ViewModel
     [ImplementPropertyChanged]
     public class MainViewModel : INotifyPropertyChanged
     {
+        private static object _lock = new object();
         public event PropertyChangedEventHandler PropertyChanged;
 
         public CompositeCollection GridItems { get; set; } = new CompositeCollection();
@@ -62,6 +63,7 @@ namespace _4cube.Presentation.ViewModel
             };
             _config = config;
 
+            BindingOperations.EnableCollectionSynchronization(GridItems, _lock);
             LoadGrid(_gridContainer.Grid);
 
             _gridContainer.PropertyChanged += GridContainerOnPropertyChanged;
@@ -85,6 +87,8 @@ namespace _4cube.Presentation.ViewModel
             GridItems.Add(new CollectionContainer { Collection = grid.Components });
             GridItems.Add(new CollectionContainer {Collection = grid.Cars});
             GridItems.Add(new CollectionContainer {Collection = grid.Pedestrians});
+            BindingOperations.EnableCollectionSynchronization(grid.Cars, _lock);
+            BindingOperations.EnableCollectionSynchronization(grid.Pedestrians, _lock);
 
             Width = grid.Width * _config.GridWidth;
             Height = grid.Width * _config.GridHeight;
