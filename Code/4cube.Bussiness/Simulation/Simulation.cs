@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using _4cube.Common;
 using _4cube.Common.Components;
@@ -13,6 +14,7 @@ using System.Timers;
 using _4cube.Bussiness.Config;
 using _4cube.Common.Ai;
 using _4cube.Common.Components.Crossroad;
+using Timer = System.Timers.Timer;
 
 namespace _4cube.Bussiness.Simulation
 
@@ -24,10 +26,10 @@ namespace _4cube.Bussiness.Simulation
         // private IReport _report;
         private double _time = 0;
         private readonly Timer _timer;
-        
-
+        private SynchronizationContext _uiContext;
         public Simulation(IConfig config)
         {
+            _uiContext = SynchronizationContext.Current;
             _timer = new Timer(16);
             _timer.Elapsed += TimerOnElapsed;
             _config = config;
@@ -63,12 +65,13 @@ namespace _4cube.Bussiness.Simulation
                             laneSpawnPoint.Item2 - d, laneSpawnPoint.Item1 + d, laneSpawnPoint.Item2 + d);
                         if (!_grid.Cars.Any(x => collisionField.IsInPosition(x.X, x.Y)))
                         {
-                            _grid.Cars.Add(new CarEntity
-                            {
-                                Direction = direction,
-                                X = laneSpawnPoint.Item1,
-                                Y = laneSpawnPoint.Item2
-                            });
+                            _uiContext.Send(x =>
+                                _grid.Cars.Add(new CarEntity
+                                {
+                                    Direction = direction,
+                                    X = laneSpawnPoint.Item1,
+                                    Y = laneSpawnPoint.Item2
+                                }), null);
                             compo.NrOfIncomingCarsSpawned[i]++;
                         }
                     }
