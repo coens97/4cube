@@ -53,14 +53,16 @@ namespace _4cube.Bussiness.Simulation
                 { 
                     if (compo.NrOfIncomingCarsSpawned[i] < compo.NrOfIncomingCars[i])
                     {
-                        var direction = (Direction) ((i + 2)%4);
+                        var direction = (Direction) i;
                         var laneList =
                             _config.GetLanesOfComponent(compo)
-                                .Where(x => x.DirectionLane == direction && !x.OutgoingDiretion.Any())
+                                .Where(x => x.DirectionLane == direction && x.OutgoingDiretion.Any())
                                 .ToArray();
                         var rd = new Random();
-                        var laneIndex = rd.Next(0, laneList.Count() - 1);
-                        var laneSpawnPoint = laneList[laneIndex].EnterPoint;
+                        var laneIndex = rd.Next(0, laneList.Count());
+                        var laneEnterPoint = laneList[laneIndex].EnterPoint;
+                        var laneSpawnPoint = new Tuple<int, int>(laneEnterPoint.Item1 + compo.X,
+                            laneEnterPoint.Item2 + compo.Y);
                         var d = _config.CarDistance;
                         var collisionField = new Tuple<int, int, int, int>(laneSpawnPoint.Item1 - d,
                             laneSpawnPoint.Item2 - d, laneSpawnPoint.Item1 + d, laneSpawnPoint.Item2 + d);
@@ -69,8 +71,8 @@ namespace _4cube.Bussiness.Simulation
                             _grid.Cars.Add(new CarEntity
                             {
                                 Direction = direction,
-                                X = laneSpawnPoint.Item1 + compo.X,
-                                Y = laneSpawnPoint.Item2 + compo.Y
+                                X = laneSpawnPoint.Item1,
+                                Y = laneSpawnPoint.Item2
                             });
                             compo.NrOfIncomingCarsSpawned[i]++;
                         }

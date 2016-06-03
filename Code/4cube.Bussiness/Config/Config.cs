@@ -106,20 +106,20 @@ namespace _4cube.Bussiness.Config
             switch (l.DirectionLane)
             {
                 case Direction.Up:
-                    l.EnterPoint = new Tuple<int, int>((l.BoundingBox.Item3 - l.BoundingBox.Item1)/2, l.BoundingBox.Item4);
-                    l.ExitPoint = new Tuple<int, int>((l.BoundingBox.Item3 - l.BoundingBox.Item1)/2, l.BoundingBox.Item2);
+                    l.EnterPoint = new Tuple<int, int>((l.BoundingBox.Item3 + l.BoundingBox.Item1)/2, l.BoundingBox.Item4);
+                    l.ExitPoint = new Tuple<int, int>((l.BoundingBox.Item1 + l.BoundingBox.Item1)/2, l.BoundingBox.Item2);
                     break;
                 case Direction.Down:
-                    l.EnterPoint = new Tuple<int, int>((l.BoundingBox.Item3 - l.BoundingBox.Item1) / 2, l.BoundingBox.Item2);
-                    l.ExitPoint = new Tuple<int, int>((l.BoundingBox.Item3 - l.BoundingBox.Item1) / 2, l.BoundingBox.Item4);
+                    l.EnterPoint = new Tuple<int, int>((l.BoundingBox.Item3 + l.BoundingBox.Item1) / 2, l.BoundingBox.Item2);
+                    l.ExitPoint = new Tuple<int, int>((l.BoundingBox.Item1 + l.BoundingBox.Item1) / 2, l.BoundingBox.Item4);
                     break;
                 case Direction.Left:
-                    l.EnterPoint = new Tuple<int, int>(l.BoundingBox.Item3,(l.BoundingBox.Item4- l.BoundingBox.Item2)/2);
-                    l.ExitPoint = new Tuple<int, int>(l.BoundingBox.Item3,(l.BoundingBox.Item4- l.BoundingBox.Item2)/2);
+                    l.EnterPoint = new Tuple<int, int>(l.BoundingBox.Item3,(l.BoundingBox.Item4+ l.BoundingBox.Item2)/2);
+                    l.ExitPoint = new Tuple<int, int>(l.BoundingBox.Item1,(l.BoundingBox.Item4+ l.BoundingBox.Item2)/2);
                     break;
                 case Direction.Right:
-                    l.EnterPoint = new Tuple<int, int>(l.BoundingBox.Item1, (l.BoundingBox.Item4 - l.BoundingBox.Item2) / 2);
-                    l.ExitPoint = new Tuple<int, int>(l.BoundingBox.Item1, (l.BoundingBox.Item4 - l.BoundingBox.Item2) / 2);
+                    l.EnterPoint = new Tuple<int, int>(l.BoundingBox.Item3, (l.BoundingBox.Item4 + l.BoundingBox.Item2) / 2);
+                    l.ExitPoint = new Tuple<int, int>(l.BoundingBox.Item1, (l.BoundingBox.Item4 + l.BoundingBox.Item2) / 2);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
