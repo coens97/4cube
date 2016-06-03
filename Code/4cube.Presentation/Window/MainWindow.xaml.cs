@@ -24,14 +24,16 @@ namespace _4cube.Presentation.Window
         private readonly System.Windows.Window _configWindow = new ConfigurationWindow();
         private readonly IGridModel _gridModel;
         private readonly IConfig _config;
+        private readonly ISimulation _simulation;
         private string _draggedComponent;
 
-        public MainWindow(MainViewModel viewModel, IGridModel gridModel, IConfig config)
+        public MainWindow(MainViewModel viewModel, IGridModel gridModel, IConfig config, ISimulation simulation)
         {
             InitializeComponent();
 
             _gridModel = gridModel;
             _config = config;
+            _simulation = simulation;
             DataContext = viewModel;
         }
 
@@ -43,7 +45,8 @@ namespace _4cube.Presentation.Window
 
         private void BtnStartStop_Click(object sender, RoutedEventArgs e)
         {
-            _gridModel.Grid.Cars.First().X += 5;
+            //_gridModel.Grid.Cars.First().X += 5;
+            _simulation.Start(_gridModel.Grid);
         }
 
         private void Image_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

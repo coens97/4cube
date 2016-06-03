@@ -4,7 +4,7 @@ namespace _4cube.Common.Components.Crossroad
 {
     public class CrossroadBEntity:CrossroadEntity
     {
-        public new TrafficLightGroup[] GreenLightTimeEntities { get; set; } = {
+        public override TrafficLightGroup[] GreenLightTimeEntities => new [] {
             TrafficLightGroup.B1, TrafficLightGroup.B2, TrafficLightGroup.B3, TrafficLightGroup.B4, TrafficLightGroup.B5
         };
     }

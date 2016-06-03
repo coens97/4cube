@@ -111,13 +111,13 @@ namespace _4cube.Bussiness.Simulation
                 var tries = _grid.GreenLightTimeEntities.Count + 1;
                 do
                 {
-                    c.CurrentGreenLightGroup = (c.CurrentGreenLightGroup + 1)%_grid.GreenLightTimeEntities.Count;
+                    c.CurrentGreenLightGroup = (c.CurrentGreenLightGroup + 1)%c.GreenLightTimeEntities.Length;
                     var group = c.GreenLightTimeEntities[c.CurrentGreenLightGroup];
 
                     var cr = _config.CrossRoadCoordinatesCars[group];
-                    var pd = _config.CrossRoadCoordinatesPedes[group];
+                    var pd = _config.CrossRoadCoordinatesPedes.ContainsKey(group) ?_config.CrossRoadCoordinatesPedes[group] : new Tuple<int, int, int, int>[0];
 
-                    if (_config.CrossRoadCoordinatesPedes[group].Any())
+                    if (_config.CrossRoadCoordinatesPedes.ContainsKey(group) && _config.CrossRoadCoordinatesPedes[group].Any())
                     {
                         var rnd = new Random();
                         var number = rnd.Next(1,11);

@@ -7,10 +7,10 @@ using _4cube.Common.Components.TrafficLight;
 namespace _4cube.Common.Components.Crossroad
 {
     [ImplementPropertyChanged]
-    public class CrossroadEntity: ComponentEntity , INotifyPropertyChanged
+    public abstract class CrossroadEntity: ComponentEntity , INotifyPropertyChanged
     {
         [DoNotNotify]
-        public TrafficLightGroup[] GreenLightTimeEntities { get; set; }
+        public abstract TrafficLightGroup[] GreenLightTimeEntities { get; }
 
         public int CurrentGreenLightGroup { get; set; } = 0;
 

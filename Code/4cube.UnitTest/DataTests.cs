@@ -35,7 +35,6 @@ namespace _4cube.UnitTest
             testgrid.Cars.Add(car1);
             testgrid.Cars.Add(car2);
 
-            testgrid.Components.Add(new CrossroadAEntity {X = 6});
 
             var gd = new GridData();
             var pth = "test.xml";
