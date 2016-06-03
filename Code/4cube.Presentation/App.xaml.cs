@@ -9,6 +9,7 @@ using Ninject;
 using _4cube.Bussiness;
 using _4cube.Bussiness.Config;
 using _4cube.Bussiness.Simulation;
+using _4cube.Common;
 using _4cube.Data;
 using _4cube.Presentation.Window;
 
@@ -35,7 +36,8 @@ namespace _4cube.Presentation
             _container.Bind<IGridModel>().To<GridModel>().InSingletonScope();
             _container.Bind<IGridData>().To<GridData>().InTransientScope();
             _container.Bind<ISimulation>().To<Simulation>().InSingletonScope();
-            _container.Bind<MainWindow>().To<MainWindow>().InTransientScope();
+            _container.Bind<MainWindow>().ToSelf().InTransientScope();
+            _container.Bind<GridContainer>().ToSelf().InSingletonScope();
             _container.Bind<IConfig>().To<Config>().InSingletonScope();
         }
 

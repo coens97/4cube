@@ -16,12 +16,14 @@ namespace _4cube.Bussiness
 {
     public class GridModel : IGridModel
     {
-        public GridEntity Grid { get; set; } = new GridEntity();
+        public GridEntity Grid => _gridContainer.Grid;
 
         private readonly IGridData _datalayer;
-        public GridModel(IGridData datalayer)
+        private readonly GridContainer _gridContainer;
+        public GridModel(IGridData datalayer, GridContainer gridContainer)
         {
             _datalayer = datalayer;
+            _gridContainer = gridContainer;
         }
 
         public void AddComponent(ComponentEntity component)
@@ -38,7 +40,7 @@ namespace _4cube.Bussiness
 
         public void OpenFile(string path)
         {
-            Grid = _datalayer.OpenFile(path);
+            _gridContainer.Grid = _datalayer.OpenFile(path);
         }
 
         public void ResizeGrid(int w, int h)
@@ -59,6 +61,11 @@ namespace _4cube.Bussiness
         public void SaveFile(string path)
         {
             _datalayer.SaveFile(path, Grid);
+        }
+
+        public void New()
+        {
+            _gridContainer.Grid = new GridEntity();
         }
     }
 }

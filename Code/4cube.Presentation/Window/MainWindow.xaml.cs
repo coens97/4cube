@@ -93,5 +93,10 @@ namespace _4cube.Presentation.Window
             // TODO: Add a dialogbox to save file
             _gridModel.SaveFile("test.tsim");
         }
+
+        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        {
+            _gridModel.New();
+        }
     }
 }

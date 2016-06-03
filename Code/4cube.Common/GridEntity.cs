@@ -15,7 +15,8 @@ namespace _4cube.Common
 
         public ObservableCollection<ComponentEntity> Components { get; set; } =
             new ObservableCollection<ComponentEntity>();
-        public int Height { get; set; }
+
+        public int Height { get; set; } = 6;
 
         public ObservableCollection<PedestrianEntity> Pedestrians { get; set; } =
             new ObservableCollection<PedestrianEntity>();
@@ -31,7 +32,8 @@ namespace _4cube.Common
             new GreenLightTimeEntity { Duration = 5, TrafficLightGroupSelected = TrafficLightGroup.B4},
             new GreenLightTimeEntity { Duration = 5, TrafficLightGroupSelected = TrafficLightGroup.B5}
         });
-        public int Width { get; set; }
+
+        public int Width { get; set; } = 8;
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ai\CarEntity.cs" />
+    <Compile Include="GridContainer.cs" />
     <Compile Include="IPosition.cs" />
     <Compile Include="Ai\PedestrianEntity.cs" />
     <Compile Include="Components\ComponentEntity.cs" />

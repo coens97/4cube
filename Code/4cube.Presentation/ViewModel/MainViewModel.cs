@@ -24,6 +24,7 @@ namespace _4cube.Presentation.ViewModel
         private IGridModel _gridModel;
         private ISimulation _simulation;
         private IConfig _config;
+        private GridContainer _gridContainer;
 
         public int Width { get; set; }
         public int Height { get; set; }
@@ -32,13 +33,14 @@ namespace _4cube.Presentation.ViewModel
         public int Speed { get; set; }
 
         public MainViewModel() { }
-        public MainViewModel(IGridModel gridModel, IConfig config, ISimulation simulation)
+        public MainViewModel(IGridModel gridModel, IConfig config, ISimulation simulation, GridContainer gridContainer)
         {
             _gridModel = gridModel;
             _simulation = simulation;
+            _gridContainer = gridContainer;
             
             // Test data.. should be deleted later
-            _gridModel.Grid = new GridEntity
+            gridContainer.Grid = new GridEntity
             {
                 Pedestrians = new ObservableCollection<PedestrianEntity>(new[]
                 {
