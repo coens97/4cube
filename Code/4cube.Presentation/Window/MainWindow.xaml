@@ -93,10 +93,18 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.Resources>
                         <DataTemplate DataType="{x:Type ai:CarEntity}">
-                            <Ellipse Fill="Yellow" Width="20" Height="20" Stroke="Black"/>
+                            <Ellipse Fill="Yellow" Width="20" Height="20" Stroke="Black">
+                                   <Ellipse.RenderTransform>
+                                        <TranslateTransform X="-10" Y="-10" />
+                                    </Ellipse.RenderTransform>
+                                </Ellipse>
                         </DataTemplate>
                         <DataTemplate DataType="{x:Type ai:PedestrianEntity}">
-                            <Ellipse Fill="Blue" Width="20" Height="20" Stroke="Black"/>
+                            <Ellipse Fill="Blue" Width="20" Height="20" Stroke="Black">
+                                   <Ellipse.RenderTransform>
+                                        <TranslateTransform X="-10" Y="-10" />
+                                    </Ellipse.RenderTransform>
+                                </Ellipse>
                         </DataTemplate>
                         <DataTemplate DataType="{x:Type cross:CrossroadAEntity}">
                             <Image Source="../Resources/A.png"/>
