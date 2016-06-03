@@ -108,13 +108,19 @@ namespace _4cube.Bussiness.Simulation
             {
                 if (!(_time >= c.LastTimeSwitched + _grid.GreenLightTimeEntities[c.CurrentGreenLightGroup].Duration))
                     continue;
-
+<<<<<<< HEAD
+                var tries = _grid.GreenLightTimeEntities.Count + 1;
+                do
+                {
+                    c.CurrentGreenLightGroup = (c.CurrentGreenLightGroup + 1)%_grid.GreenLightTimeEntities.Count;
+                    var group = c.GreenLightTimeEntities[c.CurrentGreenLightGroup];
+=======
                 var tries = c.GreenLightTimeEntities.Length + 1;
                 do
                 {
                     c.CurrentGreenLightGroup = (c.CurrentGreenLightGroup + 1)%c.GreenLightTimeEntities.Length;
                     var group = c.GreenLightTimeEntities[c.CurrentGreenLightGroup].TrafficLightGroup;
-
+>>>>>>> origin/master
                     var cr = _config.CrossRoadCoordinatesCars[group];
                     var pd = _config.CrossRoadCoordinatesPedes[group];
 
