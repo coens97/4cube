@@ -60,22 +60,38 @@ namespace _4cube.Presentation.ViewModel
                 Width = 10,
                 Height = 8
             };
-
-            var grid = _gridModel.Grid;
-            GridItems.Add(new CollectionContainer() {Collection = grid.Cars});
-            GridItems.Add(new CollectionContainer() {Collection = grid.Pedestrians});
-            GridItems.Add(new CollectionContainer() {Collection = grid.Components});
-
             _config = config;
 
-            Width = grid.Width * config.GridWidth;
-            Height = grid.Width * config.GridHeight;
-            ScaledWidth = Width/config.GetScale;
-            ScaledHeight = Height/config.GetScale;
+            LoadGrid(_gridContainer.Grid);
 
-            grid.PropertyChanged += GridOnPropertyChanged;
+            _gridContainer.PropertyChanged += GridContainerOnPropertyChanged;
 
             this.PropertyChanged += OnPropertyChanged;
+        }
+
+        private void GridContainerOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            switch (propertyChangedEventArgs.PropertyName)
+            {
+                case "Grid":
+                    LoadGrid(_gridContainer.Grid);
+                    break;
+            }
+        }
+
+        void LoadGrid(GridEntity grid)
+        {
+            GridItems.Clear();
+            GridItems.Add(new CollectionContainer {Collection = grid.Cars});
+            GridItems.Add(new CollectionContainer {Collection = grid.Pedestrians});
+            GridItems.Add(new CollectionContainer {Collection = grid.Components});
+
+            Width = grid.Width * _config.GridWidth;
+            Height = grid.Width * _config.GridHeight;
+            ScaledWidth = Width / _config.GetScale;
+            ScaledHeight = Height / _config.GetScale;
+
+            grid.PropertyChanged += GridOnPropertyChanged;
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)

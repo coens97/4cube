@@ -8,6 +8,6 @@ namespace _4cube.Common
     public class GridContainer : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public GridEntity Grid = new GridEntity();
+        public GridEntity Grid { get; set; } = new GridEntity();
     }
 }
