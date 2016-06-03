@@ -75,5 +75,11 @@ namespace _4cube.Presentation.Window
                 MessageBox.Show(ex.Message);
             }
         }
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+
+            Application.Current.Shutdown();
+        }
     }
 }
