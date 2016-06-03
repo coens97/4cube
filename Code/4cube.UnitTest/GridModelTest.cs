@@ -69,27 +69,5 @@ namespace _4cube.UnitTest
             Assert.AreEqual(_gridModel.Grid.Width, 500);
             Assert.AreEqual(_gridModel.Grid.Height, 400);
         }
-<<<<<<< HEAD
-=======
-
-      [TestMethod]
-
-        public void TestGreenlight()
-        {
-            var cr = new CrossroadAEntity {GreenLightTimeEntities = new []
-            {
-                new GreenLightTimeEntity { Duration = 5, TrafficLightGroup = TrafficLightGroup.A4}
-            }};
-
-            Assert.AreEqual(cr.GreenLightTimeEntities.First(x => x.TrafficLightGroup == TrafficLightGroup.A4).Duration, 5);
-
-
-            _gridModel.GreenLight(cr, TrafficLightGroup.A4, 20);
-
-            Assert.AreEqual(cr.GreenLightTimeEntities.First(x => x.TrafficLightGroup == TrafficLightGroup.A4).Duration, 20);
-
-        }
-
->>>>>>> origin/master
     }
 }
