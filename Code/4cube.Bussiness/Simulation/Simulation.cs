@@ -37,11 +37,13 @@ namespace _4cube.Bussiness.Simulation
 
         private void TimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
         {
+            _timer.Enabled = false;
             _time++;
             SpawnACar();
             ProcessTrafficLight();
             ProcessCar();
             ProcessPedestrain();
+            _timer.Enabled = true;
         }
 
         private void SpawnACar()
@@ -159,6 +161,11 @@ namespace _4cube.Bussiness.Simulation
             var gridPosition = SimulationUtility.GetGridPosition(car.X, car.Y, _config.GridWidth, _config.GridHeight);
             var component = _grid.Components.FirstOrDefault(x => x.X == gridPosition.Item1 && x.Y == gridPosition.Item2);
 
+            if (component == null)//if car go out of the component
+            {
+                _grid.Cars.Remove(car);
+                return;
+            }
 
             var lanes = _config.GetLanesOfComponent(component);
 
@@ -316,10 +323,11 @@ namespace _4cube.Bussiness.Simulation
 
         private void ProcessCar()
         {
-            var cars = _grid.Components.OfType<CarEntity>();
 
-            foreach (var car in cars)
+            for (var i = _grid.Cars.Count - 1 ; i >= 0; i--)
             {
+                var car = _grid.Cars[i];
+
                 var gridPosition = SimulationUtility.GetGridPosition(car.X, car.Y, _config.GridWidth, _config.GridHeight);
                 var component = _grid.Components.FirstOrDefault(x => x.X == gridPosition.Item1 && x.Y == gridPosition.Item2);
 
@@ -333,6 +341,10 @@ namespace _4cube.Bussiness.Simulation
                         var trafficlightGroup = crossroad.GreenLightTimeEntities[crossroad.CurrentGreenLightGroup];
                         if (car.IsInPosition(_config.CrossRoadCoordinatesCars[trafficlightGroup], gridPosition.Item1, gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation)) // Light is green of the lane it is tanding in
                             MoveCar(car);
+                    }
+                    else
+                    {
+                        MoveCar(car);
                     }
                 }
                 else if (road != null)
