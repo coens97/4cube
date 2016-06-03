@@ -28,7 +28,7 @@ namespace _4cube.Bussiness.Simulation
 
         public Simulation(IConfig config)
         {
-            _timer = new Timer(1000);
+            _timer = new Timer(16);
             _timer.Elapsed += TimerOnElapsed;
             _config = config;
         }
@@ -36,12 +36,46 @@ namespace _4cube.Bussiness.Simulation
         private void TimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
         {
             _time++;
+            SpawnACar();
             ProcessTrafficLight();
             ProcessCar();
             ProcessPedestrain();
         }
 
-        public void ChangeSpeed(double n)
+        private void SpawnACar()
+        {
+            //Create cars
+            foreach (var compo in _grid.Components)
+            {
+                for (int i = 0; i < compo.NrOfIncomingCars.Length; i++)
+                    if (compo.NrOfIncomingCarsSpawned[i] < compo.NrOfIncomingCars[i])
+                    {
+                        var direction = (Direction) ((i + 2)%4);
+                        var laneList =
+                            _config.GetLanesOfComponent(compo)
+                                .Where(x => x.DirectionLane == direction && !x.OutgoingDiretion.Any())
+                                .ToArray();
+                        var rd = new Random();
+                        var laneIndex = rd.Next(0, laneList.Count() - 1);
+                        var laneSpawnPoint = laneList[laneIndex].EnterPoint;
+                        var d = _config.CarDistance;
+                        var collisionField = new Tuple<int, int, int, int>(laneSpawnPoint.Item1 - d,
+                            laneSpawnPoint.Item2 - d, laneSpawnPoint.Item1 + d, laneSpawnPoint.Item2 + d);
+                        if (!_grid.Cars.Any(x => collisionField.IsInPosition(x.X, x.Y)))
+                        {
+                            _grid.Cars.Add(new CarEntity
+                            {
+                                Direction = direction,
+                                X = laneSpawnPoint.Item1,
+                                Y = laneSpawnPoint.Item2
+                            });
+                            compo.NrOfIncomingCarsSpawned[i]++;
+                        }
+                    }
+            }
+        }
+
+        public void ChangeSpeed(int n)
         {
             _timer.Interval = n;
 
@@ -74,11 +108,19 @@ namespace _4cube.Bussiness.Simulation
             {
                 if (!(_time >= c.LastTimeSwitched + _grid.GreenLightTimeEntities[c.CurrentGreenLightGroup].Duration))
                     continue;
+<<<<<<< HEAD
                 var tries = _grid.GreenLightTimeEntities.Count + 1;
                 do
                 {
                     c.CurrentGreenLightGroup = (c.CurrentGreenLightGroup + 1)%_grid.GreenLightTimeEntities.Count;
                     var group = c.GreenLightTimeEntities[c.CurrentGreenLightGroup];
+=======
+                var tries = c.GreenLightTimeEntities.Length + 1;
+                do
+                {
+                    c.CurrentGreenLightGroup = (c.CurrentGreenLightGroup + 1)%c.GreenLightTimeEntities.Length;
+                    var group = c.GreenLightTimeEntities[c.CurrentGreenLightGroup].TrafficLightGroup;
+>>>>>>> origin/master
                     var cr = _config.CrossRoadCoordinatesCars[group];
                     var pd = _config.CrossRoadCoordinatesPedes[group];
 

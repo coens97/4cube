@@ -10,12 +10,16 @@ namespace _4cube.Common.Components.Crossroad
     public class CrossroadEntity: ComponentEntity , INotifyPropertyChanged
     {
         [DoNotNotify]
+<<<<<<< HEAD
         public List<TrafficLightGroup> GreenLightTimeEntities { get; set; }
+=======
+        public GreenLightTimeEntity[] GreenLightTimeEntities { get; set; }
+>>>>>>> origin/master
 
-        public int CurrentGreenLightGroup { get; set; }
+        public int CurrentGreenLightGroup { get; set; } = 0;
 
         [DoNotNotify]
-        public double LastTimeSwitched { get; set; }
+        public double LastTimeSwitched { get; set; } = 0;
 
         public event PropertyChangedEventHandler PropertyChanged;
     }

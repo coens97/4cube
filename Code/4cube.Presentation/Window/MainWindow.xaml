@@ -31,10 +31,10 @@
                 <TabItem Header="Crossing" Margin="-2,-2,-2.222,0">
                     <Grid Margin="10,11,0,5.111" HorizontalAlignment="Left" Width="120">
                         <Border BorderThickness="1" BorderBrush="#FF000000">
-                            <Image Source="../Resources/A.png" />
+                            <Image x:Name="CrossroadA" Source="../Resources/A.png" MouseDown="Image_MouseDown" />
                         </Border>
                         <Border BorderThickness="1" BorderBrush="#FF000000" Margin="125,0,-125,-0.333">
-                            <Image Source="..\Resources\B.png" />
+                            <Image x:Name="CrossroadB" Source="..\Resources\B.png" MouseDown="Image_MouseDown" />
                         </Border>
                     </Grid>
                 </TabItem>
@@ -42,10 +42,10 @@
                 <TabItem Header="Road" >
                     <Grid Margin="10,11,0,5.444" HorizontalAlignment="Left" Width="120">
                         <Border BorderThickness="1" BorderBrush="#FF000000">
-                            <Image Source="..\Resources/roada.png" />
+                            <Image x:Name="RoadA" Source="..\Resources/roada.png" MouseDown="Image_MouseDown" />
                         </Border>
                         <Border BorderThickness="1" BorderBrush="#FF000000" Margin="125,0,-125,-0.333">
-                            <Image Source="..\Resources/roadb.png" />
+                            <Image x:Name="RoadB" Source="..\Resources/roadb.png" MouseDown="Image_MouseDown" />
                         </Border>
                     </Grid>
                 </TabItem>
@@ -55,7 +55,7 @@
                 <Grid Margin="0,0,-0.111,2">
                     <Button x:Name="BtnStartStop" Content="Start" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Width="236" Height="39" Click="BtnStartStop_Click"/>
                     <Button x:Name="BtnPause" Content="Pause" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Width="236" Height="39"/>
-                    <Slider x:Name="slider" Margin="11,188,10,73.889" RenderTransformOrigin="0.967,0.544"/>
+                    <Slider x:Name="slider" Margin="11,188,10,73.889" RenderTransformOrigin="0.967,0.544" Minimum="1" Value="{Binding Speed}"/>
                     <Label x:Name="label" Content="Change simulation speed:" Margin="10,137,28,0" RenderTransformOrigin="0.407,0.446" Height="26" VerticalAlignment="Top"/>
                     <Button x:Name="BtnShowReport" Content="Show Report" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Width="236" Height="39"/>
 
@@ -69,7 +69,26 @@
                     <ItemsControl ItemsSource="{Binding GridItems}">
                     <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <Canvas Background="White" Height="{Binding Width}" Width="{Binding Height}" />
+                                <Canvas Height="{Binding Width}" Width="{Binding Height}" MouseUp="Canvas_MouseUp">
+                                    <Canvas.Background>
+                                        <DrawingBrush Stretch="None" TileMode="Tile"
+                          Viewport="0,0 400,400" ViewportUnits="Absolute">
+                                            <DrawingBrush.Drawing>
+                                                <GeometryDrawing>
+                                                    <GeometryDrawing.Geometry>
+                                                        <GeometryGroup>
+                                                            <LineGeometry StartPoint="0,0" EndPoint="0,400"/>
+                                                            <LineGeometry StartPoint="0,0" EndPoint="400,0"/>
+                                                        </GeometryGroup>
+                                                    </GeometryDrawing.Geometry>
+                                                    <GeometryDrawing.Pen>
+                                                        <Pen Thickness="1" Brush="Black"/>
+                                                    </GeometryDrawing.Pen>
+                                                </GeometryDrawing>
+                                            </DrawingBrush.Drawing>
+                                        </DrawingBrush>
+                                    </Canvas.Background>
+                                </Canvas>
                             </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.Resources>

@@ -31,6 +31,8 @@ namespace _4cube.Bussiness
 
         public void AddComponent(ComponentEntity component)
         {
+            if (Grid.Components.Any(x => x.X == component.X && x.Y == component.Y))
+                throw new Exception("The position in the grid is already in use");
             Grid.Components.Add(component);
         }
 

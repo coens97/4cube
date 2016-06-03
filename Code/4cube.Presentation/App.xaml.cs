@@ -34,7 +34,7 @@ namespace _4cube.Presentation
             this._container = new StandardKernel();
             _container.Bind<IGridModel>().To<GridModel>().InSingletonScope();
             _container.Bind<IGridData>().To<GridData>().InTransientScope();
-            _container.Bind<ISimulation>().To<Simulation>().InTransientScope();
+            _container.Bind<ISimulation>().To<Simulation>().InSingletonScope();
             _container.Bind<MainWindow>().To<MainWindow>().InTransientScope();
             _container.Bind<IConfig>().To<Config>().InSingletonScope();
         }
