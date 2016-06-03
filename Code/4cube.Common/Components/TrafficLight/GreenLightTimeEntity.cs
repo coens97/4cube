@@ -1,10 +1,14 @@
-﻿using PropertyChanged;
+﻿using System.ComponentModel;
+using PropertyChanged;
 
 namespace _4cube.Common.Components.TrafficLight
 {
-    public class GreenLightTimeEntity
+    [ImplementPropertyChanged]
+    public class GreenLightTimeEntity: INotifyPropertyChanged
     {
         public int Duration { get; set; }
-        public TrafficLightGroup TrafficLightGroup { get; set; }
+        public TrafficLightGroup TrafficLightGroupSelected { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

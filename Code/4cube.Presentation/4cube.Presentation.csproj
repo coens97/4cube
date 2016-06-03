@@ -101,9 +101,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="UserControl\ComponentControl.xaml.cs">
       <DependentUpon>ComponentControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ConfigurationModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="Window\ConfigurationWindow.xaml.cs">
       <DependentUpon>ConfigurationWindow.xaml</DependentUpon>

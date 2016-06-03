@@ -4,6 +4,7 @@ using System.ComponentModel;
 using PropertyChanged;
 using _4cube.Common.Ai;
 using _4cube.Common.Components;
+using _4cube.Common.Components.TrafficLight;
 
 namespace _4cube.Common
 {
@@ -14,6 +15,7 @@ namespace _4cube.Common
         public ObservableCollection<ComponentEntity> Components { get; set; }
         public int Height { get; set; }
         public ObservableCollection<PedestrianEntity> Pedestrians { get; set; }
+        public ObservableCollection<GreenLightTimeEntity> GreenLightTimeEntities { get; set; }
         public int Width { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
     }

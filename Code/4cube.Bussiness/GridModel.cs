@@ -39,15 +39,6 @@ namespace _4cube.Bussiness
             Grid.Components.Remove(component);
         }
 
-        public void GreenLight(CrossroadEntity e, TrafficLightGroup t, int n)
-        {
-            var traficlightentity = e.GreenLightTimeEntities.FirstOrDefault(x => x.TrafficLightGroup == t);
-            if (traficlightentity != null)
-            {
-                traficlightentity.Duration = n;
-            }
-        }
-
         public void OpenFile(string path)
         {
             Grid = _datalayer.OpenFile(path);

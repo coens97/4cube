@@ -72,13 +72,13 @@ namespace _4cube.Bussiness.Simulation
             
             foreach (var c in crossroads)
             {
-                if (!(_time >= c.LastTimeSwitched + c.GreenLightTimeEntities[c.CurrentGreenLightGroup].Duration))
+                if (!(_time >= c.LastTimeSwitched + _grid.GreenLightTimeEntities[c.CurrentGreenLightGroup].Duration))
                     continue;
-                var tries = c.GreenLightTimeEntities.Count + 1;
+                var tries = _grid.GreenLightTimeEntities.Count + 1;
                 do
                 {
-                    c.CurrentGreenLightGroup = (c.CurrentGreenLightGroup + 1)%c.GreenLightTimeEntities.Count;
-                    var group = c.GreenLightTimeEntities[c.CurrentGreenLightGroup].TrafficLightGroup;
+                    c.CurrentGreenLightGroup = (c.CurrentGreenLightGroup + 1)%_grid.GreenLightTimeEntities.Count;
+                    var group = c.GreenLightTimeEntities[c.CurrentGreenLightGroup];
                     var cr = _config.CrossRoadCoordinatesCars[group];
                     var pd = _config.CrossRoadCoordinatesPedes[group];
 
@@ -289,7 +289,7 @@ namespace _4cube.Bussiness.Simulation
                 {
                     if (car.IsInPosition(_config.GetAllLanesOfTrafficLight(crossroad.GetType()), gridPosition.Item1, gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation)) // is the car in any of the lanes of the crossroad
                     {
-                        var trafficlightGroup = crossroad.GreenLightTimeEntities[crossroad.CurrentGreenLightGroup].TrafficLightGroup;
+                        var trafficlightGroup = crossroad.GreenLightTimeEntities[crossroad.CurrentGreenLightGroup];
                         if (car.IsInPosition(_config.CrossRoadCoordinatesCars[trafficlightGroup], gridPosition.Item1, gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation)) // Light is green of the lane it is tanding in
                             MoveCar(car);
                     }
