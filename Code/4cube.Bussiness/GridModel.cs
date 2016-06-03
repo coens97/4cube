@@ -16,12 +16,7 @@ namespace _4cube.Bussiness
 {
     public class GridModel : IGridModel
     {
-        public GridEntity Grid { get; set; } = new GridEntity
-        {
-            Pedestrians = new ObservableCollection<Common.Ai.PedestrianEntity>(),
-            Components = new ObservableCollection<ComponentEntity>(),
-            Cars = new ObservableCollection<Common.Ai.CarEntity>()
-        };
+        public GridEntity Grid { get; set; } = new GridEntity();
 
         private readonly IGridData _datalayer;
         public GridModel(IGridData datalayer)
@@ -58,23 +53,7 @@ namespace _4cube.Bussiness
 
         public void RotateComponent(ComponentEntity component)
         {
-            switch (component.Rotation)
-            {
-                case Direction.Up:
-                    component.Rotation = Direction.Right;
-                    break;
-                case Direction.Right:
-                    component.Rotation = Direction.Down;
-                    break;
-                case Direction.Down:
-                    component.Rotation = Direction.Left;
-                    break;
-                case Direction.Left:
-                    component.Rotation = Direction.Up;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            component.Rotation = (Direction) (((int) component.Rotation + 1)%4);
         }
 
         public void SaveFile(string path)
