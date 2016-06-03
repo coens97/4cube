@@ -82,9 +82,9 @@ namespace _4cube.Presentation.ViewModel
         void LoadGrid(GridEntity grid)
         {
             GridItems.Clear();
+            GridItems.Add(new CollectionContainer { Collection = grid.Components });
             GridItems.Add(new CollectionContainer {Collection = grid.Cars});
             GridItems.Add(new CollectionContainer {Collection = grid.Pedestrians});
-            GridItems.Add(new CollectionContainer {Collection = grid.Components});
 
             Width = grid.Width * _config.GridWidth;
             Height = grid.Width * _config.GridHeight;
