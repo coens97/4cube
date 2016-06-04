@@ -110,7 +110,7 @@ namespace _4cube.Bussiness.Simulation
 
         private void ProcessTrafficLight()
         {
-            var crossroads = _grid.Components.OfType<CrossroadEntity>();
+            var crossroads = _grid.Components.OfType<CrossroadEntity>().ToArray();
             
             foreach (var c in crossroads)
             {
