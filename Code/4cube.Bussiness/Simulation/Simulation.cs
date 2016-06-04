@@ -212,13 +212,15 @@ namespace _4cube.Bussiness.Simulation
             {
                 gridPosition = SimulationUtility.GetGridPosition(fPos.Item1, fPos.Item2, _config.GridWidth,
                     _config.GridHeight);
-                if (gridPosition == null)//if car go out of the component
+                var nextComponent =
+                    _grid.Components.FirstOrDefault(x => x.X == gridPosition.Item1 && x.Y == gridPosition.Item2);
+                if (nextComponent == null)//if car go out of the component
                 {
                     _grid.Cars.Remove(car);
                 }
                 else
                 {
-                    var l = _config.GetLanesOfComponent(component)
+                    var l = _config.GetLanesOfComponent(nextComponent)
                         .Where(x => x.OutgoingDiretion.Any() && x.DirectionLane.RotatedDirection(component.Rotation) == car.Direction).ToArray();
                     if (!l.Any())
                     {
@@ -229,7 +231,8 @@ namespace _4cube.Bussiness.Simulation
                         var random = new Random();
                         var i = random.Next(l.Count());
                         var lane = l[i];
-                        fPos = lane.EnterPoint;//fPos = MoveCarToPoint(car, lane.EnterPoint);
+                        fPos = new Tuple<int, int>(lane.EnterPoint.Item1 + nextComponent.X, lane.EnterPoint.Item2 + nextComponent.Y);
+                        //fPos = MoveCarToPoint(car, lane.ExitPoint, nextComponent);
                     }
                 }
             }
@@ -244,10 +247,16 @@ namespace _4cube.Bussiness.Simulation
         public Tuple<int, int> MoveCarToPoint(CarEntity car, Tuple<int, int> point, ComponentEntity component)
         {
             var angle = Math.Atan2((component.Y + point.Item2) - car.Y, (component.X + point.Item1) - car.X);
-            return new Tuple<int, int>(
-                component.X + car.X + (int)(Math.Cos(angle) * _config.CarSpeed),
-                component.Y + car.Y + (int)(Math.Sin(angle) * _config.CarSpeed)
+            var fpos = new Tuple<int, int>(
+                car.X + (int)(Math.Cos(angle) * _config.CarSpeed),
+                car.Y + (int)(Math.Sin(angle) * _config.CarSpeed)
                 );
+            if (fpos.Item1 == component.X + point.Item1 && fpos.Item2 == component.Y + point.Item2) // check if the future position is not the same as the destination
+                fpos = new Tuple<int, int>( // give a little boost
+                    car.X + (int)(Math.Cos(angle) * _config.CarSpeed * 1.5),
+                    car.Y + (int)(Math.Sin(angle) * _config.CarSpeed * 1.5)
+                    );
+            return fpos;
         }
 
         public void MovePedestrain(PedestrianEntity pedestrian)
