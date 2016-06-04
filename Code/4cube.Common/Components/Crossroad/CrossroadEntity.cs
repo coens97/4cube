@@ -15,6 +15,8 @@ namespace _4cube.Common.Components.Crossroad
         [DoNotNotify]
         public int LastTimeSwitched { get; set; } = 0;
 
+        public bool LightOrange { get; set; } = false;
+
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

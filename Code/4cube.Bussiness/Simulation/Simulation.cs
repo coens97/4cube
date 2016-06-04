@@ -109,6 +109,14 @@ namespace _4cube.Bussiness.Simulation
             {
                 if (_time <= c.LastTimeSwitched + _grid.GreenLightTimeEntities[c.CurrentGreenLightGroup].Duration)
                     continue;
+
+                if (!c.LightOrange) // change color of traffic lights to arrange
+                {
+                    c.LastTimeSwitched += _config.TrafficWaitTime;
+                    c.LightOrange = true;
+                    continue;;
+                }
+                c.LightOrange = false;
                 c.LastTimeSwitched = _time;
                 var tries = _grid.GreenLightTimeEntities.Count + 1;
                 do
@@ -341,7 +349,8 @@ namespace _4cube.Bussiness.Simulation
                         var outgoingLanes = lanes.Where(x => !x.OutgoingDiretion.Any()
                             && incomingLane.OutgoingDiretion.Any(y => x.DirectionLane == y));
                         var trafficlightGroup = crossroad.GreenLightTimeEntities[crossroad.CurrentGreenLightGroup];
-                        if (car.IsInPosition(_config.CrossRoadCoordinatesCars[trafficlightGroup], gridPosition.Item1,
+                        if (!crossroad.LightOrange &&
+                            car.IsInPosition(_config.CrossRoadCoordinatesCars[trafficlightGroup], gridPosition.Item1,
                             gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation)
                             && !_grid.Cars.Any( // Check if there are no cars stuck in outgoing lane
                                 c => outgoingLanes.Select(x => x.ExitBounding).ToArray()
