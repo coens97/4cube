@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ninject;
 using _4cube.Bussiness;
-using _4cube.Bussiness.Simulation;
 using _4cube.Common;
-using _4cube.Common.Ai;
 using _4cube.Common.Components;
-using _4cube.Common.Components.Crossroad;
-using _4cube.Common.Components.TrafficLight;
 using _4cube.Data;
 
 namespace _4cube.UnitTest

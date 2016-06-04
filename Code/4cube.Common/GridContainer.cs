@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using PropertyChanged;
 
 namespace _4cube.Common

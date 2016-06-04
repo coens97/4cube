@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _4cube.Bussiness.Simulation;
 using Ninject;
-using _4cube.Bussiness;
 using _4cube.Bussiness.Config;
 using _4cube.Common;
 using _4cube.Common.Ai;
-using _4cube.Common.Components;
-using _4cube.Common.Components.Crossroad;
 using _4cube.Common.Components.TrafficLight;
-using _4cube.Data;
 
 namespace _4cube.UnitTest
 {

@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using _4cube.Bussiness;
 using _4cube.Bussiness.Config;
 using _4cube.Bussiness.Simulation;
-using _4cube.Common;
-using _4cube.Common.Ai;
-using _4cube.Common.Components;
 using _4cube.Common.Components.Crossroad;
 using _4cube.Presentation.ViewModel;
 

@@ -1,13 +1,10 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _4cube.Data;
 using _4cube.Common;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using _4cube.Common.Ai;
 using _4cube.Common.Components;
-using _4cube.Common.Components.Crossroad;
 
 namespace _4cube.UnitTest
 {
