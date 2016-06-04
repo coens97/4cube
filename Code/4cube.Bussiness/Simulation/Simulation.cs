@@ -205,8 +205,7 @@ namespace _4cube.Bussiness.Simulation
 
             //Check if there is no car at the position the car wants to go to
             var d = _config.CarDistance;
-            var collisionField = new Tuple<int,int,int,int>(fPos.Item1 - d, fPos.Item2 - d, fPos.Item1 + d, fPos.Item2 + d);
-
+            
             // Check if car crosses grid border hence go to other component
             if (!Equals(SimulationUtility.GetGridPosition(car.X, car.Y, _config.GridWidth, _config.GridHeight), SimulationUtility.GetGridPosition(fPos.Item1, fPos.Item2, _config.GridWidth, _config.GridHeight)))
             {
@@ -232,12 +231,12 @@ namespace _4cube.Bussiness.Simulation
                         var i = random.Next(l.Count());
                         var lane = l[i];
                         fPos = new Tuple<int, int>(lane.EnterPoint.Item1 + nextComponent.X, lane.EnterPoint.Item2 + nextComponent.Y);
-                        //fPos = MoveCarToPoint(car, lane.ExitPoint, nextComponent);
                     }
                 }
             }
 
-            if (!_grid.Cars.Where(x => x != car).Any(x => collisionField.IsInPosition(x.X, x.Y)))
+            var collisionField = new Tuple<int, int, int, int>(fPos.Item1 - d, fPos.Item2 - d, fPos.Item1 + d, fPos.Item2 + d);
+            if (!_grid.Cars.Any(x => x!=car && collisionField.IsInPosition(x.X, x.Y)))
             {
                 car.X = fPos.Item1;
                 car.Y = fPos.Item2;
