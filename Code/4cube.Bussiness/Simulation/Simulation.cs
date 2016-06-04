@@ -112,9 +112,13 @@ namespace _4cube.Bussiness.Simulation
 
                 if (!c.LightOrange) // change color of traffic lights to arrange
                 {
-                    c.LastTimeSwitched += _config.TrafficWaitTime;
                     c.LightOrange = true;
-                    continue;;
+                    continue;
+                }
+
+                if (_grid.Cars.Any(x =>_config.TrafficCenter.IsInPosition(x.X, x.Y, c.X, c.Y, _config.GridWidth, _config.GridHeight, c.Rotation)))
+                {// if there are any cars in the center of the crossroad let the lights stay orange
+                    continue;
                 }
                 c.LightOrange = false;
                 c.LastTimeSwitched = _time;

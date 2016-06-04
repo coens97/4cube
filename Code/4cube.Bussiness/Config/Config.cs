@@ -13,7 +13,6 @@ namespace _4cube.Bussiness.Config
         public int GridWidth { get; } = 400;
         public int GridHeight { get; } = 400;
         public int CarDistance { get; } = 20;
-        public int TrafficWaitTime { get; } = 15;
         public int CarSpeed { get; } = 6;
         public int PedestrianSpeed { get; } = 1;
         public int GetScale { get; } = 2;
@@ -52,6 +51,8 @@ namespace _4cube.Bussiness.Config
             new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 178, 122, 228), DirectionLane = Direction.Right, OutgoingDiretion = new [] {Direction.Up}},
             new Lane { BoundingBox = new Tuple<int, int, int, int>(122, 0, 202, 122), DirectionLane = Direction.Left, OutgoingDiretion = new Direction[] {}}
         };
+
+        public Tuple<int, int, int, int> TrafficCenter { get; } = new Tuple<int, int, int, int>(122, 122, 278, 278);
 
         public Lane[] StraightRoad { get; } =
         {
