@@ -172,7 +172,7 @@ namespace _4cube.Bussiness.Simulation
             var enterLane =
                     lanes.FirstOrDefault(
                         x =>
-                            !x.OutgoingDiretion.Any() &&
+                            x.OutgoingDiretion.Any() &&
                             x.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2, _config.GridWidth,_config.GridHeight, component.Rotation));
             if (enterLane != null)
             {
