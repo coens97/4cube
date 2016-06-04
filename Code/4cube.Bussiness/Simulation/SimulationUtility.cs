@@ -31,6 +31,12 @@ namespace _4cube.Bussiness.Simulation
 
         public static bool InBetween(this int value, int minimum, int maximum)
         {
+            if (minimum > maximum)
+            {
+                var t = minimum;
+                minimum = maximum;
+                maximum = t;
+            }
             return value >= minimum && value <= maximum;
         }
 

@@ -55,7 +55,7 @@ namespace _4cube.Bussiness.Simulation
                 { 
                     if (compo.NrOfIncomingCarsSpawned[i] < compo.NrOfIncomingCars[i])
                     {
-                        var direction = (Direction) i;
+                        var direction = (Direction)((i + 2)%4);
                         var laneList =
                             _config.GetLanesOfComponent(compo)
                                 .Where(x => x.DirectionLane == direction && x.OutgoingDiretion.Any())
@@ -174,33 +174,10 @@ namespace _4cube.Bussiness.Simulation
                         x =>
                             x.OutgoingDiretion.Any() &&
                             x.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2, _config.GridWidth,_config.GridHeight, component.Rotation));
-            if (enterLane != null)
+            if (enterLane != null) // if car is in an entering lane
             {
-                fPos = MoveCarToPoint(car, enterLane.ExitPoint);
-            }
-            else
-            {
-                var exitLane =
-                lanes.FirstOrDefault(
-                    x =>
-                        x.OutgoingDiretion.Any() &&
-                        x.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation));
-                if (exitLane != null)
-                {
-                    fPos = MoveCarToPoint(car, exitLane.ExitPoint);
-                }
-                else
-                {
-                    exitLane =
-                        lanes.First(
-                            x => !x.OutgoingDiretion.Any() && x.DirectionLane.RotatedDirection(component.Rotation) == car.Direction);
-                    fPos = MoveCarToPoint(car, exitLane.EnterPoint);
-                }
-            }
+                fPos = MoveCarToPoint(car, enterLane.ExitPoint, component);
 
-            // Check if the car is crossing a border of the crossroad
-            if (enterLane != null)
-            {
                 // If the car was first in an entering lane but now not anymore
                 if (!enterLane.BoundingBox.IsInPosition(fPos.Item1, fPos.Item2, gridPosition.Item1,
                     gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation))
@@ -209,7 +186,21 @@ namespace _4cube.Bussiness.Simulation
                     var i = random.Next(enterLane.OutgoingDiretion.Length);
                     car.Direction = enterLane.OutgoingDiretion[i];
                 }
-                
+            }
+            else
+            {
+                var exitLane =
+                        lanes.First(
+                            x => !x.OutgoingDiretion.Any() && x.DirectionLane.RotatedDirection(component.Rotation) == car.Direction);
+                if (exitLane.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation))
+                {//if car is leaving the exit lane
+                    fPos = MoveCarToPoint(car, exitLane.ExitPoint, component);
+                }
+                else
+                {//if car is going to the exit lane
+                    
+                    fPos = MoveCarToPoint(car, exitLane.EnterPoint, component);
+                }
             }
 
             //Check if there is no car at the position the car wants to go to
@@ -250,12 +241,12 @@ namespace _4cube.Bussiness.Simulation
             }
         }
 
-        public Tuple<int, int> MoveCarToPoint(CarEntity car, Tuple<int, int> point)
+        public Tuple<int, int> MoveCarToPoint(CarEntity car, Tuple<int, int> point, ComponentEntity component)
         {
-            var angle = Math.Atan2(point.Item2 - car.Y, point.Item1 - car.X);
+            var angle = Math.Atan2((component.Y + point.Item2) - car.Y, (component.X + point.Item1) - car.X);
             return new Tuple<int, int>(
-                car.X + (int)(Math.Cos(angle) * _config.CarSpeed),
-                car.Y + (int)(Math.Sin(angle) * _config.CarSpeed)
+                component.X + car.X + (int)(Math.Cos(angle) * _config.CarSpeed),
+                component.Y + car.Y + (int)(Math.Sin(angle) * _config.CarSpeed)
                 );
         }
 
@@ -336,16 +327,16 @@ namespace _4cube.Bussiness.Simulation
 
                 if (crossroad != null)
                 {
-                    if (car.IsInPosition(_config.GetAllLanesOfTrafficLight(crossroad.GetType()), gridPosition.Item1, gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation)) // is the car in any of the lanes of the crossroad
-                    {
-                        var trafficlightGroup = crossroad.GreenLightTimeEntities[crossroad.CurrentGreenLightGroup];
-                        if (car.IsInPosition(_config.CrossRoadCoordinatesCars[trafficlightGroup], gridPosition.Item1, gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation)) // Light is green of the lane it is tanding in
-                            MoveCar(car);
-                    }
-                    else
-                    {
+                    //if (car.IsInPosition(_config.GetAllLanesOfTrafficLight(crossroad.GetType()), gridPosition.Item1, gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation)) // is the car in any of the lanes of the crossroad
+                    //{
+                    //    var trafficlightGroup = crossroad.GreenLightTimeEntities[crossroad.CurrentGreenLightGroup];
+                    //    if (car.IsInPosition(_config.CrossRoadCoordinatesCars[trafficlightGroup], gridPosition.Item1, gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation)) // Light is green of the lane it is tanding in
+                    //        MoveCar(car);
+                    //}
+                    //else
+                    //{
                         MoveCar(car);
-                    }
+                    //}
                 }
                 else if (road != null)
                 {
