@@ -24,7 +24,7 @@ namespace _4cube.Bussiness.Simulation
         private GridEntity _grid;
         private readonly IConfig _config;
         // private IReport _report;
-        private double _time = 0;
+        private int _time = 0;
         private readonly Timer _timer;
         private SynchronizationContext _uiContext;
         public Simulation(IConfig config)
@@ -40,7 +40,7 @@ namespace _4cube.Bussiness.Simulation
             _timer.Enabled = false;
             _time++;
             SpawnACar();
-            //ProcessTrafficLight();
+            ProcessTrafficLight();
             ProcessCar();
             ProcessPedestrain();
             _timer.Enabled = true;
@@ -114,8 +114,9 @@ namespace _4cube.Bussiness.Simulation
             
             foreach (var c in crossroads)
             {
-                if (!(_time >= c.LastTimeSwitched + _grid.GreenLightTimeEntities[c.CurrentGreenLightGroup].Duration))
+                if (_time <= c.LastTimeSwitched + _grid.GreenLightTimeEntities[c.CurrentGreenLightGroup].Duration)
                     continue;
+                c.LastTimeSwitched = _time;
                 var tries = _grid.GreenLightTimeEntities.Count + 1;
                 do
                 {

@@ -22,15 +22,15 @@ namespace _4cube.Common
             new ObservableCollection<PedestrianEntity>();
         public ObservableCollection<GreenLightTimeEntity> GreenLightTimeEntities { get; set; } = new ObservableCollection<GreenLightTimeEntity>(new []
         {
-            new GreenLightTimeEntity { Duration = 5, TrafficLightGroupSelected = TrafficLightGroup.A1},
-            new GreenLightTimeEntity { Duration = 5, TrafficLightGroupSelected = TrafficLightGroup.A2},
-            new GreenLightTimeEntity { Duration = 5, TrafficLightGroupSelected = TrafficLightGroup.A3},
-            new GreenLightTimeEntity { Duration = 5, TrafficLightGroupSelected = TrafficLightGroup.A4},
-            new GreenLightTimeEntity { Duration = 5, TrafficLightGroupSelected = TrafficLightGroup.B1},
-            new GreenLightTimeEntity { Duration = 5, TrafficLightGroupSelected = TrafficLightGroup.B2},
-            new GreenLightTimeEntity { Duration = 5, TrafficLightGroupSelected = TrafficLightGroup.B3},
-            new GreenLightTimeEntity { Duration = 5, TrafficLightGroupSelected = TrafficLightGroup.B4},
-            new GreenLightTimeEntity { Duration = 5, TrafficLightGroupSelected = TrafficLightGroup.B5}
+            new GreenLightTimeEntity { TrafficLightGroupSelected = TrafficLightGroup.A1},
+            new GreenLightTimeEntity { TrafficLightGroupSelected = TrafficLightGroup.A2},
+            new GreenLightTimeEntity { TrafficLightGroupSelected = TrafficLightGroup.A3},
+            new GreenLightTimeEntity { TrafficLightGroupSelected = TrafficLightGroup.A4},
+            new GreenLightTimeEntity { TrafficLightGroupSelected = TrafficLightGroup.B1},
+            new GreenLightTimeEntity { TrafficLightGroupSelected = TrafficLightGroup.B2},
+            new GreenLightTimeEntity { TrafficLightGroupSelected = TrafficLightGroup.B3},
+            new GreenLightTimeEntity { TrafficLightGroupSelected = TrafficLightGroup.B4},
+            new GreenLightTimeEntity { TrafficLightGroupSelected = TrafficLightGroup.B5}
         });
 
         public int Width { get; set; } = 8;

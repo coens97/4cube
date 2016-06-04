@@ -15,7 +15,7 @@ namespace _4cube.Common.Components.Crossroad
         public int CurrentGreenLightGroup { get; set; } = 0;
 
         [DoNotNotify]
-        public double LastTimeSwitched { get; set; } = 0;
+        public int LastTimeSwitched { get; set; } = 0;
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
