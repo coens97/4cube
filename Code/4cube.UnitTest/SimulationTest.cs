@@ -4,6 +4,7 @@ using Ninject;
 using _4cube.Bussiness.Config;
 using _4cube.Bussiness.Simulation;
 using _4cube.Common.Ai;
+using _4cube.Common.Components.Crossroad;
 
 namespace _4cube.UnitTest
 {
@@ -26,14 +27,15 @@ namespace _4cube.UnitTest
         [TestMethod]
         public void TestMoveCarToPoint()
         {
+            var cross = new CrossroadAEntity {X = 0, Y = 0};
             var car = new CarEntity {X=0,Y=0};
             
-            Assert.AreEqual(new Tuple<int,int>(0, 4), _simulation.MoveCarToPoint(car, new Tuple<int, int>(0, 100)));
-            Assert.AreEqual(new Tuple<int, int>(4, 0), _simulation.MoveCarToPoint(car, new Tuple<int, int>(100, 0)));
-            Assert.AreEqual(new Tuple<int, int>(0, -4), _simulation.MoveCarToPoint(car, new Tuple<int, int>(0, -100)));
-            Assert.AreEqual(new Tuple<int, int>(-4, 0), _simulation.MoveCarToPoint(car, new Tuple<int, int>(-100, 0)));
+            Assert.AreEqual(new Tuple<int,int>(0, 4), _simulation.MoveCarToPoint(car, new Tuple<int, int>(0, 100), cross));
+            Assert.AreEqual(new Tuple<int, int>(4, 0), _simulation.MoveCarToPoint(car, new Tuple<int, int>(100, 0), cross));
+            Assert.AreEqual(new Tuple<int, int>(0, -4), _simulation.MoveCarToPoint(car, new Tuple<int, int>(0, -100), cross));
+            Assert.AreEqual(new Tuple<int, int>(-4, 0), _simulation.MoveCarToPoint(car, new Tuple<int, int>(-100, 0), cross));
 
-            Assert.AreEqual(new Tuple<int, int>(2, 2), _simulation.MoveCarToPoint(car, new Tuple<int, int>(100, 100)));
+            Assert.AreEqual(new Tuple<int, int>(2, 2), _simulation.MoveCarToPoint(car, new Tuple<int, int>(100, 100), cross));
         }
     }
 }

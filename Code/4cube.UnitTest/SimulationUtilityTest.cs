@@ -35,8 +35,8 @@ namespace _4cube.UnitTest
         [TestMethod]
         public void TestIsInPositionNoGrid()
         {
-            var carOnLane = new CarEntity {X = 125, Y = 5}; // car on lane a1
-            var carNotOnLane = new CarEntity { X = 120, Y = 180 }; // car not on lane a1
+            var carOnLane = new CarEntity {X = 125, Y = 120}; // car on lane a1
+            var carNotOnLane = new CarEntity { X = 50, Y = 50 }; // car not on lane a1
             Assert.IsTrue(carOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1],0, 0, _config.GridWidth, _config.GridHeight, Direction.Up));
             Assert.IsFalse(carNotOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1], 0, 0, _config.GridWidth, _config.GridHeight, Direction.Up));
         }
@@ -46,8 +46,8 @@ namespace _4cube.UnitTest
         {
             var gridX = 800;
             var gridY = 400;
-            var carOnLane = new CarEntity { X = gridX + 125, Y = gridY + 5 }; // car on lane a1
-            var carNotOnLane = new CarEntity { X = gridX + 120, Y = gridY + 180 }; // car not on lane a1
+            var carOnLane = new CarEntity { X = gridX + 125, Y = gridY + 120 }; // car on lane a1
+            var carNotOnLane = new CarEntity { X = gridX + 50, Y = gridY + 50 }; // car not on lane a1
             Assert.IsTrue(carOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1], gridX, gridY, _config.GridWidth, _config.GridHeight, Direction.Up));
             Assert.IsFalse(carNotOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1], gridX, gridY, _config.GridWidth, _config.GridHeight, Direction.Up));
         }
@@ -94,7 +94,7 @@ namespace _4cube.UnitTest
 
         public void TestRotateTuples()
         {
-            var tuples = _config.GetAllLanesOfTrafficLight(typeof(CrossroadAEntity));
+            var tuples = _config.LanesA.Select(x => x.BoundingBox).ToArray();
 
             var testTuples = SimulationUtility.Rotate(tuples, 0, 0, _config.GridWidth, _config.GridHeight, Direction.Down);
             var testTuples0 = SimulationUtility.Rotate(tuples,-200, -200, _config.GridWidth, _config.GridHeight, Direction.Right);
