@@ -23,9 +23,6 @@ namespace _4cube.Bussiness.Config
 
         public Dictionary<TrafficLightGroup, Tuple<int, int, Direction>> PedstrainSpawn { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, Direction>>();
 
-        private readonly Tuple<int, int, int, int>[] _crossRoadASensors;
-        private readonly Tuple<int, int, int, int>[] _crossRoadBSensors;
-
         public Lane[] LanesA { get; } =
         {
             new Lane { BoundingBox = new Tuple<int, int, int, int>(122, 0, 172, 122), DirectionLane = Direction.Down, OutgoingDiretion = new []{ Direction.Left}},
@@ -88,38 +85,36 @@ namespace _4cube.Bussiness.Config
             new Lane { BoundingBox = new Tuple<int, int, int, int>(90,36,290,68), DirectionLane = Direction.Left, OutgoingDiretion = new Direction[] {}},
             new Lane { BoundingBox = new Tuple<int, int, int, int>(110,332,260,364), DirectionLane = Direction.Right, OutgoingDiretion = new Direction[] {}}
         };
-        public Tuple<int, int, int, int>[] GetTrafficLightSensors(Type t)
-        {
-            if (t == typeof(CrossroadAEntity))
-            {
-                return _crossRoadASensors;
-            }
-            else if (t == typeof(CrossroadBEntity))
-            {
-                return _crossRoadBSensors;
-            }
-            return null;
-        }
 
         public void CalculateLane(Lane l)
         {
+            var d = (int)(CarDistance * 1.5);
+            var b = l.BoundingBox;
             switch (l.DirectionLane)
             {
                 case Direction.Up:
-                    l.EnterPoint = new Tuple<int, int>((l.BoundingBox.Item1 + l.BoundingBox.Item3)/2, l.BoundingBox.Item4);
-                    l.ExitPoint = new Tuple<int, int>((l.BoundingBox.Item1 + l.BoundingBox.Item3)/2, l.BoundingBox.Item2);
+                    l.EnterPoint = new Tuple<int, int>((b.Item1 + b.Item3)/2, b.Item4);
+                    l.ExitPoint = new Tuple<int, int>((b.Item1 + b.Item3)/2, b.Item2);
+                    l.EnterBounding = new Tuple<int, int, int, int>(b.Item1, b.Item4 - d, b.Item3, b.Item4);
+                    l.ExitBounding = new Tuple<int, int, int, int>(b.Item1, b.Item2, b.Item3, b.Item2 + d);
                     break;
                 case Direction.Down:
-                    l.EnterPoint = new Tuple<int, int>((l.BoundingBox.Item1 + l.BoundingBox.Item3) / 2, l.BoundingBox.Item2);
-                    l.ExitPoint = new Tuple<int, int>((l.BoundingBox.Item1 + l.BoundingBox.Item3) / 2, l.BoundingBox.Item4);
+                    l.EnterPoint = new Tuple<int, int>((b.Item1 + b.Item3) / 2, b.Item2);
+                    l.ExitPoint = new Tuple<int, int>((b.Item1 + b.Item3) / 2, b.Item4);
+                    l.EnterBounding = new Tuple<int, int, int, int>(b.Item1, b.Item2, b.Item3, b.Item2 + d);
+                    l.ExitBounding = new Tuple<int, int, int, int>(b.Item1, b.Item4 - d, b.Item3, b.Item4);
                     break;
                 case Direction.Left:
-                    l.EnterPoint = new Tuple<int, int>(l.BoundingBox.Item3,(l.BoundingBox.Item4+ l.BoundingBox.Item2)/2);
-                    l.ExitPoint = new Tuple<int, int>(l.BoundingBox.Item1,(l.BoundingBox.Item4+ l.BoundingBox.Item2)/2);
+                    l.EnterPoint = new Tuple<int, int>(b.Item3,(b.Item4+ b.Item2)/2);
+                    l.ExitPoint = new Tuple<int, int>(b.Item1,(b.Item4+ b.Item2)/2);
+                    l.EnterBounding = new Tuple<int, int, int, int>(b.Item3 - d, b.Item2, b.Item3, b.Item4);
+                    l.ExitBounding = new Tuple<int, int, int, int>(b.Item1, b.Item2, b.Item1 + d, b.Item4);
                     break;
                 case Direction.Right:
-                    l.EnterPoint = new Tuple<int, int>(l.BoundingBox.Item1, (l.BoundingBox.Item4 + l.BoundingBox.Item2) / 2);
-                    l.ExitPoint = new Tuple<int, int>(l.BoundingBox.Item3, (l.BoundingBox.Item4 + l.BoundingBox.Item2) / 2);
+                    l.EnterPoint = new Tuple<int, int>(b.Item1, (b.Item4 + b.Item2) / 2);
+                    l.ExitPoint = new Tuple<int, int>(b.Item3, (b.Item4 + b.Item2) / 2);
+                    l.EnterBounding = new Tuple<int, int, int, int>(b.Item1, b.Item2, b.Item1 + d, b.Item4);
+                    l.ExitBounding = new Tuple<int, int, int, int>(b.Item3 - d, b.Item2, b.Item3, b.Item4);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -183,13 +178,6 @@ namespace _4cube.Bussiness.Config
             PedstrainSpawn[TrafficLightGroup.B3] = new Tuple<int, int, Direction>(90, 52, Direction.Right);
             PedstrainSpawn[TrafficLightGroup.B2] = new Tuple<int, int, Direction>(310, 350, Direction.Left);
 
-            _crossRoadASensors = LanesA.Where(x => x.OutgoingDiretion.Any())
-                .Select(GetSensorBounds).ToArray();
-
-            _crossRoadBSensors = LanesB
-                .Where(x => x.OutgoingDiretion.Any())
-                .Select(x => x.BoundingBox).ToArray();
-
             foreach (var lane in LanesA)
             {
                 CalculateLane(lane);
@@ -198,25 +186,6 @@ namespace _4cube.Bussiness.Config
             foreach (var lane in LanesB)
             {
                 CalculateLane(lane);
-            }
-        }
-
-        private Tuple<int, int, int, int> GetSensorBounds(Lane l)
-        {
-            var d = (int)(CarDistance*1.5);
-            var b = l.BoundingBox;
-            switch (l.DirectionLane)
-            {
-                case Direction.Up:
-                    return new Tuple<int, int, int, int>(b.Item1, b.Item2, b.Item3, b.Item2 + d);
-                case Direction.Right:
-                    return new Tuple<int, int, int, int>(b.Item3 - d, b.Item2, b.Item3, b.Item4);
-                case Direction.Down:
-                    return new Tuple<int, int, int, int>(b.Item1, b.Item4 - d, b.Item3, b.Item4);
-                case Direction.Left:
-                    return new Tuple<int, int, int, int>(b.Item1, b.Item2, b.Item1 + d, b.Item4);
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
     }

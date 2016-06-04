@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.ComponentModel;
 using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using _4cube.Common;
 using _4cube.Common.Components;
-using _4cube.Data;
 using System.Timers;
 using _4cube.Bussiness.Config;
 using _4cube.Common.Ai;
@@ -48,7 +41,7 @@ namespace _4cube.Bussiness.Simulation
 
         private void SpawnACar()
         {
-            //Create cars
+            //Create cars       
             foreach (var compo in _grid.Components)
             {
                 for (var i = 0; i < compo.NrOfIncomingCars.Length; i++)
@@ -195,11 +188,10 @@ namespace _4cube.Bussiness.Simulation
                             x => !x.OutgoingDiretion.Any() && x.DirectionLane.RotatedDirection(component.Rotation) == car.Direction);
                 if (exitLane.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation))
                 {//if car is leaving the exit lane
-                    fPos = MoveCarToPoint(car, exitLane.ExitPoint, component);
+                        fPos = MoveCarToPoint(car, exitLane.ExitPoint, component);
                 }
                 else
                 {//if car is going to the exit lane
-                    
                     fPos = MoveCarToPoint(car, exitLane.EnterPoint, component);
                 }
             }
@@ -336,14 +328,26 @@ namespace _4cube.Bussiness.Simulation
 
                 if (crossroad != null)
                 {
-                    if (car.IsInPosition(
-                            _config.GetTrafficLightSensors(crossroad.GetType())
-                                    , gridPosition.Item1, gridPosition.Item2, _config.GridWidth,_config.GridHeight, component.Rotation))
-                        // is the car in any of the lanes of the crossroad
+                    var lanes = _config.GetLanesOfComponent(crossroad);
+                    var incomingLanes = lanes.Where(x => x.OutgoingDiretion.Any());
+                    var incomingLane =
+                        incomingLanes.FirstOrDefault(
+                            x =>
+                                x.ExitBounding.IsInPosition(car.X, car.Y, component.X, component.Y, _config.GridWidth,
+                                    _config.GridHeight, component.Rotation));
+                    if (incomingLane != null)
+                    // is the car in any of the lanes of the crossroad
                     {
+                        var outgoingLanes = lanes.Where(x => !x.OutgoingDiretion.Any()
+                            && incomingLane.OutgoingDiretion.Any(y => x.DirectionLane == y));
                         var trafficlightGroup = crossroad.GreenLightTimeEntities[crossroad.CurrentGreenLightGroup];
-                        if (car.IsInPosition(_config.CrossRoadCoordinatesCars[trafficlightGroup], gridPosition.Item1, gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation)) 
-                            // Light is green of the lane it is tanding in
+                        if (car.IsInPosition(_config.CrossRoadCoordinatesCars[trafficlightGroup], gridPosition.Item1,
+                            gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation)
+                            && !_grid.Cars.Any( // Check if there are no cars stuck in outgoing lane
+                                c => outgoingLanes.Select(x => x.ExitBounding).ToArray()
+                                        .IsInPosition(c.X, c.Y, component.X, component.Y, _config.GridWidth,
+                                            _config.GridHeight, component.Rotation)))  
+                            // Light is green of the lane it is standing in
                             MoveCar(car);
                     }
                     else

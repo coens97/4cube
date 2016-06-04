@@ -10,5 +10,7 @@ namespace _4cube.Bussiness.Config
         public Direction[] OutgoingDiretion { get; set; }
         public Tuple<int, int> EnterPoint { get; set; }
         public Tuple<int, int> ExitPoint { get; set; }
+        public Tuple<int, int, int, int> EnterBounding { get; set; }
+        public Tuple<int, int, int, int> ExitBounding { get; set; }
     }
 }
