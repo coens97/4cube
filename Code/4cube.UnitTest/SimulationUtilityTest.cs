@@ -95,10 +95,7 @@ namespace _4cube.UnitTest
             var testTuples0 = SimulationUtility.Rotate(tuples,-200, -200, _config.GridWidth, _config.GridHeight, Direction.Right);
             
             Assert.AreEqual(testTuples[0],new Tuple<int, int, int, int>(278,400,228,278));
-            Assert.AreEqual(testTuples0[2], new Tuple<int, int, int, int>(0,222,-121,278));// Assert.AreEqual(testTuples0[2], new Tuple<int, int, int, int>(0,222,-122,278));
-
-
-
+            Assert.AreEqual(testTuples0[2], new Tuple<int, int, int, int>(400,222,278,278));
         }
 
         [TestMethod]

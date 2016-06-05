@@ -182,7 +182,7 @@ namespace _4cube.Bussiness.Simulation
                             x.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2, _config.GridWidth,_config.GridHeight, component.Rotation));
             if (enterLane != null) // if car is in an entering lane
             {
-                fPos = MoveCarToPoint(car, enterLane.ExitPoint, component);
+                fPos = MoveCarToPoint(car, enterLane.ExitPoint.Rotate(component.Rotation, _config.GridWidth, _config.GridHeight), component);
 
                 // If the car was first in an entering lane but now not anymore
                 if (!enterLane.BoundingBox.IsInPosition(fPos.Item1, fPos.Item2, gridPosition.Item1,
@@ -190,7 +190,7 @@ namespace _4cube.Bussiness.Simulation
                 {
                     var random = new Random();
                     var i = random.Next(enterLane.OutgoingDiretion.Length);
-                    car.Direction = enterLane.OutgoingDiretion[i];
+                    car.Direction = enterLane.OutgoingDiretion[i].RotatedDirection(component.Rotation);
                 }
             }
             else
@@ -200,11 +200,12 @@ namespace _4cube.Bussiness.Simulation
                             x => !x.OutgoingDiretion.Any() && x.DirectionLane.RotatedDirection(component.Rotation) == car.Direction);
                 if (exitLane.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation))
                 {//if car is leaving the exit lane
-                        fPos = MoveCarToPoint(car, exitLane.ExitPoint, component);
+                        fPos = MoveCarToPoint(car, exitLane.ExitPoint.Rotate(component.Rotation, _config.GridWidth, _config.GridHeight), component);
                 }
                 else
                 {//if car is going to the exit lane
-                    fPos = MoveCarToPoint(car, exitLane.EnterPoint, component);
+                    fPos = MoveCarToPoint(car,
+                        exitLane.EnterPoint.Rotate(component.Rotation, _config.GridWidth, _config.GridHeight), component);
                 }
             }
 
@@ -234,8 +235,8 @@ namespace _4cube.Bussiness.Simulation
                     {
                         var random = new Random();
                         var i = random.Next(l.Count());
-                        var lane = l[i];
-                        fPos = new Tuple<int, int>(lane.EnterPoint.Item1 + nextComponent.X, lane.EnterPoint.Item2 + nextComponent.Y);
+                        var lane = l[i].EnterPoint.Rotate(component.Rotation, _config.GridWidth, _config.GridHeight);
+                        fPos = new Tuple<int, int>(lane.Item1 + nextComponent.X, lane.Item2 + nextComponent.Y);
                     }
                 }
             }
