@@ -10,9 +10,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using PropertyChanged;
+using _4cube.Bussiness;
+using _4cube.Common;
 using _4cube.Common.Components;
 using _4cube.Common.Components.Crossroad;
 using _4cube.Presentation.Annotations;
@@ -22,6 +25,7 @@ namespace _4cube.Presentation.ViewModel
     [ImplementPropertyChanged]
     class ComponentViewModel: INotifyPropertyChanged
     {
+        public int Rotation { get; set; }
         public BitmapImage CompSource { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
@@ -32,12 +36,17 @@ namespace _4cube.Presentation.ViewModel
         public ComponentEntity Component { get; set; }
 
         public ComponentViewModel() { }
-
-        public ComponentViewModel(ComponentEntity c)
+        private IGridModel _gridModel;
+        public ComponentViewModel(ComponentEntity c, IGridModel gridModel)
         {
+            _gridModel = gridModel;
             Component = c;
             X = c.X;
             Y = c.Y;
+            Rotation = (int)c.Rotation * 90;
+
+            c.PropertyChanged += COnPropertyChanged;
+
             var p = AssemblyDirectory;
             if (c is CrossroadAEntity)
             {
@@ -54,6 +63,27 @@ namespace _4cube.Presentation.ViewModel
             else
             {
                 CompSource = new BitmapImage(new Uri(p + "/Resources/roadb.png", UriKind.Absolute));
+            }
+
+        }
+
+        public void OnRotate()
+        {
+            _gridModel.RotateComponent(Component);
+        }
+
+        public void OnDelete()
+        {
+            _gridModel.DeleteComponent(Component);
+        }
+
+        private void COnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            switch (propertyChangedEventArgs.PropertyName)
+            {
+                case "Rotation":
+                    Rotation = (int)Component.Rotation * 90;
+                    break;
             }
         }
 

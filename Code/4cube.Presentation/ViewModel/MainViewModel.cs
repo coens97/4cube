@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Data;
 using PropertyChanged;
 using _4cube.Bussiness;
@@ -110,13 +111,14 @@ namespace _4cube.Presentation.ViewModel
                 case NotifyCollectionChangedAction.Add:
                     foreach (var c in notifyCollectionChangedEventArgs.NewItems)
                     {
-                        Components.Add(new ComponentViewModel((ComponentEntity)c));
+                        Components.Add(new ComponentViewModel((ComponentEntity)c, _gridModel));
                     }
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (var c in notifyCollectionChangedEventArgs.OldItems)
                     {
-                        Components.Remove(new ComponentViewModel { Component = (ComponentEntity)c });
+                        var comp = Components.First(x => x.Component == c);
+                        Components.Remove(comp);
                     }
                     break;
                 case NotifyCollectionChangedAction.Reset:

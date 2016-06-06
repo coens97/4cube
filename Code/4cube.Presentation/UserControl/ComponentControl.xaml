@@ -11,8 +11,8 @@
 
     <UserControl.Resources>
         <ContextMenu x:Key="CpContext">
-            <MenuItem Header="_Rotate" MouseDown="MenuItem_MouseDown" />
-            <MenuItem Header="_Delete" MouseDown="MenuItem_MouseDown_1" />
+            <MenuItem Header="_Rotate" Click="MenuItem_Click" />
+            <MenuItem Header="_Delete" Click="MenuItem_Click_1"  />
         </ContextMenu>
     </UserControl.Resources>
     <Grid ContextMenu="{StaticResource CpContext}" MouseRightButtonUp="Grid_MouseRightButtonUp">
@@ -21,7 +21,16 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="{Binding CompSource}"/>
+            <ImageBrush ImageSource="{Binding CompSource}" >
+                <ImageBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                        <RotateTransform Angle="{Binding Rotation}" CenterY="0.5" CenterX="0.5"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ImageBrush.RelativeTransform>
+            </ImageBrush>
         </Grid.Background>
         <TextBox x:Name="textBox" Visibility ="{Binding Enable[0]}" HorizontalAlignment="Left" Height="30" Margin="169,0,0,0" TextWrapping="Wrap" Text="{Binding NrOfIncomingCars[0]}" VerticalAlignment="Top" Width="70" Grid.ColumnSpan="2" FontSize="20" />
         <TextBox x:Name="textBox_Copy" Visibility ="{Binding Enable[3]}" HorizontalAlignment="Left" Height="30" Margin="0,200,0,0" TextWrapping="Wrap" Text="{Binding NrOfIncomingCars[3]}" VerticalAlignment="Top" Width="70" FontSize="20"/>
