@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using _4cube.Bussiness;
 using _4cube.Bussiness.Config;
 using _4cube.Bussiness.Simulation;
+using _4cube.Common.Components;
 using _4cube.Common.Components.Crossroad;
 using _4cube.Presentation.ViewModel;
 
@@ -64,6 +65,15 @@ namespace _4cube.Presentation.Window
                 {
                     case "CrossroadA":
                         _gridModel.AddComponent(new CrossroadAEntity {X = position.Item1, Y = position.Item2});
+                        break;
+                    case "CrossroadB":
+                        _gridModel.AddComponent(new CrossroadBEntity { X = position.Item1, Y = position.Item2 });
+                        break;
+                    case "RoadA":
+                        _gridModel.AddComponent(new StraightRoadEntity { X = position.Item1, Y = position.Item2 });
+                        break;
+                    case "RoadB":
+                        _gridModel.AddComponent(new CurvedRoadEntity { X = position.Item1, Y = position.Item2 });
                         break;
                 }
             }

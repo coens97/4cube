@@ -6,6 +6,7 @@
         xmlns:viewModel="clr-namespace:_4cube.Presentation.ViewModel"
         xmlns:ai="clr-namespace:_4cube.Common.Ai;assembly=4cube.Common"
         xmlns:cross="clr-namespace:_4cube.Common.Components.Crossroad;assembly=4cube.Common"
+        xmlns:userControl="clr-namespace:_4cube.Presentation.UserControl"
         mc:Ignorable="d"
         Title="Traffic Simulator" Height="566.57" Width="1071.555">
     <Window.DataContext>
@@ -69,7 +70,7 @@
                     <ItemsControl ItemsSource="{Binding GridItems}">
                     <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <Canvas Height="{Binding Width}" Width="{Binding Height}" MouseUp="Canvas_MouseUp">
+                                <Canvas Height="{Binding Width}" Width="{Binding Height}" MouseLeftButtonUp="Canvas_MouseUp">
                                     <Canvas.Background>
                                         <DrawingBrush Stretch="None" TileMode="Tile"
                           Viewport="0,0 400,400" ViewportUnits="Absolute">
@@ -99,17 +100,17 @@
                                     </Ellipse.RenderTransform>
                                 </Ellipse>
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type ai:PedestrianEntity}">
-                            <Ellipse Fill="Blue" Width="20" Height="20" Stroke="Black">
-                                   <Ellipse.RenderTransform>
+                            <DataTemplate DataType="{x:Type ai:PedestrianEntity}">
+                                <Ellipse Fill="Blue" Width="20" Height="20" Stroke="Black">
+                                    <Ellipse.RenderTransform>
                                         <TranslateTransform X="-10" Y="-10" />
                                     </Ellipse.RenderTransform>
                                 </Ellipse>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type viewModel:ComponentViewModel}">
+                                <userControl:ComponentControl DataContext="{Binding}" Width="400" Height="400" />
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type cross:CrossroadAEntity}">
-                            <Image Source="../Resources/A.png"/>
-                        </DataTemplate>
-                    </ItemsControl.Resources>
+                        </ItemsControl.Resources>
                     <ItemsControl.ItemContainerStyle>
                         <Style TargetType="ContentPresenter">
                             <Setter Property="Canvas.Left" Value="{Binding X}"/>

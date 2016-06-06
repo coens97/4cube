@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows.Data;
 using PropertyChanged;
@@ -24,6 +26,8 @@ namespace _4cube.Presentation.ViewModel
         private ISimulation _simulation;
         private IConfig _config;
         private GridContainer _gridContainer;
+
+        private ObservableCollection<ComponentViewModel> Components = new ObservableCollection<ComponentViewModel>(); 
 
         public int Width { get; set; }
         public int Height { get; set; }
@@ -75,6 +79,7 @@ namespace _4cube.Presentation.ViewModel
             {
                 case "Grid":
                     LoadGrid(_gridContainer.Grid);
+                    Components.Clear();
                     break;
             }
         }
@@ -82,9 +87,10 @@ namespace _4cube.Presentation.ViewModel
         void LoadGrid(GridEntity grid)
         {
             GridItems.Clear();
-            GridItems.Add(new CollectionContainer { Collection = grid.Components });
+            //GridItems.Add(new CollectionContainer {Collection = grid.Components });
             GridItems.Add(new CollectionContainer {Collection = grid.Cars});
             GridItems.Add(new CollectionContainer {Collection = grid.Pedestrians});
+            GridItems.Add(new CollectionContainer { Collection = Components });
             BindingOperations.EnableCollectionSynchronization(grid.Cars, _lock);
             BindingOperations.EnableCollectionSynchronization(grid.Pedestrians, _lock);
 
@@ -94,6 +100,31 @@ namespace _4cube.Presentation.ViewModel
             ScaledHeight = Height / _config.GetScale;
 
             grid.PropertyChanged += GridOnPropertyChanged;
+            grid.Components.CollectionChanged += ComponentsOnCollectionChanged;
+        }
+
+        private void ComponentsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            switch (notifyCollectionChangedEventArgs.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (var c in notifyCollectionChangedEventArgs.NewItems)
+                    {
+                        Components.Add(new ComponentViewModel((ComponentEntity)c));
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (var c in notifyCollectionChangedEventArgs.OldItems)
+                    {
+                        Components.Remove(new ComponentViewModel { Component = (ComponentEntity)c });
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    Components.Clear();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -101,7 +132,7 @@ namespace _4cube.Presentation.ViewModel
             switch (propertyChangedEventArgs.PropertyName)
             {
                 case "Speed":
-                    _simulation.ChangeSpeed((10 - Speed) * 4 + 16);
+                    _simulation.ChangeSpeed((10 - Speed)*4 + 16);
                     break;
             }
         }
@@ -111,12 +142,12 @@ namespace _4cube.Presentation.ViewModel
             switch (propertyChangedEventArgs.PropertyName)
             {
                 case "Width":
-                    Width = _gridModel.Grid.Width * _config.GridWidth;
-                    ScaledWidth = Width / _config.GetScale;
+                    Width = _gridModel.Grid.Width*_config.GridWidth;
+                    ScaledWidth = Width/_config.GetScale;
                     break;
                 case "Height":
-                    Height = _gridModel.Grid.Height * _config.GridHeight;
-                    ScaledHeight = Height / _config.GetScale;
+                    Height = _gridModel.Grid.Height*_config.GridHeight;
+                    ScaledHeight = Height/_config.GetScale;
                     break;
             }
         }
