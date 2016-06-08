@@ -35,7 +35,7 @@ namespace _4cube.Bussiness.Simulation
             SpawnACar();
             ProcessTrafficLight();
             ProcessCar();
-            ProcessPedestrain();
+            //ProcessPedestrain();
             _timer.Enabled = true;
         }
 
@@ -142,12 +142,12 @@ namespace _4cube.Bussiness.Simulation
                         if (number%2 == 0)
                         {
                             //even number means there are pedestrians
-                            _grid.Pedestrians.Add(new PedestrianEntity
-                            {
-                                X = _config.PedstrainSpawn[group].Item1,
-                                Y = _config.PedstrainSpawn[group].Item2,
-                                Direction = _config.PedstrainSpawn[group].Item3
-                            });
+                            //_grid.Pedestrians.Add(new PedestrianEntity
+                            //{
+                            //    X = _config.PedstrainSpawn[group].Item1,
+                            //    Y = _config.PedstrainSpawn[group].Item2,
+                            //    Direction = _config.PedstrainSpawn[group].Item3
+                            //});
                         }
                     }
 
