@@ -15,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using PropertyChanged;
 using _4cube.Bussiness;
+using _4cube.Bussiness.Config;
+using _4cube.Bussiness.Simulation;
 using _4cube.Common;
 using _4cube.Common.Components;
 using _4cube.Common.Components.Crossroad;
@@ -29,24 +31,37 @@ namespace _4cube.Presentation.ViewModel
         public BitmapImage CompSource { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
-        public ObservableCollection<int> NrOfIncomingCars { get; set; } = new ObservableCollection<int>(new[] { 5, 7, 4, 3 });
-        public ObservableCollection<Visibility> Enable { get; set; } = new ObservableCollection<Visibility>(new[] { Visibility.Visible, Visibility.Hidden, Visibility.Visible, Visibility.Hidden });
+        public int TopCars { get; set; }
+        public int RightCars { get; set; } 
+        public int LeftCars { get; set; } 
+        public int BotCars { get; set; } 
+        public Visibility TopVisibility { get; set; } = Visibility.Hidden;
+        public Visibility RightVisibility { get; set; } = Visibility.Hidden;
+        public Visibility LeftVisibility { get; set; } = Visibility.Hidden;
+        public Visibility BotVisibility { get; set; } = Visibility.Hidden;
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
+        [DoNotNotify]
         public ComponentEntity Component { get; set; }
 
         public ComponentViewModel() { }
         private IGridModel _gridModel;
-        public ComponentViewModel(ComponentEntity c, IGridModel gridModel)
+        private IConfig _config;
+        public ComponentViewModel(ComponentEntity c, IGridModel gridModel, IConfig config)
         {
+            _config = config;
             _gridModel = gridModel;
             Component = c;
             X = c.X;
             Y = c.Y;
             Rotation = (int)c.Rotation * 90;
-
+            TopCars = c.NrOfIncomingCars[0];
+            RightCars = c.NrOfIncomingCars[1];
+            LeftCars = c.NrOfIncomingCars[3];
+            BotCars = c.NrOfIncomingCars[2];
             c.PropertyChanged += COnPropertyChanged;
-
+           
             var p = AssemblyDirectory;
             if (c is CrossroadAEntity)
             {
@@ -64,7 +79,37 @@ namespace _4cube.Presentation.ViewModel
             {
                 CompSource = new BitmapImage(new Uri(p + "/Resources/roadb.png", UriKind.Absolute));
             }
+            InitializeVisibility();
+            PropertyChanged += ViewOnPropertyChanged;
+        }
 
+        private void InitializeVisibility()
+        {
+            var lane = _config.GetLanesOfComponent(Component).Where(x => x.OutgoingDiretion.Any());
+
+            TopVisibility = lane.Any(x => x.DirectionLane.RotatedDirection(Direction.Down) == Component.Rotation.RotatedDirectionInv(Direction.Left)) ? Visibility.Visible : Visibility.Hidden;
+            RightVisibility = lane.Any(x => x.DirectionLane.RotatedDirection(Direction.Down) == Component.Rotation.RotatedDirectionInv(Direction.Up)) ? Visibility.Visible : Visibility.Hidden;
+            LeftVisibility = lane.Any(x => x.DirectionLane.RotatedDirection(Direction.Down) == Component.Rotation.RotatedDirectionInv(Direction.Down)) ? Visibility.Visible : Visibility.Hidden;
+            BotVisibility = lane.Any(x=>x.DirectionLane.RotatedDirection(Direction.Down) == Component.Rotation.RotatedDirectionInv(Direction.Right)) ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private void ViewOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case "TopCars":
+                    Component.NrOfIncomingCars[0] = TopCars;
+                    break;
+                case "RightCars":
+                    Component.NrOfIncomingCars[1] = RightCars;
+                    break;
+                case "LeftCars":
+                    Component.NrOfIncomingCars[3] = LeftCars;
+                    break;
+                case "BotCars":
+                    Component.NrOfIncomingCars[2] = BotCars;
+                    break;
+            }
         }
 
         public void OnRotate()
@@ -83,6 +128,7 @@ namespace _4cube.Presentation.ViewModel
             {
                 case "Rotation":
                     Rotation = (int)Component.Rotation * 90;
+                    InitializeVisibility();
                     break;
             }
         }

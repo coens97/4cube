@@ -90,7 +90,7 @@ namespace _4cube.Presentation.ViewModel
                 case NotifyCollectionChangedAction.Add:
                     foreach (var c in notifyCollectionChangedEventArgs.NewItems)
                     {
-                        Components.Add(new ComponentViewModel((ComponentEntity)c, _gridModel));
+                        Components.Add(new ComponentViewModel((ComponentEntity)c, _gridModel, _config));
                     }
                     break;
                 case NotifyCollectionChangedAction.Remove:

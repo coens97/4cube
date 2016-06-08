@@ -335,7 +335,15 @@ namespace _4cube.Bussiness.Simulation
 
             for (var i = _grid.Cars.Count - 1 ; i >= 0; i--)
             {
-                var car = _grid.Cars[i];
+                CarEntity car;
+                try // TODO: Fix error
+                {
+                    car = _grid.Cars[i];
+                }
+                catch(Exception e)
+                {
+                    return;
+                }
 
                 var gridPosition = SimulationUtility.GetGridPosition(car.X, car.Y, _config.GridWidth, _config.GridHeight);
                 var component = _grid.Components.FirstOrDefault(x => x.X == gridPosition.Item1 && x.Y == gridPosition.Item2);
