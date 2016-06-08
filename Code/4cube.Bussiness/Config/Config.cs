@@ -13,7 +13,7 @@ namespace _4cube.Bussiness.Config
         public int GridWidth { get; } = 400;
         public int GridHeight { get; } = 400;
         public int CarDistance { get; } = 20;
-        public int CarSpeed { get; } = 6;
+        public int CarSpeed { get; } = 10;
         public int PedestrianSpeed { get; } = 1;
         public int GetScale { get; } = 2;
 
