@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Windows;
 using _4cube.Bussiness;
 using _4cube.Presentation.ViewModel;
 
@@ -23,7 +24,15 @@ namespace _4cube.Presentation.Window
 
         private void GridResizingViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            _gridModel.ResizeGrid(_gridResizingViewModel.Width,_gridResizingViewModel.Height);
+            try
+            {
+                _gridModel.ResizeGrid(_gridResizingViewModel.Width, _gridResizingViewModel.Height);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+           
         }
 
         

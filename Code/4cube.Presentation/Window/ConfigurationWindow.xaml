@@ -7,9 +7,6 @@
         xmlns:viewModel="clr-namespace:_4cube.Presentation.ViewModel"
         mc:Ignorable="d"
         Title="Configuration" Height="271.491" Width="861.791">
-    <Window.DataContext>
-        <viewModel:ConfigurationModel/>
-    </Window.DataContext>
     <Grid Margin="0,0,0,1.111" HorizontalAlignment="Left" Width="852">
         <GroupBox x:Name="GroupBox" Header="Preview" Margin="10,10,0,0" Height="225" VerticalAlignment="Top" HorizontalAlignment="Left" Width="210">
             <Border BorderThickness="1" BorderBrush="#FF000000" Margin="10,10,7.333,11.778">
@@ -18,14 +15,29 @@
 
         </GroupBox>
         <GroupBox x:Name="groupBox" Header="Traffic Lights Group" HorizontalAlignment="Left" Margin="225,10,0,0" Width="374" Height="225" VerticalAlignment="Top">
-            <ListBox x:Name="listBox" Margin="0,0,-2.222,0.778"/>
+            <ListBox x:Name="listBox" Margin="0,0,-2.222,0.778"  ItemsSource="{Binding Path=TestCollection, UpdateSourceTrigger=PropertyChanged}" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Grid Margin="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                           <!-- <TextBlock Text="{Binding TrafficLightGroupSelected}"></TextBlock> -->
+                        <!--   <TextBlock Text="{Binding Duration }"></TextBlock> -->
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </GroupBox>
         <GroupBox x:Name="GroupBox1" Header="Green Lights Time and Reset" HorizontalAlignment="Left" Margin="604,10,0,0" VerticalAlignment="Top" Height="225" Width="242">
             <Grid Height="201" VerticalAlignment="Top" Margin="0,0,-1.222,0">
-                <ListBox x:Name="listBox1" Margin="0,0,0,-0.222" HorizontalAlignment="Left" Width="78"/>
-                <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="98,10,0,0" TextWrapping="Wrap" Text="{Binding Duration}" VerticalAlignment="Top" Width="120"/>
-                <Button x:Name="BtnChangeAll" Content="ChangeAll" HorizontalAlignment="Left" Margin="98,81,0,0" VerticalAlignment="Top" Width="120" Height="28"/>
-                <Button x:Name="BtnComplete" Content="Complete" HorizontalAlignment="Left" Margin="98,128,0,0" VerticalAlignment="Top" Width="120" Height="63"/>
+                <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="61,10,0,0" TextWrapping="Wrap" Text="{Binding Test}" VerticalAlignment="Top" Width="120"/>
+                <Button x:Name="BtnChangeAll" Content="ChangeAll" HorizontalAlignment="Left" Margin="61,81,0,0" VerticalAlignment="Top" Width="120" Height="28"/>
+                <Button x:Name="BtnComplete" Content="Complete" HorizontalAlignment="Left" Margin="61,128,0,0" VerticalAlignment="Top" Width="120" Height="63"/>
 
             </Grid>
 

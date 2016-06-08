@@ -13,8 +13,9 @@ namespace _4cube.Presentation.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        //  public List<GreenLightTimeEntity> GreenLightTimeEntities { get; set; }
-        public CompositeCollection GreenLightTimeEntities { get; set; }
+        public CompositeCollection GreenLightTimeEntities { get; set; } =new CompositeCollection();
+        public string Test { get; set; }
+        public ObservableCollection<string>TestCollection=new ObservableCollection<string>();
 
         public ConfigurationModel()
         {
@@ -22,7 +23,9 @@ namespace _4cube.Presentation.ViewModel
 
         public ConfigurationModel(IGridModel gridModel)
         {
-
+            Test = "hello";
+            TestCollection.Add("aaaaa");
+            TestCollection.Add("bbbbbb");
             GreenLightTimeEntities.Add(new CollectionContainer{ Collection = gridModel.Grid.GreenLightTimeEntities} );
         }
     }
