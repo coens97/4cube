@@ -63,8 +63,8 @@ namespace _4cube.Bussiness.Config
         };
         public Lane[] CurvedRoad { get; } =
         {
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 122, 200, 200), DirectionLane = Direction.Left, OutgoingDiretion = new Direction[] {}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 200, 122, 278), DirectionLane = Direction.Right, OutgoingDiretion = new [] {Direction.Down}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(1, 122, 200, 200), DirectionLane = Direction.Left, OutgoingDiretion = new Direction[] {}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(1, 200, 122, 278), DirectionLane = Direction.Right, OutgoingDiretion = new [] {Direction.Down}},
             new Lane { BoundingBox = new Tuple<int, int, int, int>(122, 278, 200, 399), DirectionLane = Direction.Down, OutgoingDiretion = new Direction[] {}},
             new Lane { BoundingBox = new Tuple<int, int, int, int>(200, 200, 278, 399), DirectionLane = Direction.Up, OutgoingDiretion = new [] {Direction.Left}},
         };

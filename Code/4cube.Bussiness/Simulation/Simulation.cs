@@ -230,7 +230,7 @@ namespace _4cube.Bussiness.Simulation
                 else
                 {
                     var l = _config.GetLanesOfComponent(nextComponent)
-                        .Where(x => x.OutgoingDiretion.Any() && x.DirectionLane.RotatedDirection(component.Rotation) == car.Direction).ToArray();
+                        .Where(x => x.OutgoingDiretion.Any() && x.DirectionLane.RotatedDirection(nextComponent.Rotation) == car.Direction).ToArray();
                     if (!l.Any())
                     {
                         _grid.Cars.Remove(car);
@@ -239,7 +239,7 @@ namespace _4cube.Bussiness.Simulation
                     {
                         var random = new Random();
                         var i = random.Next(l.Count());
-                        var lane = l[i].EnterPoint.Rotate(component.Rotation, _config.GridWidth, _config.GridHeight);
+                        var lane = l[i].EnterPoint.Rotate(nextComponent.Rotation, _config.GridWidth, _config.GridHeight);
                         fPos = new Tuple<int, int>(lane.Item1 + nextComponent.X, lane.Item2 + nextComponent.Y);
                     }
                 }

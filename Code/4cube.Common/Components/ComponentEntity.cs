@@ -6,7 +6,7 @@ namespace _4cube.Common.Components
     [ImplementPropertyChanged]
     public class ComponentEntity : INotifyPropertyChanged
     {
-        public int[] NrOfIncomingCars { get; set; } = {5, 5, 5, 15};
+        public int[] NrOfIncomingCars { get; set; } = {5, 5, 5, 5};
         public int[] NrOfIncomingCarsSpawned { get; set; } = { 0, 0, 0, 0 };
         public Direction Rotation { get; set; } = Direction.Up;
         [DoNotNotify]
