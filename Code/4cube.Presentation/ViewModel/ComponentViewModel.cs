@@ -29,8 +29,6 @@ namespace _4cube.Presentation.ViewModel
         public BitmapImage CompSource { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
-
-        // observable collection is useless for getting notified when a value changes
         public ObservableCollection<int> NrOfIncomingCars { get; set; } = new ObservableCollection<int>(new[] { 5, 7, 4, 3 });
         public ObservableCollection<Visibility> Enable { get; set; } = new ObservableCollection<Visibility>(new[] { Visibility.Visible, Visibility.Hidden, Visibility.Visible, Visibility.Hidden });
         public event PropertyChangedEventHandler PropertyChanged;
@@ -48,7 +46,6 @@ namespace _4cube.Presentation.ViewModel
             Rotation = (int)c.Rotation * 90;
 
             c.PropertyChanged += COnPropertyChanged;
-            this.PropertyChanged += OnPropertyChanged;
 
             var p = AssemblyDirectory;
             if (c is CrossroadAEntity)
@@ -68,16 +65,6 @@ namespace _4cube.Presentation.ViewModel
                 CompSource = new BitmapImage(new Uri(p + "/Resources/roadb.png", UriKind.Absolute));
             }
 
-        }
-
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-        {
-            switch (propertyChangedEventArgs.PropertyName)
-            {
-                case "NrCTop":
-                     
-                    break;
-            }
         }
 
         public void OnRotate()
