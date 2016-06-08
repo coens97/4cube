@@ -15,14 +15,15 @@ namespace _4cube.Presentation.Window
     /// </summary>
     public partial class MainWindow : System.Windows.Window
     {
-        private readonly System.Windows.Window _resizeWindow = new GridResizingWindow();
-        private readonly System.Windows.Window _configWindow = new ConfigurationWindow();
+        private readonly GridResizingWindow _resizeWindow;
+        private readonly System.Windows.Window _configWindow;
         private readonly IGridModel _gridModel;
         private readonly IConfig _config;
         private readonly ISimulation _simulation;
         private string _draggedComponent;
 
-        public MainWindow(MainViewModel viewModel, IGridModel gridModel, IConfig config, ISimulation simulation)
+        public MainWindow(MainViewModel viewModel, IGridModel gridModel, IConfig config,
+            ISimulation simulation, GridResizingWindow gridResizingWindow, ConfigurationWindow configurationWindow)
         {
             InitializeComponent();
 
@@ -30,6 +31,10 @@ namespace _4cube.Presentation.Window
             _config = config;
             _simulation = simulation;
             DataContext = viewModel;
+            _resizeWindow = gridResizingWindow;
+            _configWindow = configurationWindow;
+
+
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)

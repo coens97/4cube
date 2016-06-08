@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="ViewModel\ComponentViewModel.cs" />
     <Compile Include="ViewModel\ConfigurationModel.cs" />
+    <Compile Include="ViewModel\GridResizingViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="Window\ConfigurationWindow.xaml.cs">
       <DependentUpon>ConfigurationWindow.xaml</DependentUpon>

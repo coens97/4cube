@@ -43,28 +43,7 @@ namespace _4cube.Presentation.ViewModel
             _simulation = simulation;
             _gridContainer = gridContainer;
             
-            // Test data.. should be deleted later
-            gridContainer.Grid = new GridEntity
-            {
-                Pedestrians = new ObservableCollection<PedestrianEntity>(new[]
-                {
-                    new PedestrianEntity { X = 160, Y = 50 },
-                    new PedestrianEntity { X = 160, Y = 240 }
-                }),
-                Components = new ObservableCollection<ComponentEntity>(new[]
-                {
-                    new CrossroadAEntity { X = 400, Y= 400 }
-                }),
-                Cars = new ObservableCollection<CarEntity>(new[]
-               {
-                    new CarEntity { X = 100, Y = 200 },
-                    new CarEntity { X = 20, Y = 40 },
-                    new CarEntity { X = 350, Y = 100 }
-                }),
-                Width = 10,
-                Height = 8
-            };
-            _config = config;
+           _config = config;
 
             BindingOperations.EnableCollectionSynchronization(GridItems, _lock);
             LoadGrid(_gridContainer.Grid);
