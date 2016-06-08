@@ -53,9 +53,13 @@ namespace _4cube.Bussiness.Simulation
                             _config.GetLanesOfComponent(compo)
                                 .Where(x => x.DirectionLane == direction && x.OutgoingDiretion.Any())
                                 .ToArray();
+
+                        if (!laneList.Any())
+                            continue;
+
                         var rd = new Random();
                         var laneIndex = rd.Next(0, laneList.Count());
-                        var laneEnterPoint = laneList[laneIndex].EnterPoint;
+                        var laneEnterPoint = laneList[laneIndex].EnterPoint.Rotate(compo.Rotation, _config.GridWidth, _config.GridHeight);
                         var laneSpawnPoint = new Tuple<int, int>(laneEnterPoint.Item1 + compo.X,
                             laneEnterPoint.Item2 + compo.Y);
                         var d = _config.CarDistance;
@@ -65,7 +69,7 @@ namespace _4cube.Bussiness.Simulation
                         {
                             _grid.Cars.Add(new CarEntity
                             {
-                                Direction = direction,
+                                Direction = direction.RotatedDirection(compo.Rotation),
                                 X = laneSpawnPoint.Item1,
                                 Y = laneSpawnPoint.Item2
                             });

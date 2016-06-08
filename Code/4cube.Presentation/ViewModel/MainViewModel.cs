@@ -89,9 +89,9 @@ namespace _4cube.Presentation.ViewModel
         {
             GridItems.Clear();
             //GridItems.Add(new CollectionContainer {Collection = grid.Components });
+            GridItems.Add(new CollectionContainer { Collection = Components });
             GridItems.Add(new CollectionContainer {Collection = grid.Cars});
             GridItems.Add(new CollectionContainer {Collection = grid.Pedestrians});
-            GridItems.Add(new CollectionContainer { Collection = Components });
             BindingOperations.EnableCollectionSynchronization(grid.Cars, _lock);
             BindingOperations.EnableCollectionSynchronization(grid.Pedestrians, _lock);
 

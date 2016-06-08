@@ -56,17 +56,17 @@ namespace _4cube.Bussiness.Config
 
         public Lane[] StraightRoad { get; } =
         {
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 122, 100, 200), DirectionLane = Direction.Right, OutgoingDiretion = new [] {Direction.Right}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(300, 122, 399, 200), DirectionLane = Direction.Left, OutgoingDiretion = new Direction[] {}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 200, 100, 378), DirectionLane = Direction.Right, OutgoingDiretion = new Direction[] {}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(300, 200, 399, 378), DirectionLane = Direction.Left, OutgoingDiretion = new [] {Direction.Left}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 122, 100, 200), DirectionLane = Direction.Left, OutgoingDiretion = new Direction[] {}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(300, 122, 399, 200), DirectionLane = Direction.Left, OutgoingDiretion = new [] {Direction.Left}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 200, 100, 278), DirectionLane = Direction.Right, OutgoingDiretion = new [] {Direction.Right, }},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(300, 200, 399,278), DirectionLane = Direction.Right, OutgoingDiretion = new Direction[] {}},
         };
         public Lane[] CurvedRoad { get; } =
         {
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 122, 100, 200), DirectionLane = Direction.Right, OutgoingDiretion = new [] {Direction.Down}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(300, 122, 399, 399), DirectionLane = Direction.Left, OutgoingDiretion = new Direction[] {}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 122, 200, 200), DirectionLane = Direction.Left, OutgoingDiretion = new Direction[] {}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 200, 122, 278), DirectionLane = Direction.Right, OutgoingDiretion = new [] {Direction.Down}},
             new Lane { BoundingBox = new Tuple<int, int, int, int>(122, 278, 200, 399), DirectionLane = Direction.Down, OutgoingDiretion = new Direction[] {}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(200, 278, 278, 399), DirectionLane = Direction.Up, OutgoingDiretion = new [] {Direction.Left}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(200, 200, 278, 399), DirectionLane = Direction.Up, OutgoingDiretion = new [] {Direction.Left}},
         };
 
         public Lane[] GetLanesOfComponent(ComponentEntity component)
@@ -186,6 +186,16 @@ namespace _4cube.Bussiness.Config
             }
 
             foreach (var lane in LanesB)
+            {
+                CalculateLane(lane);
+            }
+
+            foreach (var lane in CurvedRoad)
+            {
+                CalculateLane(lane);
+            }
+
+            foreach (var lane in StraightRoad)
             {
                 CalculateLane(lane);
             }
