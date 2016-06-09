@@ -56,12 +56,12 @@ namespace _4cube.Presentation.ViewModel
             X = c.X;
             Y = c.Y;
             Rotation = (int)c.Rotation * 90;
-            TopCars = c.NrOfIncomingCars[0];
-            RightCars = c.NrOfIncomingCars[1];
-            LeftCars = c.NrOfIncomingCars[3];
-            BotCars = c.NrOfIncomingCars[2];
             c.PropertyChanged += COnPropertyChanged;
-           
+            TopCars = Component.NrOfIncomingCars[0];
+            RightCars = Component.NrOfIncomingCars[1];
+            LeftCars = Component.NrOfIncomingCars[3];
+            BotCars = Component.NrOfIncomingCars[2];
+
             var p = AssemblyDirectory;
             if (c is CrossroadAEntity)
             {
@@ -115,12 +115,30 @@ namespace _4cube.Presentation.ViewModel
 
         public void OnRotate()
         {
-            _gridModel.RotateComponent(Component);
+            try
+            {
+                _gridModel.RotateComponent(Component);
+                TopCars = Component.NrOfIncomingCars[0];
+                RightCars = Component.NrOfIncomingCars[1];
+                LeftCars = Component.NrOfIncomingCars[3];
+                BotCars = Component.NrOfIncomingCars[2];
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         public void OnDelete()
         {
-            _gridModel.DeleteComponent(Component);
+            try
+            {
+                _gridModel.DeleteComponent(Component);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         private void COnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)

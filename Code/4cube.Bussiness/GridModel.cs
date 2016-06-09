@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using _4cube.Bussiness.Config;
+using _4cube.Bussiness.Simulation;
 using _4cube.Common;
 using _4cube.Common.Components;
 using _4cube.Data;
@@ -12,10 +14,12 @@ namespace _4cube.Bussiness
 
         private readonly IGridData _datalayer;
         private readonly GridContainer _gridContainer;
-        public GridModel(IGridData datalayer, GridContainer gridContainer)
+        private readonly IConfig _config;
+        public GridModel(IGridData datalayer, GridContainer gridContainer, IConfig config)
         {
             _datalayer = datalayer;
             _gridContainer = gridContainer;
+            _config = config;
         }
 
         public void AddComponent(ComponentEntity component)
@@ -27,6 +31,7 @@ namespace _4cube.Bussiness
 
         public void DeleteComponent(ComponentEntity component)
         {
+            CheckComponentHasCars(component);
             Grid.Components.Remove(component);
         }
 
@@ -45,8 +50,35 @@ namespace _4cube.Bussiness
             Grid.Height = h;
         }
 
+        private void CheckComponentHasCars(ComponentEntity component) // Some actions can not be performed when cars are on the crossroad
+        {
+            var pos = new Tuple<int, int>(component.X, component.Y);
+            if (Grid.Cars.Any(x => SimulationUtility.GetGridPosition(x.X , x.Y,  _config.GridWidth, _config.GridHeight).Equals(pos)))
+                throw new Exception("Action can not  be performed with cars on the component.");
+        }
+
+        private static void ShiftCircular(int offset, int[] array)
+        {
+            if (offset == 0 || array.Length <= 1)
+                return;
+
+            offset = offset % array.Length;
+
+            if (offset == 0)
+                return;
+
+            if (offset < 0)
+                offset = array.Length + offset;
+
+            Array.Reverse(array, 0, array.Length);
+            Array.Reverse(array, 0, offset);
+            Array.Reverse(array, offset, array.Length - offset);
+        }
+
         public void RotateComponent(ComponentEntity component)
         {
+            ShiftCircular(1, component.NrOfIncomingCars);
+            ShiftCircular(1, component.NrOfIncomingCarsSpawned);
             component.Rotation = (Direction) (((int) component.Rotation + 1)%4);
         }
 
