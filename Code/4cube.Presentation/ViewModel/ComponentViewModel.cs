@@ -87,10 +87,11 @@ namespace _4cube.Presentation.ViewModel
         {
             var lane = _config.GetLanesOfComponent(Component).Where(x => x.OutgoingDiretion.Any());
 
-            TopVisibility = lane.Any(x => x.DirectionLane.RotatedDirection(Direction.Down) == Component.Rotation.RotatedDirectionInv(Direction.Left)) ? Visibility.Visible : Visibility.Hidden;
-            RightVisibility = lane.Any(x => x.DirectionLane.RotatedDirection(Direction.Down) == Component.Rotation.RotatedDirectionInv(Direction.Up)) ? Visibility.Visible : Visibility.Hidden;
-            LeftVisibility = lane.Any(x => x.DirectionLane.RotatedDirection(Direction.Down) == Component.Rotation.RotatedDirectionInv(Direction.Down)) ? Visibility.Visible : Visibility.Hidden;
-            BotVisibility = lane.Any(x=>x.DirectionLane.RotatedDirection(Direction.Down) == Component.Rotation.RotatedDirectionInv(Direction.Right)) ? Visibility.Visible : Visibility.Hidden;
+            TopVisibility = lane.Any(x => x.DirectionLane == Component.Rotation.RotatedDirectionInv(Direction.Left)) ? Visibility.Visible : Visibility.Hidden;
+            RightVisibility = lane.Any(x => x.DirectionLane == Component.Rotation.RotatedDirectionInv(Direction.Up)) ? Visibility.Visible : Visibility.Hidden;
+            BotVisibility = lane.Any(x => x.DirectionLane == Component.Rotation.RotatedDirectionInv(Direction.Right)) ? Visibility.Visible : Visibility.Hidden;
+            LeftVisibility = lane.Any(x => x.DirectionLane == Component.Rotation.RotatedDirectionInv(Direction.Down)) ? Visibility.Visible : Visibility.Hidden;
+            
         }
 
         private void ViewOnPropertyChanged(object sender, PropertyChangedEventArgs e)

@@ -123,7 +123,7 @@ namespace _4cube.Bussiness.Simulation
 
         public static Direction RotatedDirectionInv(this Direction old, Direction changed)
         {
-            return (Direction)(((int)old - (int)changed + 4) % 4);
+            return (Direction)((3 - (int)old + (int)changed) % 4);
         }
 
     }
