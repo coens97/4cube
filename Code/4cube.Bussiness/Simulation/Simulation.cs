@@ -48,7 +48,7 @@ namespace _4cube.Bussiness.Simulation
                 { 
                     if (compo.NrOfIncomingCarsSpawned[i] < compo.NrOfIncomingCars[i])
                     {
-                        var direction = ((Direction) i).RotatedDirection(Direction.Down).RotatedDirection(compo.Rotation);
+                        var direction = ((Direction) i).RotatedDirection(Direction.Right).RotatedDirectionInv(compo.Rotation);
                         var laneList =
                             _config.GetLanesOfComponent(compo)
                                 .Where(x => x.DirectionLane == direction && x.OutgoingDiretion.Any())
