@@ -25,50 +25,50 @@ namespace _4cube.Bussiness.Config
 
         public Lane[] LanesA { get; } =
         {
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(122, 0, 172, 122), DirectionLane = Direction.Down, OutgoingDiretion = new []{ Direction.Left}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(172, 0, 222, 122), DirectionLane = Direction.Down, OutgoingDiretion = new []{ Direction.Down,Direction.Right}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(222, 0, 278, 122), DirectionLane = Direction.Up, OutgoingDiretion = new Direction[] {}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(278, 122, 399, 172), DirectionLane = Direction.Left, OutgoingDiretion = new []{ Direction.Up}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(278, 172, 399, 222), DirectionLane = Direction.Left, OutgoingDiretion = new []{ Direction.Left,Direction.Down}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(278, 222, 399, 278), DirectionLane = Direction.Right, OutgoingDiretion = new Direction[] {}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(228, 278, 278, 399), DirectionLane = Direction.Up, OutgoingDiretion = new []{ Direction.Right}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(178, 278, 228, 399), DirectionLane = Direction.Up, OutgoingDiretion = new []{ Direction.Up,Direction.Left}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(122, 278, 178, 399), DirectionLane = Direction.Down, OutgoingDiretion = new Direction[] {}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 228, 122, 278), DirectionLane = Direction.Right, OutgoingDiretion = new []{ Direction.Down}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 178, 122, 228), DirectionLane = Direction.Right, OutgoingDiretion = new []{ Direction.Right,Direction.Up}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 122, 122, 178), DirectionLane = Direction.Left, OutgoingDiretion = new Direction[] {}}
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(122, 0, 172, 122), DirectionLane = Direction.Down, OutgoingDirection = new []{ Direction.Left}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(172, 0, 222, 122), DirectionLane = Direction.Down, OutgoingDirection = new []{ Direction.Down,Direction.Right}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(222, 0, 278, 122), DirectionLane = Direction.Up, OutgoingDirection = new Direction[] {}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(278, 122, 399, 172), DirectionLane = Direction.Left, OutgoingDirection = new []{ Direction.Up}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(278, 172, 399, 222), DirectionLane = Direction.Left, OutgoingDirection = new []{ Direction.Left,Direction.Down}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(278, 222, 399, 278), DirectionLane = Direction.Right, OutgoingDirection = new Direction[] {}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(228, 278, 278, 399), DirectionLane = Direction.Up, OutgoingDirection = new []{ Direction.Right}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(178, 278, 228, 399), DirectionLane = Direction.Up, OutgoingDirection = new []{ Direction.Up,Direction.Left}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(122, 278, 178, 399), DirectionLane = Direction.Down, OutgoingDirection = new Direction[] {}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 228, 122, 278), DirectionLane = Direction.Right, OutgoingDirection = new []{ Direction.Down}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 178, 122, 228), DirectionLane = Direction.Right, OutgoingDirection = new []{ Direction.Right,Direction.Up}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 122, 122, 178), DirectionLane = Direction.Left, OutgoingDirection = new Direction[] {}}
         };
         public Lane[] LanesB { get; }= 
         {
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(122, 1, 162, 122), DirectionLane = Direction.Down, OutgoingDiretion = new [] { Direction.Left}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(202, 1, 278, 122), DirectionLane = Direction.Up, OutgoingDiretion = new Direction[] {}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(278, 122, 399, 172), DirectionLane = Direction.Left, OutgoingDiretion = new [] {Direction.Up, Direction.Left}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(278, 172, 399, 222), DirectionLane = Direction.Left, OutgoingDiretion = new [] {Direction.Down}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(278, 222, 399, 278), DirectionLane = Direction.Right, OutgoingDiretion = new Direction[] {}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(202, 278, 240, 399), DirectionLane = Direction.Up, OutgoingDiretion = new [] {Direction.Left}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(122, 278, 202, 399), DirectionLane = Direction.Down, OutgoingDiretion = new Direction[] {}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(1, 228, 122, 278), DirectionLane = Direction.Right, OutgoingDiretion = new [] {Direction.Down, Direction.Right}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(1, 178, 122, 228), DirectionLane = Direction.Right, OutgoingDiretion = new [] {Direction.Up}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(1, 122, 122, 178), DirectionLane = Direction.Left, OutgoingDiretion = new Direction[] {}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(162, 1, 202, 122), DirectionLane = Direction.Down, OutgoingDiretion = new []{ Direction.Down,Direction.Right}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(240, 278, 278, 399), DirectionLane = Direction.Up, OutgoingDiretion = new []{ Direction.Right}}
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(122, 1, 162, 122), DirectionLane = Direction.Down, OutgoingDirection = new [] { Direction.Left}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(202, 1, 278, 122), DirectionLane = Direction.Up, OutgoingDirection = new Direction[] {}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(278, 122, 399, 172), DirectionLane = Direction.Left, OutgoingDirection = new [] {Direction.Up, Direction.Left}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(278, 172, 399, 222), DirectionLane = Direction.Left, OutgoingDirection = new [] {Direction.Down}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(278, 222, 399, 278), DirectionLane = Direction.Right, OutgoingDirection = new Direction[] {}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(202, 278, 240, 399), DirectionLane = Direction.Up, OutgoingDirection = new [] {Direction.Left}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(122, 278, 202, 399), DirectionLane = Direction.Down, OutgoingDirection = new Direction[] {}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(1, 228, 122, 278), DirectionLane = Direction.Right, OutgoingDirection = new [] {Direction.Down, Direction.Right}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(1, 178, 122, 228), DirectionLane = Direction.Right, OutgoingDirection = new [] {Direction.Up}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(1, 122, 122, 178), DirectionLane = Direction.Left, OutgoingDirection = new Direction[] {}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(162, 1, 202, 122), DirectionLane = Direction.Down, OutgoingDirection = new []{ Direction.Down,Direction.Right}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(240, 278, 278, 399), DirectionLane = Direction.Up, OutgoingDirection = new []{ Direction.Right}}
         };
 
         public Tuple<int, int, int, int> TrafficCenter { get; } = new Tuple<int, int, int, int>(122, 122, 278, 278);
 
         public Lane[] StraightRoad { get; } =
         {
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 122, 100, 200), DirectionLane = Direction.Left, OutgoingDiretion = new Direction[] {}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(300, 122, 399, 200), DirectionLane = Direction.Left, OutgoingDiretion = new [] {Direction.Left}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 200, 100, 278), DirectionLane = Direction.Right, OutgoingDiretion = new [] {Direction.Right }},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(300, 200, 399,278), DirectionLane = Direction.Right, OutgoingDiretion = new Direction[] {}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 122, 100, 200), DirectionLane = Direction.Left, OutgoingDirection = new Direction[] {}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(300, 122, 399, 200), DirectionLane = Direction.Left, OutgoingDirection = new [] {Direction.Left}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 200, 100, 278), DirectionLane = Direction.Right, OutgoingDirection = new [] {Direction.Right }},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(300, 200, 399,278), DirectionLane = Direction.Right, OutgoingDirection = new Direction[] {}},
         };
         public Lane[] CurvedRoad { get; } =
         {
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(1, 122, 200, 200), DirectionLane = Direction.Left, OutgoingDiretion = new Direction[] {}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(1, 200, 122, 278), DirectionLane = Direction.Right, OutgoingDiretion = new [] {Direction.Down}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(122, 278, 200, 399), DirectionLane = Direction.Down, OutgoingDiretion = new Direction[] {}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(200, 200, 278, 399), DirectionLane = Direction.Up, OutgoingDiretion = new [] {Direction.Left}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(1, 122, 200, 200), DirectionLane = Direction.Left, OutgoingDirection = new Direction[] {}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(1, 200, 122, 278), DirectionLane = Direction.Right, OutgoingDirection = new [] {Direction.Down}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(122, 278, 200, 399), DirectionLane = Direction.Down, OutgoingDirection = new Direction[] {}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(200, 200, 278, 399), DirectionLane = Direction.Up, OutgoingDirection = new [] {Direction.Left}},
         };
 
         public Lane[] GetLanesOfComponent(ComponentEntity component)
@@ -86,8 +86,8 @@ namespace _4cube.Bussiness.Config
 
         public Lane[] LanesP { get; } =
         {
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(90,36,290,68), DirectionLane = Direction.Left, OutgoingDiretion = new Direction[] {}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(110,332,260,364), DirectionLane = Direction.Right, OutgoingDiretion = new Direction[] {}}
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(90,36,290,68), DirectionLane = Direction.Left, OutgoingDirection = new Direction[] {}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(110,332,260,364), DirectionLane = Direction.Right, OutgoingDirection = new Direction[] {}}
         };
 
         public void CalculateLane(Lane l)

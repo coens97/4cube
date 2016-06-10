@@ -51,7 +51,7 @@ namespace _4cube.Bussiness.Simulation
                         var direction = ((Direction) i).RotatedDirection(compo.Rotation.RotatedDirectionInv(Direction.Left));
                         var laneList =
                             _config.GetLanesOfComponent(compo)
-                                .Where(x => x.DirectionLane == direction && x.OutgoingDiretion.Any())
+                                .Where(x => x.DirectionLane == direction && x.OutgoingDirection.Any())
                                 .ToArray();
 
                         if (!laneList.Any())
@@ -182,7 +182,7 @@ namespace _4cube.Bussiness.Simulation
             var enterLane =
                     lanes.FirstOrDefault(
                         x =>
-                            x.OutgoingDiretion.Any() &&
+                            x.OutgoingDirection.Any() &&
                             x.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2, _config.GridWidth,_config.GridHeight, component.Rotation));
             if (enterLane != null) // if car is in an entering lane
             {
@@ -193,15 +193,15 @@ namespace _4cube.Bussiness.Simulation
                     gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation))
                 {
                     var random = new Random();
-                    var i = random.Next(enterLane.OutgoingDiretion.Length);
-                    car.Direction = enterLane.OutgoingDiretion[i].RotatedDirection(component.Rotation);
+                    var i = random.Next(enterLane.OutgoingDirection.Length);
+                    car.Direction = enterLane.OutgoingDirection[i].RotatedDirection(component.Rotation);
                 }
             }
             else
             {
                 var exitLane =
                         lanes.First(
-                            x => !x.OutgoingDiretion.Any() && x.DirectionLane.RotatedDirection(component.Rotation) == car.Direction);
+                            x => !x.OutgoingDirection.Any() && x.DirectionLane.RotatedDirection(component.Rotation) == car.Direction);
                 if (exitLane.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation))
                 {//if car is leaving the exit lane
                         fPos = MoveCarToPoint(car, exitLane.ExitPoint.Rotate(component.Rotation, _config.GridWidth, _config.GridHeight), component);
@@ -230,7 +230,7 @@ namespace _4cube.Bussiness.Simulation
                 else
                 {
                     var l = _config.GetLanesOfComponent(nextComponent)
-                        .Where(x => x.OutgoingDiretion.Any() && x.DirectionLane.RotatedDirection(nextComponent.Rotation) == car.Direction).ToArray();
+                        .Where(x => x.OutgoingDirection.Any() && x.DirectionLane.RotatedDirection(nextComponent.Rotation) == car.Direction).ToArray();
                     if (!l.Any())
                     {
                         _grid.Cars.Remove(car);
@@ -354,7 +354,7 @@ namespace _4cube.Bussiness.Simulation
                 if (crossroad != null)
                 {
                     var lanes = _config.GetLanesOfComponent(crossroad);
-                    var incomingLanes = lanes.Where(x => x.OutgoingDiretion.Any());
+                    var incomingLanes = lanes.Where(x => x.OutgoingDirection.Any());
                     var incomingLane =
                         incomingLanes.FirstOrDefault(
                             x =>
@@ -363,8 +363,8 @@ namespace _4cube.Bussiness.Simulation
                     if (incomingLane != null)
                     // is the car in any of the lanes of the crossroad
                     {
-                        var outgoingLanes = lanes.Where(x => !x.OutgoingDiretion.Any()
-                            && incomingLane.OutgoingDiretion.Any(y => x.DirectionLane == y));
+                        var outgoingLanes = lanes.Where(x => !x.OutgoingDirection.Any()
+                            && incomingLane.OutgoingDirection.Any(y => x.DirectionLane == y));
                         var trafficlightGroup = crossroad.GreenLightTimeEntities[crossroad.CurrentGreenLightGroup];
                         if (!crossroad.LightOrange &&
                             car.IsInPosition(_config.CrossRoadCoordinatesCars[trafficlightGroup], gridPosition.Item1,

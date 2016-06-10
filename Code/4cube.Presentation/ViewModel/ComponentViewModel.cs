@@ -85,7 +85,7 @@ namespace _4cube.Presentation.ViewModel
             InitializeVisibility();
             if (Component is CrossroadEntity)
             {
-                var lane = _config.GetLanesOfComponent(Component).Where(x => x.OutgoingDiretion.Any());
+                var lane = _config.GetLanesOfComponent(Component).Where(x => x.OutgoingDirection.Any());
                 foreach (var l in lane)
                 {
                     Lights.Add(new TrafficLightComponent
@@ -103,7 +103,7 @@ namespace _4cube.Presentation.ViewModel
 
         private void InitializeVisibility()
         {
-            var lane = _config.GetLanesOfComponent(Component).Where(x => x.OutgoingDiretion.Any());
+            var lane = _config.GetLanesOfComponent(Component).Where(x => x.OutgoingDirection.Any());
 
             TopVisibility = lane.Any(x => x.DirectionLane == Component.Rotation.RotatedDirectionInv(Direction.Left)) ? Visibility.Visible : Visibility.Hidden;
             RightVisibility = lane.Any(x => x.DirectionLane == Component.Rotation.RotatedDirectionInv(Direction.Up)) ? Visibility.Visible : Visibility.Hidden;
