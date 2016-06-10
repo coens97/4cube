@@ -77,6 +77,7 @@ namespace _4cube.Bussiness
 
         public void RotateComponent(ComponentEntity component)
         {
+            CheckComponentHasCars(component);
             ShiftCircular(1, component.NrOfIncomingCars);
             ShiftCircular(1, component.NrOfIncomingCarsSpawned);
             component.Rotation = (Direction) (((int) component.Rotation + 1)%4);
