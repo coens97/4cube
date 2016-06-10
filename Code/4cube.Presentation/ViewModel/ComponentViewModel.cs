@@ -85,18 +85,7 @@ namespace _4cube.Presentation.ViewModel
             InitializeVisibility();
             if (Component is CrossroadEntity)
             {
-                var lane = _config.GetLanesOfComponent(Component).Where(x => x.OutgoingDirection.Any());
-                foreach (var l in lane)
-                {
-                    Lights.Add(new TrafficLightComponent
-                    {
-                        X = l.ExitPoint.Item1,
-                        Y = l.ExitPoint.Item2,
-                        Color = System.Windows.Media.Brushes.Red,
-                        Lane = l
-                    });
-                }
-                ChangeTrafficColors();
+                PlaceLights();
             }
             PropertyChanged += ViewOnPropertyChanged;
         }
@@ -166,6 +155,7 @@ namespace _4cube.Presentation.ViewModel
                 case "Rotation":
                     Rotation = (int)Component.Rotation * 90;
                     InitializeVisibility();
+                    PlaceLights();
                     break;
                 case "CurrentGreenLightGroup":
                     ChangeTrafficColors();
@@ -176,6 +166,23 @@ namespace _4cube.Presentation.ViewModel
             }
         }
 
+        private void PlaceLights()
+        {
+            var lane = _config.GetLanesOfComponent(Component).Where(x => x.OutgoingDirection.Any());
+            foreach (var l in lane)
+            {
+                var point = l.ExitPoint.Rotate(Component.Rotation, _config.GridWidth, _config.GridHeight);
+                Lights.Add(new TrafficLightComponent
+                {
+                    X = point.Item1,
+                    Y = point.Item2,
+                    Color = System.Windows.Media.Brushes.Red,
+                    Lane = l
+                });
+            }
+            ChangeTrafficColors();
+        }
+
         private void ChangeTrafficColors()
         {
             var crossroad = Component as CrossroadEntity;
@@ -184,7 +191,7 @@ namespace _4cube.Presentation.ViewModel
             foreach (var l in Lights)
             {
                 l.Color = System.Windows.Media.Brushes.Red;
-                if (lane.Any(x=> x.Equals(l.Lane.BoundingBox)))
+                if (lane.Any(x=> x.Equals(l.Lane)))
                 {
                     l.Color = crossroad.LightOrange ? System.Windows.Media.Brushes.Orange : System.Windows.Media.Brushes.Green;
                 }

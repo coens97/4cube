@@ -18,25 +18,25 @@ namespace _4cube.Bussiness.Config
         public int GetScale { get; } = 2;
 
 
-        public Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]> CrossRoadCoordinatesCars { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]>();
+        public Dictionary<TrafficLightGroup, Lane[]> CrossRoadCoordinatesCars { get; } = new Dictionary<TrafficLightGroup, Lane[]>();
         public Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]> CrossRoadCoordinatesPedes { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]>();
 
         public Dictionary<TrafficLightGroup, Tuple<int, int, Direction>> PedstrainSpawn { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, Direction>>();
 
         public Lane[] LanesA { get; } =
         {
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(122, 0, 172, 122), DirectionLane = Direction.Down, OutgoingDirection = new []{ Direction.Left}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(172, 0, 222, 122), DirectionLane = Direction.Down, OutgoingDirection = new []{ Direction.Down,Direction.Right}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(222, 0, 278, 122), DirectionLane = Direction.Up, OutgoingDirection = new Direction[] {}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(122, 1, 172, 122), DirectionLane = Direction.Down, OutgoingDirection = new []{ Direction.Left}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(172, 1, 222, 122), DirectionLane = Direction.Down, OutgoingDirection = new []{ Direction.Down,Direction.Right}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(222, 1, 278, 122), DirectionLane = Direction.Up, OutgoingDirection = new Direction[] {}},
             new Lane { BoundingBox = new Tuple<int, int, int, int>(278, 122, 399, 172), DirectionLane = Direction.Left, OutgoingDirection = new []{ Direction.Up}},
             new Lane { BoundingBox = new Tuple<int, int, int, int>(278, 172, 399, 222), DirectionLane = Direction.Left, OutgoingDirection = new []{ Direction.Left,Direction.Down}},
             new Lane { BoundingBox = new Tuple<int, int, int, int>(278, 222, 399, 278), DirectionLane = Direction.Right, OutgoingDirection = new Direction[] {}},
             new Lane { BoundingBox = new Tuple<int, int, int, int>(228, 278, 278, 399), DirectionLane = Direction.Up, OutgoingDirection = new []{ Direction.Right}},
             new Lane { BoundingBox = new Tuple<int, int, int, int>(178, 278, 228, 399), DirectionLane = Direction.Up, OutgoingDirection = new []{ Direction.Up,Direction.Left}},
             new Lane { BoundingBox = new Tuple<int, int, int, int>(122, 278, 178, 399), DirectionLane = Direction.Down, OutgoingDirection = new Direction[] {}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 228, 122, 278), DirectionLane = Direction.Right, OutgoingDirection = new []{ Direction.Down}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 178, 122, 228), DirectionLane = Direction.Right, OutgoingDirection = new []{ Direction.Right,Direction.Up}},
-            new Lane { BoundingBox = new Tuple<int, int, int, int>(0, 122, 122, 178), DirectionLane = Direction.Left, OutgoingDirection = new Direction[] {}}
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(1, 228, 122, 278), DirectionLane = Direction.Right, OutgoingDirection = new []{ Direction.Down}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(1, 178, 122, 228), DirectionLane = Direction.Right, OutgoingDirection = new []{ Direction.Right,Direction.Up}},
+            new Lane { BoundingBox = new Tuple<int, int, int, int>(1, 122, 122, 178), DirectionLane = Direction.Left, OutgoingDirection = new Direction[] {}}
         };
         public Lane[] LanesB { get; }= 
         {
@@ -129,45 +129,45 @@ namespace _4cube.Bussiness.Config
         {
             CrossRoadCoordinatesCars[TrafficLightGroup.A1] = new[]
             {
-                LanesA[0].BoundingBox,LanesA[9].BoundingBox, LanesA[10].BoundingBox
+                LanesA[0],LanesA[9], LanesA[10]
             };
 
             CrossRoadCoordinatesCars[TrafficLightGroup.A2] = new[]
             {
-                LanesA[6].BoundingBox, LanesA[7].BoundingBox, LanesA[8].BoundingBox
+                LanesA[6], LanesA[7], LanesA[8]
             };
 
             CrossRoadCoordinatesCars[TrafficLightGroup.A3] = new[] //3,4,5
             {
-                LanesA[3].BoundingBox, LanesA[4].BoundingBox, LanesA[6].BoundingBox
+                LanesA[3], LanesA[4], LanesA[6]
             };
 
             CrossRoadCoordinatesCars[TrafficLightGroup.A4] = new[] //1,2,3
             {
-                LanesA[0].BoundingBox, LanesA[1].BoundingBox, LanesA[3].BoundingBox
+                LanesA[0], LanesA[1], LanesA[3]
             };
 
             CrossRoadCoordinatesCars[TrafficLightGroup.B1] = new[] //2,5
             {
-                LanesB[2].BoundingBox, LanesB[7].BoundingBox
+                LanesB[2], LanesB[7]
             };
 
             CrossRoadCoordinatesCars[TrafficLightGroup.B2] = new[] //6 for cars 
             {
-                LanesB[9].BoundingBox,
+                LanesB[9],
             };
 
             CrossRoadCoordinatesCars[TrafficLightGroup.B3] = new[] //3 
             {
-                LanesB[3].BoundingBox
+                LanesB[3]
             };
             CrossRoadCoordinatesCars[TrafficLightGroup.B4] = new[]
             {
-                LanesB[6].BoundingBox, LanesB[11].BoundingBox,
+                LanesB[6], LanesB[11],
             };
             CrossRoadCoordinatesCars[TrafficLightGroup.B5] = new[]
             {
-                LanesB[0].BoundingBox, LanesB[10].BoundingBox,
+                LanesB[0], LanesB[10],
             };
 
             //CrossRoadCoordinatesPedes[TrafficLightGroup.B3] = new[]

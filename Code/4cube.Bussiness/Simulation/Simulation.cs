@@ -126,13 +126,13 @@ namespace _4cube.Bussiness.Simulation
                 }
                 c.LightOrange = false;
                 c.LastTimeSwitched = _time;
-                var tries = _grid.GreenLightTimeEntities.Count + 1;
-                do
+                var tries = _grid.GreenLightTimeEntities.Count;
+                while (tries > 0)
                 {
                     c.CurrentGreenLightGroup = (c.CurrentGreenLightGroup + 1)%c.GreenLightTimeEntities.Length;
                     var group = c.GreenLightTimeEntities[c.CurrentGreenLightGroup];
 
-                    var cr = _config.CrossRoadCoordinatesCars[group];
+                    var cr = _config.CrossRoadCoordinatesCars[group].Select(x => x.ExitBounding).ToArray();
                     var pd = _config.CrossRoadCoordinatesPedes.ContainsKey(group) ?_config.CrossRoadCoordinatesPedes[group] : new Tuple<int, int, int, int>[0];
 
                     if (_config.CrossRoadCoordinatesPedes.ContainsKey(group) && _config.CrossRoadCoordinatesPedes[group].Any())
@@ -160,7 +160,7 @@ namespace _4cube.Bussiness.Simulation
                     {
                         tries--;
                     }
-                } while (tries < 0);
+                } 
             }
         }
 
@@ -366,8 +366,10 @@ namespace _4cube.Bussiness.Simulation
                         var outgoingLanes = lanes.Where(x => !x.OutgoingDirection.Any()
                             && incomingLane.OutgoingDirection.Any(y => x.DirectionLane == y));
                         var trafficlightGroup = crossroad.GreenLightTimeEntities[crossroad.CurrentGreenLightGroup];
+                        var sensors =
+                            _config.CrossRoadCoordinatesCars[trafficlightGroup].Select(x => x.ExitBounding).ToArray();
                         if (!crossroad.LightOrange &&
-                            car.IsInPosition(_config.CrossRoadCoordinatesCars[trafficlightGroup], gridPosition.Item1,
+                            car.IsInPosition(sensors, gridPosition.Item1,
                             gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation)
                             && !_grid.Cars.Any( // Check if there are no cars stuck in outgoing lane
                                 c => outgoingLanes.Select(x => x.ExitBounding).ToArray()

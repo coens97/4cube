@@ -32,8 +32,8 @@ namespace _4cube.UnitTest
         {
             var carOnLane = new CarEntity {X = 125, Y = 120}; // car on lane a1
             var carNotOnLane = new CarEntity { X = 50, Y = 50 }; // car not on lane a1
-            Assert.IsTrue(carOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1],0, 0, _config.GridWidth, _config.GridHeight, Direction.Up));
-            Assert.IsFalse(carNotOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1], 0, 0, _config.GridWidth, _config.GridHeight, Direction.Up));
+            Assert.IsTrue(carOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1].Select(x => x.BoundingBox).ToArray(),0, 0, _config.GridWidth, _config.GridHeight, Direction.Up));
+            Assert.IsFalse(carNotOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1].Select(x => x.BoundingBox).ToArray(), 0, 0, _config.GridWidth, _config.GridHeight, Direction.Up));
         }
 
         [TestMethod]
@@ -43,8 +43,8 @@ namespace _4cube.UnitTest
             var gridY = 400;
             var carOnLane = new CarEntity { X = gridX + 125, Y = gridY + 120 }; // car on lane a1
             var carNotOnLane = new CarEntity { X = gridX + 50, Y = gridY + 50 }; // car not on lane a1
-            Assert.IsTrue(carOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1], gridX, gridY, _config.GridWidth, _config.GridHeight, Direction.Up));
-            Assert.IsFalse(carNotOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1], gridX, gridY, _config.GridWidth, _config.GridHeight, Direction.Up));
+            Assert.IsTrue(carOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1].Select(x => x.BoundingBox).ToArray(), gridX, gridY, _config.GridWidth, _config.GridHeight, Direction.Up));
+            Assert.IsFalse(carNotOnLane.IsInPosition(_config.CrossRoadCoordinatesCars[TrafficLightGroup.A1].Select(x => x.BoundingBox).ToArray(), gridX, gridY, _config.GridWidth, _config.GridHeight, Direction.Up));
         }
 
         [TestMethod]
