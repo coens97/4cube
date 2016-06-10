@@ -168,6 +168,7 @@ namespace _4cube.Presentation.ViewModel
 
         private void PlaceLights()
         {
+            Lights.Clear();;
             var lane = _config.GetLanesOfComponent(Component).Where(x => x.OutgoingDirection.Any());
             foreach (var l in lane)
             {

@@ -59,20 +59,24 @@ namespace _4cube.Bussiness.Simulation
 
         public static Tuple<int, int> Rotate(int x, int y, int originX, int originY, Direction d)
         {
-            double radians = 0;
-            double cosTheta;
-            double sinTheta;
+            x -= originX;
+            y -= originY;
 
+            var oldX = x;
+            var oldY = y;
             switch (d)
             {
                 case Direction.Right:
-                    radians = 0.5 * Math.PI;
+                    x = -y -1;
+                    y = oldX;
                     break;
                 case Direction.Down:
-                    radians = Math.PI;
+                    x = -x - 1;
+                    y = -oldY - 1;
                     break;
                 case Direction.Left:
-                    radians = 1.5 * Math.PI;
+                    x = y;
+                    y = -oldX - 1;
                     break;
                 case Direction.Up:
                     break;
@@ -80,9 +84,8 @@ namespace _4cube.Bussiness.Simulation
                     throw new ArgumentOutOfRangeException(nameof(d), d, null);
             }
 
-            cosTheta = Math.Cos(radians);
-            sinTheta = Math.Sin(radians);
-            return new Tuple<int, int>((int) (cosTheta*(x - originX) - sinTheta*(y - originY) + originX), (int) (sinTheta*(x - originX) + cosTheta*(y - originY) + originY));
+            
+            return new Tuple<int, int>(x + originX, y + originY);
         }
 
         public static Tuple<int, int, int, int>[] Rotate(this Tuple<int, int, int, int>[] t, int gridX, int gridY,

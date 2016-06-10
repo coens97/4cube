@@ -238,7 +238,7 @@ namespace _4cube.Bussiness.Simulation
                     else
                     {
                         var random = new Random();
-                        var i = random.Next(l.Count());
+                        var i = random.Next(l.Length);
                         var lane = l[i].EnterPoint.Rotate(nextComponent.Rotation, _config.GridWidth, _config.GridHeight);
                         fPos = new Tuple<int, int>(lane.Item1 + nextComponent.X, lane.Item2 + nextComponent.Y);
                     }
@@ -386,6 +386,10 @@ namespace _4cube.Bussiness.Simulation
                 else if (road != null)
                 {
                     MoveCar(car);
+                }
+                else if (component == null)
+                {
+                    //_grid.Cars.Remove(car);
                 }
             }
         }
