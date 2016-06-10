@@ -83,10 +83,8 @@ namespace _4cube.Presentation.ViewModel
                 CompSource = new BitmapImage(new Uri(p + "/Resources/roadb.png", UriKind.Absolute));
             }
             InitializeVisibility();
-            if (Component is CrossroadEntity)
-            {
-                PlaceLights();
-            }
+
+            PlaceLights();
             PropertyChanged += ViewOnPropertyChanged;
         }
 
@@ -168,6 +166,8 @@ namespace _4cube.Presentation.ViewModel
 
         private void PlaceLights()
         {
+            if (!(Component is CrossroadEntity))
+                return;
             Lights.Clear();;
             var lane = _config.GetLanesOfComponent(Component).Where(x => x.OutgoingDirection.Any());
             foreach (var l in lane)
