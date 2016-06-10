@@ -105,6 +105,7 @@
     <Compile Include="UserControl\ComponentControl.xaml.cs">
       <DependentUpon>ComponentControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\TrafficLightComponent.cs" />
     <Compile Include="ViewModel\ComponentViewModel.cs" />
     <Compile Include="ViewModel\ConfigurationModel.cs" />
     <Compile Include="ViewModel\GridResizingViewModel.cs" />

@@ -16,10 +16,6 @@
         </ContextMenu>
     </UserControl.Resources>
     <Grid ContextMenu="{StaticResource CpContext}" MouseRightButtonUp="Grid_MouseRightButtonUp">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush ImageSource="{Binding CompSource}" >
                 <ImageBrush.RelativeTransform>
@@ -32,9 +28,31 @@
                 </ImageBrush.RelativeTransform>
             </ImageBrush>
         </Grid.Background>
+        <ItemsControl ItemsSource="{Binding Lights}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas Height="400" Width="400" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Rectangle Fill="{Binding Color}" Width="14" Height="14" Stroke="Black">
+                        <Rectangle.RenderTransform>
+                            <TranslateTransform X="-7" Y="-7" />
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                    <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+        </ItemsControl>
         <TextBox x:Name="textBox" Visibility ="{Binding TopVisibility}" HorizontalAlignment="Left" Height="30" Margin="169,0,0,0" TextWrapping="Wrap" Text="{Binding TopCars}" VerticalAlignment="Top" Width="70" Grid.ColumnSpan="2" FontSize="20" />
         <TextBox x:Name="textBox_Copy" Visibility ="{Binding LeftVisibility}" HorizontalAlignment="Left" Height="30" Margin="0,200,0,0" TextWrapping="Wrap" Text="{Binding LeftCars}" VerticalAlignment="Top" Width="70" FontSize="20"/>
-        <TextBox x:Name="textBox_Copy1" Visibility ="{Binding RightVisibility}" HorizontalAlignment="Left" Height="30" Margin="130,200,0,0" TextWrapping="Wrap" Text="{Binding RightCars}" VerticalAlignment="Top" Width="70" Grid.Column="1" FontSize="20"/>
+        <TextBox x:Name="textBox_Copy1" Visibility ="{Binding RightVisibility}" HorizontalAlignment="Left" Height="30" Margin="330,200,0,0" TextWrapping="Wrap" Text="{Binding RightCars}" VerticalAlignment="Top" Width="70" FontSize="20"/>
         <TextBox x:Name="textBox_Copy2" Visibility ="{Binding BotVisibility}" HorizontalAlignment="Left" Height="30" Margin="169,370,0,0" TextWrapping="Wrap" Text="{Binding BotCars}" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" FontSize="20" />
 
     </Grid>

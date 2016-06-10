@@ -21,6 +21,9 @@ using _4cube.Common;
 using _4cube.Common.Components;
 using _4cube.Common.Components.Crossroad;
 using _4cube.Presentation.Annotations;
+using _4cube.Presentation.UserControl;
+using Brushes = System.Drawing.Brushes;
+using Color = System.Drawing.Color;
 
 namespace _4cube.Presentation.ViewModel
 {
@@ -39,7 +42,7 @@ namespace _4cube.Presentation.ViewModel
         public Visibility RightVisibility { get; set; } = Visibility.Hidden;
         public Visibility LeftVisibility { get; set; } = Visibility.Hidden;
         public Visibility BotVisibility { get; set; } = Visibility.Hidden;
-        
+        public ObservableCollection<TrafficLightComponent> Lights { get; set; } = new ObservableCollection<TrafficLightComponent>();
         public event PropertyChangedEventHandler PropertyChanged;
 
         [DoNotNotify]
@@ -80,6 +83,21 @@ namespace _4cube.Presentation.ViewModel
                 CompSource = new BitmapImage(new Uri(p + "/Resources/roadb.png", UriKind.Absolute));
             }
             InitializeVisibility();
+            if (Component is CrossroadEntity)
+            {
+                var lane = _config.GetLanesOfComponent(Component).Where(x => x.OutgoingDiretion.Any());
+                foreach (var l in lane)
+                {
+                    Lights.Add(new TrafficLightComponent
+                    {
+                        X = l.ExitPoint.Item1,
+                        Y = l.ExitPoint.Item2,
+                        Color = System.Windows.Media.Brushes.Red,
+                        Lane = l
+                    });
+                }
+                ChangeTrafficColors();
+            }
             PropertyChanged += ViewOnPropertyChanged;
         }
 
@@ -149,6 +167,27 @@ namespace _4cube.Presentation.ViewModel
                     Rotation = (int)Component.Rotation * 90;
                     InitializeVisibility();
                     break;
+                case "CurrentGreenLightGroup":
+                    ChangeTrafficColors();
+                    break;
+                case "LightOrange":
+                    ChangeTrafficColors();
+                    break;
+            }
+        }
+
+        private void ChangeTrafficColors()
+        {
+            var crossroad = Component as CrossroadEntity;
+            var currentGroup = crossroad.GreenLightTimeEntities[crossroad.CurrentGreenLightGroup];
+            var lane = _config.CrossRoadCoordinatesCars[currentGroup];
+            foreach (var l in Lights)
+            {
+                l.Color = System.Windows.Media.Brushes.Red;
+                if (lane.Any(x=> x.Equals(l.Lane.BoundingBox)))
+                {
+                    l.Color = crossroad.LightOrange ? System.Windows.Media.Brushes.Orange : System.Windows.Media.Brushes.Green;
+                }
             }
         }
 
