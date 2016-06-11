@@ -468,13 +468,17 @@ namespace _4cube.Bussiness.Simulation
 
         private void ProcessCar()
         {
-            _grid.Components.AsParallel().ForAll(c =>
+            try
             {
-                for (var i = c.CarsInComponent.Count - 1; i >= 0; i--)
+                _grid.Components.AsParallel().ForAll(c =>
                 {
-                    CheckCanMoveCar(c.CarsInComponent[i]);
-                }
-            });
+                    for (var i = c.CarsInComponent.Count - 1; i >= 0; i--)
+                    {
+                        CheckCanMoveCar(c.CarsInComponent[i]);
+                    }
+                });
+            }
+            catch (AggregateException){ }
         }
     }
 }
