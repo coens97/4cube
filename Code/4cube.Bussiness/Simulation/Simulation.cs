@@ -387,10 +387,6 @@ namespace _4cube.Bussiness.Simulation
                 {
                     MoveCar(car);
                 }
-                else if (component == null)
-                {
-                    //_grid.Cars.Remove(car);
-                }
             }
         }
     }

@@ -28,13 +28,13 @@ namespace _4cube.Presentation.ViewModel
         private IConfig _config;
         private GridContainer _gridContainer;
 
-        private ObservableCollection<ComponentViewModel> Components = new ObservableCollection<ComponentViewModel>(); 
+        private readonly ObservableCollection<ComponentViewModel> _components = new ObservableCollection<ComponentViewModel>(); 
 
         public int Width { get; set; }
         public int Height { get; set; }
         public int ScaledWidth { get; set; }
         public int ScaledHeight { get; set; }
-        public int Speed { get; set; }
+        public int Speed { get; set; } = 10;
 
         public MainViewModel() { }
         public MainViewModel(IGridModel gridModel, IConfig config, ISimulation simulation, GridContainer gridContainer)
@@ -59,16 +59,15 @@ namespace _4cube.Presentation.ViewModel
             {
                 case "Grid":
                     LoadGrid(_gridContainer.Grid);
-                    Components.Clear();
                     break;
             }
         }
 
-        void LoadGrid(GridEntity grid)
+        private void LoadGrid(GridEntity grid)
         {
             GridItems.Clear();
             //GridItems.Add(new CollectionContainer {Collection = grid.Components });
-            GridItems.Add(new CollectionContainer { Collection = Components });
+            GridItems.Add(new CollectionContainer { Collection = _components });
             GridItems.Add(new CollectionContainer {Collection = grid.Cars});
             GridItems.Add(new CollectionContainer {Collection = grid.Pedestrians});
             BindingOperations.EnableCollectionSynchronization(grid.Cars, _lock);
@@ -81,6 +80,17 @@ namespace _4cube.Presentation.ViewModel
 
             grid.PropertyChanged += GridOnPropertyChanged;
             grid.Components.CollectionChanged += ComponentsOnCollectionChanged;
+
+            _components.Clear();
+            foreach (var c in grid.Components)
+            {
+                AddComponent(c);
+            }
+        }
+        
+        private void AddComponent(ComponentEntity c)
+        {
+            _components.Add(new ComponentViewModel(c, _gridModel, _config));
         }
 
         private void ComponentsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
@@ -90,18 +100,18 @@ namespace _4cube.Presentation.ViewModel
                 case NotifyCollectionChangedAction.Add:
                     foreach (var c in notifyCollectionChangedEventArgs.NewItems)
                     {
-                        Components.Add(new ComponentViewModel((ComponentEntity)c, _gridModel, _config));
+                        AddComponent((ComponentEntity)c);
                     }
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (var c in notifyCollectionChangedEventArgs.OldItems)
                     {
-                        var comp = Components.First(x => x.Component == c);
-                        Components.Remove(comp);
+                        var comp = _components.First(x => x.Component == c);
+                        _components.Remove(comp);
                     }
                     break;
                 case NotifyCollectionChangedAction.Reset:
-                    Components.Clear();
+                    _components.Clear();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
