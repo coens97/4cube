@@ -17,9 +17,7 @@ namespace _4cube.Bussiness.Config
         int GetScale { get; }
 
         Dictionary<TrafficLightGroup, Lane[]> CrossRoadCoordinatesCars { get; }
-        Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]> CrossRoadCoordinatesPedes { get; }
-
-        Dictionary<TrafficLightGroup, Tuple<int, int, Direction>> PedstrainSpawn { get; }
+        Dictionary<TrafficLightGroup, Lane[]> CrossRoadCoordinatesPedes { get; }
 
         Lane[] LanesA { get; }
         Lane[] LanesB { get; }

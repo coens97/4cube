@@ -18,15 +18,15 @@ namespace _4cube.Presentation.ViewModel
     [ImplementPropertyChanged]
     public class MainViewModel : INotifyPropertyChanged
     {
-        private static object _lock = new object();
+        private static readonly object _lock = new object();
         public event PropertyChangedEventHandler PropertyChanged;
 
         public CompositeCollection GridItems { get; set; } = new CompositeCollection();
 
-        private IGridModel _gridModel;
-        private ISimulation _simulation;
-        private IConfig _config;
-        private GridContainer _gridContainer;
+        private readonly IGridModel _gridModel;
+        private readonly ISimulation _simulation;
+        private readonly IConfig _config;
+        private readonly GridContainer _gridContainer;
 
         private readonly ObservableCollection<ComponentViewModel> _components = new ObservableCollection<ComponentViewModel>(); 
 

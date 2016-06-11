@@ -11,7 +11,7 @@ namespace _4cube.Presentation.Window
     public partial class ConfigurationWindow : System.Windows.Window
     {
         private IGridModel _gridModel;
-        private ConfigurationModel _configurationModel;
+        private readonly ConfigurationModel _configurationModel;
         public ConfigurationWindow(IGridModel gridModel, ConfigurationModel configurationModel)
         {
             InitializeComponent();

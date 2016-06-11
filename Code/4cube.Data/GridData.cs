@@ -8,7 +8,7 @@ namespace _4cube.Data
 {
     public class GridData : IGridData
     {
-        private static Type[] _unkownTypes = new[]
+        private static readonly Type[] _unkownTypes =
         {typeof(CrossroadAEntity), typeof(CrossroadBEntity), typeof(CurvedRoadEntity), typeof(StraightRoadEntity)};
     public GridEntity OpenFile(string path)
         {

@@ -19,9 +19,7 @@ namespace _4cube.Bussiness.Config
 
 
         public Dictionary<TrafficLightGroup, Lane[]> CrossRoadCoordinatesCars { get; } = new Dictionary<TrafficLightGroup, Lane[]>();
-        public Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]> CrossRoadCoordinatesPedes { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, int, int>[]>();
-
-        public Dictionary<TrafficLightGroup, Tuple<int, int, Direction>> PedstrainSpawn { get; } = new Dictionary<TrafficLightGroup, Tuple<int, int, Direction>>();
+        public Dictionary<TrafficLightGroup, Lane[]> CrossRoadCoordinatesPedes { get; } = new Dictionary<TrafficLightGroup, Lane[]>();
 
         public Lane[] LanesA { get; } =
         {
@@ -52,7 +50,6 @@ namespace _4cube.Bussiness.Config
             new Lane { BoundingBox = new Tuple<int, int, int, int>(1, 227, 121, 277), DirectionLane = Direction.Right, OutgoingDirection = new [] {Direction.Down, Direction.Right}},
             new Lane { BoundingBox = new Tuple<int, int, int, int>(1, 177, 121, 227), DirectionLane = Direction.Right, OutgoingDirection = new [] {Direction.Up}},
             new Lane { BoundingBox = new Tuple<int, int, int, int>(1, 121, 121, 177), DirectionLane = Direction.Left, OutgoingDirection = new Direction[] {}},
-            
         };
 
         public Tuple<int, int, int, int> TrafficCenter { get; } = new Tuple<int, int, int, int>(122, 122, 278, 278);
@@ -171,37 +168,20 @@ namespace _4cube.Bussiness.Config
                 LanesB[0], LanesB[1],
             };
 
-            //CrossRoadCoordinatesPedes[TrafficLightGroup.B3] = new[]
-            //{
-            //    LanesP[0].BoundingBox,LanesA[0].BoundingBox
-            //};
-            //CrossRoadCoordinatesPedes[TrafficLightGroup.B2] = new[]
-            //{
-            //    LanesP[1].BoundingBox
-            //};
-
-            PedstrainSpawn[TrafficLightGroup.B3] = new Tuple<int, int, Direction>(90, 52, Direction.Right);
-            PedstrainSpawn[TrafficLightGroup.B2] = new Tuple<int, int, Direction>(310, 350, Direction.Left);
-
-            foreach (var lane in LanesA)
+            CrossRoadCoordinatesPedes[TrafficLightGroup.B3] = new[]
             {
-                CalculateLane(lane);
-            }
-
-            foreach (var lane in LanesB)
+                LanesP[0]
+            };
+            CrossRoadCoordinatesPedes[TrafficLightGroup.B2] = new[]
             {
-                CalculateLane(lane);
-            }
+                LanesP[1]
+            };
 
-            foreach (var lane in CurvedRoad)
-            {
-                CalculateLane(lane);
-            }
-
-            foreach (var lane in StraightRoad)
-            {
-                CalculateLane(lane);
-            }
+            LanesA.AsParallel().ForAll(CalculateLane);
+            LanesB.AsParallel().ForAll(CalculateLane);
+            CurvedRoad.AsParallel().ForAll(CalculateLane);
+            StraightRoad.AsParallel().ForAll(CalculateLane);
+            LanesP.AsParallel().ForAll(CalculateLane);
         }
     }
 }

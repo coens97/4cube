@@ -49,8 +49,8 @@ namespace _4cube.Presentation.ViewModel
         public ComponentEntity Component { get; set; }
 
         public ComponentViewModel() { }
-        private IGridModel _gridModel;
-        private IConfig _config;
+        private readonly IGridModel _gridModel;
+        private readonly IConfig _config;
         public ComponentViewModel(ComponentEntity c, IGridModel gridModel, IConfig config)
         {
             _config = config;

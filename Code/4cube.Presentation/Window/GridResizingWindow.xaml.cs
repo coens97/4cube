@@ -11,8 +11,8 @@ namespace _4cube.Presentation.Window
     /// </summary>
     public partial class GridResizingWindow : System.Windows.Window
     {
-        private GridResizingViewModel _gridResizingViewModel;
-        private IGridModel _gridModel;
+        private readonly GridResizingViewModel _gridResizingViewModel;
+        private readonly IGridModel _gridModel;
         public GridResizingWindow(IGridModel gridModel, GridResizingViewModel gridResizingViewModel)
         {
             InitializeComponent();

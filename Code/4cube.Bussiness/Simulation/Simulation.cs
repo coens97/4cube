@@ -133,7 +133,7 @@ namespace _4cube.Bussiness.Simulation
                     var group = c.GreenLightTimeEntities[c.CurrentGreenLightGroup];
 
                     var cr = _config.CrossRoadCoordinatesCars[group].Select(x => x.ExitBounding).ToArray();
-                    var pd = _config.CrossRoadCoordinatesPedes.ContainsKey(group) ?_config.CrossRoadCoordinatesPedes[group] : new Tuple<int, int, int, int>[0];
+                    var pd = _config.CrossRoadCoordinatesPedes.ContainsKey(group) ?_config.CrossRoadCoordinatesPedes[group].Select(x => x.BoundingBox).ToArray() : null;
 
                     if (_config.CrossRoadCoordinatesPedes.ContainsKey(group) && _config.CrossRoadCoordinatesPedes[group].Any())
                     {
