@@ -34,7 +34,7 @@ namespace _4cube.Presentation.ViewModel
         public int Height { get; set; }
         public int ScaledWidth { get; set; }
         public int ScaledHeight { get; set; }
-        public int Speed { get; set; } = 10;
+        public int Speed { get; set; } = 9;
 
         public MainViewModel() { }
         public MainViewModel(IGridModel gridModel, IConfig config, ISimulation simulation, GridContainer gridContainer)
@@ -50,7 +50,7 @@ namespace _4cube.Presentation.ViewModel
 
             _gridContainer.PropertyChanged += GridContainerOnPropertyChanged;
 
-            this.PropertyChanged += OnPropertyChanged;
+            this.PropertyChanged += OnViewPropertyChanged;
         }
 
         private void GridContainerOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -118,12 +118,12 @@ namespace _4cube.Presentation.ViewModel
             }
         }
 
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        private void OnViewPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             switch (propertyChangedEventArgs.PropertyName)
             {
                 case "Speed":
-                    _simulation.ChangeSpeed((10 - Speed)*4 + 16);
+                    _simulation.ChangeSpeed(Speed);
                     break;
             }
         }
