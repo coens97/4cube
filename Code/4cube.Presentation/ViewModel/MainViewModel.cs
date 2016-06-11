@@ -70,7 +70,7 @@ namespace _4cube.Presentation.ViewModel
             GridItems.Add(new CollectionContainer { Collection = _components });
             GridItems.Add(new CollectionContainer {Collection = grid.Cars});
             GridItems.Add(new CollectionContainer {Collection = grid.Pedestrians});
-            BindingOperations.EnableCollectionSynchronization(grid.Cars, _lock);
+            //BindingOperations.EnableCollectionSynchronization(grid.Cars, _lock);
             BindingOperations.EnableCollectionSynchronization(grid.Pedestrians, _lock);
 
             Width = grid.Width * _config.GridWidth;

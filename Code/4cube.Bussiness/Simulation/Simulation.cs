@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using _4cube.Common;
 using _4cube.Common.Components;
 using System.Timers;
@@ -14,12 +16,14 @@ namespace _4cube.Bussiness.Simulation
 {
     public class Simulation : ISimulation
     {
+        private ReaderWriterLockSlim _rwCar = new ReaderWriterLockSlim();
         private GridEntity _grid;
         private readonly IConfig _config;
         // private IReport _report;
         private int _time = 0;
         private readonly Timer _timer;
         private SynchronizationContext _uiContext;
+        private List<CarEntity> _carsToGetDeleted = new List<CarEntity>();
         public Simulation(IConfig config)
         {
             _uiContext = SynchronizationContext.Current;
@@ -35,6 +39,19 @@ namespace _4cube.Bussiness.Simulation
             SpawnACar();
             ProcessTrafficLight();
             ProcessCar();
+
+            _uiContext.Send(x =>
+            {
+                _rwCar.EnterWriteLock();
+                foreach (var car in _carsToGetDeleted)
+                {
+                    _grid.Cars.Remove(car);
+                }
+                
+                _rwCar.ExitWriteLock();
+                _carsToGetDeleted.Clear();
+            }, null);
+            
             //ProcessPedestrain();
             _timer.Enabled = true;
         }
@@ -42,42 +59,54 @@ namespace _4cube.Bussiness.Simulation
         private void SpawnACar()
         {
             //Create cars       
-            foreach (var compo in _grid.Components)
+            Parallel.ForEach(_grid.Components.AsParallel(),
+                  //new ParallelOptions() { MaxDegreeOfParallelism = 4 }, 
+                  (compo =>
             {
                 for (var i = 0; i < compo.NrOfIncomingCars.Length; i++)
-                { 
-                    if (compo.NrOfIncomingCarsSpawned[i] < compo.NrOfIncomingCars[i])
+                {
+                    if (compo.NrOfIncomingCarsSpawned[i] >= compo.NrOfIncomingCars[i]) continue;
+                    var direction =
+                        ((Direction) i).RotatedDirection(compo.Rotation.RotatedDirectionInv(Direction.Left));
+                    var laneList =
+                        _config.GetLanesOfComponent(compo)
+                            .Where(x => x.DirectionLane == direction && x.OutgoingDirection.Any())
+                            .ToArray();
+
+                    if (!laneList.Any())
+                        continue;
+
+                    var rd = new Random();
+                    var laneIndex = rd.Next(0, laneList.Count());
+                    var laneEnterPoint = laneList[laneIndex].EnterPoint.Rotate(compo.Rotation, _config.GridWidth,
+                        _config.GridHeight);
+                    var laneSpawnPoint = new Tuple<int, int>(laneEnterPoint.Item1 + compo.X,
+                        laneEnterPoint.Item2 + compo.Y);
+                    var d = _config.CarDistance;
+                    var collisionField = new Tuple<int, int, int, int>(laneSpawnPoint.Item1 - d,
+                        laneSpawnPoint.Item2 - d, laneSpawnPoint.Item1 + d, laneSpawnPoint.Item2 + d);
+
+                    _uiContext.Send(a =>
                     {
-                        var direction = ((Direction) i).RotatedDirection(compo.Rotation.RotatedDirectionInv(Direction.Left));
-                        var laneList =
-                            _config.GetLanesOfComponent(compo)
-                                .Where(x => x.DirectionLane == direction && x.OutgoingDirection.Any())
-                                .ToArray();
-
-                        if (!laneList.Any())
-                            continue;
-
-                        var rd = new Random();
-                        var laneIndex = rd.Next(0, laneList.Count());
-                        var laneEnterPoint = laneList[laneIndex].EnterPoint.Rotate(compo.Rotation, _config.GridWidth, _config.GridHeight);
-                        var laneSpawnPoint = new Tuple<int, int>(laneEnterPoint.Item1 + compo.X,
-                            laneEnterPoint.Item2 + compo.Y);
-                        var d = _config.CarDistance;
-                        var collisionField = new Tuple<int, int, int, int>(laneSpawnPoint.Item1 - d,
-                            laneSpawnPoint.Item2 - d, laneSpawnPoint.Item1 + d, laneSpawnPoint.Item2 + d);
-                        if (!_grid.Cars.Any(x => collisionField.IsInPosition(x.X, x.Y)))
+                        // only spawn cars when there is position
+                        _rwCar.EnterWriteLock();
+                        var collision = _grid.Cars.Any(x => collisionField.IsInPosition(x.X, x.Y));
+                        if (collision)
                         {
-                            _grid.Cars.Add(new CarEntity
-                            {
-                                Direction = direction.RotatedDirection(compo.Rotation),
-                                X = laneSpawnPoint.Item1,
-                                Y = laneSpawnPoint.Item2
-                            });
-                            compo.NrOfIncomingCarsSpawned[i]++;
+                            _rwCar.ExitWriteLock();
+                            return;
                         }
-                    }
+                        _grid.Cars.Add(new CarEntity
+                        {
+                            Direction = direction.RotatedDirection(compo.Rotation),
+                            X = laneSpawnPoint.Item1,
+                            Y = laneSpawnPoint.Item2
+                        });
+                        _rwCar.ExitWriteLock();
+                        compo.NrOfIncomingCarsSpawned[i]++;
+                    }, null);
                 }
-            }
+            }));
         }
 
         public void ChangeSpeed(int n)
@@ -96,7 +125,6 @@ namespace _4cube.Bussiness.Simulation
         {
             _grid = g;
             _timer.Start();
-            //TimerOnElapsed(this, null);
         }
 
         public void Stop()
@@ -108,21 +136,26 @@ namespace _4cube.Bussiness.Simulation
         private void ProcessTrafficLight()
         {
             var crossroads = _grid.Components.OfType<CrossroadEntity>().ToArray();
-            
-            foreach (var c in crossroads)
+
+            crossroads.AsParallel().ForAll(c =>
             {
                 if (_time <= c.LastTimeSwitched + _grid.GreenLightTimeEntities[c.CurrentGreenLightGroup].Duration)
-                    continue;
+                    return;
 
                 if (!c.LightOrange) // change color of traffic lights to arrange
                 {
                     c.LightOrange = true;
-                    continue;
+                    return;
                 }
 
-                if (_grid.Cars.Any(x =>_config.TrafficCenter.IsInPosition(x.X, x.Y, c.X, c.Y, _config.GridWidth, _config.GridHeight, c.Rotation)))
-                {// if there are any cars in the center of the crossroad let the lights stay orange
-                    continue;
+                if (
+                    _grid.Cars.Any(
+                        x =>
+                            _config.TrafficCenter.IsInPosition(x.X, x.Y, c.X, c.Y, _config.GridWidth, _config.GridHeight,
+                                c.Rotation)))
+                {
+// if there are any cars in the center of the crossroad let the lights stay orange
+                    return;
                 }
                 c.LightOrange = false;
                 c.LastTimeSwitched = _time;
@@ -133,12 +166,15 @@ namespace _4cube.Bussiness.Simulation
                     var group = c.GreenLightTimeEntities[c.CurrentGreenLightGroup];
 
                     var cr = _config.CrossRoadCoordinatesCars[group].Select(x => x.ExitBounding).ToArray();
-                    var pd = _config.CrossRoadCoordinatesPedes.ContainsKey(group) ?_config.CrossRoadCoordinatesPedes[group].Select(x => x.BoundingBox).ToArray() : null;
+                    var pd = _config.CrossRoadCoordinatesPedes.ContainsKey(group)
+                        ? _config.CrossRoadCoordinatesPedes[group].Select(x => x.BoundingBox).ToArray()
+                        : null;
 
-                    if (_config.CrossRoadCoordinatesPedes.ContainsKey(group) && _config.CrossRoadCoordinatesPedes[group].Any())
+                    if (_config.CrossRoadCoordinatesPedes.ContainsKey(group) &&
+                        _config.CrossRoadCoordinatesPedes[group].Any())
                     {
                         var rnd = new Random();
-                        var number = rnd.Next(1,11);
+                        var number = rnd.Next(1, 11);
                         if (number%2 == 0)
                         {
                             //even number means there are pedestrians
@@ -151,8 +187,11 @@ namespace _4cube.Bussiness.Simulation
                         }
                     }
 
-                    if (_grid.Cars.Any(x=> x.IsInPosition(cr, c.X, c.Y, _config.GridWidth,_config.GridHeight,c.Rotation)) 
-                        || _grid.Pedestrians.Any(x => x.IsInPosition(pd, c.X, c.Y, _config.GridWidth, _config.GridHeight, c.Rotation)))
+                    if (_grid.Cars.Any(
+                        x => x.IsInPosition(cr, c.X, c.Y, _config.GridWidth, _config.GridHeight, c.Rotation))
+                        ||
+                        _grid.Pedestrians.Any(
+                            x => x.IsInPosition(pd, c.X, c.Y, _config.GridWidth, _config.GridHeight, c.Rotation)))
                     {
                         tries = 0;
                     }
@@ -160,8 +199,13 @@ namespace _4cube.Bussiness.Simulation
                     {
                         tries--;
                     }
-                } 
-            }
+                }
+            });
+        }
+
+        private void DeleteCar(CarEntity car)
+        {
+            _carsToGetDeleted.Add(car);
         }
 
         private void MoveCar(CarEntity car)
@@ -173,7 +217,7 @@ namespace _4cube.Bussiness.Simulation
 
             if (component == null)//if car go out of the component
             {
-                _grid.Cars.Remove(car);
+                DeleteCar(car);
                 return;
             }
 
@@ -184,6 +228,7 @@ namespace _4cube.Bussiness.Simulation
                         x =>
                             x.OutgoingDirection.Any() &&
                             x.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2, _config.GridWidth,_config.GridHeight, component.Rotation));
+
             if (enterLane != null) // if car is in an entering lane
             {
                 fPos = MoveCarToPoint(car, enterLane.ExitPoint.Rotate(component.Rotation, _config.GridWidth, _config.GridHeight), component);
@@ -225,7 +270,7 @@ namespace _4cube.Bussiness.Simulation
                     _grid.Components.FirstOrDefault(x => x.X == gridPosition.Item1 && x.Y == gridPosition.Item2);
                 if (nextComponent == null)//if car go out of the component
                 {
-                    _grid.Cars.Remove(car);
+                    DeleteCar(car);
                 }
                 else
                 {
@@ -233,7 +278,7 @@ namespace _4cube.Bussiness.Simulation
                         .Where(x => x.OutgoingDirection.Any() && x.DirectionLane.RotatedDirection(nextComponent.Rotation) == car.Direction).ToArray();
                     if (!l.Any())
                     {
-                        _grid.Cars.Remove(car);
+                        DeleteCar(car);
                     }
                     else
                     {
@@ -246,11 +291,13 @@ namespace _4cube.Bussiness.Simulation
             }
 
             var collisionField = new Tuple<int, int, int, int>(fPos.Item1 - d, fPos.Item2 - d, fPos.Item1 + d, fPos.Item2 + d);
-            if (!_grid.Cars.Any(x => x!=car && collisionField.IsInPosition(x.X, x.Y)))
-            {
-                car.X = fPos.Item1;
-                car.Y = fPos.Item2;
-            }
+
+            var collision = _grid.Cars.Any(x =>  x != car && collisionField.IsInPosition(x.X, x.Y));
+
+            if (collision) return;
+
+            car.X = fPos.Item1;
+            car.Y = fPos.Item2;
         }
 
         public Tuple<int, int> MoveCarToPoint(CarEntity car, Tuple<int, int> point, ComponentEntity component)
@@ -332,21 +379,11 @@ namespace _4cube.Bussiness.Simulation
 
         private void ProcessCar()
         {
-
-            for (var i = _grid.Cars.Count - 1 ; i >= 0; i--)
+            _grid.Cars.ToArray().AsParallel().ForAll(car =>
             {
-                CarEntity car;
-                try // TODO: Fix error
-                {
-                    car = _grid.Cars[i];
-                }
-                catch(Exception e)
-                {
-                    return;
-                }
-
                 var gridPosition = SimulationUtility.GetGridPosition(car.X, car.Y, _config.GridWidth, _config.GridHeight);
-                var component = _grid.Components.FirstOrDefault(x => x.X == gridPosition.Item1 && x.Y == gridPosition.Item2);
+                var component =
+                    _grid.Components.FirstOrDefault(x => x.X == gridPosition.Item1 && x.Y == gridPosition.Item2);
 
                 var crossroad = component as CrossroadEntity;
                 var road = component as RoadEntity;
@@ -361,20 +398,24 @@ namespace _4cube.Bussiness.Simulation
                                 x.ExitBounding.IsInPosition(car.X, car.Y, component.X, component.Y, _config.GridWidth,
                                     _config.GridHeight, component.Rotation));
                     if (incomingLane != null)
-                    // is the car in any of the lanes of the crossroad
+                        // is the car in any of the lanes of the crossroad
                     {
                         var outgoingLanes = lanes.Where(x => !x.OutgoingDirection.Any()
-                            && incomingLane.OutgoingDirection.Any(y => x.DirectionLane == y));
+                                                             &&
+                                                             incomingLane.OutgoingDirection.Any(
+                                                                 y => x.DirectionLane == y));
                         var trafficlightGroup = crossroad.GreenLightTimeEntities[crossroad.CurrentGreenLightGroup];
                         var sensors =
                             _config.CrossRoadCoordinatesCars[trafficlightGroup].Select(x => x.ExitBounding).ToArray();
-                        if (!crossroad.LightOrange &&
+
+                        var carInOutgoingLane = !_grid.Cars.Any(
+                            c => outgoingLanes.Select(x => x.ExitBounding).ToArray()
+                                .IsInPosition(c.X, c.Y, component.X, component.Y, _config.GridWidth,
+                                    _config.GridHeight, component.Rotation));
+
+                        if (carInOutgoingLane && !crossroad.LightOrange &&
                             car.IsInPosition(sensors, gridPosition.Item1,
-                            gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation)
-                            && !_grid.Cars.Any( // Check if there are no cars stuck in outgoing lane
-                                c => outgoingLanes.Select(x => x.ExitBounding).ToArray()
-                                        .IsInPosition(c.X, c.Y, component.X, component.Y, _config.GridWidth,
-                                            _config.GridHeight, component.Rotation)))  
+                                gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation))
                             // Light is green of the lane it is standing in
                             MoveCar(car);
                     }
@@ -387,7 +428,7 @@ namespace _4cube.Bussiness.Simulation
                 {
                     MoveCar(car);
                 }
-            }
+            });
         }
     }
 }
