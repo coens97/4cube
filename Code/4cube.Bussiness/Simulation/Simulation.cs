@@ -69,47 +69,51 @@ namespace _4cube.Bussiness.Simulation
 
         private void SpawnACar()
         {
-            //Create cars       
-            Parallel.ForEach(_grid.Components.AsParallel(),
-                  //new ParallelOptions() { MaxDegreeOfParallelism = 4 }, 
-                  (compo =>
+            //Create cars    
+            try
             {
-                for (var i = 0; i < compo.NrOfIncomingCars.Length; i++)
-                {
-                    if (compo.NrOfIncomingCarsSpawned[i] >= compo.NrOfIncomingCars[i]) continue;
-                    var direction =
-                        ((Direction) i).RotatedDirection(compo.Rotation.RotatedDirectionInv(Direction.Left));
-                    var laneList =
-                        _config.GetLanesOfComponent(compo)
-                            .Where(x => x.DirectionLane == direction && x.OutgoingDirection.Any())
-                            .ToArray();
-
-                    if (!laneList.Any())
-                        continue;
-
-                    var rd = new Random();
-                    var laneIndex = rd.Next(0, laneList.Count());
-                    var laneEnterPoint = laneList[laneIndex].EnterPoint.Rotate(compo.Rotation, _config.GridWidth,
-                        _config.GridHeight);
-                    var laneSpawnPoint = new Tuple<int, int>(laneEnterPoint.Item1 + compo.X,
-                        laneEnterPoint.Item2 + compo.Y);
-
-                    var car = new CarEntity
+                Parallel.ForEach(_grid.Components.AsParallel(),
+                    //new ParallelOptions() { MaxDegreeOfParallelism = 4 }, 
+                    (compo =>
                     {
-                        Direction = direction.RotatedDirection(compo.Rotation),
-                        X = laneSpawnPoint.Item1,
-                        Y = laneSpawnPoint.Item2
-                    };
+                        for (var i = 0; i < compo.NrOfIncomingCars.Length; i++)
+                        {
+                            if (compo.NrOfIncomingCarsSpawned[i] >= compo.NrOfIncomingCars[i]) continue;
+                            var direction =
+                                ((Direction) i).RotatedDirection(compo.Rotation.RotatedDirectionInv(Direction.Left));
+                            var laneList =
+                                _config.GetLanesOfComponent(compo)
+                                    .Where(x => x.DirectionLane == direction && x.OutgoingDirection.Any())
+                                    .ToArray();
 
-                    if (CheckCarCollision(compo, car, new Tuple<int, int>(car.X, car.Y)))
-                    {
-                        return;
-                    }
-                    compo.CarsInComponent.Add(car);
-                    _carsToGetAdded.Add(car);
-                    compo.NrOfIncomingCarsSpawned[i]++;
-                }
-            }));
+                            if (!laneList.Any())
+                                continue;
+
+                            var rd = new Random();
+                            var laneIndex = rd.Next(0, laneList.Count());
+                            var laneEnterPoint = laneList[laneIndex].EnterPoint.Rotate(compo.Rotation, _config.GridWidth,
+                                _config.GridHeight);
+                            var laneSpawnPoint = new Tuple<int, int>(laneEnterPoint.Item1 + compo.X,
+                                laneEnterPoint.Item2 + compo.Y);
+
+                            var car = new CarEntity
+                            {
+                                Direction = direction.RotatedDirection(compo.Rotation),
+                                X = laneSpawnPoint.Item1,
+                                Y = laneSpawnPoint.Item2
+                            };
+
+                            if (CheckCarCollision(compo, car, new Tuple<int, int>(car.X, car.Y)))
+                            {
+                                return;
+                            }
+                            compo.CarsInComponent.Add(car);
+                            _carsToGetAdded.Add(car);
+                            compo.NrOfIncomingCarsSpawned[i]++;
+                        }
+                    }));
+            }
+            catch (AggregateException) { }
         }
 
         public void ChangeSpeed(int n)
@@ -224,9 +228,9 @@ namespace _4cube.Bussiness.Simulation
         private void DeleteCar(CarEntity car, ComponentEntity component)
         {
             _carsToGetDeleted.Add(car);
-            component.CarsInComponentLock.EnterWriteLock();
-            component.CarsInComponent.Remove(car);
-            component.CarsInComponentLock.ExitWriteLock();
+            component?.CarsInComponentLock.EnterWriteLock(); // Component could be deleted before cars get deleted
+            component?.CarsInComponent.Remove(car);
+            component?.CarsInComponentLock.ExitWriteLock();
         }
 
         private bool CheckCarCollision(ComponentEntity component, CarEntity car, Tuple<int, int> fPos)
@@ -239,12 +243,10 @@ namespace _4cube.Bussiness.Simulation
             return collision;
         }
 
-        private void MoveCar(CarEntity car)
+        private void MoveCar(ComponentEntity component, CarEntity car)
         {
             var fPos = new Tuple<int, int>(0,0);
 
-            var gridPosition = SimulationUtility.GetGridPosition(car.X, car.Y, _config.GridWidth, _config.GridHeight);
-            var component = _grid.Components.FirstOrDefault(x => x.X == gridPosition.Item1 && x.Y == gridPosition.Item2);
 
             if (component == null)//if car go out of the component
             {
@@ -258,15 +260,15 @@ namespace _4cube.Bussiness.Simulation
                     lanes.FirstOrDefault(
                         x =>
                             x.OutgoingDirection.Any() &&
-                            x.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2, _config.GridWidth,_config.GridHeight, component.Rotation));
+                            x.BoundingBox.IsInPosition(car.X, car.Y, component.X, component.Y, _config.GridWidth,_config.GridHeight, component.Rotation));
 
             if (enterLane != null) // if car is in an entering lane
             {
                 fPos = MoveCarToPoint(car, enterLane.ExitPoint.Rotate(component.Rotation, _config.GridWidth, _config.GridHeight), component);
 
                 // If the car was first in an entering lane but now not anymore
-                if (!enterLane.BoundingBox.IsInPosition(fPos.Item1, fPos.Item2, gridPosition.Item1,
-                    gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation))
+                if (!enterLane.BoundingBox.IsInPosition(fPos.Item1, fPos.Item2, component.X,
+                    component.Y, _config.GridWidth, _config.GridHeight, component.Rotation))
                 {
                     var random = new Random();
                     var i = random.Next(enterLane.OutgoingDirection.Length);
@@ -278,9 +280,51 @@ namespace _4cube.Bussiness.Simulation
                 var exitLane =
                         lanes.First(
                             x => !x.OutgoingDirection.Any() && x.DirectionLane.RotatedDirection(component.Rotation) == car.Direction);
-                if (exitLane.BoundingBox.IsInPosition(car.X, car.Y, gridPosition.Item1, gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation))
+                if (exitLane.BoundingBox.IsInPosition(car.X, car.Y, component.X, component.Y, _config.GridWidth, _config.GridHeight, component.Rotation))
                 {//if car is leaving the exit lane
                         fPos = MoveCarToPoint(car, exitLane.ExitPoint.Rotate(component.Rotation, _config.GridWidth, _config.GridHeight), component);
+
+                        // Check if car crosses grid border hence go to other component
+                        if (!Equals(SimulationUtility.GetGridPosition(car.X, car.Y, _config.GridWidth, _config.GridHeight), SimulationUtility.GetGridPosition(fPos.Item1, fPos.Item2, _config.GridWidth, _config.GridHeight)))
+                        {
+                            var gridPosition = SimulationUtility.GetGridPosition(fPos.Item1, fPos.Item2, _config.GridWidth,
+                                _config.GridHeight);
+                            var nextComponent =
+                                _grid.Components.FirstOrDefault(x => x.X == gridPosition.Item1 && x.Y == gridPosition.Item2);
+                            if (nextComponent == null)//if car go out of the component
+                            {
+                                DeleteCar(car, component);
+                            }
+                            else
+                            {
+                                var l = _config.GetLanesOfComponent(nextComponent)
+                                    .Where(x => x.OutgoingDirection.Any() && x.DirectionLane.RotatedDirection(nextComponent.Rotation) == car.Direction).ToArray();
+                                if (!l.Any())
+                                {
+                                    DeleteCar(car, component);
+                                }
+                                else
+                                {
+                                    // swich car to other component
+                                    var random = new Random();
+                                    var i = random.Next(l.Length);
+                                    var lane = l[i].EnterPoint.Rotate(nextComponent.Rotation, _config.GridWidth, _config.GridHeight);
+                                    fPos = new Tuple<int, int>(lane.Item1 + nextComponent.X, lane.Item2 + nextComponent.Y);
+                                    if (CheckCarCollision(nextComponent, car, fPos)) return;
+
+                                    component.CarsInComponentLock.EnterWriteLock();
+                                    component.CarsInComponent.Remove(car);
+                                    component.CarsInComponentLock.ExitWriteLock();
+                                    nextComponent.CarsInComponentLock.EnterWriteLock();
+                                    nextComponent.CarsInComponent.Add(car);
+                                    nextComponent.CarsInComponentLock.ExitWriteLock();
+
+                                    car.X = fPos.Item1;
+                                    car.Y = fPos.Item2;
+                                    return;
+                                }
+                            }
+                        }
                 }
                 else
                 {//if car is going to the exit lane
@@ -289,46 +333,7 @@ namespace _4cube.Bussiness.Simulation
                 }
             }
 
-            // Check if car crosses grid border hence go to other component
-            if (!Equals(SimulationUtility.GetGridPosition(car.X, car.Y, _config.GridWidth, _config.GridHeight), SimulationUtility.GetGridPosition(fPos.Item1, fPos.Item2, _config.GridWidth, _config.GridHeight)))
-            {
-                gridPosition = SimulationUtility.GetGridPosition(fPos.Item1, fPos.Item2, _config.GridWidth,
-                    _config.GridHeight);
-                var nextComponent =
-                    _grid.Components.FirstOrDefault(x => x.X == gridPosition.Item1 && x.Y == gridPosition.Item2);
-                if (nextComponent == null)//if car go out of the component
-                {
-                    DeleteCar(car, component);
-                }
-                else
-                {
-                    var l = _config.GetLanesOfComponent(nextComponent)
-                        .Where(x => x.OutgoingDirection.Any() && x.DirectionLane.RotatedDirection(nextComponent.Rotation) == car.Direction).ToArray();
-                    if (!l.Any())
-                    {
-                        DeleteCar(car, component);
-                    }
-                    else
-                    {
-                        var random = new Random();
-                        var i = random.Next(l.Length);
-                        var lane = l[i].EnterPoint.Rotate(nextComponent.Rotation, _config.GridWidth, _config.GridHeight);
-                        fPos = new Tuple<int, int>(lane.Item1 + nextComponent.X, lane.Item2 + nextComponent.Y);
-                        if (CheckCarCollision(nextComponent, car, fPos)) return;
-
-                        component.CarsInComponentLock.EnterWriteLock();
-                        component.CarsInComponent.Remove(car);
-                        component.CarsInComponentLock.ExitWriteLock();
-                        nextComponent.CarsInComponentLock.EnterWriteLock();
-                        nextComponent.CarsInComponent.Add(car);
-                        nextComponent.CarsInComponentLock.ExitWriteLock();
-
-                        car.X = fPos.Item1;
-                        car.Y = fPos.Item2;
-                        return;
-                    }
-                }
-            }
+            
 
             if (CheckCarCollision(component, car, fPos)) return;
 
@@ -413,12 +418,8 @@ namespace _4cube.Bussiness.Simulation
             }
         }
 
-        private void CheckCanMoveCar(CarEntity car)
+        private void CheckCanMoveCar(ComponentEntity component, CarEntity car)
         {
-            var gridPosition = SimulationUtility.GetGridPosition(car.X, car.Y, _config.GridWidth, _config.GridHeight);
-            var component =
-                _grid.Components.FirstOrDefault(x => x.X == gridPosition.Item1 && x.Y == gridPosition.Item2);
-
             var crossroad = component as CrossroadEntity;
             var road = component as RoadEntity;
 
@@ -450,19 +451,19 @@ namespace _4cube.Bussiness.Simulation
                     component.CarsInComponentLock.ExitReadLock();
 
                     if (carInOutgoingLane && !crossroad.LightOrange &&
-                        car.IsInPosition(sensors, gridPosition.Item1,
-                            gridPosition.Item2, _config.GridWidth, _config.GridHeight, component.Rotation))
+                        car.IsInPosition(sensors, component.X,
+                            component.Y, _config.GridWidth, _config.GridHeight, component.Rotation))
                         // Light is green of the lane it is standing in
-                        MoveCar(car);
+                        MoveCar(component, car);
                 }
                 else
                 {
-                    MoveCar(car);
+                    MoveCar(component, car);
                 }
             }
             else if (road != null)
             {
-                MoveCar(car);
+                MoveCar(component, car);
             }
         }
 
@@ -474,11 +475,12 @@ namespace _4cube.Bussiness.Simulation
                 {
                     for (var i = c.CarsInComponent.Count - 1; i >= 0; i--)
                     {
-                        CheckCanMoveCar(c.CarsInComponent[i]);
+                        CheckCanMoveCar(c, c.CarsInComponent[i]);
                     }
                 });
             }
             catch (AggregateException){ }
+            catch (ArgumentOutOfRangeException) { }
         }
     }
 }
