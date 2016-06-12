@@ -4,6 +4,7 @@ using _4cube.Bussiness.Config;
 using _4cube.Bussiness.Simulation;
 using _4cube.Common;
 using _4cube.Common.Components;
+using _4cube.Common.Components.Crossroad;
 using _4cube.Data;
 
 namespace _4cube.Bussiness
@@ -31,7 +32,7 @@ namespace _4cube.Bussiness
 
         public void DeleteComponent(ComponentEntity component)
         {
-            CheckComponentHasCars(component);
+            CheckComponentHasCarsAndPedestrians(component);
             Grid.Components.Remove(component);
         }
 
@@ -50,11 +51,24 @@ namespace _4cube.Bussiness
             Grid.Height = h;
         }
 
-        private void CheckComponentHasCars(ComponentEntity component) // Some actions can not be performed when cars are on the crossroad
+        private static void CheckComponentHasCarsAndPedestrians(ComponentEntity component) // Some actions can not be performed when cars are on the crossroad
         {
-            var pos = new Tuple<int, int>(component.X, component.Y);
-            if (Grid.Cars.Any(x => SimulationUtility.GetGridPosition(x.X , x.Y,  _config.GridWidth, _config.GridHeight).Equals(pos)))
+            component.CarsInComponentLock.EnterReadLock();
+            var carsInComponent = component.CarsInComponent.Any();
+            component.CarsInComponentLock.ExitReadLock();
+            if (carsInComponent)
                 throw new Exception("Action can not  be performed with cars on the component.");
+
+            var crossb = component as CrossroadBEntity;
+            if (crossb != null)
+            {
+                crossb.PedestriansInComponentLock.EnterReadLock();
+                var ped = crossb.PedestriansInComponent.Any();
+                crossb.PedestriansInComponentLock.ExitReadLock();
+                if (ped)
+                    throw new Exception("Action can not  be performed with pedestrians on the component.");
+            }
+
         }
 
         private static void ShiftCircular(int offset, int[] array)
@@ -77,7 +91,7 @@ namespace _4cube.Bussiness
 
         public void RotateComponent(ComponentEntity component)
         {
-            CheckComponentHasCars(component);
+            CheckComponentHasCarsAndPedestrians(component);
             ShiftCircular(1, component.NrOfIncomingCars);
             ShiftCircular(1, component.NrOfIncomingCarsSpawned);
             component.Rotation = (Direction) (((int) component.Rotation + 1)%4);

@@ -33,13 +33,13 @@ namespace _4cube.UnitTest
             var car = new CarEntity {X=0,Y=0};
             var d = _config.CarSpeed;
             
-            Assert.AreEqual(new Tuple<int,int>(0, d), _simulation.MoveCarToPoint(car, new Tuple<int, int>(0, 100), cross));
-            Assert.AreEqual(new Tuple<int, int>(d, 0), _simulation.MoveCarToPoint(car, new Tuple<int, int>(100, 0), cross));
-            Assert.AreEqual(new Tuple<int, int>(0, -d), _simulation.MoveCarToPoint(car, new Tuple<int, int>(0, -100), cross));
-            Assert.AreEqual(new Tuple<int, int>(-d, 0), _simulation.MoveCarToPoint(car, new Tuple<int, int>(-100, 0), cross));
+            Assert.AreEqual(new Tuple<int,int>(0, d), Simulation.MoveCarToPoint(car, new Tuple<int, int>(0, 100), cross, d));
+            Assert.AreEqual(new Tuple<int, int>(d, 0), Simulation.MoveCarToPoint(car, new Tuple<int, int>(100, 0), cross, d));
+            Assert.AreEqual(new Tuple<int, int>(0, -d), Simulation.MoveCarToPoint(car, new Tuple<int, int>(0, -100), cross, d));
+            Assert.AreEqual(new Tuple<int, int>(-d, 0), Simulation.MoveCarToPoint(car, new Tuple<int, int>(-100, 0), cross, d));
 
             var deg45 = (int)Math.Sqrt((d*d)/2);
-            Assert.AreEqual(new Tuple<int, int>(deg45, deg45), _simulation.MoveCarToPoint(car, new Tuple<int, int>(100, 100), cross));
+            Assert.AreEqual(new Tuple<int, int>(deg45, deg45), Simulation.MoveCarToPoint(car, new Tuple<int, int>(100, 100), cross, d));
         }
     }
 }

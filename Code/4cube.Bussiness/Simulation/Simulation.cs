@@ -166,10 +166,11 @@ namespace _4cube.Bussiness.Simulation
                 if (number%2 != 0) continue;
                 //even number means there are pedestrians
 
+                var spawn = lane.EnterPoint.Rotate(c.Rotation, _config.GridWidth, _config.GridHeight);
                 var ped = new PedestrianEntity
                 {
-                    X = lane.EnterPoint.Item1 + c.X,
-                    Y = lane.EnterPoint.Item2 + c.Y,
+                    X = spawn.Item1 + c.X,
+                    Y = spawn.Item2 + c.Y,
                     Direction = lane.DirectionLane.RotatedDirection(c.Rotation)
                 };
                 c.PedestriansInComponentLock.EnterWriteLock();
@@ -206,6 +207,16 @@ namespace _4cube.Bussiness.Simulation
                     return;
                 }
 
+                var crossroadB = c as CrossroadBEntity;
+                if (crossroadB != null)
+                {
+                    crossroadB.PedestriansInComponentLock.EnterReadLock();
+                    stayOrange = crossroadB.PedestriansInComponent.Any();
+                    crossroadB.PedestriansInComponentLock.ExitReadLock();
+                    if (stayOrange) // stay orange light when there are any pedestrians on the component
+                        return;
+                }
+
                 c.LightOrange = false;
                 c.LastTimeSwitched = _time;
                 var tries = _grid.GreenLightTimeEntities.Count;
@@ -232,9 +243,16 @@ namespace _4cube.Bussiness.Simulation
                         x => x.IsInPosition(cr, c.X, c.Y, _config.GridWidth, _config.GridHeight, c.Rotation));
                     c.CarsInComponentLock.ExitReadLock();
 
-                    if (carsonSensor ||
-                        _grid.Pedestrians.Any(
-                            x => x.IsInPosition(pd, c.X, c.Y, _config.GridWidth, _config.GridHeight, c.Rotation)))
+                    var pedesOnSensor = false;
+                    if (crossB != null && pd != null)
+                    {
+                        crossB.PedestriansInComponentLock.EnterReadLock();
+                        pedesOnSensor = crossB.PedestriansInComponent.Any(
+                            x => x.IsInPosition(pd, c.X, c.Y, _config.GridWidth, _config.GridHeight, c.Rotation));
+                        crossB.PedestriansInComponentLock.ExitReadLock();
+                    }
+
+                    if (carsonSensor || pedesOnSensor)
                     {
                         tries = 0;
                     }
@@ -397,7 +415,7 @@ namespace _4cube.Bussiness.Simulation
             return fpos;
         }
 
-        public void MovePedestrian(PedestrianEntity pedestrian)
+        public void MovePedestrian(PedestrianEntity pedestrian, Direction direction)
         {
             switch (pedestrian.Direction)
             {
@@ -418,45 +436,56 @@ namespace _4cube.Bussiness.Simulation
             }
         }
 
+        private void RemovePedestrian(CrossroadBEntity c, PedestrianEntity p)
+        {
+            c.PedestriansInComponentLock.EnterWriteLock();
+            c.PedestriansInComponent.Remove(p);
+            c.PedestriansInComponentLock.ExitWriteLock();
+            _pedestriansToGetDeleted.Enqueue(p);
+        }
+
         private void ProcessPedestrian()
         {
             var dis = 90;
             var invDis = _config.GridWidth - dis;
-            var pedestrains = _grid.Components.OfType<PedestrianEntity>();
-            foreach (var p in pedestrains)
+            _grid.Components.OfType<CrossroadBEntity>().AsParallel().ForAll(c =>
             {
-                MovePedestrian(p);
-                switch (p.Direction)
+                for (var i = c.PedestriansInComponent.Count - 1; i >= 0; i--)
                 {
-                    case Direction.Up:
-                        if (p.Y < dis)
-                        {
-                            _grid.Pedestrians.Remove(p);
-                        }
-                        break;
-                    case Direction.Right:
-                        if (p.X > invDis)
-                        {
-                            _grid.Pedestrians.Remove(p);
-                        }
-                        break;
-                    case Direction.Down:
-                        if (p.Y > invDis)
-                        {
-                            _grid.Pedestrians.Remove(p);
-                        }
+                    var p = c.PedestriansInComponent[i];
+                    MovePedestrian(p, c.Rotation);
+                    switch (p.Direction)
+                    {
+                        case Direction.Up:
+                            if (p.Y < dis + c.Y)
+                            {
+                                RemovePedestrian(c, p);
+                            }
+                            break;
+                        case Direction.Right:
+                            if (p.X > invDis + c.X)
+                            {
+                                RemovePedestrian(c, p);
+                            }
+                            break;
+                        case Direction.Down:
+                            if (p.Y > invDis + c.Y)
+                            {
+                                RemovePedestrian(c, p);
+                            }
 
-                        break;
-                    case Direction.Left:
-                        if (p.X < dis)
-                        {
-                            _grid.Pedestrians.Remove(p);
-                        }
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
+                            break;
+                        case Direction.Left:
+                            if (p.X < dis + c.X)
+                            {
+                                RemovePedestrian(c, p);
+                            }
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
                 }
-            }
+            });
         }
 
         private void CheckCanMoveCar(ComponentEntity component, CarEntity car)
@@ -513,18 +542,13 @@ namespace _4cube.Bussiness.Simulation
 
         private void ProcessCar()
         {
-            try
+            _grid.Components.AsParallel().ForAll(c =>
             {
-                _grid.Components.AsParallel().ForAll(c =>
+                for (var i = c.CarsInComponent.Count - 1; i >= 0; i--)
                 {
-                    for (var i = c.CarsInComponent.Count - 1; i >= 0; i--)
-                    {
-                        CheckCanMoveCar(c, c.CarsInComponent[i]);
-                    }
-                });
-            }
-            catch (AggregateException) { }
-            catch (ArgumentOutOfRangeException) { }
+                    CheckCanMoveCar(c, c.CarsInComponent[i]);
+                }
+            });
         }
     }
 }
