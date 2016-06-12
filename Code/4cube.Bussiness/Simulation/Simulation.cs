@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -352,35 +351,16 @@ namespace _4cube.Bussiness.Simulation
             return fPos;
         }
 
-        private void MoveCar(ComponentEntity component, CarEntity car)
+        private void MoveCar(ComponentEntity component, CarEntity car, Lane enterLane, Lane exitLane)
         {
             Tuple<int, int> fPos;
-
-
-            if (component == null)//if car go out of the component
-            {
-                DeleteCar(car, component);
-                return;
-            }
-
-            var lanes = _config.GetLanesOfComponent(component);
-
-            var enterLane =
-                    lanes.FirstOrDefault(
-                        x =>
-                            x.OutgoingDirection.Any() &&
-                            x.BoundingBox.IsInPosition(car.X, car.Y, component.X, component.Y, _config.GridWidth, _config.GridHeight, component.Rotation));
-
+            
             if (enterLane != null) // if car is in an entering lane
             {
                 fPos = MoveCarEnterLane(component, car, enterLane);
             }
-            else
+            else if (exitLane != null)
             {
-                var exitLane =
-                        lanes.FirstOrDefault(
-                            x => !x.OutgoingDirection.Any() && x.DirectionLane.RotatedDirection(component.Rotation) == car.Direction);
-                if (exitLane == null) return;
                 if (exitLane.BoundingBox.IsInPosition(car.X, car.Y, component.X, component.Y, _config.GridWidth, _config.GridHeight, component.Rotation))
                 {//if car is leaving the exit lane
                     fPos = MoveCarExitLane(component, car, exitLane);
@@ -391,8 +371,10 @@ namespace _4cube.Bussiness.Simulation
                         exitLane.EnterPoint.Rotate(component.Rotation, _config.GridWidth, _config.GridHeight), component, _config.CarSpeed);
                 }
             }
-
-
+            else
+            {
+                return;
+            }
 
             if (CheckCarCollision(component, car, fPos)) return;
 
@@ -496,48 +478,76 @@ namespace _4cube.Bussiness.Simulation
             var crossroad = component as CrossroadEntity;
             var road = component as RoadEntity;
 
-            if (crossroad != null)
-            {
-                var lanes = _config.GetLanesOfComponent(crossroad);
-                var incomingLanes = lanes.Where(x => x.OutgoingDirection.Any());
-                var incomingLane =
+            var lanes = _config.GetLanesOfComponent(crossroad);
+            var incomingLanes = lanes.Where(x => x.OutgoingDirection.Any());
+            var incomingLane =
                     incomingLanes.FirstOrDefault(
                         x =>
-                            x.ExitBounding.IsInPosition(car.X, car.Y, component.X, component.Y, _config.GridWidth,
+                            x.BoundingBox.IsInPosition(car.X, car.Y, component.X, component.Y, _config.GridWidth,
                                 _config.GridHeight, component.Rotation));
+
+            IEnumerable<Lane> outgoingLanes = null;
+            Lane exitLane = null;
+            if (incomingLane != null) // if the car is not on a incominglane then get the outgoing lane
+            {
+                outgoingLanes = lanes.Where(x => !x.OutgoingDirection.Any()
+                                                     &&incomingLane.OutgoingDirection.Any(y => x.DirectionLane == y));
+            }
+            else
+            {
+                exitLane =
+                        lanes.FirstOrDefault(
+                            x => !x.OutgoingDirection.Any() && x.DirectionLane.RotatedDirection(component.Rotation) == car.Direction);
+            }
+
+            if (crossroad != null)
+            {
                 if (incomingLane != null)
                 // is the car in any of the lanes of the crossroad
                 {
-                    var outgoingLanes = lanes.Where(x => !x.OutgoingDirection.Any()
-                                                         &&
-                                                         incomingLane.OutgoingDirection.Any(
-                                                             y => x.DirectionLane == y));
                     var trafficlightGroup = crossroad.GreenLightTimeEntities[crossroad.CurrentGreenLightGroup];
-                    var sensors =
-                        _config.CrossRoadCoordinatesCars[trafficlightGroup].Select(x => x.ExitBounding).ToArray();
+                    
+                    if (incomingLane.ExitBounding.IsInPosition(car.X, car.Y, component.X,
+                        component.Y, _config.GridWidth, _config.GridHeight, component.Rotation)) // if car is on the exit sensor
+                    {
+                        if (crossroad.LightOrange)
+                            return;
 
-                    component.CarsInComponentLock.EnterReadLock();
-                    var carInOutgoingLane = !component.CarsInComponent.Any(
-                        c => outgoingLanes.Select(x => x.ExitBounding).ToArray()
-                            .IsInPosition(c.X, c.Y, component.X, component.Y, _config.GridWidth,
-                                _config.GridHeight, component.Rotation));
-                    component.CarsInComponentLock.ExitReadLock();
+                        if (!_config.CrossRoadCoordinatesCars[trafficlightGroup].Contains(incomingLane)) // if light is not green
+                            return;
 
-                    if (carInOutgoingLane && !crossroad.LightOrange &&
-                        car.IsInPosition(sensors, component.X,
-                            component.Y, _config.GridWidth, _config.GridHeight, component.Rotation))
-                        // Light is green of the lane it is standing in
-                        MoveCar(component, car);
-                }
-                else
-                {
-                    MoveCar(component, car);
+                        component.CarsInComponentLock.EnterReadLock();
+                        var carInOutgoingLane = component.CarsInComponent.Any(
+                            c => outgoingLanes.Select(x => x.ExitBounding).ToArray()
+                                .IsInPosition(c.X, c.Y, component.X, component.Y, _config.GridWidth,
+                                    _config.GridHeight, component.Rotation));
+                        component.CarsInComponentLock.ExitReadLock();
+
+                        if (carInOutgoingLane)//if any cars in outgoing lane
+                            return;
+                    }
+
+                    /*var crossB = component as CrossroadBEntity;
+                        if (crossB!=null) // on crossroad b cars can't stop on the walking lane
+                        {
+                            var enterSensors =
+                             _config.CrossRoadCoordinatesCars[trafficlightGroup].Select(x => x.EnterBounding).ToArray();
+                            if (car.IsInPosition(enterSensors, component.X,
+                                component.Y, _config.GridWidth, _config.GridHeight, component.Rotation))
+                            {
+                                component.CarsInComponentLock.EnterReadLock();
+                                var carOnExitSensors = component.CarsInComponent.Any(
+                                    c => incomingLane.ExitBounding.IsInPosition(c.X, c.Y, component.X, component.Y, _config.GridWidth,
+                                            _config.GridHeight, component.Rotation));
+                                component.CarsInComponentLock.ExitReadLock();
+                                if (carOnExitSensors)
+                                    return;
+                            }
+
+                        }*/
                 }
             }
-            else if (road != null)
-            {
-                MoveCar(component, car);
-            }
+            MoveCar(component, car, incomingLane, exitLane);
         }
 
         private void ProcessCar()
