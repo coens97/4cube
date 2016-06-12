@@ -88,6 +88,8 @@ namespace _4cube.Bussiness.Config
             new Lane { BoundingBox = new Tuple<int, int, int, int>(110,332,260,364), DirectionLane = Direction.Right, OutgoingDirection = new Direction[] {}}
         };
 
+        public Dictionary<Lane, Lane> CrossCarLanePedesLane { get; } = new Dictionary<Lane, Lane>();
+
         public void CalculateLane(Lane l)
         {
             var d = (int)(CarDistance * 1.5);
@@ -125,6 +127,13 @@ namespace _4cube.Bussiness.Config
 
         public Config()
         {
+            CrossCarLanePedesLane[LanesB[0]] = LanesP[0];
+            CrossCarLanePedesLane[LanesB[1]] = LanesP[0];
+            CrossCarLanePedesLane[LanesB[2]] = LanesP[0];
+            CrossCarLanePedesLane[LanesB[7]] = LanesP[1];
+            CrossCarLanePedesLane[LanesB[8]] = LanesP[1];
+            CrossCarLanePedesLane[LanesB[9]] = LanesP[1];
+
             CrossRoadCoordinatesCars[TrafficLightGroup.A1] = new[]
             {
                 LanesA[0],LanesA[9], LanesA[10]

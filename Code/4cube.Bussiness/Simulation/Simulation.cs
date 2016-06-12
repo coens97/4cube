@@ -476,9 +476,8 @@ namespace _4cube.Bussiness.Simulation
                 return;
 
             var crossroad = component as CrossroadEntity;
-            var road = component as RoadEntity;
 
-            var lanes = _config.GetLanesOfComponent(crossroad);
+            var lanes = _config.GetLanesOfComponent(component);
             var incomingLanes = lanes.Where(x => x.OutgoingDirection.Any());
             var incomingLane =
                     incomingLanes.FirstOrDefault(
@@ -526,25 +525,28 @@ namespace _4cube.Bussiness.Simulation
                         if (carInOutgoingLane)//if any cars in outgoing lane
                             return;
                     }
-
-                    /*var crossB = component as CrossroadBEntity;
-                        if (crossB!=null) // on crossroad b cars can't stop on the walking lane
-                        {
-                            var enterSensors =
-                             _config.CrossRoadCoordinatesCars[trafficlightGroup].Select(x => x.EnterBounding).ToArray();
-                            if (car.IsInPosition(enterSensors, component.X,
-                                component.Y, _config.GridWidth, _config.GridHeight, component.Rotation))
-                            {
-                                component.CarsInComponentLock.EnterReadLock();
-                                var carOnExitSensors = component.CarsInComponent.Any(
-                                    c => incomingLane.ExitBounding.IsInPosition(c.X, c.Y, component.X, component.Y, _config.GridWidth,
-                                            _config.GridHeight, component.Rotation));
-                                component.CarsInComponentLock.ExitReadLock();
-                                if (carOnExitSensors)
-                                    return;
-                            }
-
-                        }*/
+                }
+                var crossB = component as CrossroadBEntity;
+                if (crossB != null) // on crossroad b cars can't stop on the walking lane
+                {
+                    var lane = incomingLane ?? exitLane;
+                    Lane walkLane;
+                    if (_config.CrossCarLanePedesLane.TryGetValue(lane, out walkLane) && lane.EnterBounding.IsInPosition(car.X, car.Y, component.X,
+                        component.Y, _config.GridWidth, _config.GridHeight, component.Rotation))
+                    {
+                        component.CarsInComponentLock.EnterReadLock();
+                        var carOnWalkSensors = component.CarsInComponent.Any(
+                            c => c != car &&
+                                walkLane.BoundingBox.IsInPosition(car.X, car.Y, component.X, component.Y,
+                                    _config.GridWidth,
+                                    _config.GridHeight, component.Rotation, _config.CarDistance) &&
+                                lane.BoundingBox.IsInPosition(c.X, c.Y, component.X, component.Y,
+                                    _config.GridWidth,
+                                    _config.GridHeight, component.Rotation, _config.CarDistance));
+                        component.CarsInComponentLock.ExitReadLock();
+                        if (carOnWalkSensors)
+                            return;
+                    }
                 }
             }
             MoveCar(component, car, incomingLane, exitLane);

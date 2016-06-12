@@ -13,6 +13,11 @@ namespace _4cube.Bussiness.Simulation
             return positions.IsInPosition(car.X, car.Y, gridx, gridy, gridWidth,gridHeight,d);
         }
 
+        public static bool IsInPosition(this CarEntity car, Tuple<int, int, int, int>[] positions, int gridx, int gridy, int gridWidth, int gridHeight, Direction d, int distance)
+        {
+            return positions.Any(tup => tup.IsInPosition(car.X, car.Y, gridx, gridy, gridWidth, gridHeight, d, distance));
+        }
+
         public static bool IsInPosition(this PedestrianEntity ped, Tuple<int, int, int, int>[] positions, int gridx, int gridy, int gridWidth, int gridHeight, Direction d)
         {
             return positions.IsInPosition(ped.X, ped.Y, gridx, gridy, gridWidth, gridHeight, d);
@@ -55,6 +60,15 @@ namespace _4cube.Bussiness.Simulation
         {
             var pos = inp.Rotate(gridWidth, gridHeight,d);
             return x.InBetween(pos.Item1 + gridx, pos.Item3 + gridx) && y.InBetween(pos.Item2 + gridy, pos.Item4 + gridy);
+        }
+
+        public static bool IsInPosition(this Tuple<int, int, int, int> inp, int x, int y, int gridx, int gridy, int gridWidth, int gridHeight, Direction d, int carDistance)
+        {
+            return new Tuple<int, int, int, int>(
+                inp.Item1 - carDistance,
+                inp.Item2 - carDistance,
+                inp.Item3 + carDistance,
+                inp.Item4 + carDistance).IsInPosition(x, y, gridx, gridy, gridWidth, gridHeight, d);
         }
 
         public static Tuple<int, int> Rotate(int x, int y, int originX, int originY, Direction d)

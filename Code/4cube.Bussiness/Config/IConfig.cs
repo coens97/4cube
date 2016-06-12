@@ -18,9 +18,11 @@ namespace _4cube.Bussiness.Config
 
         Dictionary<TrafficLightGroup, Lane[]> CrossRoadCoordinatesCars { get; }
         Dictionary<TrafficLightGroup, Lane[]> CrossRoadCoordinatesPedes { get; }
+        Dictionary<Lane, Lane> CrossCarLanePedesLane { get; }
 
         Lane[] LanesA { get; }
         Lane[] LanesB { get; }
+        Lane[] LanesP { get; }
 
         Lane[] StraightRoad { get; }
         Lane[] CurvedRoad { get; }
