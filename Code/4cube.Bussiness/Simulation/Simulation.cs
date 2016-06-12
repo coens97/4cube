@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,10 +25,12 @@ namespace _4cube.Bussiness.Simulation
         private bool _enabled = false;
         private readonly Timer _timer;
         private bool _constantCalculation = false;
-        private SynchronizationContext _uiContext;
+        private readonly SynchronizationContext _uiContext;
 
-        private readonly List<CarEntity> _carsToGetAdded = new List<CarEntity>();
-        private readonly List<CarEntity> _carsToGetDeleted = new List<CarEntity>();
+        private readonly ConcurrentQueue<CarEntity> _carsToGetAdded = new ConcurrentQueue<CarEntity>();
+        private readonly ConcurrentQueue<CarEntity> _carsToGetDeleted = new ConcurrentQueue<CarEntity>();
+        private readonly ConcurrentQueue<PedestrianEntity> _pedestriansToGetAdded = new ConcurrentQueue<PedestrianEntity>();
+        private readonly ConcurrentQueue<PedestrianEntity> _pedestriansToGetDeleted = new ConcurrentQueue<PedestrianEntity>();
         public Simulation(IConfig config)
         {
             _uiContext = SynchronizationContext.Current;
@@ -46,74 +50,78 @@ namespace _4cube.Bussiness.Simulation
                 _time++;
                 SpawnACar();
                 ProcessTrafficLight();
+                ProcessPedestrian();
                 ProcessCar();
 
-                _uiContext.Send(x =>
+                _uiContext.Send(x => // this will run in the UI thread
                 {
-                    foreach (var car in _carsToGetAdded)
+                    CarEntity car;
+                    while(_carsToGetAdded.TryDequeue(out car))
                     {
                         _grid.Cars.Add(car);
                     }
-                    _carsToGetAdded.Clear();
-                    foreach (var car in _carsToGetDeleted)
+                    while (_carsToGetDeleted.TryDequeue(out car))
                     {
                         _grid.Cars.Remove(car);
                     }
-                    _carsToGetDeleted.Clear();
+                    PedestrianEntity ped;
+                    while (_pedestriansToGetAdded.TryDequeue(out ped))
+                    {
+                        _grid.Pedestrians.Add(ped);
+                    }
+                    while (_pedestriansToGetDeleted.TryDequeue(out ped))
+                    {
+                        _grid.Pedestrians.Remove(ped);
+                    }
                 }, null);
             } while (_constantCalculation && _enabled);
 
-            //ProcessPedestrain();
             _timer.Enabled = true;
         }
 
         private void SpawnACar()
         {
             //Create cars    
-            try
-            {
-                Parallel.ForEach(_grid.Components.AsParallel(),
-                    //new ParallelOptions() { MaxDegreeOfParallelism = 4 }, 
-                    (compo =>
+            Parallel.ForEach(_grid.Components.AsParallel(),
+                //new ParallelOptions() { MaxDegreeOfParallelism = 4 }, 
+                (compo =>
+                {
+                    for (var i = 0; i < compo.NrOfIncomingCars.Length; i++)
                     {
-                        for (var i = 0; i < compo.NrOfIncomingCars.Length; i++)
+                        if (compo.NrOfIncomingCarsSpawned[i] >= compo.NrOfIncomingCars[i]) continue;
+                        var direction =
+                            ((Direction)i).RotatedDirection(compo.Rotation.RotatedDirectionInv(Direction.Left));
+                        var laneList =
+                            _config.GetLanesOfComponent(compo)
+                                .Where(x => x.DirectionLane == direction && x.OutgoingDirection.Any())
+                                .ToArray();
+
+                        if (!laneList.Any())
+                            continue;
+
+                        var rd = new Random();
+                        var laneIndex = rd.Next(0, laneList.Count());
+                        var laneEnterPoint = laneList[laneIndex].EnterPoint.Rotate(compo.Rotation, _config.GridWidth,
+                            _config.GridHeight);
+                        var laneSpawnPoint = new Tuple<int, int>(laneEnterPoint.Item1 + compo.X,
+                            laneEnterPoint.Item2 + compo.Y);
+
+                        var car = new CarEntity
                         {
-                            if (compo.NrOfIncomingCarsSpawned[i] >= compo.NrOfIncomingCars[i]) continue;
-                            var direction =
-                                ((Direction)i).RotatedDirection(compo.Rotation.RotatedDirectionInv(Direction.Left));
-                            var laneList =
-                                _config.GetLanesOfComponent(compo)
-                                    .Where(x => x.DirectionLane == direction && x.OutgoingDirection.Any())
-                                    .ToArray();
+                            Direction = direction.RotatedDirection(compo.Rotation),
+                            X = laneSpawnPoint.Item1,
+                            Y = laneSpawnPoint.Item2
+                        };
 
-                            if (!laneList.Any())
-                                continue;
-
-                            var rd = new Random();
-                            var laneIndex = rd.Next(0, laneList.Count());
-                            var laneEnterPoint = laneList[laneIndex].EnterPoint.Rotate(compo.Rotation, _config.GridWidth,
-                                _config.GridHeight);
-                            var laneSpawnPoint = new Tuple<int, int>(laneEnterPoint.Item1 + compo.X,
-                                laneEnterPoint.Item2 + compo.Y);
-
-                            var car = new CarEntity
-                            {
-                                Direction = direction.RotatedDirection(compo.Rotation),
-                                X = laneSpawnPoint.Item1,
-                                Y = laneSpawnPoint.Item2
-                            };
-
-                            if (CheckCarCollision(compo, car, new Tuple<int, int>(car.X, car.Y)))
-                            {
-                                return;
-                            }
-                            compo.CarsInComponent.Add(car);
-                            _carsToGetAdded.Add(car);
-                            compo.NrOfIncomingCarsSpawned[i]++;
+                        if (CheckCarCollision(compo, car, new Tuple<int, int>(car.X, car.Y)))
+                        {
+                            return;
                         }
-                    }));
-            }
-            catch (AggregateException) { }
+                        compo.CarsInComponent.Add(car);
+                        _carsToGetAdded.Enqueue(car);
+                        compo.NrOfIncomingCarsSpawned[i]++;
+                    }
+                }));
         }
 
         public void ChangeSpeed(int n)
@@ -147,6 +155,28 @@ namespace _4cube.Bussiness.Simulation
         {
             _timer.Stop();
             _time = 0;
+        }
+
+        private void SpawnPedestrian(CrossroadBEntity c, IEnumerable<Lane> lanes)
+        {
+            foreach (var lane in lanes)
+            {
+                var rnd = new Random();
+                var number = rnd.Next(1, 11);
+                if (number%2 != 0) continue;
+                //even number means there are pedestrians
+
+                var ped = new PedestrianEntity
+                {
+                    X = lane.EnterPoint.Item1 + c.X,
+                    Y = lane.EnterPoint.Item2 + c.Y,
+                    Direction = lane.DirectionLane.RotatedDirection(c.Rotation)
+                };
+                c.PedestriansInComponentLock.EnterWriteLock();
+                c.PedestriansInComponent.Add(ped);
+                c.PedestriansInComponentLock.ExitWriteLock();
+                _pedestriansToGetAdded.Enqueue(ped);
+            }
         }
 
         private void ProcessTrafficLight()
@@ -189,22 +219,13 @@ namespace _4cube.Bussiness.Simulation
                         ? _config.CrossRoadCoordinatesPedes[group].Select(x => x.BoundingBox).ToArray()
                         : null;
 
-                    if (_config.CrossRoadCoordinatesPedes.ContainsKey(group) &&
-                        _config.CrossRoadCoordinatesPedes[group].Any())
+                    Lane[] lanes;
+                    var crossB = c as CrossroadBEntity;
+                    if (crossB != null && _config.CrossRoadCoordinatesPedes.TryGetValue(group, out lanes))
                     {
-                        var rnd = new Random();
-                        var number = rnd.Next(1, 11);
-                        if (number % 2 == 0)
-                        {
-                            //even number means there are pedestrians
-                            //_grid.Pedestrians.Add(new PedestrianEntity
-                            //{
-                            //    X = _config.PedstrainSpawn[group].Item1,
-                            //    Y = _config.PedstrainSpawn[group].Item2,
-                            //    Direction = _config.PedstrainSpawn[group].Item3
-                            //});
-                        }
+                        SpawnPedestrian(crossB, lanes);
                     }
+                    
 
                     c.CarsInComponentLock.EnterReadLock();
                     var carsonSensor = c.CarsInComponent.Any(
@@ -227,7 +248,7 @@ namespace _4cube.Bussiness.Simulation
 
         private void DeleteCar(CarEntity car, ComponentEntity component)
         {
-            _carsToGetDeleted.Add(car);
+            _carsToGetDeleted.Enqueue(car);
             component?.CarsInComponentLock.EnterWriteLock(); // Component could be deleted before cars get deleted
             component?.CarsInComponent.Remove(car);
             component?.CarsInComponentLock.ExitWriteLock();
@@ -246,7 +267,7 @@ namespace _4cube.Bussiness.Simulation
         private Tuple<int, int> MoveCarEnterLane(ComponentEntity component, CarEntity car, Lane enterLane)
         {
             var fPos = MoveCarToPoint(car, enterLane.ExitPoint.Rotate(component.Rotation, _config.GridWidth, _config.GridHeight), component, _config.CarSpeed);
-            
+
             if (enterLane.BoundingBox.IsInPosition(fPos.Item1, fPos.Item2, component.X,
                 component.Y, _config.GridWidth, _config.GridHeight, component.Rotation)) return fPos;
 
@@ -271,7 +292,7 @@ namespace _4cube.Bussiness.Simulation
             var nextComponent =
                 _grid.Components.FirstOrDefault(x => x.X == nextGrid.Item1 && x.Y == nextGrid.Item2);
 
-            
+
             if (currentGrid.Equals(nextGrid)) return fPos;
 
             if (nextComponent == null) //if car go out of the component
@@ -376,7 +397,7 @@ namespace _4cube.Bussiness.Simulation
             return fpos;
         }
 
-        public void MovePedestrain(PedestrianEntity pedestrian)
+        public void MovePedestrian(PedestrianEntity pedestrian)
         {
             switch (pedestrian.Direction)
             {
@@ -397,14 +418,14 @@ namespace _4cube.Bussiness.Simulation
             }
         }
 
-        private void ProcessPedestrain()
+        private void ProcessPedestrian()
         {
             var dis = 90;
             var invDis = _config.GridWidth - dis;
             var pedestrains = _grid.Components.OfType<PedestrianEntity>();
             foreach (var p in pedestrains)
             {
-                MovePedestrain(p);
+                MovePedestrian(p);
                 switch (p.Direction)
                 {
                     case Direction.Up:
