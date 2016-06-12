@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:_4cube.Presentation"
         xmlns:common="clr-namespace:_4cube.Common;assembly=4cube.Common"
         mc:Ignorable="d"
-        Title="Grid Resizing" Height="225.333" Width="278.667">
+        Title="Grid Resizing" Height="243.637" Width="278.667" Closing="Window_Closing">
   
     <Grid>
         <GroupBox x:Name="GroupBox" Header="Resizing width and height" Margin="10,10,9.556,9.889">
@@ -15,7 +15,7 @@
                 <Label x:Name="label1" Content="Height:" HorizontalAlignment="Left" Margin="27,53,0,0" VerticalAlignment="Top"/>
                 <TextBox x:Name="TbWidth" Height="23" Margin="91,14,24,0" TextWrapping="Wrap" Text="{Binding Width}" VerticalAlignment="Top"/>
                 <TextBox x:Name="TbHeight" Height="23" Margin="91,56,23,0" TextWrapping="Wrap" Text="{Binding Height}" VerticalAlignment="Top"/>
-                <Button x:Name="BtnResize" Content="OK" HorizontalAlignment="Left" Margin="91,104,0,0" VerticalAlignment="Top" Width="121" Height="28" IsCancel="True"/>
+                <Button x:Name="BtnResize" Content="OK" HorizontalAlignment="Left" Margin="91,104,0,0" VerticalAlignment="Top" Width="121" Height="28" IsCancel="True" Click="BtnResize_Click"/>
 
             </Grid>
         </GroupBox>

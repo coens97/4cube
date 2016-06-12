@@ -23,7 +23,8 @@
                 <MenuItem Header="_Exit" />
             </MenuItem>
             <MenuItem Header="_Edit">
-                <MenuItem Header="_Document settings" Click="MenuItem_Click" />
+                <MenuItem Header="_Resize grid" Click="MenuItem_Click_4" />
+                <MenuItem Header="_Change traffic light times" Click="MenuItem_Click" />
             </MenuItem>
         </Menu>
 
@@ -70,7 +71,7 @@
                     <ItemsControl ItemsSource="{Binding GridItems}">
                     <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <Canvas Height="{Binding Width}" Width="{Binding Height}" MouseLeftButtonUp="Canvas_MouseUp">
+                                <Canvas Height="{Binding Height}" Width="{Binding Width}" MouseLeftButtonUp="Canvas_MouseUp">
                                     <Canvas.Background>
                                         <DrawingBrush Stretch="None" TileMode="Tile"
                           Viewport="0,0 400,400" ViewportUnits="Absolute">

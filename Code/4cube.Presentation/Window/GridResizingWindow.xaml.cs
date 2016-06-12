@@ -35,6 +35,15 @@ namespace _4cube.Presentation.Window
            
         }
 
-        
+        private void BtnResize_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            Hide();
+        }
     }
 }

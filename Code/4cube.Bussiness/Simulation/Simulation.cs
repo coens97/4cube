@@ -339,8 +339,9 @@ namespace _4cube.Bussiness.Simulation
             else
             {
                 var exitLane =
-                        lanes.First(
+                        lanes.FirstOrDefault(
                             x => !x.OutgoingDirection.Any() && x.DirectionLane.RotatedDirection(component.Rotation) == car.Direction);
+                if (exitLane == null) return;
                 if (exitLane.BoundingBox.IsInPosition(car.X, car.Y, component.X, component.Y, _config.GridWidth, _config.GridHeight, component.Rotation))
                 {//if car is leaving the exit lane
                     fPos = MoveCarExitLane(component, car, exitLane);
@@ -439,6 +440,9 @@ namespace _4cube.Bussiness.Simulation
 
         private void CheckCanMoveCar(ComponentEntity component, CarEntity car)
         {
+            if (car == null)
+                return;
+
             var crossroad = component as CrossroadEntity;
             var road = component as RoadEntity;
 

@@ -42,7 +42,7 @@ namespace _4cube.Bussiness
 
         public void ResizeGrid(int w, int h)
         {
-            if (Grid.Components.Any(x => x.X > w || x.Y > h))
+            if (Grid.Components.Any(x => x.X >= w * _config.GridWidth || x.Y >= h * _config.GridHeight))
             {
                 throw new Exception("Components are outside of the grid");
             }

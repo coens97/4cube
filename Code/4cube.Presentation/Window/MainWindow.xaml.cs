@@ -39,7 +39,6 @@ namespace _4cube.Presentation.Window
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            _resizeWindow.Show();
             _configWindow.Show();
         }
 
@@ -109,6 +108,11 @@ namespace _4cube.Presentation.Window
         private void MenuItem_Click_3(object sender, RoutedEventArgs e)
         {
             _gridModel.New();
+        }
+
+        private void MenuItem_Click_4(object sender, RoutedEventArgs e)
+        {
+            _resizeWindow.Show();
         }
     }
 }
