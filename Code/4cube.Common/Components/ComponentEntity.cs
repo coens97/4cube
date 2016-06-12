@@ -19,7 +19,7 @@ namespace _4cube.Common.Components
         public int X { get; set; }
         [DoNotNotify]
         public int Y { get; set; }
-        [DoNotNotify]
+        [DoNotNotify, NonSerialized]
         public List<CarEntity> CarsInComponent = new List<CarEntity>();
         [DoNotNotify, NonSerialized]
         public ReaderWriterLockSlim CarsInComponentLock = new ReaderWriterLockSlim();
