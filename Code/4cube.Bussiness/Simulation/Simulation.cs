@@ -308,6 +308,8 @@ namespace _4cube.Bussiness.Simulation
             nextComponent.CarsInComponentLock.EnterWriteLock();
             nextComponent.CarsInComponent.Add(car);
             nextComponent.CarsInComponentLock.ExitWriteLock();
+            car.X = fPos.Item1;
+            car.Y = fPos.Item2;
             return fPos;
         }
 
