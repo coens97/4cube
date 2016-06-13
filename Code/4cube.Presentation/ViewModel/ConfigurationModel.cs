@@ -1,8 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 using PropertyChanged;
 using _4cube.Bussiness;
+using _4cube.Common.Components.TrafficLight;
 
 namespace _4cube.Presentation.ViewModel
 {
@@ -21,8 +23,11 @@ namespace _4cube.Presentation.ViewModel
         public ConfigurationModel(IGridModel gridModel)
         {
             Test = "hello";
-            LightGroups.Add("aaaaa");
-            LightGroups.Add("bbbbbb");
+            foreach (var group in Enum.GetValues(typeof(TrafficLightGroup)))
+            {
+                LightGroups.Add("Light group " + group);
+            }
+            
         }
     }
 }
