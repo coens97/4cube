@@ -18,7 +18,7 @@
                 <MenuItem Header="_New" Click="MenuItem_Click_3" />
                 <MenuItem Header="_Open" Click="MenuItem_Click_1" />
                 <MenuItem Header="_Save" Click="MenuItem_Click_2" />
-                <MenuItem Header="_Save as" />
+                <MenuItem Header="_Save as" Click="MenuItem_Click_5" />
                 <Separator />
                 <MenuItem Header="_Exit" />
             </MenuItem>
@@ -59,7 +59,6 @@
                     <Button x:Name="BtnPause" Content="Pause" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Width="236" Height="39"/>
                     <Slider x:Name="slider" Margin="11,188,10,73.889" RenderTransformOrigin="0.967,0.544" Minimum="1" Value="{Binding Speed}"/>
                     <Label x:Name="label" Content="Change simulation speed:" Margin="10,137,28,0" RenderTransformOrigin="0.407,0.446" Height="26" VerticalAlignment="Top"/>
-                    <Button x:Name="BtnShowReport" Content="Show Report" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Width="236" Height="39"/>
 
                 </Grid>
 

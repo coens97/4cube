@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32;
 using _4cube.Bussiness;
 using _4cube.Bussiness.Config;
 using _4cube.Bussiness.Simulation;
@@ -21,6 +22,7 @@ namespace _4cube.Presentation.Window
         private readonly IConfig _config;
         private readonly ISimulation _simulation;
         private string _draggedComponent;
+        private string _path = string.Empty;
 
         public MainWindow(MainViewModel viewModel, IGridModel gridModel, IConfig config,
             ISimulation simulation, GridResizingWindow gridResizingWindow, ConfigurationWindow configurationWindow)
@@ -44,7 +46,6 @@ namespace _4cube.Presentation.Window
 
         private void BtnStartStop_Click(object sender, RoutedEventArgs e)
         {
-            //_gridModel.Grid.Cars.First().X += 5;
             _simulation.Start(_gridModel.Grid);
         }
 
@@ -95,24 +96,58 @@ namespace _4cube.Presentation.Window
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-            // TODO: Add a dialogbox to open file
-            _gridModel.OpenFile("test.tsim");
+            var openFileDialog1 = new OpenFileDialog
+            {
+                Filter = "TSIM Files (.tsim)|*.tsim|All Files (*.*)|*.*",
+                FilterIndex = 1,
+                Multiselect = false
+            };
+
+            
+            var userClickedOk = openFileDialog1.ShowDialog();
+            if (userClickedOk == true)
+            {
+                _path = openFileDialog1.FileName;
+                _gridModel.OpenFile(openFileDialog1.FileName);
+            }
         }
 
-        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        private void MenuItem_Click_5(object sender, RoutedEventArgs e)
         {
-            // TODO: Add a dialogbox to save file
-            _gridModel.SaveFile("test.tsim");
+            var saveFileDialog1 = new SaveFileDialog
+            {
+                Filter = "TSIM Files (.tsim)|*.tsim|All Files (*.*)|*.*",
+                FilterIndex = 1
+            };
+
+
+            var userClickedOk = saveFileDialog1.ShowDialog();
+            if (userClickedOk != null && userClickedOk.Value)
+            {
+                _path = saveFileDialog1.FileName;
+                _gridModel.SaveFile(saveFileDialog1.FileName);
+            }
         }
 
         private void MenuItem_Click_3(object sender, RoutedEventArgs e)
         {
+            _path = string.Empty;
             _gridModel.New();
         }
 
         private void MenuItem_Click_4(object sender, RoutedEventArgs e)
         {
             _resizeWindow.Show();
+        }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (_path == string.Empty)
+                MenuItem_Click_5(sender, e);
+            else
+            {
+                _gridModel.SaveFile(_path);
+            }
         }
     }
 }
