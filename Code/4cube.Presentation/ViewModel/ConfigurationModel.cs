@@ -16,6 +16,8 @@ namespace _4cube.Presentation.ViewModel
 
         public string Test { get; set; }
 
+        public TrafficGroupModel SelectedProp {get; set; }
+
         public ObservableCollection<TrafficGroupModel> LightGroups { get; set; } =
             new ObservableCollection<TrafficGroupModel>();
 
