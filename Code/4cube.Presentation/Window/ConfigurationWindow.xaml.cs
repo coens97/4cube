@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
+using Ninject.Infrastructure.Language;
 using _4cube.Bussiness;
 using _4cube.Presentation.ViewModel;
 
@@ -18,12 +20,18 @@ namespace _4cube.Presentation.Window
             _gridModel = gridModel;
             _configurationModel = configurationModel;
             DataContext = _configurationModel;
-            _configurationModel.PropertyChanged+= ConfigurationModelOnPropertyChanged;
         }
 
-        private void ConfigurationModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        private void BtnChangeAll_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            //_gridModel.Grid.
+            if (_configurationModel.SelectedProp == null) return;
+            foreach (var x in _gridModel.Grid.GreenLightTimeEntities)
+                x.Duration = _configurationModel.SelectedProp.Time;
+
+            foreach (var x in _configurationModel.LightGroups)
+            {
+                x.Time = _configurationModel.SelectedProp.Time;
+            }
         }
     }
 }
