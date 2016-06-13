@@ -3,8 +3,6 @@ using System.ComponentModel;
 using System.Windows.Data;
 using PropertyChanged;
 using _4cube.Bussiness;
-using _4cube.Common.Components.TrafficLight;
-using System.Collections.ObjectModel;
 
 namespace _4cube.Presentation.ViewModel
 {
@@ -13,9 +11,8 @@ namespace _4cube.Presentation.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public CompositeCollection GreenLightTimeEntities { get; set; } =new CompositeCollection();
         public string Test { get; set; }
-        public ObservableCollection<string>TestCollection=new ObservableCollection<string>();
+        public ObservableCollection<string> LightGroups { get; set; } = new ObservableCollection<string>();
 
         public ConfigurationModel()
         {
@@ -24,9 +21,8 @@ namespace _4cube.Presentation.ViewModel
         public ConfigurationModel(IGridModel gridModel)
         {
             Test = "hello";
-            TestCollection.Add("aaaaa");
-            TestCollection.Add("bbbbbb");
-            GreenLightTimeEntities.Add(new CollectionContainer{ Collection = gridModel.Grid.GreenLightTimeEntities} );
+            LightGroups.Add("aaaaa");
+            LightGroups.Add("bbbbbb");
         }
     }
 }
