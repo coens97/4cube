@@ -20,13 +20,11 @@
                     <DataTemplate>
                         <Grid Margin="2">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="20" />
                                 <ColumnDefinition Width="150" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="Test" Margin="1" Grid.Column="0" />
-                            <TextBlock Text="{Binding}" Margin="1" Grid.Column="1" />
-                            <TextBlock Text="2" Margin="1" Grid.Column="2" />
+                            <TextBlock Text="{Binding Group}" Margin="1" Grid.Column="0" />
+                            <TextBlock Text="{Binding Time}" Margin="1" Grid.Column="1" /> 
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

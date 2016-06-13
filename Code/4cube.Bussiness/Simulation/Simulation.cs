@@ -218,7 +218,7 @@ namespace _4cube.Bussiness.Simulation
 
                 c.LightOrange = false;
                 c.LastTimeSwitched = _time;
-                var tries = _grid.GreenLightTimeEntities.Count;
+                var tries = _grid.GreenLightTimeEntities.Length;
                 while (tries > 0)
                 {
                     c.CurrentGreenLightGroup = (c.CurrentGreenLightGroup + 1) % c.GreenLightTimeEntities.Length;

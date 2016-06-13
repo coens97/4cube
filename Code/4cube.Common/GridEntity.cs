@@ -19,7 +19,7 @@ namespace _4cube.Common
 
         public ObservableCollection<PedestrianEntity> Pedestrians { get; set; } =
             new ObservableCollection<PedestrianEntity>();
-        public ObservableCollection<GreenLightTimeEntity> GreenLightTimeEntities { get; set; } = new ObservableCollection<GreenLightTimeEntity>(new []
+        public GreenLightTimeEntity[] GreenLightTimeEntities { get; set; } =  
         {
             new GreenLightTimeEntity { TrafficLightGroupSelected = TrafficLightGroup.A1},
             new GreenLightTimeEntity { TrafficLightGroupSelected = TrafficLightGroup.A2},
@@ -30,7 +30,7 @@ namespace _4cube.Common
             new GreenLightTimeEntity { TrafficLightGroupSelected = TrafficLightGroup.B3},
             new GreenLightTimeEntity { TrafficLightGroupSelected = TrafficLightGroup.B4},
             new GreenLightTimeEntity { TrafficLightGroupSelected = TrafficLightGroup.B5}
-        });
+        };
 
         public int Width { get; set; } = 12;
         public event PropertyChangedEventHandler PropertyChanged;
