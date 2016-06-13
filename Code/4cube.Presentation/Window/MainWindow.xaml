@@ -55,8 +55,8 @@
 
             <GroupBox x:Name="GroupBox" Header="Simulation" HorizontalAlignment="Left" Margin="10,176,0,10.445" Width="269">
                 <Grid Margin="0,0,-0.111,2">
-                    <Button x:Name="BtnStartStop" Content="Start" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Width="236" Height="39" Click="BtnStartStop_Click"/>
-                    <Button x:Name="BtnPause" Content="Pause" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Width="236" Height="39"/>
+                    <Button x:Name="BtnStartStop" Content="{Binding StartStopText}" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Width="236" Height="39" Click="BtnStartStop_Click"/>
+                    <Button x:Name="BtnPause" Content="{Binding PauseText}" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Width="236" Height="39" Click="BtnPause_Click" IsEnabled="{Binding Running}"/>
                     <Slider x:Name="slider" Margin="11,188,10,73.889" RenderTransformOrigin="0.967,0.544" Minimum="1" Value="{Binding Speed}"/>
                     <Label x:Name="label" Content="Change simulation speed:" Margin="10,137,28,0" RenderTransformOrigin="0.407,0.446" Height="26" VerticalAlignment="Top"/>
 

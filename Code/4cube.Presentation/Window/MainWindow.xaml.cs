@@ -23,7 +23,7 @@ namespace _4cube.Presentation.Window
         private readonly ISimulation _simulation;
         private string _draggedComponent;
         private string _path = string.Empty;
-
+        private MainViewModel _viewModel;
         public MainWindow(MainViewModel viewModel, IGridModel gridModel, IConfig config,
             ISimulation simulation, GridResizingWindow gridResizingWindow, ConfigurationWindow configurationWindow)
         {
@@ -35,8 +35,7 @@ namespace _4cube.Presentation.Window
             DataContext = viewModel;
             _resizeWindow = gridResizingWindow;
             _configWindow = configurationWindow;
-
-
+            _viewModel = viewModel;
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -46,7 +45,17 @@ namespace _4cube.Presentation.Window
 
         private void BtnStartStop_Click(object sender, RoutedEventArgs e)
         {
-            _simulation.Start(_gridModel.Grid);
+            if (_viewModel.Running)
+            {
+                _viewModel.Running = false;
+                _viewModel.Paused = false;
+                _simulation.Stop();
+            }
+            else
+            {
+                _viewModel.Running = true;
+                _simulation.Start(_gridModel.Grid);
+            }
         }
 
         private void Image_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -103,7 +112,6 @@ namespace _4cube.Presentation.Window
                 Multiselect = false
             };
 
-            
             var userClickedOk = openFileDialog1.ShowDialog();
             if (userClickedOk == true)
             {
@@ -119,7 +127,6 @@ namespace _4cube.Presentation.Window
                 Filter = "TSIM Files (.tsim)|*.tsim|All Files (*.*)|*.*",
                 FilterIndex = 1
             };
-
 
             var userClickedOk = saveFileDialog1.ShowDialog();
             if (userClickedOk != null && userClickedOk.Value)
@@ -147,6 +154,20 @@ namespace _4cube.Presentation.Window
             else
             {
                 _gridModel.SaveFile(_path);
+            }
+        }
+
+        private void BtnPause_Click(object sender, RoutedEventArgs e)
+        {
+            if (_viewModel.Paused)
+            {
+                _viewModel.Paused = false;
+                _simulation.Start(_gridModel.Grid);
+            }
+            else
+            {
+                _viewModel.Paused = true;
+                _simulation.Pause();
             }
         }
     }

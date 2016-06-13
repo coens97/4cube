@@ -34,7 +34,10 @@ namespace _4cube.Presentation.ViewModel
         public int ScaledWidth { get; set; }
         public int ScaledHeight { get; set; }
         public int Speed { get; set; } = 9;
-
+        public bool Running { get; set; } = false;
+        public bool Paused { get; set; } = false;
+        public string StartStopText => Running ? "Stop" : "Start"; // when running get notifies this will also be notified
+        public string PauseText => Paused ? "Unpause" : "Pause";
         public MainViewModel() { }
         public MainViewModel(IGridModel gridModel, IConfig config, ISimulation simulation, GridContainer gridContainer)
         {

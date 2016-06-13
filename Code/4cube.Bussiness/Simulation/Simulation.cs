@@ -22,6 +22,7 @@ namespace _4cube.Bussiness.Simulation
         // private IReport _report;
         private int _time = 0;
         private bool _enabled = false;
+        private bool _stop = false;
         private readonly Timer _timer;
         private bool _constantCalculation = false;
         private readonly SynchronizationContext _uiContext;
@@ -42,7 +43,28 @@ namespace _4cube.Bussiness.Simulation
         {
             _timer.Enabled = false;
 
-            if (!_enabled) return;
+            if (!_enabled)
+            {
+                if (!_stop) return;
+
+                _stop = false;
+                _time = 0;
+                // reset everything
+                _uiContext.Send(x =>
+                {
+                    _grid.Cars.Clear();
+                    _grid.Pedestrians.Clear();
+                }, null);
+
+                _grid.Components.AsParallel().ForAll(x =>
+                {
+                    x.CarsInComponentLock.EnterWriteLock();
+                    x.CarsInComponent.Clear();
+                    x.CarsInComponentLock.ExitWriteLock();
+                    x.NrOfIncomingCarsSpawned = new[] { 0, 0, 0, 0 };
+                });
+                return;
+            }
 
             do
             {
@@ -152,8 +174,8 @@ namespace _4cube.Bussiness.Simulation
 
         public void Stop()
         {
-            _timer.Stop();
-            _time = 0;
+            _enabled = false;
+            _stop = true;
         }
 
         private void SpawnPedestrian(CrossroadBEntity c, IEnumerable<Lane> lanes)
