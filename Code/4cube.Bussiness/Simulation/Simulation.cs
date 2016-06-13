@@ -526,28 +526,28 @@ namespace _4cube.Bussiness.Simulation
                             return;
                     }
                 }
-                var crossB = component as CrossroadBEntity;
-                if (crossB != null) // on crossroad b cars can't stop on the walking lane
-                {
-                    var lane = incomingLane ?? exitLane;
-                    Lane walkLane;
-                    if (_config.CrossCarLanePedesLane.TryGetValue(lane, out walkLane) && lane.EnterBounding.IsInPosition(car.X, car.Y, component.X,
-                        component.Y, _config.GridWidth, _config.GridHeight, component.Rotation))
-                    {
-                        component.CarsInComponentLock.EnterReadLock();
-                        var carOnWalkSensors = component.CarsInComponent.Any(
-                            c => c != car &&
-                                walkLane.BoundingBox.IsInPosition(car.X, car.Y, component.X, component.Y,
-                                    _config.GridWidth,
-                                    _config.GridHeight, component.Rotation, _config.CarDistance) &&
-                                lane.BoundingBox.IsInPosition(c.X, c.Y, component.X, component.Y,
-                                    _config.GridWidth,
-                                    _config.GridHeight, component.Rotation, _config.CarDistance));
-                        component.CarsInComponentLock.ExitReadLock();
-                        if (carOnWalkSensors)
-                            return;
-                    }
-                }
+                //var crossB = component as CrossroadBEntity;
+                //if (crossB != null) // on crossroad b cars can't stop on the walking lane
+                //{
+                //    var lane = incomingLane ?? exitLane;
+                //    Lane walkLane;
+                //    if (_config.CrossCarLanePedesLane.TryGetValue(lane, out walkLane) && lane.EnterBounding.IsInPosition(car.X, car.Y, component.X,
+                //        component.Y, _config.GridWidth, _config.GridHeight, component.Rotation))
+                //    {
+                //        component.CarsInComponentLock.EnterReadLock();
+                //        var carOnWalkSensors = component.CarsInComponent.Any(
+                //            c => c != car &&
+                //                walkLane.BoundingBox.IsInPosition(car.X, car.Y, component.X, component.Y,
+                //                    _config.GridWidth,
+                //                    _config.GridHeight, component.Rotation, _config.CarDistance) &&
+                //                lane.BoundingBox.IsInPosition(c.X, c.Y, component.X, component.Y,
+                //                    _config.GridWidth,
+                //                    _config.GridHeight, component.Rotation, _config.CarDistance));
+                //        component.CarsInComponentLock.ExitReadLock();
+                //        if (carOnWalkSensors)
+                //            return;
+                //    }
+                //}
             }
             MoveCar(component, car, incomingLane, exitLane);
         }
