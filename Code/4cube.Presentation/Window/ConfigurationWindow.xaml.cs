@@ -33,5 +33,11 @@ namespace _4cube.Presentation.Window
                 x.Time = _configurationModel.SelectedProp.Time;
             }
         }
+
+        private void Window_Closing_1(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            Hide();
+        }
     }
 }
