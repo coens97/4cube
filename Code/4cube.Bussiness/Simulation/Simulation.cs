@@ -42,30 +42,6 @@ namespace _4cube.Bussiness.Simulation
         private void TimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
         {
             _timer.Enabled = false;
-
-            if (!_enabled)
-            {
-                if (!_stop) return;
-
-                _stop = false;
-                _time = 0;
-                // reset everything
-                _uiContext.Send(x =>
-                {
-                    _grid.Cars.Clear();
-                    _grid.Pedestrians.Clear();
-                }, null);
-
-                _grid.Components.AsParallel().ForAll(x =>
-                {
-                    x.CarsInComponentLock.EnterWriteLock();
-                    x.CarsInComponent.Clear();
-                    x.CarsInComponentLock.ExitWriteLock();
-                    x.NrOfIncomingCarsSpawned = new[] { 0, 0, 0, 0 };
-                });
-                return;
-            }
-
             do
             {
                 _time++;
@@ -95,6 +71,28 @@ namespace _4cube.Bussiness.Simulation
                         _grid.Pedestrians.Remove(ped);
                     }
                 }, null);
+                if (!_enabled)
+                {
+                    if (!_stop) return;
+
+                    _stop = false;
+                    _time = 0;
+                    // reset everything
+                    _uiContext.Send(x =>
+                    {
+                        _grid.Cars.Clear();
+                        _grid.Pedestrians.Clear();
+                    }, null);
+
+                    _grid.Components.AsParallel().ForAll(x =>
+                    {
+                        x.CarsInComponentLock.EnterWriteLock();
+                        x.CarsInComponent.Clear();
+                        x.CarsInComponentLock.ExitWriteLock();
+                        x.NrOfIncomingCarsSpawned = new[] { 0, 0, 0, 0 };
+                    });
+                    return;
+                }
             } while (_constantCalculation && _enabled);
 
             _timer.Enabled = true;
