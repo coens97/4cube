@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:_4cube.Presentation"
         xmlns:common="clr-namespace:_4cube.Common;assembly=4cube.Common"
         mc:Ignorable="d"
-        Title="Grid Resizing" Height="243.637" Width="278.667" Closing="Window_Closing">
+        Title="Grid Resizing" Height="243.637" Width="278.667" Closing="Window_Closing" Icon="pack://siteoforigin:,,,/Resources/keyboard-buttons-or-visualization-button-of-nine-s.ico">
   
     <Grid>
         <GroupBox x:Name="GroupBox" Header="Resizing width and height" Margin="10,10,9.556,9.889">

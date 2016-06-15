@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:_4cube.Presentation"
         xmlns:viewModel="clr-namespace:_4cube.Presentation.ViewModel"
         mc:Ignorable="d"
-        Title="Configuration" Height="271.491" Width="861.791" Closing="Window_Closing_1">
+        Title="Configuration" Height="271.491" Width="861.791" Closing="Window_Closing_1" Icon="../Resources/taffic_light-512.ico">
     <Grid Margin="0,0,0,1.111" HorizontalAlignment="Left" Width="852">
         <GroupBox x:Name="GroupBox" Header="Preview" Margin="10,10,0,0" Height="225" VerticalAlignment="Top" HorizontalAlignment="Left" Width="210">
             <Border BorderThickness="1" BorderBrush="#FF000000" Margin="10,10,7.333,11.778">

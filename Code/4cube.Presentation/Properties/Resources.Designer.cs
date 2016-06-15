@@ -81,6 +81,16 @@ namespace _4cube.Presentation.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon keyboard_buttons_or_visualization_button_of_nine_s {
+            get {
+                object obj = ResourceManager.GetObject("keyboard_buttons_or_visualization_button_of_nine_s", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap roada {
@@ -97,6 +107,16 @@ namespace _4cube.Presentation.Properties {
             get {
                 object obj = ResourceManager.GetObject("roadb", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon taffic_light_512 {
+            get {
+                object obj = ResourceManager.GetObject("taffic_light_512", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
     }

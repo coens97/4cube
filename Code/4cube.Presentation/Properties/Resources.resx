@@ -124,10 +124,16 @@
   <data name="B" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\B.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="keyboard_buttons_or_visualization_button_of_nine_s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\keyboard-buttons-or-visualization-button-of-nine-s.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="roada" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\roada.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="roadb" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\roadb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="taffic_light_512" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\taffic_light-512.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

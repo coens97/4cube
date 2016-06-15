@@ -150,6 +150,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\keyboard-buttons-or-visualization-button-of-nine-s.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\taffic_light-512.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="FodyWeavers.xml" />
     <Content Include="Resources\A.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
