@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Data;
 using PropertyChanged;
 using _4cube.Bussiness;
@@ -27,12 +28,13 @@ namespace _4cube.Presentation.ViewModel
         private readonly IConfig _config;
         private readonly GridContainer _gridContainer;
 
-        private readonly ObservableCollection<ComponentViewModel> _components = new ObservableCollection<ComponentViewModel>(); 
+        private readonly ObservableCollection<ComponentViewModel> _components = new ObservableCollection<ComponentViewModel>();
 
+        public int Scale { get; set; } = 1;
         public int Width { get; set; }
         public int Height { get; set; }
-        public int ScaledWidth { get; set; }
-        public int ScaledHeight { get; set; }
+        public int ScaledWidth => Width / Scale;
+        public int ScaledHeight => Height/Scale;
         public int Speed { get; set; } = 9;
         public bool Running { get; set; } = false;
         public bool Paused { get; set; } = false;
@@ -46,6 +48,7 @@ namespace _4cube.Presentation.ViewModel
             _gridContainer = gridContainer;
             
            _config = config;
+            Scale = _config.GetScale;
 
             LoadGrid(_gridContainer.Grid);
 
@@ -74,8 +77,6 @@ namespace _4cube.Presentation.ViewModel
 
             Width = grid.Width * _config.GridWidth;
             Height = grid.Width * _config.GridHeight;
-            ScaledWidth = Width / _config.GetScale;
-            ScaledHeight = Height / _config.GetScale;
 
             grid.PropertyChanged += GridOnPropertyChanged;
             grid.Components.CollectionChanged += ComponentsOnCollectionChanged;
@@ -133,11 +134,9 @@ namespace _4cube.Presentation.ViewModel
             {
                 case "Width":
                     Width = _gridModel.Grid.Width*_config.GridWidth;
-                    ScaledWidth = Width/_config.GetScale;
                     break;
                 case "Height":
                     Height = _gridModel.Grid.Height*_config.GridHeight;
-                    ScaledHeight = Height/_config.GetScale;
                     break;
             }
         }

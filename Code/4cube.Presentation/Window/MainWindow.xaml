@@ -59,6 +59,7 @@
                     <Button x:Name="BtnPause" Content="{Binding PauseText}" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Width="236" Height="39" Click="BtnPause_Click" IsEnabled="{Binding Running}"/>
                     <Slider x:Name="slider" Margin="11,188,10,73.889" RenderTransformOrigin="0.967,0.544" Minimum="1" Value="{Binding Speed}"/>
                     <Label x:Name="label" Content="Change simulation speed:" Margin="10,137,28,0" RenderTransformOrigin="0.407,0.446" Height="26" VerticalAlignment="Top"/>
+                    <Slider x:Name="slider2" Margin="11,234,10.111,28" RenderTransformOrigin="0.967,0.544" Minimum="1" Value="{Binding Scale}"/>
 
                 </Grid>
 
