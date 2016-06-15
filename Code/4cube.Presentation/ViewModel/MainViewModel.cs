@@ -76,7 +76,7 @@ namespace _4cube.Presentation.ViewModel
             GridItems.Add(new CollectionContainer {Collection = grid.Pedestrians});
 
             Width = grid.Width * _config.GridWidth;
-            Height = grid.Width * _config.GridHeight;
+            Height = grid.Height * _config.GridHeight;
 
             grid.PropertyChanged += GridOnPropertyChanged;
             grid.Components.CollectionChanged += ComponentsOnCollectionChanged;
