@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Xml.Serialization;
 using PropertyChanged;
 using _4cube.Common.Ai;
 using _4cube.Common.Components;
@@ -7,9 +9,10 @@ using _4cube.Common.Components.TrafficLight;
 
 namespace _4cube.Common
 {
-    [ImplementPropertyChanged]
+    [ImplementPropertyChanged, Serializable]
     public class GridEntity : INotifyPropertyChanged
     {
+        [XmlIgnore]
         public ObservableCollection<CarEntity> Cars { get; set; } = new ObservableCollection<CarEntity>();
 
         public ObservableCollection<ComponentEntity> Components { get; set; } =
