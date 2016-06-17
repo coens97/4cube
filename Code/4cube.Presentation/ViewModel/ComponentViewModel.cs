@@ -52,7 +52,8 @@ namespace _4cube.Presentation.ViewModel
         public ComponentViewModel() { }
         private readonly IGridModel _gridModel;
         private readonly IConfig _config;
-        public ComponentViewModel(ComponentEntity c, IGridModel gridModel, IConfig config)
+        private readonly ISimulation _simulation;
+        public ComponentViewModel(ComponentEntity c, IGridModel gridModel, IConfig config, ISimulation simulation)
         {
             _config = config;
             _gridModel = gridModel;
@@ -65,6 +66,7 @@ namespace _4cube.Presentation.ViewModel
             RightCars = Component.NrOfIncomingCars[1];
             LeftCars = Component.NrOfIncomingCars[3];
             BotCars = Component.NrOfIncomingCars[2];
+            _simulation = simulation;
 
             var p = AssemblyDirectory;
             if (c is CrossroadAEntity)
@@ -161,6 +163,8 @@ namespace _4cube.Presentation.ViewModel
 
         public void OnDelete()
         {
+            if (_simulation.Enabled)
+                return;
             try
             {
                 _gridModel.DeleteComponent(Component);

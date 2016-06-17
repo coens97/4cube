@@ -22,7 +22,7 @@ namespace _4cube.Bussiness.Simulation
         private readonly IGridModel _gridModel;
         // private IReport _report;
         private int _time = 0;
-        private bool _enabled = false;
+        public bool Enabled { get; private set; }= false;
         private bool _stop = false;
         private readonly Timer _timer;
         private bool _constantCalculation = false;
@@ -73,7 +73,7 @@ namespace _4cube.Bussiness.Simulation
                         _grid.Pedestrians.Remove(ped);
                     }
                 }, null);
-                if (!_enabled)
+                if (!Enabled)
                 {
                     if (!_stop) return;
 
@@ -95,7 +95,7 @@ namespace _4cube.Bussiness.Simulation
                     });
                     return;
                 }
-            } while (_constantCalculation && _enabled);
+            } while (_constantCalculation && Enabled);
 
             _timer.Enabled = true;
         }
@@ -157,20 +157,20 @@ namespace _4cube.Bussiness.Simulation
 
         public void Pause()
         {
-            _enabled = false;
+            Enabled = false;
         }
 
 
         public void Start(GridEntity g)
         {
             _grid = g;
-            _enabled = true;
+            Enabled = true;
             _timer.Start();
         }
 
         public void Stop()
         {
-            _enabled = false;
+            Enabled = false;
             _stop = true;
         }
 

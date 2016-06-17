@@ -8,5 +8,6 @@ namespace _4cube.Bussiness.Simulation
         void Pause();
         void Start(GridEntity g);
         void Stop();
+        bool Enabled { get; }
     }
 }

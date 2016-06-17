@@ -68,6 +68,9 @@ namespace _4cube.Presentation.Window
 
         private void Canvas_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (_simulation.Enabled)
+                return;
+
             if(string.IsNullOrEmpty(_draggedComponent))
                 return;
             var canvas = sender as Canvas;

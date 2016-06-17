@@ -90,7 +90,7 @@ namespace _4cube.Presentation.ViewModel
         
         private void AddComponent(ComponentEntity c)
         {
-            _components.Add(new ComponentViewModel(c, _gridModel, _config));
+            _components.Add(new ComponentViewModel(c, _gridModel, _config, _simulation));
         }
 
         private void ComponentsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
