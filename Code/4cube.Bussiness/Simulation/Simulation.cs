@@ -19,6 +19,7 @@ namespace _4cube.Bussiness.Simulation
     {
         private GridEntity _grid;
         private readonly IConfig _config;
+        private readonly IGridModel _gridModel;
         // private IReport _report;
         private int _time = 0;
         private bool _enabled = false;
@@ -31,8 +32,9 @@ namespace _4cube.Bussiness.Simulation
         private readonly ConcurrentQueue<CarEntity> _carsToGetDeleted = new ConcurrentQueue<CarEntity>();
         private readonly ConcurrentQueue<PedestrianEntity> _pedestriansToGetAdded = new ConcurrentQueue<PedestrianEntity>();
         private readonly ConcurrentQueue<PedestrianEntity> _pedestriansToGetDeleted = new ConcurrentQueue<PedestrianEntity>();
-        public Simulation(IConfig config)
+        public Simulation(IConfig config, IGridModel gridModel)
         {
+            _gridModel = gridModel;
             _uiContext = SynchronizationContext.Current;
             _timer = new Timer(15);
             _timer.Elapsed += TimerOnElapsed;
@@ -98,29 +100,7 @@ namespace _4cube.Bussiness.Simulation
             _timer.Enabled = true;
         }
 
-        private bool HasNeighbourComponent(Direction d, int x, int y)
-        {
-            var w = _config.GridWidth;
-            var h = _config.GridHeight;
-            switch (d)
-            {
-                case Direction.Left:
-                    x += w;
-                    break;
-                case Direction.Up:
-                    y += h;
-                    break;
-                case Direction.Right:
-                    x -= w;
-                    break;
-                case Direction.Down:
-                    y -= h;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(d), d, null);
-            }
-            return _grid.Components.Any(c => c.X == x && c.Y == y);
-        }
+        
 
         private void SpawnACar()
         {
@@ -138,7 +118,7 @@ namespace _4cube.Bussiness.Simulation
                         if (!laneList.Any())
                             continue;
 
-                        if (HasNeighbourComponent(direction, compo.X, compo.Y))
+                        if (_gridModel.HasNeighbourComponent(direction, compo.X, compo.Y))
                             continue;
 
                         var rd = new Random();

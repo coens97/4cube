@@ -71,6 +71,30 @@ namespace _4cube.Bussiness
 
         }
 
+        public bool HasNeighbourComponent(Direction d, int x, int y)
+        {
+            var w = _config.GridWidth;
+            var h = _config.GridHeight;
+            switch (d)
+            {
+                case Direction.Left:
+                    x += w;
+                    break;
+                case Direction.Up:
+                    y += h;
+                    break;
+                case Direction.Right:
+                    x -= w;
+                    break;
+                case Direction.Down:
+                    y -= h;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(d), d, null);
+            }
+            return Grid.Components.Any(c => c.X == x && c.Y == y);
+        }
+
         private static void ShiftCircular(int offset, int[] array)
         {
             if (offset == 0 || array.Length <= 1)

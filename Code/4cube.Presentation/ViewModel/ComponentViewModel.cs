@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -86,17 +87,41 @@ namespace _4cube.Presentation.ViewModel
 
             PlaceLights();
             PropertyChanged += ViewOnPropertyChanged;
+            _gridModel.Grid.Components.CollectionChanged += ComponentsOnCollectionChanged;
+        }
+
+        private void ComponentsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            switch (notifyCollectionChangedEventArgs.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                case NotifyCollectionChangedAction.Remove:
+                    InitializeVisibility();
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private void InitializeVisibility()
         {
             var lane = _config.GetLanesOfComponent(Component).Where(x => x.OutgoingDirection.Any());
 
-            TopVisibility = lane.Any(x => x.DirectionLane == Component.Rotation.RotatedDirectionInv(Direction.Left)) ? Visibility.Visible : Visibility.Hidden;
-            RightVisibility = lane.Any(x => x.DirectionLane == Component.Rotation.RotatedDirectionInv(Direction.Up)) ? Visibility.Visible : Visibility.Hidden;
-            BotVisibility = lane.Any(x => x.DirectionLane == Component.Rotation.RotatedDirectionInv(Direction.Right)) ? Visibility.Visible : Visibility.Hidden;
-            LeftVisibility = lane.Any(x => x.DirectionLane == Component.Rotation.RotatedDirectionInv(Direction.Down)) ? Visibility.Visible : Visibility.Hidden;
-            
+            TopVisibility = IsSideVisible(lane, Direction.Up) ? Visibility.Visible : Visibility.Hidden;
+            RightVisibility = IsSideVisible(lane, Direction.Right) ? Visibility.Visible : Visibility.Hidden;
+            BotVisibility = IsSideVisible(lane, Direction.Down) ? Visibility.Visible : Visibility.Hidden;
+            LeftVisibility = IsSideVisible(lane, Direction.Left) ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private bool IsSideVisible(IEnumerable<Lane> lane, Direction d)
+        {
+            return lane.Any(x => x.DirectionLane == Component.Rotation.RotatedDirectionInv(d.RotatedDirection(Direction.Left))) && !_gridModel.HasNeighbourComponent(d.RotatedDirection(Direction.Down), Component.X, Component.Y);
         }
 
         private void ViewOnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -151,7 +176,7 @@ namespace _4cube.Presentation.ViewModel
             switch (propertyChangedEventArgs.PropertyName)
             {
                 case "Rotation":
-                    Rotation = (int)Component.Rotation * 90;
+                    Rotation = (int) Component.Rotation*90;
                     InitializeVisibility();
                     PlaceLights();
                     break;
@@ -168,17 +193,15 @@ namespace _4cube.Presentation.ViewModel
         {
             if (!(Component is CrossroadEntity))
                 return;
-            Lights.Clear();;
+            Lights.Clear();
+            ;
             var lane = _config.GetLanesOfComponent(Component).Where(x => x.OutgoingDirection.Any());
             foreach (var l in lane)
             {
                 var point = l.ExitPoint.Rotate(Component.Rotation, _config.GridWidth, _config.GridHeight);
                 Lights.Add(new TrafficLightComponent
                 {
-                    X = point.Item1,
-                    Y = point.Item2,
-                    Color = System.Windows.Media.Brushes.Red,
-                    Lane = l
+                    X = point.Item1, Y = point.Item2, Color = System.Windows.Media.Brushes.Red, Lane = l
                 });
             }
             ChangeTrafficColors();
@@ -192,7 +215,7 @@ namespace _4cube.Presentation.ViewModel
             foreach (var l in Lights)
             {
                 l.Color = System.Windows.Media.Brushes.Red;
-                if (lane.Any(x=> x.Equals(l.Lane)))
+                if (lane.Any(x => x.Equals(l.Lane)))
                 {
                     l.Color = crossroad.LightOrange ? System.Windows.Media.Brushes.Orange : System.Windows.Media.Brushes.Green;
                 }

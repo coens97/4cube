@@ -13,5 +13,6 @@ namespace _4cube.Bussiness
         void RotateComponent(ComponentEntity component);
         void SaveFile(string path);
         void New();
+        bool HasNeighbourComponent(Direction direction, int x, int y);
     }
 }
